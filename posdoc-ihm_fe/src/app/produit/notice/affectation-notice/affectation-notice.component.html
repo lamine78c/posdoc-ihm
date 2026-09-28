@@ -1,0 +1,53 @@
+<div class="global-content">
+  <div class="normal-content">
+    <app-search-affectation-notice
+      [isAffNot]="true"
+      (applySearchEvent)="lister($event)"
+      [isSomeChangeNotSubmited]="isSomeChangeNotSubmited"
+    ></app-search-affectation-notice>
+  </div>
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Total articles :
+      <div class="badge badge-info badge-ml">{{ totalNotices }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="false"
+      [enableExportButtons]="false"
+      [enableAddButton]="addType"
+      [disableAddBtn]="disableAddBtn"
+      [canAddPerm]="canAddPermPosition"
+      [canRemovePerm]="canRemovePermPosition"
+      [enableFullEdit]="false"
+      [asynchronousErrors$]="asynchronousErrors$"
+      (gridReady)="onGridReady($event)"
+      (addEvent)="openAddPopup()"
+      (deleteRows)="onDeleteRow($event)"
+    ></app-tableau>
+  </div>
+
+  <div *ngIf="hasEditPerm" class="row pt-2 normal-content">
+    <div class="col-flex d-flex p-0">
+      <label class="col-6 col-form-label">Date début: </label>
+      <div class="col-6 position-relative"><app-date-picker [currentDate]="form.get('dateDeb')"></app-date-picker></div>
+    </div>
+    <div class="col-flex d-flex p-0">
+      <label class="col-6 col-form-label">Date fin: </label>
+      <div class="col-6 position-relative"><app-date-picker [currentDate]="form.get('dateFin')" [minDate]="endDateMinDate"></app-date-picker></div>
+    </div>
+    <div class="col-flex d-flex p-0">
+      <button type="button" class="btn btn-primary" (click)="updateDates()" [disabled]="isApplyButtonDisabled()">
+        <i class="icon-b_valid"></i><span>Appliquer</span>
+      </button>
+      <button type="button" class="btn btn-primary ms-3" (click)="updateAffectationNotices()" [disabled]="isValidateButtonDisabled()">
+        <i class="icon-b_valid"></i><span>Valider</span>
+      </button>
+    </div>
+  </div>
+</div>

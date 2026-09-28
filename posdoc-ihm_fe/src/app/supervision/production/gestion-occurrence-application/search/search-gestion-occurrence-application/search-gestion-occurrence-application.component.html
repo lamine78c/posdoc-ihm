@@ -1,0 +1,63 @@
+<div class="row pt-1 normal-content search">
+  <div class="col-2 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Environnement:'"
+      [blankOptionValue]="' '"
+      [form]="formEnv"
+      [index]="indexForm.ENVIRONNEMENT"
+      [isError]="true"
+      [options]="optionsEnv"
+      [labelColumns]="6"
+      [hasBlankOption]="true"
+      [inputColumns]="6"
+      [errorMessage]="formEnv.errors?.message || formEnv.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-2 p-0">
+    <app-single-select-hierarchise-list
+      sessionDataSearchDirective
+      [form]="formOrg"
+      [formIndex]="indexForm.ORGANISME"
+      [label]="'Organismes:'"
+      [defaultText]="' '"
+      [labelColumns]="5"
+      [inputColumns]="7"
+      [isError]="true"
+      [isOptTreeUniInit]="isOrgOptionsInitialized"
+      (changeEvent)="onChangeOrganisme($event)"
+      [errorMessage]="formOrg.errors?.message || formOrg.errors"
+    ></app-single-select-hierarchise-list>
+  </div>
+  <div class="col-2 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Application:'"
+      [blankOptionValue]="' '"
+      [form]="formApp"
+      [index]="indexForm.APPLICATION"
+      [isError]="true"
+      [options]="optionsApp"
+      [labelColumns]="5"
+      [hasBlankOption]="true"
+      [inputColumns]="7"
+      [errorMessage]="formApp.errors?.message || formApp.errors"
+    ></app-liste-deroulante>
+  </div>
+
+  <div class="col-2 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Période:'"
+      [blankOptionValue]="' '"
+      [form]="formPeriode"
+      [index]="indexForm.PERIODE"
+      [isError]="true"
+      [options]="optionsPeriode"
+      [labelColumns]="5"
+      [hasBlankOption]="true"
+      [inputColumns]="7"
+      [errorMessage]="formPeriode.errors?.message || formPeriode.errors"
+    ></app-liste-deroulante>
+  </div>
+</div>

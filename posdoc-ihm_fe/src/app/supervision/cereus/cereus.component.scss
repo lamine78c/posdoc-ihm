@@ -1,0 +1,29 @@
+// barre vertical
+.col-with-border {
+  border-bottom: 0.15rem solid #e8e8e8; // 1px
+  flex-wrap: wrap;
+  padding-bottom: 0.03rem;
+}
+
+button.btn-recherche {
+  background-color: #808080;
+  border: none;
+  color: white;
+}
+
+button.btn-recherche:hover {
+  background-color: #727272;
+  border: none;
+  color: white;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active {
+  background-color: #808080;
+  border: none;
+  color: white;
+}
+
+.btn.agent-btn {
+  width: 100%;
+  display: block;
+}

@@ -1,0 +1,15 @@
+<app-onglet [type]="ongletTypeEnum.PREMIER_NIVEAU" [tabs]="onglets" [(active)]="active">
+  <app-onglet-header-container *ngFor="let onglet of onglets; index as index">
+    <app-onglet-header class="d-flex" [tab]="onglet" [type]="ongletTypeEnum.PREMIER_NIVEAU"></app-onglet-header>
+  </app-onglet-header-container>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_DIST_EXEMPLAIRE">
+    <app-distribution-exemplaires></app-distribution-exemplaires>
+  </div>
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_DIST_PARAM_EDITION_LISTE">
+    <app-distribution-parametre-edition></app-distribution-parametre-edition>
+  </div>
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_DIST_PARAM_EDITION_COLONNE">
+    <app-parametre-edition-colonne></app-parametre-edition-colonne>
+  </div>
+</app-onglet>

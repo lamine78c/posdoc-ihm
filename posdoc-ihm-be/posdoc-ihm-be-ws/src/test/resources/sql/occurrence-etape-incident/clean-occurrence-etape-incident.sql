@@ -1,0 +1,2 @@
+DELETE FROM genscr;
+DELETE FROM utilog;

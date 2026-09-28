@@ -1,0 +1,70 @@
+// Styles partagés pour l'éditeur Quill avec support du redimensionnement d'images
+
+::ng-deep .content-editor {
+  img {
+    max-width: 100% !important;
+    max-height: 400px !important;
+    object-fit: contain;
+    height: auto !important;
+  }
+
+  // Styles pour le module de redimensionnement d'images
+  .ql-editor {
+    img {
+      cursor: pointer;
+    }
+  }
+
+  // Overlay de redimensionnement
+  .img-resize-overlay {
+    position: absolute;
+    box-sizing: border-box;
+    border: 1px dashed #444;
+  }
+
+  // Poignées de redimensionnement
+  .img-resize-handle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border: 1px solid #777;
+    box-sizing: border-box;
+  }
+
+  .img-resize-handle-nw {
+    cursor: nw-resize;
+    top: -6px;
+    left: -6px;
+  }
+
+  .img-resize-handle-ne {
+    cursor: ne-resize;
+    top: -6px;
+    right: -6px;
+  }
+
+  .img-resize-handle-sw {
+    cursor: sw-resize;
+    bottom: -6px;
+    left: -6px;
+  }
+
+  .img-resize-handle-se {
+    cursor: se-resize;
+    bottom: -6px;
+    right: -6px;
+  }
+
+  // Affichage de la taille
+  .img-resize-display-size {
+    position: absolute;
+    top: -25px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+}

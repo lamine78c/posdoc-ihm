@@ -1,0 +1,3 @@
+query getNoticePdf($codnot: String!) {
+    getNoticePdf(codnot: $codnot)
+}

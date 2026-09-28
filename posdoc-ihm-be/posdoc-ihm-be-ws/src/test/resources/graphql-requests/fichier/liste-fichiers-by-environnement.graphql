@@ -1,0 +1,6 @@
+query getFichiersSearchByEnvironnement {
+  getFichiersSearchByEnvironnement {
+    codeDoc
+    codeEnv
+  }
+}

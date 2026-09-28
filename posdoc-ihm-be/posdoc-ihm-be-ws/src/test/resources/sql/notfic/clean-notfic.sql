@@ -1,0 +1,4 @@
+DELETE FROM utilog;
+DELETE FROM myslog;
+DELETE FROM notfic;
+DELETE FROM fichie;

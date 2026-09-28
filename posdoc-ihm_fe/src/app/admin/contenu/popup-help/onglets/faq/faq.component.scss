@@ -1,0 +1,85 @@
+.faq-container {
+  width: 55vw;
+  height: 55vh;
+}
+
+.card {
+  transition: background-color 0.2s ease;
+}
+
+::ng-deep .rich-text-content {
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+  }
+
+  // Gras
+  strong, b {
+    font-weight: bold !important;
+  }
+
+  // Italique
+  em, i {
+    font-style: italic !important;
+  }
+
+  // Souligné
+  u {
+    text-decoration: underline !important;
+  }
+
+  // Barré
+  s {
+    text-decoration: line-through !important;
+  }
+
+  // Alignement
+  .ql-align-center {
+    text-align: center !important;
+  }
+
+  .ql-align-right {
+    text-align: right !important;
+  }
+
+  .ql-align-justify {
+    text-align: justify !important;
+  }
+
+  // Couleurs (support des styles inline)
+  [style*="color"] {
+    color: inherit;
+  }
+
+  [style*="background-color"] {
+    background-color: inherit;
+  }
+
+  // Listes
+  ul, ol {
+    padding-left: 1.5rem;
+  }
+
+  // Titres
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  // Liens
+  a {
+    color: #06c;
+    text-decoration: underline;
+  }
+}
+
+.selected-card {
+  background-color: #e8f0fe;
+  border: 1px solid #1967d2;
+  transition: background-color 0.3s ease;
+}

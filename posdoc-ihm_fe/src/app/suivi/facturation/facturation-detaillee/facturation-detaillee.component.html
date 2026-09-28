@@ -1,0 +1,27 @@
+<div class="global-content">
+  <div class="normal-content mb-2">
+    <app-search-facturation-detaillee (applySearchEvent)="searchFacturationDetaillee($event)"></app-search-facturation-detaillee>
+  </div>
+  <div class="normal-content" [ngClass]="{ 'prth-0': facturationDetaillee.length >= 1 }">
+    <div class="col-3 d-flex justify-content-start">
+      <h3 class="d-flex" *ngIf="!showTotal">
+        Total articles :
+        <div class="badge badge-info badge-ml">{{ nbTotalFacturationDetaillee }}</div>
+      </h3>
+    </div>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="facturationDetaillee"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="false"
+      [enableExportButtons]="true"
+      [disablePdfExportButton]="true"
+      [disableExcelExportButton]="facturationDetaillee.length < 1"
+      (gridReady)="onGridReady($event)"
+      (exportAsExcel)="excelExport($event)"
+    ></app-tableau>
+  </div>
+</div>

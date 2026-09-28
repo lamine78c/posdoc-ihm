@@ -1,0 +1,8 @@
+<app-liste-deroulante-multiple
+  [form]="getFormGroup()"
+  [inputColumns]="12"
+  [formIndex]="formIndex"
+  [isRessourceCustomSort]="isRessourceCustomSort"
+  [isFormatDDMMYYYYCustomSort]="isFormatDDMMYYYYCustomSort"
+  (changeEvent)="filterChanged($event)"
+></app-liste-deroulante-multiple>

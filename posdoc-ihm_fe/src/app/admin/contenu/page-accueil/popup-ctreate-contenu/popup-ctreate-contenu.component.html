@@ -1,0 +1,56 @@
+<app-popup
+  [modalRef]="activeModal"
+  [isFormValid]="form.valid"
+  [title]="'Création de contenu'"
+  [firstButton]="{ label: 'Enregistrer', icone: 'icon-b_valid' }"
+  [secondButton]="{ label: 'Quitter', icone: 'icon-b_cancel' }"
+  (saveEvent)="save()"
+>
+  <form [formGroup]="form">
+    <div class="card mat-elevation-z4">
+      <div class="card-body">
+        <div class="row mb-2">
+          <div class="col-4 p-0">
+            <div class="form-group d-flex align-items-center">
+              <label class="col-2">Titre:</label>
+              <div class="col-10">
+                <app-champ-de-saisie
+                  [index]="5"
+                  [inputColumns]="12"
+                  [fillInput]="true"
+                  [form]="form.get('titre')"
+                  [isError]="true"
+                  [errorMessage]="form.get('titre').errors?.message || form.get('titre').errors"
+                ></app-champ-de-saisie>
+              </div>
+            </div>
+          </div>
+          <div class="col-5 p-0">
+            <app-champ-de-saisie-date-intervalle
+              [label]="'Activation '"
+              [formFrom]="form.get('dateActivation')"
+              [formTo]="form.get('dateExpiration')"
+            ></app-champ-de-saisie-date-intervalle>
+          </div>
+          <div class="col-3 p-0">
+            <app-liste-deroulante-multiple
+              [form]="form.get('regions')"
+              [label]="'Région:'"
+              [labelColumns]="4"
+              [inputColumns]="8"
+              [defaultText]="' '"
+            ></app-liste-deroulante-multiple>
+          </div>
+        </div>
+        <quill-editor
+          formControlName="message"
+          [modules]="quillModules"
+          [styles]="{ height: '420px' }"
+          class="content-editor"
+          [placeholder]="'Saisir texte ici'"
+        >
+        </quill-editor>
+      </div>
+    </div>
+  </form>
+</app-popup>

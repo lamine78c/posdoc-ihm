@@ -1,0 +1,18 @@
+extend type Query {
+    getDetailsPeriodeFromGenApp(paramData: DetailsPeriodeInput): [DetailsPeriode]
+}
+
+input DetailsPeriodeInput {
+    codEnv: String
+    codOrgs: [String]
+    codApp: String
+    isManuel: Boolean
+}
+
+type DetailsPeriode {
+    perCod: String
+    appsta: String
+    dappld: DateTime
+    dapplt: DateTime
+    manuel: Boolean
+}

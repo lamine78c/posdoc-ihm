@@ -1,0 +1,113 @@
+extend type Mutation {
+    updateBonTravail(updateBonTravail: [BonTravailUpdateInput], userInfo: UserInfoInput): [BonTravailUpdateDTO]!
+}
+
+extend type Query {
+    searchBonTravail(bonTravailPayload: BonTravailPayload): GroupedBonTravailDTO
+    getDistinctEnvOrgAppPerFromGenApp(bonTravailPeriodeFilterPayload: BonTravailPeriodeFilterPayload): [String]
+    isBonTravailManuel(isBonTravailManuelInput: IsBonTravailManuelInput): Boolean
+    getBonTravailPdf(input: BonTravailPdfInput!): String
+}
+
+input BonTravailPdfInput {
+    codbon: String!
+    codenv: String!
+    codorg: String!
+    codapp: String!
+    percod: String!
+    numcom: String!
+    codcom: String!
+    codfic: String!
+    isManuel: Boolean!
+}
+
+input BonTravailPayload {
+    codenv: String
+    codorg: [String]
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    codcli: String
+    codbon: String
+    dappcrDeb: String
+    dappcrFin: String
+    dfiexpDeb: String
+    dfiexpFin: String
+    isDateEmpty: Boolean
+    delmsp: String
+    codsit: String
+}
+
+type BonTravailDTO {
+    codbon: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    pagfic: Int
+    plific: Int
+    dappcr: DateTime
+    drecep: DateTime
+    dfiexp: DateTime
+    delmsp: Int
+    inform: String
+    codpal: Int
+    libfic: String
+    codnot: [String]
+    libnot: [String]
+    codsit: String
+    typtar: String
+}
+
+type GroupedBonTravailDTO {
+    groupedBonTravail: [BonTravailDTO]!
+    message: String!
+}
+
+input BonTravailUpdateInput {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    datexp: String
+    inform: String
+    id: String
+}
+
+input IsBonTravailManuelInput {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+}
+
+input UserInfoInput {
+    user: String
+    formid: String
+}
+
+type BonTravailUpdateDTO {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    drecep: DateTime
+    dfiexp: DateTime
+    inform: String
+    delmsp: Int
+}
+input BonTravailPeriodeFilterPayload {
+    codenv: String
+    codorg: [String]
+    codapp: String
+}

@@ -1,0 +1,33 @@
+button.btn-primary {
+  background-color: rgb(240, 240, 240);
+  height: 2rem;
+  color: rgb(95, 95, 95);
+  border: none;
+  font-size: none;
+  font-weight: none;
+}
+
+.btn.btn-primary:hover {
+  color: rgb(95, 95, 95);
+  background-color: rgb(194, 209, 240);
+}
+
+button.btn.itemSelected {
+  color: rgb(255, 255, 255);
+  background-color: rgb(15, 48, 155);
+}
+
+button.btn.btn-primary.itemSelected:hover {
+  color: rgb(255, 255, 255) !important;
+  background-color: rgb(15, 48, 155);
+}
+
+.btn-primary,
+.btn-outline-primary {
+  font-size: 1rem; // 17px
+  font-weight: 500;
+}
+
+.arborescence-collapse .tree-element .form-check-label .checked {
+  color: #000000;
+}

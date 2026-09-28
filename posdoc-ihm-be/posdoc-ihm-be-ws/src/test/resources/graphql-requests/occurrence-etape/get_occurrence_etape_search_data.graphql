@@ -1,0 +1,7 @@
+query GetOccurrenceEtapeSearchData {
+    getOccurrenceEtapeSearchData {
+        codenv
+        codorg
+        codapp
+    }
+}

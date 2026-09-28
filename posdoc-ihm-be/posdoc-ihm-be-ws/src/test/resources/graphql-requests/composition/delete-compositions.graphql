@@ -1,0 +1,5 @@
+mutation deleteCompositions($deletesDTO: DeleteByArrayStringIdInput!) {
+    deleteCompositions(deleteCompositions: $deletesDTO) {
+        ok
+    }
+}

@@ -1,0 +1,44 @@
+<div class="form row form-radio d-flex" *ngIf="formGroup" [formGroup]="formGroup">
+  <label
+    *ngIf="label"
+    class="col-{{ labelColumns }} col-form-label"
+    [ngStyle]="{ width: labelWidth + 'px' }"
+    [ngClass]="{ 'col-form-label-fix': labelWidth }"
+    >{{ label }}</label
+  >
+  <div class="col-{{ inputColumns }} d-flex" [ngStyle]="fillInput && { width: 'calc(100% - ' + labelWidth + 'px)' }">
+    <div class="form-check radio-with-label me-4" *ngFor="let radioLabel of radioLabelList; let internIndex = index">
+      <input
+        type="radio"
+        id="radio{{ internIndex }}-{{ index }}"
+        class="form-check-input"
+        [value]="radioLabel.value"
+        [formControlName]="controlName"
+      />
+      <label class="form-check-label" for="radio{{ internIndex }}-{{ index }}">{{ radioLabel.label }}</label>
+    </div>
+
+    <span
+      *ngIf="!formGroup.get(controlName).valid && !formGroup.get(controlName).disabled && !isError && formGroup.get(controlName).touched"
+      class="icon-warning d-flex align-items-center"
+      aria-hidden="true"
+      [ngbPopover]="array.isArray(errorMessage) ? list : errorMessage"
+      triggers="mouseenter:mouseleave focus"
+      tabindex="0"
+    ></span>
+    <span
+      *ngIf="!formGroup.get(controlName).valid && !formGroup.get(controlName).disabled && isError && formGroup.get(controlName).touched"
+      class="icon-error d-flex align-items-center"
+      aria-hidden="true"
+      [ngbPopover]="array.isArray(errorMessage) ? list : errorMessage"
+      triggers="mouseenter:mouseleave focus"
+      tabindex="0"
+    ></span>
+  </div>
+</div>
+
+<ng-template #list>
+  <ng-container *ngFor="let error of errorMessage; let last = last">
+    <div [ngClass]="{ 'mb-2': !last }">{{ error.message }}</div>
+  </ng-container>
+</ng-template>

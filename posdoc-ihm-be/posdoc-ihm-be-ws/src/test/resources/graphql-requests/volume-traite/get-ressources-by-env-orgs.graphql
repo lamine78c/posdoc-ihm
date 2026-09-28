@@ -1,0 +1,7 @@
+query getGamSitResByEnvOrgs($query: EnvOrgsQuery) {
+  getGamSitResByEnvOrgs(query: $query) {
+    codres
+    codgam
+    codsit
+  }
+}

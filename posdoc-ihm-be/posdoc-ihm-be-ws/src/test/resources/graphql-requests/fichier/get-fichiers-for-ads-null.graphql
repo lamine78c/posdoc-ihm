@@ -1,0 +1,12 @@
+query getFichiersForAdsNull($codeEnv: String, $codeOrg: String, $codeApp: String, $codeCom: String, $codeFic: String, $refImprime: String) {
+  getFichiersForAdsNull(codeEnv: $codeEnv, codeOrg: $codeOrg, codeApp: $codeApp, codeCom: $codeCom, codeFic: $codeFic, refImprime: $refImprime) {
+    codeEnv
+    codeOrg
+    codeApp
+    codeCom
+    codeFich
+    codeAdr
+    refImprime
+    libFichier
+  }
+}

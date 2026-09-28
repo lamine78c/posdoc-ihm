@@ -1,0 +1,52 @@
+extend type Query {
+    findPremas(findPremasInput: FindPremasInput): [Premas]
+    getDistinctEnvOrgAppFromPremas: [DistinctEnvOrgAppModel]
+}
+
+extend type Mutation {
+    invaliderMassifications(massifications: [InvalidateMassificationInput!]!, query: FindPremasInput!): [Premas]
+}
+
+input FindPremasInput {
+    codenv: String
+    codorgs: [String]
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    codsit: String
+    presta: String
+}
+
+input InvalidateMassificationInput {
+    codenv: String!
+    codorg: String!
+    codapp: String!
+    percod: String!
+    codcom: String!
+    codfic: String!
+    numcom: String!
+}
+
+type Premas {
+    mascom: String
+    masfic: String
+    codsit: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    presta: String
+    dprevc: String
+    dprevt: String
+    dprevi: String
+}
+
+type DistinctEnvOrgAppModel {
+    codenv: String
+    codorg: String
+    codapp: String
+}

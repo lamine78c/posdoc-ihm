@@ -1,0 +1,85 @@
+<div class="global-content">
+  <div class="normal-content" [ngClass]="{ 'div-search-disabled': isSearchDisabled }">
+    <app-search-bon-travail (applySearchEvent)="searchBonTravail($event)"></app-search-bon-travail>
+  </div>
+
+  <div class="normal-content row prth-0">
+    <div class="col-3 d-flex justify-content-start pl-0">
+      <h3 class="d-flex">
+        Total articles :
+        <div class="badge badge-info badge-ml">{{ totalBonTravail }}</div>
+      </h3>
+    </div>
+    <div class="col-3 d-flex">
+      <h3 class="d-flex">
+        Total pages :
+        <div *ngIf="totalPagefic > 0" class="badge badge-info badge-ml">{{ totalPagefic }}</div>
+      </h3>
+    </div>
+    <div class="col-6"></div>
+  </div>
+
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="bonTravailData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="noDataMessage"
+      [pagination]="false"
+      [asynchronousErrors$]="asynchronousErrors$"
+      [canEditPerm]="canEditPermPosition"
+      [enableExportButtons]="true"
+      [disablePdfExportButton]="true"
+      (gridReady)="onGridReady($event)"
+      (saveEdition)="onSaveEdition($event)"
+      (cancelEdition)="onCancelEdition()"
+      (exportAsExcel)="export($event)"
+    ></app-tableau>
+  </div>
+
+  <div *ngIf="hasEditPerm" class="row pt-2 pl-1">
+    <div class="col-12 col-md-5 d-flex flex-column flex-md-row align-items-center mb-2 mb-md-0">
+      <label class="me-2 mb-2 mb-md-0">Date EXP :</label>
+      <div class="me-2 mb-2 mb-md-0">
+        <app-date-picker [currentDate]="form.get('dateExp')"></app-date-picker>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary text-nowrap mb-2 mb-md-0"
+        (click)="getMessageApplicDateExpIfExist()"
+        [disabled]="!isAppliqueEnMasseDateExpAuthorised()"
+      >
+        <i class="icon-b_valid"></i><span>Appliquer date</span>
+      </button>
+    </div>
+    <div class="col-12 col-md-5 d-flex flex-column flex-md-row align-items-center mb-2 mb-md-0">
+      <app-champ-de-saisie
+        appNoSpecialCharacters
+        [allowedCharacters]="[' ', '/', '-']"
+        [label]="'Infos :'"
+        [labelColumns]="4"
+        [inputColumns]="8"
+        [fillInput]="true"
+        [index]="1"
+        [form]="form.get('infos')"
+        [isError]="true"
+        [toUpperCase]="false"
+        [errorMessage]="form.get('infos').errors?.message || form.get('infos').errors"
+        class="me-2 mb-2 mb-md-0"
+      ></app-champ-de-saisie>
+      <button
+        type="button"
+        class="btn btn-primary text-nowrap mb-2 mb-md-0"
+        (click)="getMessageApplicInfofExist()"
+        [disabled]="!isAppliqueEnMasseInfosAuthorised()"
+      >
+        <i class="icon-b_valid"></i><span>Appliquer infos</span>
+      </button>
+    </div>
+    <div class="col-12 col-md-2 d-flex align-items-center justify-content-center mb-2 mb-md-0">
+      <button type="button" class="btn btn-primary text-nowrap" (click)="validerEnMasse()" [disabled]="!isSomeMultiChangeNotSubmited()">
+        <i class="icon-b_valid"></i><span>Valider</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+delete from genfic;
+delete from gennot;
+delete from notice;
+delete from gentar;
+delete from genmas;
+delete from genapp;
+delete from organi;
+delete from tarpos;
+delete from params;
+delete from genetp;
+delete from tarifs;
+delete from fichie;
+delete from hisfic;
+delete from histar;
+delete from hismas;
+delete from hisnot;

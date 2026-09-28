@@ -1,0 +1,65 @@
+<div class="form row d-flex" [ngStyle]="vertical ? { 'flex-direction': 'column' } : {}">
+  <label
+    *ngIf="label"
+    for="select{{ index }}"
+    class="col-{{ labelColumns }} col-form-label"
+    [ngStyle]="{ width: labelWidth + 'px' }"
+    [class.ps-0]="vertical"
+    [ngClass]="{ 'col-form-label-fix': labelWidth }"
+    >{{ label }}</label
+  >
+  <div class="table-select col-{{ inputColumns }} position-relative">
+    <div container="body" ngbDropdown class="d-inline-block fake-select-container" placement="bottom-left">
+      <div class="p-relative">
+        <input
+          ngbDropdownToggle
+          name="input{{ index }}"
+          id="input{{ index }}"
+          type="text"
+          class="form-control scroll-text-input"
+          autocomplete="off"
+          [formControl]="form"
+          (click)="dropdownMenu.dropdown.open()"
+          (keydown.tab)="dropdownMenu.dropdown.isOpen() && dropdownMenu.dropdown.close()"
+          [attr.disabled]="isDisabled ? isDisabled : null"
+          (input)="patchFormatedValue($event)"
+          [ngClass]="{
+            'warning error': isTouchedAndEmpty(),
+          }"
+        />
+        <button
+          ngbDropdownToggle
+          class="icon-arrow-down"
+          [disabled]="isDisabled"
+          [ngClass]="{
+            'btn-error': isTouchedAndEmpty(),
+          }"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="grey" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+          </svg>
+        </button>
+        <div class="err-icn">
+          <span
+            [ngbPopover]="form.errors?.message"
+            triggers="mouseenter:mouseleave"
+            container="body"
+            *ngIf="isTouchedAndEmpty()"
+            class="icon-error align-items-center"
+            aria-hidden="true"
+          ></span>
+        </div>
+      </div>
+      <div #dropdownMenuRef ngbDropdownMenu attr.aria-labelledby="dropdownForm">
+        <div class="form-check">
+          {{ !!getFiltredData(options)?.length ? 'Veuillez sélectionner un élément' : 'Après le filtre, aucun élément à sélectionner' }}
+        </div>
+        <div class="fake-select-scrollable-content" id="combobox-options{{ index }}">
+          <div *ngFor="let option of getFiltredData(options)" class="row option" (click)="closeToggleDropdown(option)">
+            <span class="font-weight-semi-bold" [value]="option">{{ option }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

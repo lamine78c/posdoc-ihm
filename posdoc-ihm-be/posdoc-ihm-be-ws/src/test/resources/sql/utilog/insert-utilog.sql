@@ -1,0 +1,2 @@
+INSERT INTO utilog(c69_codulo,s69_codsta,s69_codusr,s69_formid,d69_datulo,s69_action,s69_params,b69_result,s69_erreur,s69_versio)
+VALUES ('42254', '0:0:0:0:0:0:0:1', 'AC750G0092', 'formid', '2025-06-12 14:44:49.182718', 'INSERT', 'params', 1, null, '111');

@@ -1,0 +1,11 @@
+mutation updateCommande($updateCommande: CreateOrUpdateCommandeInput!) {
+    updateCommande(updateCommande: $updateCommande) {
+          codenv
+          codorg
+          codapp
+          code
+          libelle
+          codreg
+          isNotAuthorisedToBeDeleted
+    }
+}

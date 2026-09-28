@@ -1,0 +1,77 @@
+{
+  "documentations":
+  {
+    "projets":
+    [
+      {
+        "name" : "Fullstack",
+        "url": "https://readthedocs.cnp.recouv/projects/fullstack/",
+        "urlsearch": "https://readthedocs.cnp.recouv/docs/fullstack/fr/latest/search.html?check_keywords=yes&area=default&q="
+      },
+      {
+        "name" : "Integration Continue",
+        "url": "https://readthedocs.cnp.recouv/projects/pic-et-outils/",
+        "urlsearch": "https://readthedocs.cnp.recouv/docs/pic-et-outils/fr/latest/search.html?check_keywords=yes&area=default&q="
+      },
+      {
+        "name" : "Kafka",
+        "url": "https://readthedocs.cnp.recouv/projects/documentation-kafka/",
+        "urlsearch": "https://readthedocs.cnp.recouv/docs/documentation-kafka/fr/latest/search.html?check_keywords=yes&area=default&q="
+      }
+    ]
+  },
+  "liens":
+    {
+      "blocs":
+      [
+        {
+        "titre": "Fullstack",
+        "liens":
+        [
+          {
+            "icone": "/assets/icons/lien/gitlab-logo-500.svg",
+            "lien": "http://gitlab.altair.recouv/sded/bureau-technique/architecture-expertise-applicative/fullstack/fullstack-spa-internet",
+            "nomlien": "Fullstack SPA Internet",
+            "description": "Fullstack SPA Internet"
+          },
+          {
+            "icone": "/assets/icons/lien/gitlab-logo-500.svg",
+            "lien": "http://gitlab.altair.recouv/sded/bureau-technique/architecture-expertise-applicative/fullstack/fullstack-api-end2end-testing",
+            "nomlien": "API end to end testing",
+            "description": "API end to end testing"
+          },
+          {
+            "icone": "/assets/icons/lien/gitlab-logo-500.svg",
+            "lien": "http://gitlab.altair.recouv/sded/bureau-technique/architecture-expertise-applicative/fullstack/fullstack-spa-e2e",
+            "nomlien": "End to end testing",
+            "description": "End to end testing"
+          },
+          {
+            "icone": "/assets/icons/lien/ic_shortcut_fs.png",
+            "lien": "http://gitlab.altair.recouv/sded/bureau-technique/architecture-expertise-applicative/fullstack/fullstack-v3",
+            "nomlien": "Fullstack V3",
+            "description": "Fullstack V3"
+          }
+        ]
+      },
+      {
+        "titre": "Integration continue",
+        "liens":
+        [
+          {
+            "icone": "/assets/icons/lien/jenkins.svg",
+            "lien": "http://jenkins.urssaf.recouv/",
+            "nomlien": "Jenkins",
+            "description": "Jenkins"
+          },
+          {
+            "icone": "/assets/icons/lien/SonarQube icon.svg",
+            "lien": "http://sonarqube.altair.recouv/",
+            "nomlien": "Sonar Qube",
+            "description": "Sonar Qube"
+          }
+        ]
+      }
+    ]
+  }
+}

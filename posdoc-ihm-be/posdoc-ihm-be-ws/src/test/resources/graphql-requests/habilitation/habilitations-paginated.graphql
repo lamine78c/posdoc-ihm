@@ -1,0 +1,15 @@
+query($page: Int!, $size: Int!) {
+    habilitations(queryParameters: {page: $page, size: $size}) {
+        content {
+            id
+            parentId
+            habilitationType
+            identite
+            ordre
+        }
+        totalElements
+        totalPages
+        currentPage
+        size
+    }
+}

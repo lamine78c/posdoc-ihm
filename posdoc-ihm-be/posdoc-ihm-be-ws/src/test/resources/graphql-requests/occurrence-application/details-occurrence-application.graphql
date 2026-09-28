@@ -1,0 +1,12 @@
+query getOccurrenceApplication($paramData: OccurrenceApplicationInput!) {
+    getOccurrenceApplication(paramData: $paramData) {
+        appsta
+        appinf
+        dapplc
+        dappld
+        dapplt
+        dappls
+        typref
+        sitori
+    }
+}

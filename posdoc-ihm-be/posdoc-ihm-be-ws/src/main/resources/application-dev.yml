@@ -1,0 +1,99 @@
+prisme:
+  security:
+    enabled: true
+
+spring:
+
+  # En dev local, la DataSource @Primary est fournie par DataSourceRoutingDevConfiguration
+  # (2 pools HikariCP différenciés par ApplicationName). Voir bloc posdoc.datasource ci-dessous.
+  datasource: {}
+
+  jpa:
+    open-in-view: true
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+
+adelaide-server:
+  host: 10.203.48.25
+  port: 8800
+  export-path: "/Export"
+
+bon-travail:
+  #Chemin de stockage des fichiers de bon de travail
+  #"/hawai/data/partage/posdoc/bonTravail"
+  directory:
+
+notices:
+  directory: "/hawai/data/partage/posdoc/notices/"
+  file:
+    max-size: 5MB
+
+anais:
+  wsdl-url: ""
+  namespace: ""
+  username: ""
+  password: ""
+  enrich-user-names: false
+
+posdoc:
+  datasource:
+    mode: direct
+    username: "pgposdoc"
+    password: "pg_posdoc?"
+    write:
+      url: "jdbc:postgresql://10.207.89.197:5432/posdoc_int?ApplicationName=posdoc-local-rw"
+    read:
+      url: "jdbc:postgresql://10.207.89.197:5432/posdoc_int?ApplicationName=posdoc-local-ro"
+
+  bilan:
+    #Definir un chemin local selon votre config
+    archive-directory: "C:\\TEMP\\posdoc\\bilans\\"
+
+    # Durée de rétention des bilans en jours (par défaut: 90 jours = 3 mois)
+    retention-days: 90
+
+    # Configuration de la purge automatique des bilans obsolètes
+    purge:
+      # Active/désactive la purge automatique (par défaut: true)
+      enabled: true
+
+      # Expression cron pour la planification de la purge
+      # Format: seconde minute heure jour mois jour_semaine
+      # Tous les dimanches à 1h00 du matin
+      cron: "0 0 1 * * 0"
+
+      # Mode dry-run: si true, affiche les fichiers qui seraient supprimés sans les supprimer réellement
+      # Utile pour tester la configuration (par défaut: false)
+      dry-run: false
+
+  bontravail:
+    archive-directory: /hawai/data/partage/posdoc/bonTravail
+    retention-days: 90
+    purge:
+      enabled: true
+      dry-run: false
+      lock-retention-days: 1
+      cron: "0 0 2 * * 0"
+
+scheduler:
+  log:
+    purge:
+      # lancer chaque dimanche à 00:30 et 01:30
+      cron: "0 30 0,1 * * SUN"
+      retention-days-utilog: 366
+      retention-days-myslog: 366
+      retention-days-lock: 1
+      batch-size: 30000
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    com.zaxxer.hikari: DEBUG
+    fr.acoss.posdoc.database.configuration.RoutingDataSource: DEBUG
+    fr.acoss.posdoc.database.aspect.DataSourceChoserAspect: DEBUG
+    org.springframework.transaction.interceptor: TRACE

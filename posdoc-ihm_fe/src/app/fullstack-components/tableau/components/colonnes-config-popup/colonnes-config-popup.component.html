@@ -1,0 +1,30 @@
+<app-popup
+  class="colonnes-config-popup"
+  [modalRef]="activeModal"
+  [title]="'Configuration des colonnes du tableau'"
+  [firstButton]="{ label: 'Valider', icone: 'icon-b_valid' }"
+  [secondButton]="{ label: 'Abandonner', icone: 'icon-b_cancel' }"
+>
+  <div class="d-flex">
+    <button type="button" class="btn btn-outline-secondary mb-3 ms-auto" (click)="reset()">Restaurer configuration par défaut</button>
+  </div>
+
+  <div class="d-flex mb-1">
+    <div class="w-50">Colonnes masquées : {{ columnsHidden.length }}</div>
+    <div class="w-50 displayed-columns">Colonnes affichées : {{ columnsDisplayed.length }}</div>
+  </div>
+
+  <lib-double-liste
+    [height]="'14.286rem'"
+    [width]="'25rem'"
+    [listeSource]="columnsHidden"
+    [listeDestination]="columnsDisplayed"
+    [keyToDisplay]="'headerName'"
+  >
+  </lib-double-liste>
+
+  <div class="d-flex mt-1" *ngIf="displayUnmovableMessage">
+    <div class="w-50"></div>
+    <div class="w-50 displayed-columns">* Ces colonnes ne peuvent pas être masquées</div>
+  </div>
+</app-popup>

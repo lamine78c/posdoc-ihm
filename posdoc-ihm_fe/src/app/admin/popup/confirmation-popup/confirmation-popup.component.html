@@ -1,0 +1,61 @@
+<app-popup
+  [modalRef]="activeModal"
+  [title]="title"
+  [iconToDisplay]="'assets/icones-showcase/m_warning.svg'"
+  [firstButton]="{ label: firstButtonLabel, icone: 'icon-b_valid', isDisabled: !!!rowsToDelete.length }"
+  [secondButton]="{ label: secondButtonLabel, icone: 'icon-b_cancel' }"
+>
+  @if (rowsToDelete.length === 1) {
+    <div>
+      {{ messages[1] }} :
+      <span *ngFor="let idLabel of idsLabel; let last = last"
+        >{{ rowsToDelete[0][idLabel] }}<ng-container *ngIf="!last && idsLabel.length > 1">{{ idsLabelSeparator }}</ng-container></span
+      >
+    </div>
+  } @else if (rowsToDelete.length > 1) {
+    <div>
+      {{ messages[2] }} :
+      <ul class="mb-0">
+        @for (rowData of rowsToDelete.slice(0, 20); track rowData) {
+          <li>
+            <span *ngFor="let idLabel of idsLabel; let last = last"
+              >{{ rowData[idLabel] }}<ng-container *ngIf="!last && idsLabel.length > 1">{{ idsLabelSeparator }}</ng-container></span
+            >
+          </li>
+        }
+        @if (rowsToDelete.length > 20) {
+          <li>
+            <span>+ {{ rowsToDelete.length - 20 }} éléments supplémentaires...</span>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+
+  @if (rowsNotAuthorisedToBeDeleted.length === 1) {
+    <div>
+      {{ messages[5] }} :
+      <span *ngFor="let idLabel of idsLabel; let last = last"
+        >{{ rowsNotAuthorisedToBeDeleted[0][idLabel] }}<ng-container *ngIf="!last && idsLabel.length > 1">{{ idsLabelSeparator }}</ng-container></span
+      >
+    </div>
+  } @else if (rowsNotAuthorisedToBeDeleted.length > 1) {
+    <div>
+      {{ rowsNotAuthorisedMessage }} :
+      <ul class="mb-0">
+        @for (rowData of rowsNotAuthorisedToBeDeleted.slice(0, 20); track rowData) {
+          <li>
+            <span *ngFor="let idLabel of idsLabel; let last = last"
+              >{{ rowData[idLabel] }}<ng-container *ngIf="!last && idsLabel.length > 1">{{ idsLabelSeparator }}</ng-container></span
+            >
+          </li>
+        }
+        @if (rowsNotAuthorisedToBeDeleted.length > 20) {
+          <li>
+            <span>+ {{ rowsNotAuthorisedToBeDeleted.length - 20 }} éléments supplémentaires...</span>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</app-popup>

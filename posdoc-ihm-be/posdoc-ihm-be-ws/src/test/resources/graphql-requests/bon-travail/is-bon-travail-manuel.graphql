@@ -1,0 +1,3 @@
+query IsBonTravailManuel($isBonTravailManuelInput: IsBonTravailManuelInput) {
+    isBonTravailManuel(isBonTravailManuelInput: $isBonTravailManuelInput)
+}

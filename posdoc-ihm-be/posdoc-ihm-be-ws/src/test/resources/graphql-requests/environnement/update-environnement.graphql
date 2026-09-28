@@ -1,0 +1,6 @@
+mutation UpdateEnvironnement($var: UpdateEnvironnementInput!){
+    updateEnvironnement(updateEnvironnement: $var){
+        code
+        libelle
+    }
+}

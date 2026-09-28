@@ -1,0 +1,8 @@
+query GetDestinataires{
+  allDestinataires{
+    code
+    codeOrg
+    libelle
+    refPri
+  }
+}

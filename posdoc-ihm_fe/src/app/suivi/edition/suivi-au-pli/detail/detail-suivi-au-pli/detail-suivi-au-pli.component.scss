@@ -1,0 +1,53 @@
+.popup-detail-suivi-au-pli {
+  width: 900px;
+}
+
+table.table-suivi {
+  text-align: center;
+  font-weight: bold;
+  color: grey;
+  margin: 20px 10px;
+}
+
+table.table-suivi th {
+  padding-bottom: 10px;
+}
+
+table.table-suivi td {
+  padding: 0px 15px;
+}
+
+table.table-suivi thead tr th:nth-child(even) {
+  border-bottom: 2px solid;
+  width: 80px;
+}
+table.table-suivi thead tr th span {
+  font-size: 30px;
+  font-weight: bold;
+}
+table.table-suivi tbody tr.row-etat {
+  font-size: 16px;
+}
+table.table-suivi tbody tr.row-date {
+  font-size: 14px;
+}
+
+.detail {
+  height: 500px;
+  overflow-y: auto;
+}
+
+.text-success,
+.icon-success:before {
+  color: #198754;
+}
+
+.text-error,
+.icon-error:before {
+  color: #dd3810;
+}
+
+.text-gray,
+.icon-gray:before {
+  color: gray;
+}

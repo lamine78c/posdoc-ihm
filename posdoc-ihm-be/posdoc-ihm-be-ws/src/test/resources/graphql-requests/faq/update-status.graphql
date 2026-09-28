@@ -1,0 +1,14 @@
+mutation updateStatus($id: Int!, $status: String!) {
+    updateStatus(id: $id, status: $status) {
+        id
+        path
+        question
+        answer
+        status
+        viewCount
+        createdBy
+        updatedBy
+        createdAt
+        updatedAt
+    }
+}

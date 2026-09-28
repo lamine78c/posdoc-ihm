@@ -1,0 +1,6 @@
+query allStatuts {
+    allStatuts {
+        code
+        libelle
+    }
+}

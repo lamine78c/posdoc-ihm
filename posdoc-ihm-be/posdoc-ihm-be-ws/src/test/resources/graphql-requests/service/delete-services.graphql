@@ -1,0 +1,5 @@
+mutation deleteServicesPosdoc($ids: DeleteByArrayStringIdInput!){
+    deleteServicesPosdoc(deleteServices: $ids){
+        ok
+    }
+}

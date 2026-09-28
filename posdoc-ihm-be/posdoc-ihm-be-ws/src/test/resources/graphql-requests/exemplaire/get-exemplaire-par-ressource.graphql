@@ -1,0 +1,16 @@
+query getExemplairesByRessource($query: ExemplaireByRessourceQuery) {
+    getExemplairesByRessource(query: $query) {
+        codenv
+        codorg
+        codapp
+        codcom
+        codfic
+        message
+        ressources {
+            codres
+            codsit
+            etat
+            coddes
+        }
+    }
+}

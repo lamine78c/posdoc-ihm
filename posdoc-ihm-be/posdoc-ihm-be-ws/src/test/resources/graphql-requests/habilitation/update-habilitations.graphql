@@ -1,0 +1,9 @@
+mutation($updatesDTO: UpdateHabilitationsInput!) {
+    updateHabilitations(updatesDTO: $updatesDTO) {
+        id
+        parentId
+        habilitationType
+        identite
+        ordre
+    }
+}

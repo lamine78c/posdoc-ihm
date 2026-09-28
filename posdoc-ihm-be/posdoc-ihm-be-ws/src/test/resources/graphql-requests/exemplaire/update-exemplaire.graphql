@@ -1,0 +1,16 @@
+mutation UpdateExemplaire ($updateExemplaire: CreateOrUpdateExemplaireInput!) {
+    updateExemplaire (updateExemplaire: $updateExemplaire) {
+        codenv
+        codorg
+        codapp
+        codcom
+        exeact
+        nbrexe
+        coddes
+        codres
+        codfic
+        codgam
+        numexe
+        codsit
+    }
+}

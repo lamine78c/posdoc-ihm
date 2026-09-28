@@ -1,0 +1,17 @@
+<div class="global-content">
+  <div class="d-flex justify-content-end mb-2">
+    <button (click)="printPdf()" class="btn btn-outline-secondary" type="button">
+      <i aria-hidden="true" class="icon-b_export_pdf"></i><span>Imprimer PDF</span>
+    </button>
+  </div>
+  <div class="popup-tableau">
+    <app-tableau
+      (gridReady)="onGridReady($event)"
+      [columnDefs]="columnDefs"
+      [gridOptions]="gridOptions"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="false"
+      [rowData]="detailNotices"
+    ></app-tableau>
+  </div>
+</div>

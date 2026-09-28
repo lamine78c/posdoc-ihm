@@ -1,0 +1,5 @@
+mutation SeleteParametresEdition($var: DeleteByArrayStringIdInput!){
+    deleteParametresEdition(deleteParametresEdition: $var){
+        ok
+    }
+}

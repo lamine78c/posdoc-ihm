@@ -1,0 +1,6 @@
+query GetDestinatairesToAddNewExemplaire($codeOrg: String){
+    getDestinatairesToAddNewExemplaire(codeOrg: $codeOrg) {
+        code
+        text
+    }
+}

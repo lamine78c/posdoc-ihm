@@ -1,0 +1,2 @@
+DELETE FROM ficadr;
+DELETE FROM utilog;

@@ -1,0 +1,105 @@
+<div class="row pt-1 normal-content" [ngClass]="{ 'div-search-disabled': isSearchDisabled }">
+  <div class="p-0" [ngClass]="isWithoutCommandeOptions ? 'col-3' : 'col-2'">
+    <app-liste-deroulante-multiple
+      sessionDataSearchDirective
+      [form]="formEnv"
+      [formIndex]="indexForm.ENVIRONNEMENT"
+      [label]="'Environnements:'"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [isWithValidAndRAZBtn]="false"
+      [isOptMulInit]="isEnvOptionsInitialized"
+      [defaultText]="' '"
+      [labelClass]="'pl-0'"
+      (changeEvent)="onChangeEnvironnement()"
+      [isError]="true"
+      [errorMessage]="formEnv.errors?.message || formEnv.errors"
+    ></app-liste-deroulante-multiple>
+  </div>
+  <div class="p-0" [ngClass]="isWithoutCommandeOptions ? 'col-3' : 'col-2'">
+    <app-liste-deroulante-hierarchisee
+      sessionDataSearchDirective
+      [form]="formOrg"
+      [formIndex]="indexForm.ORGANISME"
+      [label]="'Organismes:'"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [isWithValidAndRAZBtn]="false"
+      [isOptTreeInit]="isOrgOptionsInitialized"
+      [defaultText]="' '"
+      (changeEvent)="onChangeOrganisme($event)"
+      [isError]="true"
+      [errorMessage]="formOrg.errors?.message || formOrg.errors"
+    ></app-liste-deroulante-hierarchisee>
+  </div>
+
+  <div class="p-0" [ngClass]="isWithoutCommandeOptions ? 'col-3' : 'col-2'">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [form]="formApp"
+      [index]="indexForm.APPLICATION"
+      [label]="'Application:'"
+      [options]="applicationOptions"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [hasBlankOption]="true"
+      [blankOptionValue]="' '"
+      [isError]="true"
+      [errorMessage]="formApp.errors?.message || formApp.errors"
+    ></app-liste-deroulante>
+  </div>
+
+  <div *ngIf="!isWithoutCommandeOptions" class="col-2 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [form]="formCom"
+      [index]="indexForm.COMMANDE"
+      [label]="'Commande:'"
+      [options]="commandeOptions"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [hasBlankOption]="true"
+      [blankOptionValue]="' '"
+      [isError]="true"
+      [errorMessage]="formCom?.errors?.message || formCom?.errors"
+    ></app-liste-deroulante>
+  </div>
+
+  <div *ngIf="!isWithoutFichierOptions && !isFicInList" class="col-2 p-0">
+    <app-select-from-table-list
+      sessionDataSearchDirective
+      [form]="formFic"
+      [index]="indexForm.FICHIER_TB"
+      [label]="'Fichier:'"
+      [options]="fichierOptions"
+      [labelColumns]="5"
+      [inputColumns]="6"
+      [isError]="true"
+      [errorMessage]="formFic?.errors?.message || formFic?.errors"
+    ></app-select-from-table-list>
+  </div>
+
+  <div *ngIf="!isWithoutFichierOptions && isFicInList" class="col-2 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [form]="formFic"
+      [index]="indexForm.FICHIER"
+      [label]="'Fichier:'"
+      [options]="fichierListOptions"
+      [labelColumns]="5"
+      [inputColumns]="6"
+      [isError]="true"
+      [errorMessage]="formFic?.errors?.message || formFic?.errors"
+      [hasBlankOption]="true"
+      [blankOptionValue]="' '"
+    ></app-liste-deroulante>
+  </div>
+
+  <div class="p-0" [ngClass]="isWithoutCommandeOptions ? 'col-3' : 'col-2'">
+    <div class="button-group ms-auto">
+      <button type="button" class="btn btn-primary btn-recherche" [disabled]="!isFormValid()" (click)="valider()">
+        <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+    </div>
+  </div>
+</div>

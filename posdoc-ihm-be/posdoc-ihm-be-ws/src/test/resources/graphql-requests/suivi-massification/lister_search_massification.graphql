@@ -1,0 +1,22 @@
+query searchForSuiviMassification($suiviMassificationPayload: SuiviMassificationPayload!) {
+    searchForSuiviMassification(suiviMassificationPayload: $suiviMassificationPayload) {
+        masper
+        mascom
+        masfic
+        masnum
+        codorg
+        codapp
+        percod
+        codcom
+        codfic
+        numcom
+        codenv
+        libFichier
+        libsup
+        codprd
+        masuti
+        pagFic
+        pliFic
+        codcli
+    }
+}

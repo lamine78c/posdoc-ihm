@@ -1,0 +1,26 @@
+extend type Query {
+    findAllServices: [ServicePosdoc]
+    checkServiceHealth(url: String!): String
+}
+
+extend type Mutation {
+    createServicePosdoc(createService: ServicePosdocInput!): [ServicePosdoc]
+    updateServicePosdoc(updateService: ServicePosdocInput!): [ServicePosdoc]
+    deleteServicesPosdoc(deleteServices: DeleteByArrayStringIdInput!): DeletePayload!
+}
+
+type ServicePosdoc {
+    id: Int
+    libelle: String
+    url: String
+    createdAt: DateTime
+    updatedAt: DateTime
+    createdBy: String
+    updatedBy: String
+}
+
+input ServicePosdocInput {
+    id: Int
+    libelle: String
+    url: String
+}

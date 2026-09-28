@@ -1,0 +1,43 @@
+<app-popup [modalRef]="modalRef" [isFormValid]="isFormValid" [title]="title" [firstButton]="null" [secondButton]="null" (saveEvent)="passBack()">
+  <div class="container">
+    <div class="form row">
+      <h3>Vous êtes sur le point de compléter la ressource {{ exemplaire.codgam }}-{{ exemplaire.codsit }}-{{ exemplaire.codres }} :</h3>
+    </div>
+    <div class="form row">
+      <app-liste-deroulante-hierarchisee
+        [form]="formGroup.get('organismes')"
+        [label]="'Organisme/Région :'"
+        (changeEvent)="onChangeOrganisme($event)"
+        [isWithValidAndRAZBtn]="false"
+        [labelColumns]="4"
+        [inputColumns]="8"
+        [isError]="true"
+        [errorMessage]="formGroup.get('organismes').errors?.message || formGroup.get('organismes').errors"
+      ></app-liste-deroulante-hierarchisee>
+    </div>
+    <div class="form row">
+      <app-champ-de-saisie
+        [form]="formGroup.get('copiesNbre')"
+        [label]="'copiesNbre :'"
+        [typeInput]="'number'"
+        [labelColumns]="4"
+        [inputColumns]="8"
+        [index]="1"
+        [fillInput]="true"
+        [isError]="true"
+        [errorMessage]="formGroup.get('copiesNbre').errors?.message || formGroup.get('copiesNbre').errors"
+      ></app-champ-de-saisie>
+    </div>
+  </div>
+  <div style="color: red; font-size: 14px; font-weight: bold; text-align: center; padding: 5px; display: block">{{ errorForm }}</div>
+</app-popup>
+<div class="modal-footer">
+  <div class="button-group">
+    <button type="button" class="btn btn-outline-primary" (click)="modalRef.close()" *ngIf="secondButton">
+      <i *ngIf="secondButton.icone" class="{{ secondButton.icone }}" aria-hidden="true"></i><span>{{ secondButton.label }}</span>
+    </button>
+    <button type="button" class="btn btn-primary" (click)="passBack()" *ngIf="firstButton" [disabled]="!isFormValid()" style="border: none">
+      <i *ngIf="firstButton.icone" class="{{ firstButton.icone }}" aria-hidden="true"></i><span>{{ firstButton.label }}</span>
+    </button>
+  </div>
+</div>

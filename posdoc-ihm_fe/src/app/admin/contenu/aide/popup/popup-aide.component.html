@@ -1,0 +1,40 @@
+<app-popup
+  [modalRef]="activeModal"
+  [isFormValid]="form.valid"
+  [title]="id ? 'Modification d\'une aide contextuelle' : 'Création d\'une aide contextuelle'"
+  [firstButton]="{ label: 'Enregistrer', icone: 'icon-b_valid' }"
+  [secondButton]="{ label: 'Quitter', icone: 'icon-b_cancel' }"
+  (saveEvent)="save()"
+>
+  <form [formGroup]="form">
+    <div class="card mat-elevation-z4">
+      <div class="card-body">
+        <div class="row mb-2">
+          <div class="col-12">
+            <app-liste-deroulante
+              [label]="'Page (Chemin):'"
+              [form]="form.get('path')"
+              [options]="pathOptions"
+              [labelColumns]="2"
+              [inputColumns]="10"
+              [isError]="true"
+              [errorMessage]="form.get('path').errors?.message || form.get('path').errors"
+            ></app-liste-deroulante>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-12">
+            <label class="form-label">Message:</label>
+            <quill-editor
+              formControlName="message"
+              [modules]="quillModules"
+              [styles]="{ height: '400px' }"
+              class="content-editor"
+              [placeholder]="'Saisir le message d\'aide ici'">
+            </quill-editor>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</app-popup>

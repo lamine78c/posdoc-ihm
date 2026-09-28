@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "quotes": ["warn", "single"],
+    "no-dupe-else-if": "error",
+    "no-lonely-if": "warn",
+    "no-magic-numbers": "warn",
+    "no-multi-str": "error",
+    "no-useless-return": "error",
+    "complexity": ["warn", 7],
+    "max-len": ["error", { "code": 150 }],
+    "max-params": ["warn", 5],
+    "max-lines-per-function": ["warn", { "max": 50 }],
+    "no-extra-boolean-cast": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "prettier/prettier": "error"
+  },
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "jasmine": true
+  }
+}

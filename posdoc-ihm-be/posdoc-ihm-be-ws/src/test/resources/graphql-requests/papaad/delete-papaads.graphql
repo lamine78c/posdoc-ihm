@@ -1,0 +1,5 @@
+mutation deletePapaads($deleteDTO: DeleteByArrayPapaadCompositeIdInput!) {
+    deletePapaads(deletePapaads: $deleteDTO) {
+        ok
+    }
+}

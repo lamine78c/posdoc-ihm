@@ -1,0 +1,13 @@
+query findHistoryByQuery($query: FindHistoryByQuery) {
+    findHistoryByQuery(query: $query) {
+        id
+        station
+        utilisateur
+        insertionDate
+        actionUtilisateur
+        condition
+        entite
+        entree
+        sortie
+    }
+}

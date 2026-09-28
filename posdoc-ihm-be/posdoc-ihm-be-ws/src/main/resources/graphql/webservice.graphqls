@@ -1,0 +1,1776 @@
+#SCALARS
+directive @auth(role: String!) on MUTATION
+
+# Format : 2011-12-03T10:15:30
+scalar DateTime
+
+# Format: 2011-12-03
+scalar Date
+
+#MUTATIONS
+type Mutation {
+    #reedition
+    reediter(reeditions: [ReeditionInput]!): [UtiLogPayload]!
+
+    #Information Organisme
+    createInformationOrganisme(createOrganisme: CreateInformationOrganismeInput !): [CreateOrUpdateInformationOrganismePayload]!
+    updateInformationOrganisme(updateOrganisme: UpdateInformationOrganismeInput!): CreateOrUpdateInformationOrganismePayload!
+    deleteInformationOrganisme(deleteOrganisme: DeleteByIntIdInput!): DeletePayload!
+
+    #Environnements
+    createEnvironnement(createEnvironnement: CreateEnvironnementInput!): CreateOrUpdateEnvironnementPayload!
+    updateEnvironnement(updateEnvironnement: UpdateEnvironnementInput!): CreateOrUpdateEnvironnementPayload!
+    deleteEnvironnement(deleteEnvironnement: DeleteByStringIdInput!): DeletePayload!
+    deleteEnvironnements(deleteEnvironnements: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Gammes
+    createGamme(createGamme: CreateGammeInput!): CreateOrUpdateGammePayload!
+    updateGamme(updateGamme: UpdateGammeInput!): CreateOrUpdateGammePayload!
+    deleteGamme(deleteGamme: DeleteByStringIdInput!): DeletePayload!
+    updateGammes(updateGammes: UpdateGammesInput!): [CreateOrUpdateGammePayload]!
+    deleteGammes(deleteGammes: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Utilisateurs
+    createUtilisateur(createUtilisateur: CreateUtilisateurInput!): CreateOrUpdateUtilisateurPayload!
+    updateUtilisateur(updateUtilisateur: UpdateUtilisateurInput!): CreateOrUpdateUtilisateurPayload!
+    deleteUtilisateur(deleteUtilisateur: DeleteByStringIdInput!): DeletePayload!
+    deleteUtilisateurs(deleteUtilisateurs: DeleteByArrayStringIdInput!): DeletePayload!
+    updateUtilisateurs(updateUtilisateurs: UpdateUtilisateursInput!): [CreateOrUpdateUtilisateurPayload]!
+
+    #Profiles
+    createProfile(createProfile: CreateProfileInput!): CreateOrUpdateProfilePayload!
+    updateProfile(updateProfile: UpdateProfileInput!): CreateOrUpdateProfilePayload!
+    deleteProfile(deleteProfile: DeleteByStringIdInput!): DeletePayload!
+
+    #Servers
+    createServer(createServer: CreateServerInput!): CreateOrUpdateServerPayload!
+    updateServer(updateServer: UpdateServerInput!): CreateOrUpdateServerPayload!
+    deleteServer(deleteServer: DeleteByStringIdInput!): DeletePayload!
+    deleteServers(deleteServers: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Clients
+    createClient(createClient: CreateClientInput!): CreateOrUpdateClientPayload!
+    updateClient(updateClient: UpdateClientInput!): CreateOrUpdateClientPayload!
+    deleteClients(deleteClients: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Parametres
+    createParametre(createParametre: CreateOrUpdateParametreInput!): CreateOrUpdateParametrePayload!
+    updateParametre(updateParametre: CreateOrUpdateParametreInput!): CreateOrUpdateParametrePayload!
+    deleteParametre(deleteParametre: DeleteByStringIdInput!): DeletePayload
+    deleteParametres(deleteParametres: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Parametres distribution
+    createParametreDistribution(createParametreDistribution: CreateOrUpdateParametreDistributionInput!): CreateOrUpdateParametreDistributionPayload!
+    updateParametreDistribution(updateParametreDistribution: CreateOrUpdateParametreDistributionInput!): CreateOrUpdateParametreDistributionPayload!
+    deleteParametreDistributions(deleteParametreDistributions: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Regions
+    createRegion(createRegion: CreateOrUpdateRegionInput!): CreateOrUpdateRegionPayload!
+    updateRegion(updateRegion: CreateOrUpdateRegionInput!): CreateOrUpdateRegionPayload!
+    deleteRegion(deleteRegion: DeleteByStringIdInput!): DeletePayload!
+    deleteRegions(deleteRegions: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #SiteCNP
+    createSiteCNP(createSiteCNP: CreateOrUpdateSiteCNPInput!): CreateOrUpdateSiteCNPPayload!
+    updateSiteCNP(updateSiteCNP: CreateOrUpdateSiteCNPInput!): CreateOrUpdateSiteCNPPayload!
+    deleteSitesCNP(deleteSitesCNP: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #SiteOrganisme
+    createSiteOrganisme(createSiteOrganisme: CreateOrUpdateSiteOrganismeInput!): CreateOrUpdateSiteOrganismePayload!
+    updateSiteOrganisme(updateSiteOrganisme: CreateOrUpdateSiteOrganismeInput!): CreateOrUpdateSiteOrganismePayload!
+    deleteSiteOrganisme(deleteSiteOrganisme: DeleteByStringIdInput!): DeletePayload!
+
+    #Support
+    createSupport(createSupport: CreateOrUpdateSupportInput!): CreateOrUpdateSupportPayload!
+    updateSupport(updateSupport: CreateOrUpdateSupportInput!): CreateOrUpdateSupportPayload!
+    deleteSupports(deleteSupports: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Format
+    createFormat(createFormat: CreateOrUpdateFormatInput!): CreateOrUpdateFormatPayload!
+    updateFormat(updateFormat: CreateOrUpdateFormatInput!): CreateOrUpdateFormatPayload!
+    deleteFormats(deleteFormats: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Imprimes
+    createImprime(createImprime: CreateOrUpdateImprimeInput!): CreateOrUpdateImprimePayload!
+    updateImprime(updateImprime: CreateOrUpdateImprimeInput!): CreateOrUpdateImprimePayload!
+    deleteImprime(deleteImprime: DeleteByStringIdInput!): DeletePayload!
+    deleteImprimes(deleteImprimes: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Parametres echantillons
+    createParametreEchantillon(createParametreEchantillon: CreateOrUpdateParametreEchantillonInput!): CreateOrUpdateParametreEchantillonPayload!
+    updateParametreEchantillon(updateParametreEchantillon: CreateOrUpdateParametreEchantillonInput!): CreateOrUpdateParametreEchantillonPayload!
+    deleteParametreEchantillons(deleteParametreEchantillons: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Habilitations
+    createHabilitations(updatesDTO: UpdateHabilitationsInput!): [CreateOrUpdateHabilitationPayload]!
+    updateHabilitations(updatesDTO: UpdateHabilitationsInput!): [CreateOrUpdateHabilitationPayload]!
+    deleteHabilitations(deletesDTO: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #organisme
+    deleteOrganismes(deleteOrganismes: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Compositions
+    createComposition(createComposition: CreateCompositionInput!): CreateOrUpdateCompositionPayload!
+    updateComposition(updateComposition: UpdateCompositionInput!): CreateOrUpdateCompositionPayload!
+    deleteCompositions(deleteCompositions: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #parametres edition
+    createParametreEdition(createParametreEdition: CreateOrUpdateParametreEditionInput!): CreateOrUpdateParametreEditionPayload!
+    updateParametreEdition(updateParametreEdition: CreateOrUpdateParametreEditionInput!): CreateOrUpdateParametreEditionPayload!
+    deleteParametresEdition(deleteParametresEdition: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Multif
+    createMultif(createMultif: CreateOrUpdateMultifInput!): CreateOrUpdateMultifPayload!
+    updateMultif(updateMultif: CreateOrUpdateMultifInput!): CreateOrUpdateMultifPayload!
+    deleteMultifs(deleteMultifs: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Adresse Retour
+    createAdressesRetour(createAdressesRetour: CreateOrUpdateAdressesRetourInput!): [CreateOrUpdateAdresseRetourPayload]!
+    updateAdresseRetour(updateAdresseRetour: CreateOrUpdateAdresseRetourInput!): CreateOrUpdateAdresseRetourPayload!
+    deleteAdressesRetour(deleteAdressesRetour: DeleteByArrayAdresseRetourCompositeIdInput!): DeletePayload!
+
+     #Commande
+          createCommandes(createCommandes: CreateOrUpdateCommandesInput!): [CreateOrUpdateCommandePayload]!
+          updateCommande(updateCommande: CreateOrUpdateCommandeInput!): CreateOrUpdateCommandePayload!
+          deleteCommandes(deleteCommandes: DeleteByArrayCommandeCompositeIdInput!): DeletePayload!
+
+    #destinataire
+    createDestinataires(createDestinataires: CreateDestinatairesEnMasseInput!): [CreateOrUpdateDestinatairePayload]!
+    updateDestinataire(updateDestinataire: CreateOrUpdateDestinataireInput!): CreateOrUpdateDestinatairePayload!
+    #deleteDestinataire(deleteDestinataire: DeleteDestinataireInput!): DeletePayload!
+    deleteDestinataires(deleteDestinataires: DeleteByArrayDestinataireCompositeIdInput!): DeletePayload!
+
+    #Papaad
+    createPapaad(createPapaad: CreatePapaadInput!): CreateOrUpdatePapaadPayload!
+    updatePapaad(updatePapaad: UpdatePapaadInput!): CreateOrUpdatePapaadPayload!
+    deletePapaads(deletePapaads: DeleteByArrayPapaadCompositeIdInput!): DeletePayload!
+
+        #Application
+              createApplication(createApplication: CreateOrUpdateApplicationInput!): CreateOrUpdateApplicationPayload!
+              updateApplication(updateApplication: CreateOrUpdateApplicationInput!): CreateOrUpdateApplicationPayload!
+              deleteApplications(deleteApplications: DeleteByArrayApplicationCompositeIdInput!): DeletePayload!
+
+        #productio flux
+
+    #productionFlux
+    deleteProductionFlux(deleteProductionFlux: DeleteByArrayStringIdInput!): DeletePayload!
+
+    #Ressources
+    createRessource(createRessource: CreateOrUpdateRessourceInput!): CreateOrUpdateRessourcePayload!
+    updateRessource(updateRessource: CreateOrUpdateRessourceInput!): CreateOrUpdateRessourcePayload!
+    #deleteClient(deleteClient: DeleteByStringIdInput!): DeletePayload!
+    # deleteRessources(deleteRessources: [CreateOrUpdateRessourceInput]!): DeletePayload!
+    deleteRessources(deleteRessources: DeleteByArrayRessourceCompositeIdInput!): DeletePayload!
+
+     #Fichier
+     createFichierWithExemplaire(createFichier: [CreateOrUpdateFichierInputDTO]!): CreateFichierWithExemplairePayloadDTO!
+     updateFichiers(fichiers: [CreateOrUpdateFichierInputDTO]!): [CreateOrUpdateFichierPayload]!
+     setNewImprimeToFichiers(fichiers: [CreateOrUpdateFichierInputDTO]!): [CreateOrUpdateFichierPayload]!
+     setNewImprimeToFichier(fichier: CreateOrUpdateFichierInputDTO!): CreateOrUpdateFichierPayload!
+     deleteFichiers(deleteFichiers: [CreateOrUpdateFichierInputDTO]!): DeletePayload!
+
+
+    #organisme
+    createOrganisme(createOrganisme: CreateOrUpdateOrganismeInput!): CreateOrUpdateOrganismePayload!
+    updateOrganisme(updateOrganisme: CreateOrUpdateOrganismeInput!): CreateOrUpdateOrganismePayload!
+    deleteOrganismes(deleteOrganismes: DeleteByArrayStringIdInput!): DeletePayload!
+}
+
+#QUERIES
+type Query {
+    allOrganismes: [CreateOrUpdateOrganismePayload]!
+    getCodesOrganismesByRegions(regions : [String]): [String]!
+    environnements(queryParameters: QueryParametersInput!): Paginated
+    allEnvironnements: [CreateOrUpdateEnvironnementPayload]!
+    allEnvironnementsInApplication: [CreateOrUpdateEnvironnementPayload]!
+    allEnvironnementsInFichier: [CreateOrUpdateEnvironnementPayload]!
+    gammes(queryParameters: QueryParametersInput!): Paginated
+    allGammes: [CreateOrUpdateGammePayload]!
+    getDestinatairesByOrgs(orgs: [String]): [String]!
+    utilisateurs(queryParameters: QueryParametersInput!): Paginated
+    profile(id: String): CreateOrUpdateProfilePayload!
+    allProfiles: [CreateOrUpdateProfilePayload]!
+    servers(queryParameters: QueryParametersInput!): Paginated
+    allServers: [CreateOrUpdateServerPayload]!
+    clients(queryParameters: QueryParametersInput!): Paginated
+    allClients: [CreateOrUpdateClientPayload]!
+    parametres(queryParameters: QueryParametersInput!): Paginated
+    allParametres: [CreateOrUpdateParametrePayload]!
+    parametresDistribution(queryParameters: QueryParametersInput!): Paginated
+    allParametresDistribution: [CreateOrUpdateParametreDistributionPayload]!
+    verrous(queryParameters: QueryParametersInput!): Paginated
+    regions(queryParameters: QueryParametersInput!): Paginated
+    allRegions: [CreateOrUpdateRegionPayload]!
+    sitesCNP(queryParameters: QueryParametersInput!): Paginated
+    allSitesCNP: [CreateOrUpdateSiteCNPPayload]!
+    sitesOrganisme(queryParameters: QueryParametersInput!): Paginated
+    allSitesOrganisme: [CreateOrUpdateSiteOrganismePayload]!
+    supports(queryParameters: QueryParametersInput!): Paginated
+    allSupports: [CreateOrUpdateSupportPayload]!
+    imprimes(queryParameters: QueryParametersInput!): Paginated
+    allImprimes : [CreateOrUpdateImprimePayload]
+    getImprimesByEnvsAndApps(codesEnv : [String], codesApp : [String]) : [CreateOrUpdateImprimePayload]!
+    parametresEchantillon(queryParameters: QueryParametersInput!): Paginated
+    allParametresEchantillon: [CreateOrUpdateParametreEchantillonPayload]!
+    habilitations(queryParameters: QueryParametersInput!): Paginated
+    allHabilitations: [CreateOrUpdateHabilitationPayload]!
+    informationOrganismes(queryParameters: QueryParametersInput!): Paginated
+
+    formats(queryParameters: QueryParametersInput!): Paginated
+    allFormats: [CreateOrUpdateFormatPayload]!
+    multifs(queryParameters: QueryParametersInput!): Paginated
+    allMultifs: [CreateOrUpdateMultifPayload]!
+    compositions(queryParameters: QueryParametersInput!): Paginated
+    allCompositions: [CreateOrUpdateCompositionPayload]!
+
+    parametresEdition(queryParameters: QueryParametersInput!): Paginated
+    allParametresEdition: [CreateOrUpdateParametreEditionPayload]!
+    allApplications: [CreateOrUpdateApplicationPayload]!
+    getApplicationsByEnvs(codesEnv : [String]) : [CreateOrUpdateApplicationPayload]!
+    lotsRef(queryParameters: QueryParametersInput!): Paginated
+    compareCommandes(codesEnv: [String], codesOrg : [String], codesApp : [String]) : [CommandeForComparePayload]!
+    getDistinctApplications : [String]
+    getDistinctEnvsByApp(codapp: String) : [String]
+    getDistinctCommByAppEnv(codapp: String, codenvs: [String]): [String]
+    getDistinctOrg(codeEnv: [String], codeApp: String, codeCom: String, codeFic: String) : [String]
+    groupes(queryParameters: QueryParametersInput!): Paginated
+    adressesRetour(queryParameters: QueryParametersInput!): Paginated
+    allAdressesRetour: [CreateOrUpdateAdresseRetourPayload]!
+    #fichiers(queryParameters: QueryParametersInput!): Paginated
+    allFichiers: [CreateOrUpdateFichierPayload]!
+    getFichiersForUpdatingReference(codesEnv : [String], codesApp : [String], refsImp : [String]): [CreateOrUpdateFichierPayload]!
+    getFichiersToAddNewExemplaire(codeEnv: String, codeOrg: String, codeApp: String, perCod: String, codeGam: String): [String]
+    getFichiersByApp(codenv: String, codesOrg : [String], codesApp : [String],codesCom : [String]) : [CreateOrUpdateFichierPayload]!
+    getFichiersForAdsNull(codeEnv:String, codeOrg:String, codeApp:String, codeCom:String, codeFic:String, refImprime:String): [CreateOrUpdateFichierPayload]!
+    getExistedFichiers(codeEnv:[String], codeApp:String, codeCom:String, codeFic:String): [CreateOrUpdateFichierPayload]!
+    getFichiersSearchElements: [EnvAppRefImpEnGroupInFichierPayload]!
+    getAllDistinctCodComCodFicCodPrd: [ComFichProdEnGroupInFichierPayload]!
+    getDistinctEnvsFromFichier : [String]
+    getDistinctEnvsFromCommande : [String]
+    getDistOrgByEnvFromFichier(query: SearchFichierFilterQuery): [String]
+    getDistOrgNoMasByEnvFromFichier(query: SearchFichierFilterQuery): [String]
+    getDistOrgByEnvFromCommande(codenvs: [String]): [String]
+    getDistAppByEnvOrgFromFichier(query: SearchFichierFilterQuery): [String]
+    getDistAppByEnvOrgFromCommande(codenvs: [String], codorgs: [String]): [String]
+    getDistOrgByEnvsAndAppsFromCommande(codenvs: [String], codapps: [String]): [String]
+    getDistAppByEnvsFromCommande(codenvs: [String]): [String]
+    getDistComByEnvOrgAppFromFichier(query: SearchFichierFilterQuery): [String]
+    getDistFicByEnvOrgAppCom(query: SearchFichierFilterQuery): [String]
+    getPreselectedFichier(query: SearchFichierFilterQuery): [CreateOrUpdateFichierPayload]!
+    getPreselectedCommande(codenvs: [String], codorgs: [String], codapp: String): CommandeDTO!
+    getCommandesByEnvsOrgsApps(codenvs: [String], codorgs: [String], codapp: String): [CreateOrUpdateCommandePayload]!
+
+    allDestinataires: [CreateOrUpdateDestinatairePayload]!
+    allPapaads: [CreateOrUpdatePapaadPayload]!
+    allRessources: [CreateOrUpdateRessourcePayload]!
+    getRessourcesByOrgGam(codesOrg : [String], codesGam : [String]): [CreateOrUpdateRessourcePayload]!
+
+    allProductionFlux: [CreateOrUpdateProductionFluxPayload]!
+
+    allHistory: [CreateOrUpdateHistoryPayload]!
+
+    allColimps: [Colimp]!
+
+    allComposs: [Compos]!
+
+    getDistinctEnvOrgAppFromGenfic: [EnvOrgApp]
+    getDistinctEnvOrgFromGenfic: [EnvOrg]
+    getPeriodeFromGenfic(codenv : String, codorg : [String], codapp : String): [String]
+    getCommandeFromGenfic(codenv : String, codorg : [String], periode : String): [String]
+    getCommandeFromGenficWithApp(codenv : String, codorg : [String], codapp: String, periode : String): [String]
+    getFichierFromGenfic(codenv : String, codorg : [String], periode : String, commande : String): [String]
+    getFichierFromGenficWithApp(codenv : String, codorg : [String], codapp: String, periode : String, commande : String): [String]
+    searchReeditionPerRessurce(codenv : String, codorg : [String], codapp : String, periode : String): [ReeditionRessource]
+    searchReeditionParMassification(searchReeditionParMassificationQuery : SearchReeditionParMassificationQuery):[ReeditionMassification]
+    searchReeditionPerProduit(codenv : String, codorg : [String], application : String, periode : String, codcom : String, codfic : String): [ReeditionProduit]
+
+    getOrganismeMassification: [String]
+    getDistinctEnvOrgAppFromGenapp: [EnvOrgApp]
+    getParamsForMasappMasgamMasuti: [Parametre]
+
+    getFichiersSearchByEnvironnement : [EnvDocImpEnGroupInFichierPayloadDTO]!
+
+    findAllCodeDestinsAndCodeOrg: [CodeDestinataireCodeOrg]
+}
+
+
+
+#Generic types
+type EnvOrgApp {
+    codenv: String
+    codorg: String
+    codapp: String
+}
+
+type EnvOrg {
+    codenv: String
+    codorg: String
+}
+
+type ReeditionRessource {
+    percod: String
+    codsit: String
+    codres: String
+    codgam: String
+    codcom: String
+    codfic: String
+    numcom: String
+    codprd: String
+    refimp: String
+    pagFic: Int
+    coddes: String
+    nbrexe: Int
+    libfic: String
+    codorg: String
+    reedit: Boolean
+}
+
+type ReeditionMassification {
+     codcomOld: String
+     codficOld: String
+     numcomOld: String
+     pagficOld: Int
+     plificOld: Int
+     libficOld: String
+     codenv: String
+     codorg: String
+     codapp: String
+     percod: String
+     codcom: String
+     codfic: String
+     numcom: String
+     pagfic: Int
+     plific: Int
+     libfic: String
+     codcli: String
+     codsit: String
+     codres: String
+     coddes: String
+     nbrexe: Int
+}
+
+type ReeditionProduit {
+    codcom: String
+    codfic: String
+    numcom: String
+    refimp: String
+    codprd: String
+    libfic: String
+    pagfic: Int
+    codgam: String
+    codsit: String
+    codres: String
+    coddes: String
+    nbrexe: Int
+    codorg: String
+    percod: String
+    reedit: Boolean
+}
+
+input DeleteByStringIdInput {
+    id: String!
+}
+
+input DeleteByArrayStringIdInput {
+    ids: [String]!
+}
+
+
+input DeleteByIntIdInput {
+    id: Int!
+}
+
+type DeletePayload{
+    ok: Boolean!
+}
+
+union PaginatedElement =
+    Server | Support | Client | Environnement | Gamme | Utilisateur | Profile | InformationOrganisme | Format |
+    Organisme | Commande | Parametre | ParametreDistribution | Region | SiteOrganisme | SiteCNP | Support |
+    Tarif | Verrou | Imprime | ParametreEchantillon | Habilitation | Multif | Composition | ParametreEdition | AdresseRetour | Fichier | Application | LotRef | Groupe |
+    Destinataire | History
+    | GenPro | GenEtp | HisPro | GenDoc | StaDoc | GenApp | Produi | Expedition
+
+type Paginated {
+    elements: [PaginatedElement]!
+    totalElement: Int!
+    totalPages:Int!
+}
+
+input QueryParametersInput {
+    filterCriteria: FilterCriteriaInput
+    paginationParameters: PaginationParametersInput
+}
+
+input FilterCriteriaInput {
+    criteria: [FilterCriterionInput]!
+}
+
+enum SearchOperation {
+    EQUALS
+    LIKE
+}
+
+enum Direction {
+    ASCENDING
+    DESCENDING
+}
+
+input FilterCriterionInput {
+    value: String!
+    column: String!
+    operation: SearchOperation!
+}
+
+input PaginationParametersInput {
+    page: Int
+    size: Int
+    sort: [SortInput]!
+}
+
+input SortInput {
+    column: String!
+    direction: Direction!
+}
+
+# InformationOrganisme
+type InformationOrganisme {
+    id: Int!
+    organisme: Organisme!
+    message: String!
+    actif: Boolean!
+    date: DateTime
+}
+
+input CreateInformationOrganismeInput {
+    organismeId: [String]!
+    message: String!
+    actif: Boolean!
+}
+
+input ReeditionInput {
+    codEnv: String!
+    codOrg: String!
+    codApp: String!
+    perCod: String!
+    product: String!
+    user: String!
+    formId: String!
+}
+
+input UpdateInformationOrganismeInput{
+    id: Int!
+    message: String
+    actif: Boolean
+}
+
+type UtiLogPayload {
+    codulo: Int!
+    codsta: String!
+    codusr: String!
+    formid: String!
+    datulo: Date
+    action: String!
+    params: String
+    result: Boolean!
+    erreur: String
+    versio: String
+}
+
+type CreateOrUpdateInformationOrganismePayload {
+    id: Int!
+    organismeId: String!
+    message: String!
+    actif: Boolean!
+}
+
+#Fin InformationOrganisme
+
+# Organisme
+type Organisme {
+    code: String!
+    libelle: String!
+    adresse1: String
+    adresse2: String
+    adresse3: String
+    adresse4: String
+    type: String!
+    codeRegion: String
+    codeSite: String!
+}
+
+input CreateOrUpdateOrganismeInput {
+    code: String!
+    libelle: String!
+    adresse1: String
+    adresse2: String
+    adresse3: String
+    adresse4: String
+    type: String!
+    codeRegion: String
+    codeSite: String
+}
+
+type CreateOrUpdateOrganismePayload {
+    code: String!
+    libelle: String!
+    adresse1: String
+    adresse2: String
+    adresse3: String
+    adresse4: String
+    type: String!
+    codeRegion: String
+    codeSite: String
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+
+# Format
+type Format {
+    code : String
+    libelle : String
+}
+
+input CreateOrUpdateFormatInput {
+    code: String!
+    libelle: String!
+}
+
+type CreateOrUpdateFormatPayload {
+    code: String!
+    libelle: String!
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+
+# Multif
+type Multif {
+    code : String
+    libelle : String
+}
+
+type CreateOrUpdateMultifPayload {
+    code: String!
+    libelle: String!
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+input CreateOrUpdateMultifInput {
+    code: String!
+    libelle: String!
+}
+
+
+# Composition
+type Composition {
+    code : String
+    libelle : String
+}
+
+type CreateOrUpdateCompositionPayload {
+    code: String!
+    libelle: String!
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+input CreateCompositionInput {
+    code: String!
+    libelle: String!
+}
+
+input UpdateCompositionInput {
+    code: String!
+    libelle: String!
+}
+
+# Application
+type Application {
+    code : String
+    libelle : String
+    codeOrganisation : String
+    codeEnvironnement : String
+    codeSystem : String
+    codeGroupe : String
+    lotNumber : String
+    typeRefection : TypeRefection
+}
+
+type CreateOrUpdateApplicationPayload {
+    code : String
+    libelle : String
+    codeOrganisation : String
+    codeEnvironnement : String
+    codeSystem : String
+    codeGroupe : String
+    lotNumber : String
+    typeRefection : TypeRefection
+    codeRessource : String
+    codeGamme : String
+    codeServeur : String
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+
+input CreateOrUpdateApplicationInput {
+    code : String
+    libelle : String
+    codeOrganisation : String
+    codeEnvironnement : String
+    codeSystem : String
+    codeGroupe : String
+    lotNumber : String
+    typeRefection : TypeRefection
+}
+
+
+input DeleteApplicationInput {
+   codeEnvironnement: String!
+   codeOrganisation: String!
+   code: String!
+}
+enum TypeRefection {
+    ACTUELS, INITIAUX
+}
+input DeleteByArrayApplicationCompositeIdInput {
+    ids: [DeleteApplicationInput]!
+}
+
+# LotRef
+type LotRef {
+    refEnvironnement : String
+    refOrganisation : String
+    refApplication : String
+    lotNumber : String
+    type : String
+    libelle : String
+    lotApplicatif : String
+    statut : String
+    dateCreation : Date
+    dateCloture : Date
+    dateActivation : Date
+    dateInterruption : Date
+}
+# Groupe
+type Groupe {
+ code: String
+    libelle: String
+    refEnvironnement : String
+    refOrganisme : String
+    refApplication : String
+    typeGroupe  : String
+
+}
+
+# Commande
+type Commande {
+      codenv: String!
+              codorg: String!
+              codapp: String!
+              code: String!
+              libelle: String!
+}
+
+type CommandeDTO {
+    commandes: [CreateOrUpdateCommandePayload]!
+    message: String!
+}
+
+input CreateOrUpdateCommandeInput {
+     codenv: String!
+             codorg: String!
+             codapp: String!
+             code: String!
+             libelle: String!
+}
+
+type CreateOrUpdateCommandePayload {
+         codenv: String!
+          codorg: String!
+          codapp: String!
+          code: String!
+          libelle: String!
+          codreg: String!
+          isNotAuthorisedToBeDeleted: Boolean!
+}
+
+input SearchFichierFilterQuery {
+    codenvs: [String]
+    codorgs: [String]
+    codapp: String
+    codcom: String
+    codfic: String
+}
+
+type CommandeForComparePayload {
+    application: String!
+    organisme: String!
+    codeReg: String!
+    sortHelper: String!
+    environnements: String!
+}
+
+input DeleteCommandeInput {
+   codenv: String!
+           codorg: String!
+           codapp: String!
+           code: String!
+}
+input CreateOrUpdateCommandesInput {
+    commandes: [CreateOrUpdateCommandeInput]!
+}
+
+input DeleteByArrayCommandeCompositeIdInput {
+    ids: [DeleteCommandeInput]!
+}
+
+#Environnement
+type Environnement {
+    code: String!
+    libelle: String!
+}
+
+input CreateEnvironnementInput {
+    code: String!
+    libelle: String!
+}
+
+input UpdateEnvironnementInput {
+    code: String!
+    libelle: String
+}
+
+type CreateOrUpdateEnvironnementPayload {
+    code: String!
+    libelle: String!
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+
+#Fin Environnement
+
+#Gamme
+type Gamme {
+    code: String!
+    libelle: String!
+    codeVerrou: String
+}
+
+input CreateGammeInput {
+    code: String!
+    libelle: String!
+    codeVerrou: String
+}
+
+input UpdateGammeInput {
+    code: String!
+    libelle: String
+    codeVerrou: String
+}
+
+input UpdateGammesInput {
+   gammes: [UpdateGammeInput]!
+}
+
+type CreateOrUpdateGammePayload {
+    code: String!
+    libelle: String!
+    codeVerrou: String
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+
+#Fin Gamme
+
+#Utilisateur
+type Utilisateur {
+    codeUtilisateur: String!
+    libelleUtilisateur: String!
+    profile: String!
+    password: String!
+    actif: Boolean!
+    codeEnvironnement: String!
+    codeSite: String
+}
+
+input CreateUtilisateurInput {
+    codeUtilisateur: String!
+    libelleUtilisateur: String!
+    profile: String!
+    password: String!
+    actif: Boolean!
+    codeEnvironnement: String!
+    codeSite: String
+}
+
+input UpdateUtilisateurInput {
+    codeUtilisateur: String!
+    libelleUtilisateur: String
+    profile: String
+    password: String
+    actif: Boolean
+    codeEnvironnement: String
+    codeSite: String
+}
+
+input UpdateUtilisateursInput {
+   utilisateurs: [UpdateUtilisateurInput]!
+}
+
+type CreateOrUpdateUtilisateurPayload {
+    codeUtilisateur: String!
+    libelleUtilisateur: String!
+    profile: String!
+    password: String!
+    actif: Boolean!
+    codeEnvironnement: String!
+    codeSite: String
+}
+
+#FIN Utilisateur
+
+#Destinataire
+
+type Destinataire {
+    code: String!
+    codeOrg: String!
+    libelle: String!
+    refPri: String
+}
+
+input CreateOrUpdateDestinataireInput {
+    code: String!
+    codeOrg: String!
+    libelle: String!
+    refPri: String
+}
+
+input CreateDestinatairesEnMasseInput {
+    destinataires: [CreateOrUpdateDestinataireInput]!
+}
+
+type CreateOrUpdateDestinatairePayload {
+    code: String!
+    codeOrg: String!
+    libelle: String!
+    refPri: String
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+
+input DeleteDestinataireInput {
+    code: String!
+    codeOrg: String!
+}
+
+input DeleteByArrayDestinataireCompositeIdInput {
+    ids: [DeleteDestinataireInput]!
+}
+
+
+#FIN Destinataire
+
+#Profile
+type Profile {
+    profile: String!
+    libelleProfile: String!
+}
+
+input CreateProfileInput {
+    profile: String!
+    libelleProfile: String!
+    habilitations: [UpdateHabilitationInput]
+}
+
+input UpdateProfileInput {
+    profile: String!
+    libelleProfile: String
+    habilitations: [UpdateHabilitationInput]
+}
+
+type CreateOrUpdateProfilePayload {
+    profile: String!
+    libelleProfile: String!
+    habilitations: [Habilitation]
+}
+
+#FIN Profile
+
+
+#Server
+type Server {
+    code: String!
+    systeme: Systeme!
+    libelle:String!
+    adresseIp: String
+    teste:Boolean!
+    actif:Boolean!
+}
+
+enum Systeme {
+    WINDOWS
+    AIX
+    LINUX
+}
+
+input CreateServerInput {
+    code: String!
+    systeme: Systeme!
+    libelle:String!
+    adresseIp: String
+    teste:Boolean!
+    actif:Boolean!
+}
+
+input UpdateServerInput {
+    code: String!
+    systeme: Systeme
+    libelle:String
+    adresseIp: String
+    teste:Boolean
+    actif:Boolean
+}
+
+type CreateOrUpdateServerPayload {
+    code: String!
+    systeme: Systeme!
+    libelle:String!
+    adresseIp: String
+    teste:Boolean!
+    actif:Boolean!
+    isNotAuthorisedToBeDeleted:Boolean!
+}
+#Fin Server
+
+
+#habilitation
+
+type Habilitation {
+    id: Int
+    parentId: Int
+    habilitationType: HabilitationType
+    identite:String
+    ordre: Int
+}
+
+enum HabilitationType {
+    MENU
+    SOUS_MENU
+    FORMULAIRE
+    CONTROLE
+}
+
+input UpdateHabilitationInput {
+    id: Int
+    parentId: Int
+    habilitationType: HabilitationType
+    identite: String
+    ordre: Int
+}
+
+input UpdateHabilitationsInput {
+    habilitations: [UpdateHabilitationInput]!
+}
+
+type CreateOrUpdateHabilitationPayload {
+    id: Int!
+    parentId: Int
+    habilitationType: HabilitationType
+    identite: String
+    ordre: Int
+}
+# fin habilitation
+
+
+#Client
+type Client{
+    code: String!
+    libelle: String!
+    codeAlliage: String!
+}
+
+input CreateClientInput {
+    code: String!
+    libelle: String!
+    codeAlliage: String!
+}
+
+input UpdateClientInput {
+    code: String!
+    libelle: String
+    codeAlliage: String
+}
+
+type CreateOrUpdateClientPayload {
+    code: String!
+    libelle: String!
+    codeAlliage: String!
+    isNotAuthorisedToBeDeleted:Boolean!
+}
+
+#Fin client
+
+#Paramètres généraux
+type Parametre {
+    code: String!
+    value: String!
+    libelle: String
+}
+
+input CreateOrUpdateParametreInput {
+    code: String!
+    value: String!
+    libelle: String
+}
+
+type CreateOrUpdateParametrePayload {
+    code: String!
+    value: String!
+    libelle: String
+}
+
+#Fin paramètres généraux
+
+#Paramètres resources
+
+type ParametreDistribution {
+    reference: String!
+    libelle: String!
+    logicielDistribution: String!
+    commandeDistribution: String
+}
+
+input CreateOrUpdateParametreDistributionInput {
+    reference: String!
+    libelle: String!
+    logicielDistribution: String!
+    commandeDistribution: String!
+}
+
+type CreateOrUpdateParametreDistributionPayload {
+    reference: String!
+    libelle: String!
+    logicielDistribution: String!
+    commandeDistribution: String!
+    isNotAuthorisedToBeDeleted:Boolean!
+}
+
+#Fin paramètre resources
+
+#Verrou
+type Verrou {
+    code: String!
+    libelle: String!
+    maxExecution: Int!
+}
+
+#Region
+type Region {
+    code: String!
+    libelle: String!
+}
+
+input CreateOrUpdateRegionInput {
+    code: String!
+    libelle: String
+}
+
+type CreateOrUpdateRegionPayload {
+    code: String!
+    libelle: String!
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+#Fin region
+
+#Papaad
+
+input CreatePapaadInput {
+  codeCommande: String!
+  codeFichier: String!
+  codeNotif: String!
+  libelle: String!
+  periode: Boolean!
+  codeRND: String!
+  appPro: String!
+  typeHas: String!
+  format: String!
+  isUrib: String
+  nsTruc: Boolean!
+  imprime: Boolean!
+  huissier: Boolean!
+  numNot: Boolean!
+  strRaf: Boolean!
+  contrat: Boolean!
+  medele: Boolean!
+  idtbcc: Boolean!
+}
+
+input UpdatePapaadInput {
+  codeCommande: String!
+  codeFichier: String!
+  codeNotif: String!
+  libelle: String!
+  periode: Boolean!
+  codeRND: String!
+  appPro: String!
+  typeHas: String!
+  format: String!
+  isUrib: String
+  nsTruc: Boolean!
+  imprime: Boolean!
+  huissier: Boolean!
+  numNot: Boolean!
+  strRaf: Boolean!
+  contrat: Boolean!
+  medele: Boolean!
+  idtbcc: Boolean!
+}
+type CreateOrUpdatePapaadPayload {
+  codeCommande: String!
+  codeFichier: String!
+  codeNotif: String!
+  libelle: String
+  periode: Boolean
+  codeRND: String
+  appPro: String
+  typeHas: String
+  format: String
+  isUrib: String
+  nsTruc: Boolean
+  imprime: Boolean
+  huissier: Boolean
+  numNot: Boolean
+  strRaf: Boolean
+  contrat: Boolean
+  medele: Boolean
+  idtbcc: Boolean
+}
+input DeletePapaadInput {
+  codeCommande: String!
+  codeFichier: String!
+  codeNotif: String!
+}
+input DeleteByArrayPapaadCompositeIdInput {
+    ids: [DeletePapaadInput]!
+}
+
+#Fin Papaad
+
+#Site CNP
+type SiteCNP {
+    code: String!
+    host: String!
+    username:String!
+    password:String!
+    ressourceDelestage: String!
+    organismeMassification:String!
+}
+
+input CreateOrUpdateSiteCNPInput {
+    code: String!
+    host: String!
+    username:String!
+    password:String!
+    ressourceDelestage: String!
+    organismeMassification:String!
+}
+
+type CreateOrUpdateSiteCNPPayload {
+    code: String!
+    host: String!
+    username:String!
+    password:String!
+    ressourceDelestage: String!
+    organismeMassification:String!
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+
+#Fin Site CNP
+
+#Site Organisme
+type SiteOrganisme {
+    codeOrganisme: String!
+    codeSiteDematerialisation: String!
+    codeSiteProdocs: String!
+}
+
+input CreateOrUpdateSiteOrganismeInput {
+    codeOrganisme: String!
+    codeSiteDematerialisation: String!
+    codeSiteProdocs: String!
+}
+
+type CreateOrUpdateSiteOrganismePayload {
+    codeOrganisme: String!
+    codeSiteDematerialisation: String!
+    codeSiteProdocs: String!
+}
+
+#Fin Site Organisme
+
+#Support
+type Support {
+    type: String!
+    libelle: String!
+    poids: Int!
+}
+
+input CreateOrUpdateSupportInput {
+    type: String!
+    libelle: String!
+    poids: Int!
+}
+
+type CreateOrUpdateSupportPayload {
+    type: String!
+    libelle: String!
+    poids: Int!
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+
+#Fin Support
+
+#Compos
+type Compos {
+    typmef: String!
+    libmef: String!
+}
+#Fin Compos
+
+#Colimp
+type Colimp {
+    typcol: String!
+    libcol: String!
+}
+#Fin Colimp
+
+#Imprime
+type Imprime {
+    reference: String!
+    libelle: String!
+    codeRND: String
+    typeComposition: String!
+    typeCouleur: String!
+    rectoVerso: Boolean!
+}
+
+input CreateOrUpdateImprimeInput {
+    reference: String!
+    libelle: String!
+    codeRND: String
+    typeComposition: String!
+    typeCouleur: String!
+    rectoVerso: Boolean!
+}
+
+type CreateOrUpdateImprimePayload {
+    reference: String!
+    libelle: String!
+    codeRND: String
+    typeComposition: String!
+    typeCouleur: String!
+    rectoVerso: Boolean!
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+#Fin Imprime
+
+#Parametres echantillons
+enum TypeEchantillon {
+    LOT, PAGE
+}
+
+type ParametreEchantillon {
+    reference:String!
+    type: TypeEchantillon!
+    nombreLots: Int
+    nombrePages: Int
+    random: Boolean!
+    formule: String!
+}
+
+
+input CreateOrUpdateParametreEchantillonInput {
+    reference:String!
+    type: TypeEchantillon!
+    nombreLots: Int
+    nombrePages: Int
+    random: Boolean!
+    formule: String!
+}
+
+type CreateOrUpdateParametreEchantillonPayload {
+    reference:String!
+    type: TypeEchantillon!
+    nombreLots: Int
+    nombrePages: Int
+    random: Boolean!
+    formule: String!
+    isNotAuthorisedToBeDeleted: Boolean!
+}
+#Fin Parametres echantillons
+
+
+type ParametreEdition {
+    reference:String
+    type: String
+    libelle: String
+    lineNumber: Int
+    columnNumber: Int
+    length: Int
+}
+
+
+input CreateOrUpdateParametreEditionInput {
+    reference:String
+    type: String
+    libelle: String
+    lineNumber: Int
+    columnNumber: Int
+    length: Int
+}
+
+type CreateOrUpdateParametreEditionPayload {
+    reference:String
+    type: String
+    libelle: String
+    lineNumber: Int
+    columnNumber: Int
+    length: Int
+}
+
+#Adresse retour
+
+ type AdresseRetour {
+      code : String
+      codeOrganisme : String
+      adresse1 : String
+      adresse2 : String
+      adresse3 : String
+      adresse4 : String
+ }
+
+ input CreateOrUpdateAdresseRetourInput {
+       code : String
+       codeOrganisme : String
+       adresse1 : String
+       adresse2 : String
+       adresse3 : String
+       adresse4 : String
+ }
+
+ type CreateOrUpdateAdresseRetourPayload {
+     code : String
+           codeOrganisme : String
+           adresse1 : String
+           adresse2 : String
+           adresse3 : String
+           adresse4 : String
+           fichiers : [CreateOrUpdateFichierPayload]
+           isNotAuthorisedToBeDeleted: Boolean!
+ }
+
+ input DeleteAdresseRetourInput {
+     code: String!
+     codeOrganisme: String!
+ }
+ input DeleteByArrayAdresseRetourCompositeIdInput {
+     ids: [DeleteAdresseRetourInput]!
+ }
+ input CreateOrUpdateAdressesRetourInput {
+     adressesRetour: [CreateOrUpdateAdresseRetourInput]!
+ }
+
+
+
+ # Fichier
+
+ type Fichier {
+
+     codeEnv : String
+     codeOrg : String
+     codeApp : String
+     codeCom : String
+     codeFich : String
+     libFichier : String
+     refImprime : String
+     codeAdr : String
+     codeProd : String
+     refFormat :String
+     typeFormat :String
+     page :Int
+     codeClient :String
+     typeSig: TypeSignature
+     typeMultif: String
+     typeSupport: String
+     refSupport: String
+     eclatement: Int
+     codeDocument: String
+
+ }
+
+ type EnvAppRefImpEnGroupInFichierPayload {
+
+    codeEnv : String
+    codeApp : String
+    refImprime : String
+
+ }
+
+ type ComFichProdEnGroupInFichierPayload {
+
+    codeCom : String
+    codeFic : String
+    codePrd : String
+
+ }
+
+ type CreateOrUpdateFichierPayload {
+
+        codeEnv : String
+        codeOrg : String
+        codeApp : String
+        codeCom : String
+        codeFich : String
+        libFichier : String
+        refImprime : String
+        codeAdr : String
+        codeProd : String
+        refFormat :String
+        typeFormat :String
+        page :Int
+        codeClient :String
+        typeSig: String
+        typeMultif: String
+        typeSupport: String
+        refSupport: String
+        eclatement: Int
+        codeDocument: String
+        isNotAuthorisedToBeDeleted: Boolean!
+     }
+
+     type CreateFichierWithExemplairePayloadDTO {
+        nbFichiers : Int
+        nbProduits : Int
+        nbExemplaires : Int
+     }
+
+     input CreateOrUpdateFichierInputDTO {
+
+             codeEnv : String
+             codeOrg : String
+             codeApp : String
+             codeCom : String
+             codeFich : String
+             libFichier : String
+             refImprime : String
+             codeAdr : String
+             codeProd : String
+             refFormat :String
+             typeFormat :String
+             page :Int
+             codeClient :String
+             typeSig: String
+             typeMultif: String
+             typeSupport: String
+             refSupport: String
+             eclatement: Int
+             codeDocument: String
+             exemplaires : [CreateExemplaireWithFichierInputDTO]
+          }
+
+     input CreateExemplaireWithFichierInputDTO {
+        codeRessource: String,
+        codeGamme: String,
+        codeSite: String
+     }
+
+
+     enum TypeSignature {
+         R
+         V
+         SPACE
+     }
+
+    type EnvDocImpEnGroupInFichierPayloadDTO{
+        codeDoc: String
+        codeEnv: String
+    }
+
+# fin fichier
+
+#Ressource
+type CreateOrUpdateRessourcePayload {
+
+   codeEnvironnement : String !
+   codeOrganisme : String !
+   codeApplication : String !
+   codeGamme : String !
+   codeSite : String !
+   codeRessource : String !
+   codeServeur : String
+   libelle : String
+   type : String
+   logicielDistribution : String
+   referenceDistributionProduit : String
+   referenceDistributionProduitRecap : String
+   userId : String
+   password : String
+   typeFusion : String
+   destinataire :Boolean
+   fileImpression : String
+   informationUtilisateur : String
+   fileBloquee : Boolean
+   miseSousPli : Boolean
+   profil : String
+   isNotAuthorisedToBeDeleted:Boolean
+}
+
+input CreateOrUpdateRessourceInput {
+    codeEnvironnement : String !
+    codeOrganisme : String !
+    codeApplication : String !
+    codeGamme : String !
+    codeSite : String !
+    codeRessource : String !
+    codeServeur : String !
+    libelle : String !
+    type : String
+    logicielDistribution : String
+    referenceDistributionProduit : String
+    referenceDistributionProduitRecap : String
+    userId : String
+    password : String
+    typeFusion : String
+    destinataire :Boolean
+    fileImpression : String
+    informationUtilisateur : String
+    fileBloquee : Boolean
+    miseSousPli : Boolean
+    profil : String
+}
+
+input DeleteRessourceInput {
+   codeEnvironnement : String !
+   codeOrganisme : String !
+   codeApplication : String !
+   codeGamme : String !
+   codeSite : String !
+   codeRessource : String !
+}
+input DeleteByArrayRessourceCompositeIdInput {
+    ids: [DeleteRessourceInput]!
+}
+
+#fin ressource
+
+# HisPro
+type HisPro {
+    codeEnv : String
+    codeOrg : String
+    codeApp : String
+    perCod : String
+    codeCom : String
+    numCom : String
+    codeFic : String
+    codeGam : String
+    proSta : String
+    proInf : String
+    prefec : Boolean
+    dprodc : DateTime
+    dprodd : DateTime
+    dprodt : DateTime
+    dprods : DateTime
+    dprodh : DateTime
+    pagFic : Int
+    pliFic : Int
+    rejFic : Int
+}
+
+# GenPro
+type GenPro {
+    codeEnv : String
+    codeOrg : String
+    codeApp : String
+    perCod : String
+    codeCom : String
+    numCom : String
+    codeFic : String
+    codeGam : String
+    proSta : String
+    proInf : String
+    prefec : Boolean
+    dprodc : DateTime
+    dprodd : DateTime
+    dprodt : DateTime
+    dprods : DateTime
+    dprodh : DateTime
+    pagFic : Int
+    pliFic : Int
+    rejFic : Int
+}
+
+#GenEtp
+type GenEtp {
+    id : Int
+    typetp : String
+    codenv : String
+    codorg : String
+    codapp : String
+    percod : String
+    codcom : String
+    numcom : String
+    codfic : String
+    codgam : String
+    numexe : String
+    codres : String
+    codsit : String
+    coddes : String
+    nbrexe : Int
+    codser : String
+    codsig : String
+    signal : String
+    reedit : Boolean
+    fabsim : Boolean
+    statut : String
+    codinf : Int
+    create : DateTime
+    valide : DateTime
+    debute : DateTime
+    termin : DateTime
+    invali : DateTime
+    suspen : DateTime
+    histor : DateTime
+    script : String
+    stepno : Int
+    numpid : Int
+    etpfus : String
+    clefus : String
+    idtfus : Int
+}
+
+#Production flux
+
+type CreateOrUpdateProductionFluxPayload {
+
+    id : Int!
+    nomArchiveRetour : String!
+    nomFichierRetour : String!
+    dateProduction: DateTime
+    datePoste: DateTime
+    nombrePlisFabriques : Int
+    details: Int
+}
+
+#fin production flux
+
+# history
+
+type History{
+
+    id: Int!
+    station: String
+    utilisateur: String
+    insertionDate: String
+    actionUtilisateur: String
+    entite: String
+    condition: String
+    entree: String
+    sortie: String
+}
+
+type CreateOrUpdateHistoryPayload {
+
+    id: Int!
+    station: String
+    utilisateur: String
+    insertionDate: String
+    actionUtilisateur: String
+    entite: String
+    condition: String
+    entree: String
+    sortie: String
+}
+
+#fin history
+
+
+# GenDoc
+type GenDoc{
+  datdem: String
+  numdem: Int
+  codenv: String
+  codorg: String
+  codapp: String
+  percod: String
+  numcom: String
+  codcom: String
+  codfic: String
+  coddoc: String
+  refdem: String
+  typact: String
+  imprim: Boolean
+  docsta: String
+  docinf: String
+  ddodeb: DateTime
+  ddofin: DateTime
+  ddosus: DateTime
+  tpscom: Int
+  retour: Boolean
+  ddoimp: DateTime
+  ddoexp: DateTime
+}
+
+
+# fin GenDoc
+
+
+
+# StaDoc
+type StaDoc{
+  docinf: String
+  libinf: String
+}
+# fin StaDoc
+
+# fin documents dématérialisés
+
+# GenApp
+type GenApp {
+  codeEnv: String
+  codeOrg: String
+  codeApp: String
+  perCod: String
+  appsta: String
+  appinf: String
+  arefec: Boolean
+  dapplc: DateTime
+  dappld: DateTime
+  dapplt: DateTime
+  dappls: DateTime
+  dapplh: DateTime
+  typref: TypeRefection
+  manuel: Boolean
+  sitori: String
+}
+
+# fin GenApp
+
+
+# Produi
+type Produi {
+  codenv: String
+  codorg: String
+  codapp: String
+  codcom: String
+  codfic: String
+  codgam: String
+  proact: Boolean
+}
+# fin Produi
+
+input SearchReeditionParMassificationQuery{
+    codenv: String
+    codorg: [String]
+    periode: String
+    codcom: String
+    codfic: String
+    masapp: String
+    masgam: String
+
+}
+
+type CodeDestinataireCodeOrg {
+    code: String
+    codeOrg: String
+}

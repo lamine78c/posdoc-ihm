@@ -1,0 +1,14 @@
+extend type Query {
+    findHistoryByQuery(query: FindHistoryByQuery): [CreateOrUpdateHistoryPayload]
+    findDistinctEntity: [String]
+    findDistinctUser: [String]
+    findHistoryByCodulo(codulo: Int!): [CreateOrUpdateHistoryPayload]
+}
+
+input FindHistoryByQuery {
+    dtdeb: String!
+    dtfin: String!
+    user: String
+    action: String
+    entity: String
+}

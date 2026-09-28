@@ -1,0 +1,173 @@
+<div class="ps-2">
+  <div class="row row-with-border">
+    <div class="row p-0">
+      <div class="col-5 p-0">
+        <app-label-valeur [label]="'Environnement'" [valeur]="getEnvironnement()" [labelColumns]="6" [inputColumns]="6"></app-label-valeur>
+      </div>
+      <div class="col-3 p-0">
+        <app-label-valeur [label]="'Application'" [valeur]="dataDefinition.application" [labelColumns]="6" [inputColumns]="6"></app-label-valeur>
+      </div>
+    </div>
+    <div class="row p-0">
+      <div class="col-5 p-0">
+        <app-label-valeur [label]="'Organisme/Région'" [valeur]="getOrganisme()" [labelColumns]="6" [inputColumns]="6"></app-label-valeur>
+      </div>
+      <div class="col-3 p-0">
+        <app-label-valeur [label]="'Commande'" [valeur]="dataDefinition.commande" [labelColumns]="6" [inputColumns]="6"></app-label-valeur>
+      </div>
+      <div class="col-4 p-0">
+        <app-label-valeur [label]="'Nom Fichier'" [valeur]="dataDefinition.fichier" [labelColumns]="5" [inputColumns]="7"></app-label-valeur>
+      </div>
+    </div>
+  </div>
+  <div class="row pt-2">
+    <div class="col-8">
+      <app-champ-de-saisie
+        appNoSpecialCharacters
+        [label]="'Désignation *'"
+        [allowedCharacters]="['-', ' ', '(', ')', '_', '#', '%']"
+        [vertical]="true"
+        [form]="form.get('designation')"
+        [labelColumns]="12"
+        [inputColumns]="12"
+        [fillInput]="true"
+        [toUpperCase]="true"
+        [isError]="true"
+        [errorMessage]="form.get('designation').errors?.message || form.get('designation').errors"
+      ></app-champ-de-saisie>
+    </div>
+    <div class="col-4">
+      <app-champ-de-saisie
+        [label]="'Code Produit'"
+        [vertical]="true"
+        [toUpperCase]="true"
+        [form]="form.get('codeProduit')"
+        [labelColumns]="8"
+        [inputColumns]="8"
+        [isError]="true"
+        [errorMessage]="form.get('codeProduit').errors?.message || form.get('codeProduit').errors"
+      ></app-champ-de-saisie>
+    </div>
+  </div>
+
+  <div class="row pt-2">
+    <div class="col-4">
+      <app-champ-de-saisie
+        [label]="'Référence Format'"
+        [vertical]="true"
+        [form]="form.get('refFormat')"
+        [labelColumns]="8"
+        [inputColumns]="8"
+        [isError]="true"
+        [errorMessage]="form.get('refFormat').errors?.message || form.get('refFormat').errors"
+      ></app-champ-de-saisie>
+    </div>
+    <div class="col-4">
+      <app-liste-deroulante
+        [label]="'Type Format *'"
+        [form]="form.get('typeFormat')"
+        [isError]="true"
+        [options]="formatOption"
+        [vertical]="true"
+        [labelColumns]="8"
+        [inputColumns]="8"
+        [errorMessage]="form.get('typeFormat').errors?.message || form.get('typeFormat').errors"
+      ></app-liste-deroulante>
+    </div>
+    <div class="col-4">
+      <app-champ-de-saisie-auto-completion
+        [label]="'Fond De Page *'"
+        [index]="1"
+        [vertical]="true"
+        [form]="form.get('fondPage')"
+        [labelColumns]="8"
+        [inputColumns]="8"
+        [autoCompleteResults]="imprimeData"
+        [editable]="false"
+        [placeholder]="'auto-completion'"
+        [displaySearchIcon]="false"
+        [isError]="true"
+        [errorMessage]="form.get('fondPage').errors?.message || form.get('fondPage').errors"
+      ></app-champ-de-saisie-auto-completion>
+    </div>
+  </div>
+  <div class="row pt-2 pb-2">
+    <div class="col-4">
+      <app-liste-deroulante
+        [label]="'Code Client *'"
+        [form]="form.get('codeClient')"
+        [isError]="true"
+        [options]="clientOption"
+        [vertical]="true"
+        [labelColumns]="8"
+        [inputColumns]="8"
+        [errorMessage]="form.get('codeClient').errors?.message || form.get('codeClient').errors"
+      ></app-liste-deroulante>
+    </div>
+    <div class="col-4">
+      <app-liste-deroulante
+        [label]="'Signature'"
+        [form]="form.get('signature')"
+        [isError]="true"
+        [options]="signatureOptions"
+        [hasBlankOption]="true"
+        [blankOptionValue]="''"
+        [vertical]="true"
+        [labelColumns]="8"
+        [inputColumns]="8"
+        [errorMessage]="form.get('signature').errors?.message || form.get('signature').errors"
+      ></app-liste-deroulante>
+    </div>
+    <div class="col-4">
+      <app-champ-de-saisie
+        [label]="'Code Document:'"
+        [vertical]="true"
+        [form]="form.get('codeDocument')"
+        [labelColumns]="8"
+        [inputColumns]="8"
+        [isError]="true"
+        [errorMessage]="form.get('codeDocument').errors?.message || form.get('codeDocument').errors"
+      ></app-champ-de-saisie>
+    </div>
+  </div>
+  <div class="row" *ngIf="noRegionFound">
+    <div class="col-12 font-weight-semi-bold" [ngClass]="noRegionFoundb ? 'text-success' : 'text-danger'">
+      <i class="me-1" [ngClass]="noRegionFoundb ? 'icon-b_valid' : 'icon-error'" aria-hidden="true"></i>
+      {{ noRegionFound }}
+      <em class="icon-b_modify" (click)="onEditOrganismeClient()"></em>
+    </div>
+  </div>
+  <div class="row pt-2 pb-2">
+    <div class="col-4 checkbox-eclatement">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="eclatement" role="checkbox" name="eclatement" [formControl]="form.get('eclatement')" />
+        <label class="form-check-label" for="eclatement"> Eclatement </label>
+      </div>
+    </div>
+    <div class="col-4">
+      <app-liste-deroulante
+        [label]="'Type Support: '"
+        [form]="form.get('typeSupport')"
+        [isError]="true"
+        [options]="typSupportOption"
+        [vertical]="true"
+        [labelColumns]="8"
+        [inputColumns]="8"
+        [errorMessage]="form.get('typeSupport').errors?.message || form.get('typeSupport').errors"
+      ></app-liste-deroulante>
+    </div>
+    <div class="col-4">
+      <app-champ-de-saisie
+        [label]="'Limite regroupement'"
+        [labelColumns]="8"
+        [inputColumns]="8"
+        [fillInput]="false"
+        [vertical]="true"
+        [typeInput]="'number'"
+        [form]="form.get('page')"
+        [isError]="true"
+        [errorMessage]="form.get('page').errors?.message || form.get('page').errors"
+      ></app-champ-de-saisie>
+    </div>
+  </div>
+</div>

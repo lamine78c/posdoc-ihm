@@ -1,0 +1,7 @@
+<svg fill="#384A6D" id="Pas_de_tri" data-name="Pas de tri" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <rect id="Rectangle_230" data-name="Rectangle 230" width="20" height="20" fill="rgba(255,0,0,0.1)" opacity="0"/>
+  <g id="Groupe_125" data-name="Groupe 125" transform="translate(129.5 15.5) rotate(180)">
+    <path id="Tracé_48" data-name="Tracé 48" d="M5.656-10.25v4.5L3.406-8Zm1-2.406L2-8,6.656-3.344Z" transform="translate(127.844 13.5) rotate(-90)"/>
+    <path id="Tracé_49" data-name="Tracé 49" d="M5.656-30.25v4.5L3.406-28Zm1-2.406L2-28l4.656,4.656Z" transform="translate(91.844 -2.5) rotate(90)"/>
+  </g>
+</svg>

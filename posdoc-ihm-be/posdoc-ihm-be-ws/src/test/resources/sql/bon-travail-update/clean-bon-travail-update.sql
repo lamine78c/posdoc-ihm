@@ -1,0 +1,4 @@
+DELETE FROM genfic;
+DELETE FROM params;
+DELETE FROM genetp;
+DELETE FROM utilog;

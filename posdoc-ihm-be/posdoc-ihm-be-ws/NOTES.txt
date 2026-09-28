@@ -1,0 +1,19 @@
+Exemple de valeurs de test :
+
+{
+  "page": 0,
+  "size": 10,
+  "sort":[
+    {
+      "column": "reference",
+      "direction": "ASCENDING"
+    }
+  ],
+  "criteria": [
+    {
+      "value": "true",
+      "column": "rectoVerso",
+      "operation": "EQUALS"
+    }
+  ]
+}

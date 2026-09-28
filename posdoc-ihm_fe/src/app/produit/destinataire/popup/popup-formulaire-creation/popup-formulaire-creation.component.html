@@ -1,0 +1,62 @@
+<app-popup [modalRef]="modalRef" [title]="'Ajouter en masse des destinataires'" [firstButton]="null" [secondButton]="null" (saveEvent)="passBack()">
+  <app-liste-deroulante-hierarchisee
+    [form]="formGroup.get('organismes')"
+    [label]="'Organisme/Région*'"
+    [labelColumns]="4"
+    [inputColumns]="8"
+    [isWithValidAndRAZBtn]="false"
+    (changeEvent)="onChangeOrganisme($event)"
+    [isError]="true"
+    [errorMessage]="orgGroup.errors?.message || orgGroup.errors"
+  ></app-liste-deroulante-hierarchisee>
+
+  <app-champ-de-saisie
+    [form]="formGroup.get('destinataire')"
+    [label]="'Destinataire*'"
+    [toUpperCase]="true"
+    [labelColumns]="4"
+    [inputColumns]="8"
+    [index]="1"
+    [placeholder]=""
+    [isError]="true"
+    [errorMessage]="formGroup.get('destinataire').errors?.message || formGroup.get('destinataire').errors"
+  ></app-champ-de-saisie>
+
+  <app-champ-de-saisie
+    [form]="formGroup.get('designation')"
+    [label]="'Désignation*'"
+    [toUpperCase]="true"
+    [labelColumns]="4"
+    [inputColumns]="8"
+    [index]="2"
+    [placeholder]=""
+    [isError]="true"
+    [errorMessage]="formGroup.get('designation').errors?.message || formGroup.get('designation').errors"
+  ></app-champ-de-saisie>
+
+  <app-champ-de-saisie
+    [form]="formGroup.get('imprimante')"
+    [label]="'Imprimante'"
+    [toUpperCase]="true"
+    [labelColumns]="4"
+    [inputColumns]="8"
+    [index]="3"
+    [placeholder]=""
+    [isError]="true"
+    [errorMessage]="formGroup.get('imprimante').errors?.message || formGroup.get('imprimante').errors"
+  ></app-champ-de-saisie>
+
+  <!-- error -->
+  <div class="errorForm">{{ errorPass }}</div>
+</app-popup>
+
+<div class="modal-footer">
+  <div class="button-group">
+    <button type="button" class="btn btn-outline-primary" (click)="closePopup()">
+      <i class="icon-b_cancel" aria-hidden="true"></i><span>Abandonner</span>
+    </button>
+    <button type="button" class="btn btn-primary" [disabled]="!isFormValid()" (click)="passBack()">
+      <i class="icon-b_valid" aria-hidden="true"></i><span>Confirmer</span>
+    </button>
+  </div>
+</div>

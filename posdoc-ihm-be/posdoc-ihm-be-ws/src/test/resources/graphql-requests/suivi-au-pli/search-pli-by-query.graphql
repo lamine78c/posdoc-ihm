@@ -1,0 +1,18 @@
+query searchPliByQuery($query: SearchPliQueryInput) {
+    searchPliByQuery(query: $query) {
+        status
+        numpli
+        idtpli
+        adres1
+        adres2
+        adres3
+        adres4
+        adres5
+        adres6
+        adres7
+        genpro
+        codgam
+        datdep
+        mpsidd
+    }
+}

@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-center pl">
+  <i
+    #actionRenderer
+    [class.disabled-icon]="isDisabled"
+    tabindex="0"
+    class="icon-b_init no-focus"
+    (keyup.enter)="clearFilter()"
+    (click)="clearFilter()"
+    aria-hidden="true"
+    title="Réinitialiser les filtres"
+  >
+    <span class="path1"></span><span class="path2"></span><span class="path3"></span>
+  </i>
+</div>

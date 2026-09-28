@@ -1,0 +1,5 @@
+mutation DeleteEnvironnement($var: DeleteByStringIdInput!){
+    deleteEnvironnement(deleteEnvironnement: $var){
+        ok
+    }
+}

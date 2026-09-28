@@ -1,0 +1,73 @@
+extend type Query {
+    searchBonTravailManuel(searchBonTravailManuelQuery: SearchBonTravailManuelQuery): [BonTravailDTO]
+    imprimerBonTravail(bonTravailInput: BonTravailInput): String
+}
+extend type Mutation {
+    createBonTravailManuel(payload: CreateOrUpdateBonTravailManuelPayload): CreateOrUpdateBonTravailManuelDTO!
+    updateBonTravailManuel(payload: CreateOrUpdateBonTravailManuelPayload): CreateOrUpdateBonTravailManuelDTO!
+    deleteBonTravailManuel(query: DeleteBonTravailManuelQuery): DeletePayload!
+}
+
+input BonTravailInput {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+}
+
+input SearchBonTravailManuelQuery {
+    codenv: String
+    codorg: String
+    codapp: String
+    codcom: String
+    codfic: String
+}
+
+input CreateOrUpdateBonTravailManuelPayload {
+    isedit: Boolean
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    numcom: String
+    codfic: String
+    typtar: String
+    pagfic: Int
+    plific: Int
+    dappcr: DateTime
+    codsit: String
+    inform: String
+    notices: [CreateOrUpdateBonTravailManuelNoticesPayload]
+    oldnotices: [String]
+}
+
+input CreateOrUpdateBonTravailManuelNoticesPayload {
+    codnot: String
+    poinot: BigDecimal
+}
+
+input DeleteBonTravailManuelQuery {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    user: String
+    formId: String
+}
+
+type CreateOrUpdateBonTravailManuelDTO {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    numcom: String
+    codfic: String
+}

@@ -1,0 +1,136 @@
+extend type Query {
+    getOccurrencesFichiers(filtersPayload: OccurrencesFichiersFiltersInput!): OccurrenceFichierPayloadDTO!
+    searchOccAppByFic(fichierPayload: SearchOccAppByFicInput): SearchOccAppByFicPayloadDTO!
+    searchProduitsByFichier(fichierPayload: SearchProduitsByFichierInput): [SearchProduitsByFichierPayloadDTO]
+    searchFacturationsByFichier(fichierPayload: SearchFacturationsByFichierInput): SearchFacturationsByFichierPayloadDTO
+}
+
+input SearchFacturationsByFichierInput {
+    codenv: String!
+    codorg: String!
+    codapp: String!
+    percod: String!
+    codcom: String!
+    codfic: String!
+    numcom: String!
+}
+
+type SearchFacturationsByFichierPayloadDTO {
+    facturations: [SearchFacturationsByFichierResult]
+    fichiersMas: [SearchFacturationsByFichierMasResult]
+}
+
+type SearchFacturationsByFichierResult {
+    typtar: String!
+    libtar: String
+    nbplis: Int
+    coutot: Int
+}
+
+type SearchFacturationsByFichierMasResult {
+    codenv: String!
+    codorg: String!
+    codapp: String!
+    percod: String!
+    codcom: String!
+    codfic: String!
+    numcom: String!
+    libtar: String
+    nbplis: Int
+    coutot: Int
+}
+
+input SearchProduitsByFichierInput {
+    codenv: String!
+    codorg: String!
+    codapp: String!
+    percod: String!
+    codcom: String!
+    codfic: String!
+    numcom: String!
+}
+
+type SearchProduitsByFichierPayloadDTO {
+    codgam: String!
+    libgam: String
+    prosta: String
+    proinf: String
+    dprodd: DateTime
+    dprodt: DateTime
+    dprods: DateTime
+    pagfic: Int
+    plific: Int
+    rejfic: Int
+}
+
+input SearchOccAppByFicInput {
+    codenv: String!
+    codorg: String!
+    codapp: String!
+    percod: String!
+    codcom: String!
+    codfic: String!
+    numcom: String!
+}
+
+type SearchOccAppByFicPayloadDTO {
+    libfic: String
+    libfor: String
+    libsup: String
+    libmul: String
+    reffor: String
+    refimp: String
+    refsup: String
+    reftri: String
+    refech: String
+    ficatt: String
+    ficsta: String
+    maxpag: Int
+    codprd: String
+    repexp: Int
+    typsig: String
+    codcli: String
+    codrnd: String
+    ficinf: String
+    dappcr: DateTime
+    dfichd: DateTime
+    dficht: DateTime
+    dfichs: DateTime
+    codsit: String
+    eclate: Boolean
+}
+
+type OccurrenceFichierPayloadDTO {
+    occurrencesFichiers: [OccurrenceFichier]!
+    message: String
+}
+
+type OccurrenceFichier {
+    codenv: String!
+    codorg: String!
+    codapp: String!
+    percod: String!
+    codcom: String!
+    codfic: String!
+    numcom: String!
+    codprd: String
+    ficsta: String!
+    ficinf: String
+    frefec: Boolean!
+    ficvid: Boolean!
+    dappcr: DateTime
+    dfichd: DateTime
+    dficht: DateTime
+}
+
+input OccurrencesFichiersFiltersInput {
+    codenv: String!
+    codorg: [String]
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    codprd: String
+    codsta: String
+    refimp: String
+}

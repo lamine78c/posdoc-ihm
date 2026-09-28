@@ -1,0 +1,45 @@
+<div class="normal-content">
+  <div *ngIf="error" class="errorForm">{{ error }}</div>
+  <div *ngIf="!error">
+    <div>
+      <div class="position-absolute">Total articles: {{ facturations.length }}</div>
+      <div class="text-center">Facturation</div>
+    </div>
+    <table class="table table-bordered table-striped" aria-describedby="table facturation">
+      <thead>
+        <tr>
+          <th>Tarif</th>
+          <th>Désignation</th>
+          <th>Nb. plis</th>
+          <th>Coût</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="facturations.length === 0">
+          <td colspan="4" class="text-center"><span class="no-rows">Aucune facturation</span></td>
+        </tr>
+        <tr *ngFor="let data of facturations; let i = index">
+          <td>{{ data.typtar }}</td>
+          <td>{{ data.libtar }}</td>
+          <td>{{ data.nbplis }}</td>
+          <td>{{ data.coutot }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!error" class="popup-tableau mt-5">
+    <div>
+      <div class="position-absolute">Total articles: {{ fichiersMas.length }}</div>
+      <div class="text-center">Liste des fichiers massifiés</div>
+    </div>
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="fichiersMas"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="false"
+      (gridReady)="onGridReady($event)"
+    ></app-tableau>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+query getDetailsFichesLiaison($paramData: OngletsParamDataInput!) {
+    getDetailsFichesLiaison(paramData: $paramData) {
+        coddes
+        codcom
+        codfic
+        numcom
+        codgam
+        codprd
+        refimp
+        nbrexe
+        pagfic
+        libfic
+        libdes
+    }
+}

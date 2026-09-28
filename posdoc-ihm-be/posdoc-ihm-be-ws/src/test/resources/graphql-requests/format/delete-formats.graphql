@@ -1,0 +1,5 @@
+mutation deleteFormats($deletesDTO: DeleteByArrayStringIdInput!) {
+    deleteFormats(deleteFormats: $deletesDTO) {
+        ok
+    }
+}

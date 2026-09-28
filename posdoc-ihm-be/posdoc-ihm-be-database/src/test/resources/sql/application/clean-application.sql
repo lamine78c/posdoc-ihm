@@ -1,0 +1,2 @@
+DELETE applis;
+DELETE comman;

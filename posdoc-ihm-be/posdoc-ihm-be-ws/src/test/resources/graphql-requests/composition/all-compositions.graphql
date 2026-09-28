@@ -1,0 +1,7 @@
+query allCompositions {
+    allCompositions {
+        code
+        libelle
+        isNotAuthorisedToBeDeleted
+    }
+}

@@ -1,0 +1,11 @@
+query getDocDemOccurrenceApplication($query: SearchDocDemOccurrenceApplicationQuery!) {
+    getDocDemOccurrenceApplication(query: $query) {
+        datdem
+        numdem
+        coddoc
+        refdem
+        typact
+        ddodeb
+        ddofin
+    }
+}

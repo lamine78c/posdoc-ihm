@@ -1,0 +1,22 @@
+query Query ($page: Int!, $size: Int!, $sort: [SortInput]!) {
+    parametresEdition(queryParameters: {
+        paginationParameters: {
+            page: $page
+            size: $size
+            sort: $sort
+        }
+    }){
+        totalElement
+        totalPages
+        elements {
+            ... on ParametreEdition {
+                reference
+                type
+                libelle
+                lineNumber
+                columnNumber
+                length
+            }
+        }
+    }
+}

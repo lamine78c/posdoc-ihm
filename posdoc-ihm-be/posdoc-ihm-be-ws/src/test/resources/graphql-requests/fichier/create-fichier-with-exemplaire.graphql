@@ -1,0 +1,7 @@
+mutation createFichierWithExemplaire($createFichier: [CreateOrUpdateFichierInputDTO]!) {
+    createFichierWithExemplaire(createFichier: $createFichier) {
+        nbFichiers
+        nbProduits
+        nbExemplaires
+    }
+}

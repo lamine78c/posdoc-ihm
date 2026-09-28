@@ -1,0 +1,19 @@
+<div class="global-content">
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="true"
+      [enableAddButton]="addType"
+      [enableFullEdit]="false"
+      [canAddPerm]="canPermPosition"
+      [canRemovePerm]="canPermPosition"
+      [asynchronousErrors$]="asynchronousErrors$"
+      (gridReady)="onGridReady($event)"
+      (saveEdition)="onSaveEdition($event)"
+      (deleteRows)="onDeleteRow($event)"
+    ></app-tableau>
+  </div>
+</div>

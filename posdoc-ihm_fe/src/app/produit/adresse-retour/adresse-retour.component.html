@@ -1,0 +1,30 @@
+<div class="global-content">
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Liste des adresses retour
+      <div class="badge badge-info ml-1 mt-auto">{{ nombreTotal }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="true"
+      [enableAddButton]="addType"
+      [enableFullEdit]="false"
+      [addGroupButton]="true"
+      [canAddPerm]="canAddPermPosition"
+      [canRemovePerm]="canRemovePermPosition"
+      [enableExportButtons]="true"
+      [asynchronousErrors$]="asynchronousErrors$"
+      (gridReady)="onGridReady($event)"
+      (saveEdition)="onSaveEdition($event)"
+      (deleteRows)="onDeleteRow($event)"
+      (addGroup)="openPopupAjoutEnMasse()"
+      (exportAsPDF)="export($event)"
+      (exportAsExcel)="export($event)"
+    ></app-tableau>
+  </div>
+</div>

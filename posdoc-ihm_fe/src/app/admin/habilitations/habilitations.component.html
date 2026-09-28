@@ -1,0 +1,119 @@
+<div class="global-content">
+  <div class="normal-content">
+    <h2>Habilitations</h2>
+  </div>
+  <div class="card mb-3 mat-elevation-z4 normal-content">
+    <div class="card-body">
+      <h3>Profils utilisateur</h3>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-row form-group">
+            <div class="row">
+              <div class="col-2">
+                <label for="selectProfil" class="col-form-label">Sélection du profil:</label>
+              </div>
+              <div class="col-10">
+                <select class="form-select" id="selectProfil" (change)="changeProfile($event.target.value)">
+                  <option
+                    [value]="profile.profile"
+                    *ngFor="let profile of profiles"
+                    [attr.selected]="profile.profile == profileActive.profile ? true : null"
+                  >
+                    {{ profile.profile }} - {{ profile.libelleProfile }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <button type="button" class="btn right-btn btn-outline-secondary" [disabled]="dataChanged" (click)="supprimerProfils()">
+            <i class="icon-b_delete" aria-hidden="true"></i> Supprimer profil
+          </button>
+          <button type="button" class="btn right-btn btn-outline-secondary" [disabled]="dataChanged" (click)="dupliquerProfils()">
+            <i class="icon-b_double_documents" aria-hidden="true"></i> Dupliquer profil
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mat-elevation-z4 remain-content">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-4 mt-2">
+          <h3 class="mb-4">Visibilité des entrées de menus</h3>
+          <div class="mb-2">
+            <button type="button" class="btn btn-outline-secondary btn-eye" (click)="allVisible()">
+              <img src="assets/icons/png/eye-open1.png" alt="" width="28px" height="20px" /> Tout visible
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-eye" (click)="allNonVisible()">
+              <img src="assets/icons/png/eye-close1.png" alt="" width="28px" height="20px" style="opacity: 0.6" /> Tout non visible
+            </button>
+          </div>
+          <div class="overflow-auto habilitation-tree">
+            <app-arborescence [useCheckboxes]="true" [tree]="tree" (itemClick)="habilitationClicked($event)"></app-arborescence>
+          </div>
+        </div>
+        <div class="col-8 col-with-border">
+          <div class="ms-0">
+            <div class="m-5" *ngIf="!(actions.length > 0) && !(authorisations.length > 0)">
+              <h2>Sélectionner l'écran dans la liste de gauche pour faire apparaître la gestion des droits correspondant.</h2>
+            </div>
+            <!-- {{tree | json}} -->
+            <div class="row ms-0" *ngIf="actions.length > 0 || authorisations.length > 0">
+              <div class="p-0 mb-4 row">
+                <div class="col-6 mt-2">
+                  <h3 class="d-flex">Gestion des droits - {{ itemClicked.text }}</h3>
+                </div>
+                <div class="col-6">
+                  <button [disabled]="!initButton" type="button" class="btn right-btn btn-secondary" (click)="reinitialise()">
+                    <i class="icon-b_refresh" aria-hidden="true"></i> Réinitialiser
+                  </button>
+                </div>
+              </div>
+              <div class="col-4 p-0">
+                <h6>Actions</h6>
+                <div class="form-check form-switch" *ngFor="let action of actions; let i = index">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [id]="action.text"
+                    [(ngModel)]="action.value"
+                    (change)="actionOrAuthChange($event, action)"
+                  />
+                  <label class="form-check-label" [for]="action.text">{{ action.text }} </label>
+                </div>
+              </div>
+              <div class="col-4 p-0">
+                <h6>Autorisation à modifier les champs</h6>
+                <div class="form-check form-switch" *ngFor="let auth of authorisations; let i = index">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [id]="'auth' + i"
+                    [(ngModel)]="auth.value"
+                    (change)="actionOrAuthChange($event, auth)"
+                  />
+                  <label class="form-check-label" [for]="'auth' + i">{{ auth.text }}</label>
+                </div>
+              </div>
+              <div class="col-4 p-0"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="normal-content footer">
+    <div class="button-group mx-2">
+      <!-- RÉTROCOMPATIBILITÉ : Ajouter la classe btn-outline-primary -->
+      <button type="button" class="btn btn-outline-primary" [disabled]="!dataChanged" (click)="annuler()">
+        <i class="icon-b_cancel" aria-hidden="true"></i><span>Annuler</span>
+      </button>
+      <!-- RÉTROCOMPATIBILITÉ : Ajouter la classe btn-primary -->
+      <button type="button" class="btn btn-primary" [disabled]="!dataChanged" (click)="save()">
+        <i class="icon-b_valid" aria-hidden="true"></i><span>Enregistrer</span>
+      </button>
+    </div>
+  </div>
+</div>

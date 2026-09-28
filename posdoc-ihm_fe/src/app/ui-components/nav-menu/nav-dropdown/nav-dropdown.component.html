@@ -1,0 +1,13 @@
+<ul>
+  <li class="nav-item">
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="collapse" (click)="collapse()">
+      {{ label }}
+    </a>
+  </li>
+</ul>
+
+<div class="collapse" [ngClass]="{ show: show }">
+  <div class="pl-2">
+    <ng-content></ng-content>
+  </div>
+</div>

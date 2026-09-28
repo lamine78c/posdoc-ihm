@@ -1,0 +1,20 @@
+query Query ($page: Int!, $size: Int!, $sort:[SortInput]!, $criteria: FilterCriteriaInput) {
+    support: supports(queryParameters: {
+        paginationParameters: {
+            page: $page
+            size: $size
+            sort: $sort
+        }
+        filterCriteria: $criteria
+    }){
+        totalElement
+        totalPages
+        elements {
+            ... on Support {
+                type
+                libelle
+                poids
+            }
+        }
+    }
+}

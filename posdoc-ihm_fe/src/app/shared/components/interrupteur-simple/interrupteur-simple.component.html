@@ -1,0 +1,35 @@
+<div class="form row d-flex">
+  <label *ngIf="label" class="col-{{ labelColumns }} col-form-label" for="interrupteur-simple-{{ formIndex }}">{{ label }}</label>
+  <div class="col-{{ inputColumns }} position-relative form-check form-switch">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      role="interrupteur"
+      name="interrupteur-simple-{{ formIndex }}"
+      id="interrupteur-simple-{{ formIndex }}"
+      attr.aria-selected="{{ form.value }}"
+      [formControl]="form"
+    />
+    <span
+      *ngIf="!form.valid && !form.disabled && !isError && form.touched"
+      class="icon-warning d-flex align-items-center"
+      aria-hidden="true"
+      [ngbPopover]="array.isArray(errorMessage) ? list : errorMessage"
+      triggers="mouseenter:mouseleave focus"
+      tabindex="0"
+    ></span>
+    <span
+      *ngIf="!form.valid && !form.disabled && isError && form.touched"
+      class="icon-error d-flex align-items-center"
+      aria-hidden="true"
+      [ngbPopover]="array.isArray(errorMessage) ? list : errorMessage"
+      triggers="mouseenter:mouseleave focus"
+      tabindex="0"
+    ></span>
+  </div>
+</div>
+<ng-template #list>
+  <ng-container *ngFor="let error of errorMessage; let last = last">
+    <div [ngClass]="{ 'mb-2': !last }">{{ error.message }}</div>
+  </ng-container>
+</ng-template>

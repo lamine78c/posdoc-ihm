@@ -1,0 +1,106 @@
+.table-select {
+  border: 0.071rem solid #e4e4e4;
+  border-bottom-color: black;
+  border-radius: 0.357rem 0.357rem 0 0;
+  background-color: white;
+  font-size: 0.929rem;
+  padding: 0.286rem;
+  color: black;
+  height: 1.857rem;
+  margin-top: 0.143rem;
+  line-height: inherit;
+}
+
+.context-cursor {
+  cursor: context-menu;
+  min-width: 100%;
+}
+
+.selected-element {
+  height: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: calc(100% - 1.643rem);
+}
+
+.icon-arrow-down {
+  position: absolute;
+  width: 27px;
+  right: 0;
+  top: 0;
+  height: 100%;
+  border-radius: 0 0.357rem 0 0;
+  border: none;
+  cursor: default;
+  background: lightgray;
+}
+
+.table-selector {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 9999;
+  border-collapse: collapse;
+  background-color: white;
+  overflow: auto;
+  min-height: 30px;
+  max-height: 300px;
+  min-width: 100%;
+  transition: all 0.2s ease-in-out;
+
+  &.table-before {
+    right: 3px;
+    left: auto;
+  }
+}
+
+.table-selector thead {
+  position: sticky;
+  top: 0;
+  background-color: lightslategrey;
+}
+
+.table-selector th,
+.table-selector td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table-selector tbody td {
+  width: auto;
+}
+
+.table-selector tbody tr td div {
+  min-height: 1rem;
+}
+
+.single-select tr:hover {
+  background-color: #276cc8;
+  cursor: pointer;
+}
+
+.table-selector .selected {
+  background-color: darkgrey;
+  color: black;
+}
+
+.form .icon-error {
+  left: 100%;
+  padding-left: 5px;
+  top: 10%;
+}
+
+.error {
+  border-color: #ff8080 !important;
+  border-bottom-color: #ff0000 !important;
+}
+
+.disabled-item {
+  background-color: #eee !important;
+  cursor: not-allowed !important;
+  pointer-events: none;
+  color: #aaa;
+}

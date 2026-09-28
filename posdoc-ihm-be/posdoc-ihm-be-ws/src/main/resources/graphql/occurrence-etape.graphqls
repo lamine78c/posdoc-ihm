@@ -1,0 +1,280 @@
+extend type Mutation {
+    setNewStatusForListOfGenEtp(etapes: [OccurrenceEtapeInput]): [OccurrenceEtapeDTO]!
+    valideGenEtp(payload: [ValideGenEtpPayload]): [UtiLogPayload]!
+    invalideGenEtp(payload: [InvalideGenEtpPayload]): [UtiLogPayload]!
+    invalideGenEtpEtLiens(payload: InvalideGenEtpPayload): UtiLogPayload!
+    valideOuInvalideGenEtp(payload: [ValideOrInvalideGenEtpPayload]): [UtiLogPayload]!
+}
+
+extend type Query {
+    searchOccurrenceEtape(occurrenceEtapePayload: OccurrenceEtapePayload): [OccurrenceEtapeDTO]
+    findDistinctCodenvCodorgCodapp: [DistinctCodenvCodorgCodappGenetp]
+    getOccurrenceEtapeSearchData: [OccurrenceEtapeSearchDataDTO]
+    getDistinctGamsByEnvsAndOrgsAndAppsAndPercods(codenvs: [String], codorgs: [String], codapps: [String], percods: [String]): [String]
+    getDistinctComsByEnvsAndOrgsAndAppsAndPercods(codenvs: [String], codorgs: [String], codapps: [String], percods: [String]): [String]
+    getVideoSteps(videoStepPayload: VideoStepPayload): [VideoStepDTO]
+    getFirstVideoStep(videoStepPayload: VideoStepPayload): FirstVideoStep
+    getGenEtpById(id: Int): OccurrenceEtapeDTO
+    getIncidentsByIdetap(idetap: Int, idtfus: Int): [IncidentsDTO]
+    findDetailsMassificationForOccurrenceEtape(payload: DetailsMassificationPayload): [DetailsMassificationOccurrenceEtape]
+    getVideoStepDetailsFichier(videoStepDetailsFichierPayload: VideoStepDetailsFichierPayload): VideoStepDetailsFichierDTO
+    consulteScriptEtape(scriptPayload: ScriptPayload): AdelaideResult
+}
+
+input OccurrenceEtapePayload {
+    codenv: String
+    codorg: [String]
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    codgam: String
+    codsit: String
+    codres: String
+    codser: String
+    typetp: String
+    statut: String
+    codver: String
+    typdat: String
+    datdeb: String
+    datfin: String
+}
+
+input OccurrenceEtapeInput {
+    id: Int!
+    statut: String
+}
+
+type OccurrenceEtapeDTO {
+    id: Int
+    typetp: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    numcom: String
+    codfic: String
+    codgam: String
+    numexe: String
+    codres: String
+    codsit: String
+    coddes: String
+    nbrexe: Int
+    codser: String
+    codsig: String
+    signal: String
+    reedit: Boolean
+    fabsim: Boolean
+    statut: String
+    codinf: Int
+    create: DateTime
+    valide: DateTime
+    debute: DateTime
+    termin: DateTime
+    invali: DateTime
+    suspen: DateTime
+    histor: DateTime
+    script: String
+    stepno: Int
+    numpid: Int
+    etpfus: String
+    clefus: String
+    idtfus: Int
+}
+
+type DistinctCodenvCodorgCodappGenetp {
+    codenv: String
+    codorg: String
+    codapp: String
+}
+
+type OccurrenceEtapeSearchDataDTO {
+    codenv: String
+    codorg: String
+    codapp: String
+}
+
+input VideoStepPayload {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codgam: String
+    reedit: Boolean
+    etpfus: String
+    statut: String
+}
+
+type VideoStepDTO {
+    idpere: Int
+    idetap: Int
+    typetp: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    numcom: String
+    codcom: String
+    codfic: String
+    codgam: String
+    statut: String
+    codinf: Int
+    codser: String
+    codsit: String
+    codres: String
+    coddes: String
+    reedit: Boolean
+    etpfus: String
+    script: String
+    idtfus: Int
+    numexe: String
+    nbrexe: Int
+    codsig: String
+    signal: String
+    fabsim: Boolean
+    create: DateTime
+    valide: DateTime
+    debute: DateTime
+    termin: DateTime
+    invali: DateTime
+    suspen: DateTime
+    histor: DateTime
+    stepno: Int
+    numpid: String
+    clefus: String
+}
+
+type FirstVideoStep {
+    idetap: Int
+    typetp: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    numcom: String
+    codcom: String
+    codfic: String
+    codgam: String
+    statut: String
+    codinf: Int
+    codser: String
+    codsit: String
+    codres: String
+    coddes: String
+    reedit: Boolean
+    etpfus: String
+    script: String
+    idtfus: Int
+    numexe: String
+    nbrexe: Int
+    codsig: String
+    signal: String
+    fabsim: Boolean
+    create: DateTime
+    valide: DateTime
+    debute: DateTime
+    termin: DateTime
+    invali: DateTime
+    suspen: DateTime
+    histor: DateTime
+    stepno: Int
+    numpid: String
+    clefus: String
+}
+
+input DetailsMassificationPayload {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    numcom: String
+    codfic: String
+}
+
+type DetailsMassificationOccurrenceEtape {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    refimp: String
+    libfic: String
+}
+
+type IncidentsDTO {
+    dcreat: DateTime
+    script: String
+    mesano: String
+}
+
+input VideoStepDetailsFichierPayload {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+}
+
+type VideoStepDetailsFichierDTO {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    libfic: String
+    refimp: String
+    codcli: String
+    dfiexp: DateTime
+    pagfic: Int
+    plific: Int
+    rejfic: Int
+}
+
+input ValideGenEtpPayload {
+    idetap: Int
+    user: String
+    formid: String
+}
+
+input InvalideGenEtpPayload {
+    idetap: Int
+    user: String
+    formid: String
+}
+
+input ValideOrInvalideGenEtpPayload {
+    idetap: Int
+    statut: String
+    user: String
+    formid: String
+}
+
+type UtiLogPayload {
+    codulo: Int
+    codsta: String
+    codusr: String
+    formid: String
+    datulo: Date
+    action: String
+    params: String
+    result: Boolean
+    erreur: String
+    versio: String
+}
+
+input ScriptPayload {
+    script: String
+}
+
+type AdelaideResult {
+    result: String
+    error: String
+}

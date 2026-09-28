@@ -1,0 +1,7 @@
+query findExemplaireOrganismeToComplete($input: FindOrganismesToCompleteInput) {
+    findExemplaireOrganismeToComplete(input: $input)
+    allOrganismes {
+        code
+        codeRegion
+    }
+}

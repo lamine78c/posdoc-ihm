@@ -1,0 +1,14 @@
+extend type Query {
+    getCodLibCommandeByEnvOrgApp(filters: CommandeFiltersInput!): [CodLibCommande]
+}
+
+input CommandeFiltersInput {
+    codenv: String
+    codorg: String
+    codapp: String
+}
+
+type CodLibCommande {
+    code: String
+    libelle: String
+}

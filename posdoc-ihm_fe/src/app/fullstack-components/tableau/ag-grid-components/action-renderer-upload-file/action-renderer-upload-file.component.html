@@ -1,0 +1,4 @@
+<div class="d-flex justify-content-center">
+  <em tabindex="0" class="icon-b_upload no-focus" *ngIf="!params.data.pdfFilePath" (click)="onUploadClick()" title="Charger un fichier"></em>
+  <em tabindex="0" class="icon-b_cancel no-focus" *ngIf="params.data.pdfFilePath" (click)="onDeleteClick()" title="Supprimer le fichier"></em>
+</div>

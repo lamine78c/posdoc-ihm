@@ -1,0 +1,995 @@
+@use "./variables" as *;
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?qsm2cl');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?qsm2cl#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?qsm2cl') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?qsm2cl') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?qsm2cl##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-lien {
+  &:before {
+    content: $icon-lien;
+    color: #384a6d;
+  }
+}
+.icon-absence-objet {
+  &:before {
+    content: $icon-absence-objet;
+    color: #bcddfa;
+  }
+}
+.icon-b_modify {
+  &:before {
+    content: $icon-b_modify;
+    color: #384a6d;
+  }
+}
+.icon-b_duplicate {
+  &:before {
+    content: $icon-b_duplicate;
+    color: #384a6d;
+  }
+}
+.icon-brouillon-scribe-to-validate {
+  &:before {
+    content: $icon-brouillon-scribe-to-validate;
+    color: #384a6d;
+  }
+}
+.icon-user-suppleant-titulaire {
+  &:before {
+    content: $icon-user-suppleant-titulaire;
+  }
+}
+.icon-brouillon-scribe-refused .path1 {
+  &:before {
+    content: $icon-brouillon-scribe-refused-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-brouillon-scribe-refused .path2 {
+  &:before {
+    content: $icon-brouillon-scribe-refused-path2;
+    margin-left: -1em;
+    color: rgb(240, 72, 51);
+  }
+}
+.icon-brouillon-scribe-validated .path1 {
+  &:before {
+    content: $icon-brouillon-scribe-validated-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-brouillon-scribe-validated .path2 {
+  &:before {
+    content: $icon-brouillon-scribe-validated-path2;
+    margin-left: -1em;
+    color: rgb(0, 128, 0);
+  }
+}
+.icon-b_tooltip_ad {
+  &:before {
+    content: $icon-b_tooltip_ad;
+    color: #384a6d;
+  }
+}
+.icon-b_tooltip_notif .path1 {
+  &:before {
+    content: $icon-b_tooltip_notif-path1;
+    color: rgb(217, 0, 0);
+  }
+}
+.icon-b_tooltip_notif .path2 {
+  &:before {
+    content: $icon-b_tooltip_notif-path2;
+    margin-left: -1em;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-Epingle {
+  &:before {
+    content: $icon-Epingle;
+    color: #384a6d;
+  }
+}
+.icon-b_backward {
+  &:before {
+    content: $icon-b_backward;
+    color: #384a6d;
+  }
+}
+.icon-b_forward {
+  &:before {
+    content: $icon-b_forward;
+    color: #384a6d;
+  }
+}
+.icon-b_replay {
+  &:before {
+    content: $icon-b_replay;
+    color: #384a6d;
+  }
+}
+.icon-b_playstop {
+  &:before {
+    content: $icon-b_playstop;
+    color: #384a6d;
+  }
+}
+.icon-b_next {
+  &:before {
+    content: $icon-b_next;
+    color: #384a6d;
+  }
+}
+.icon-b_previous {
+  &:before {
+    content: $icon-b_previous;
+    color: #384a6d;
+  }
+}
+.icon-b_pause {
+  &:before {
+    content: $icon-b_pause;
+    color: #384a6d;
+  }
+}
+.icon-b_play {
+  &:before {
+    content: $icon-b_play;
+    color: #384a6d;
+  }
+}
+.icon-b_historic {
+  &:before {
+    content: $icon-b_historic;
+    color: #384a6d;
+  }
+}
+.icon-b_info {
+  &:before {
+    content: $icon-b_info;
+    color: #384a6d;
+  }
+}
+.icon-b_help .path1 {
+  &:before {
+    content: $icon-b_help-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_help .path2 {
+  &:before {
+    content: $icon-b_help-path2;
+    margin-left: -0.9599609375em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-b_help .path3 {
+  &:before {
+    content: $icon-b_help-path3;
+    margin-left: -0.9599609375em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-Sablier {
+  &:before {
+    content: $icon-Sablier;
+    color: #384a6d;
+  }
+}
+.icon-Affiliation .path1 {
+  &:before {
+    content: $icon-Affiliation-path1;
+    color: rgb(29, 67, 156);
+  }
+}
+.icon-Affiliation .path2 {
+  &:before {
+    content: $icon-Affiliation-path2;
+    margin-left: -1.1845703125em;
+    color: rgb(15, 153, 115);
+  }
+}
+.icon-m_warning .path1 {
+  &:before {
+    content: $icon-m_warning-path1;
+    color: rgb(255, 195, 128);
+  }
+}
+.icon-m_warning .path2 {
+  &:before {
+    content: $icon-m_warning-path2;
+    margin-left: -1.150390625em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-m_error .path1 {
+  &:before {
+    content: $icon-m_error-path1;
+    color: rgb(233, 0, 0);
+  }
+}
+.icon-m_error .path2 {
+  &:before {
+    content: $icon-m_error-path2;
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-m_close {
+  &:before {
+    content: $icon-m_close;
+  }
+}
+.icon-fa_info .path1 {
+  &:before {
+    content: $icon-fa_info-path1;
+    color: rgb(36, 97, 187);
+  }
+}
+.icon-fa_info .path2 {
+  &:before {
+    content: $icon-fa_info-path2;
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-usergroup {
+  &:before {
+    content: $icon-usergroup;
+    color: #384a6d;
+  }
+}
+.icon-plus-solid {
+  &:before {
+    content: $icon-plus-solid;
+    color: #384a6d;
+  }
+}
+.icon-camera {
+  &:before {
+    content: $icon-camera;
+  }
+}
+.icon-flag-solid {
+  &:before {
+    content: $icon-flag-solid;
+    color: #d90000;
+  }
+}
+.icon-locked {
+  &:before {
+    content: $icon-locked;
+    color: #384a6d;
+  }
+}
+.icon-naia-solid {
+  &:before {
+    content: $icon-naia-solid;
+  }
+}
+.icon-unlocked {
+  &:before {
+    content: $icon-unlocked;
+    color: #384a6d;
+  }
+}
+.icon-user-suppleant {
+  &:before {
+    content: $icon-user-suppleant;
+  }
+}
+.icon-user-titulaire {
+  &:before {
+    content: $icon-user-titulaire;
+  }
+}
+.icon-watt-solid {
+  &:before {
+    content: $icon-watt-solid;
+  }
+}
+.icon-b_circle_plus {
+  &:before {
+    content: $icon-b_circle_plus;
+    color: #384a6d;
+  }
+}
+.icon-plus {
+  &:before {
+    content: $icon-plus;
+    color: #384a6d;
+  }
+}
+.icon-minus {
+  &:before {
+    content: $icon-minus;
+    color: #384a6d;
+  }
+}
+.icon-b_all_plus {
+  &:before {
+    content: $icon-b_all_plus;
+    color: #384a6d;
+  }
+}
+.icon-b_all_minus {
+  &:before {
+    content: $icon-b_all_minus;
+    color: #384a6d;
+  }
+}
+.icon-close {
+  &:before {
+    content: $icon-close;
+    color: #384f6d;
+  }
+}
+.icon-b_run_ciblage {
+  &:before {
+    content: $icon-b_run_ciblage;
+    color: #384a6d;
+  }
+}
+.icon-manager {
+  &:before {
+    content: $icon-manager;
+    color: #970505;
+  }
+}
+.icon-b_add_main_realisateur .path1 {
+  &:before {
+    content: $icon-b_add_main_realisateur-path1;
+    color: rgb(15, 153, 115);
+  }
+}
+.icon-b_add_main_realisateur .path2 {
+  &:before {
+    content: $icon-b_add_main_realisateur-path2;
+    margin-left: -0.86328125em;
+    color: rgb(57, 75, 110);
+  }
+}
+.icon-b_add_main_realisateur .path3 {
+  &:before {
+    content: $icon-b_add_main_realisateur-path3;
+    margin-left: -0.86328125em;
+    color: rgb(57, 75, 110);
+  }
+}
+.icon-agent {
+  &:before {
+    content: $icon-agent;
+    color: #384a6d;
+  }
+}
+.icon-b_account {
+  &:before {
+    content: $icon-b_account;
+    color: #384a6d;
+  }
+}
+.icon-b_account_modif .path1 {
+  &:before {
+    content: $icon-b_account_modif-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_account_modif .path2 {
+  &:before {
+    content: $icon-b_account_modif-path2;
+    margin-left: -0.998046875em;
+    color: rgb(14, 153, 114);
+  }
+}
+.icon-b_add_2_person .path1 {
+  &:before {
+    content: $icon-b_add_2_person-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_add_2_person .path2 {
+  &:before {
+    content: $icon-b_add_2_person-path2;
+    margin-left: -1em;
+    color: rgb(14, 153, 114);
+  }
+}
+.icon-b_add_attachment {
+  &:before {
+    content: $icon-b_add_attachment;
+    color: #384a6d;
+  }
+}
+.icon-b_add_compte .path1 {
+  &:before {
+    content: $icon-b_add_compte-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_add_compte .path2 {
+  &:before {
+    content: $icon-b_add_compte-path2;
+    margin-left: -0.9931640625em;
+    color: rgb(14, 153, 114);
+  }
+}
+.icon-b_add_document .path1 {
+  &:before {
+    content: $icon-b_add_document-path1;
+    color: rgb(14, 153, 114);
+  }
+}
+.icon-b_add_document .path2 {
+  &:before {
+    content: $icon-b_add_document-path2;
+    margin-left: -1.00390625em;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_add_entreprise .path1 {
+  &:before {
+    content: $icon-b_add_entreprise-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_add_entreprise .path2 {
+  &:before {
+    content: $icon-b_add_entreprise-path2;
+    margin-left: -1em;
+    color: rgb(14, 153, 114);
+  }
+}
+.icon-b_archive {
+  &:before {
+    content: $icon-b_archive;
+    color: #384a6d;
+  }
+}
+.icon-b_bottom {
+  &:before {
+    content: $icon-b_bottom;
+    color: #384a6d;
+  }
+}
+.icon-b_browse {
+  &:before {
+    content: $icon-b_browse;
+    color: #384a6d;
+  }
+}
+.icon-b_calendar {
+  &:before {
+    content: $icon-b_calendar;
+    color: #384a6d;
+  }
+}
+.icon-b_cancel {
+  &:before {
+    content: $icon-b_cancel;
+    color: #384a6d;
+  }
+}
+.icon-b_cancel_empty {
+  &:before {
+    content: $icon-b_cancel_empty;
+    color: #384a6d;
+  }
+}
+.icon-b_close {
+  &:before {
+    content: $icon-b_close;
+    color: #384a6d;
+  }
+}
+.icon-b_compare {
+  &:before {
+    content: $icon-b_compare;
+    color: #384a6d;
+  }
+}
+.icon-b_del_document .path1 {
+  &:before {
+    content: $icon-b_del_document-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_del_document .path2 {
+  &:before {
+    content: $icon-b_del_document-path2;
+    margin-left: -1.00390625em;
+    color: rgb(217, 0, 0);
+  }
+}
+.icon-b_delete {
+  &:before {
+    content: $icon-b_delete;
+    color: #d90000;
+  }
+}
+.icon-b_delete_compte .path1 {
+  &:before {
+    content: $icon-b_delete_compte-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_delete_compte .path2 {
+  &:before {
+    content: $icon-b_delete_compte-path2;
+    margin-left: -0.9931640625em;
+    color: rgb(217, 0, 0);
+  }
+}
+.icon-b_detail {
+  &:before {
+    content: $icon-b_detail;
+    color: #384a6d;
+  }
+}
+.icon-b_document {
+  &:before {
+    content: $icon-b_document;
+    color: #384a6d;
+  }
+}
+.icon-b_double_documents {
+  &:before {
+    content: $icon-b_double_documents;
+    color: #384a6d;
+  }
+}
+.icon-b_double_modif .path1 {
+  &:before {
+    content: $icon-b_double_modif-path1;
+    color: rgb(14, 153, 114);
+  }
+}
+.icon-b_double_modif .path2 {
+  &:before {
+    content: $icon-b_double_modif-path2;
+    margin-left: -1em;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_down {
+  &:before {
+    content: $icon-b_down;
+    color: #384a6d;
+  }
+}
+.icon-b_download {
+  &:before {
+    content: $icon-b_download;
+    color: #384a6d;
+  }
+}
+.icon-b_export {
+  &:before {
+    content: $icon-b_export;
+    color: #384a6d;
+  }
+}
+.icon-b_export_csv {
+  &:before {
+    content: $icon-b_export_csv;
+    color: #384a6d;
+  }
+}
+.icon-b_export_doc {
+  &:before {
+    content: $icon-b_export_doc;
+    color: #384a6d;
+  }
+}
+.icon-b_export_excel {
+  &:before {
+    content: $icon-b_export_excel;
+    color: #006b00;
+  }
+}
+.icon-b_export_html {
+  &:before {
+    content: $icon-b_export_html;
+    color: #384a6d;
+  }
+}
+.icon-b_export_img {
+  &:before {
+    content: $icon-b_export_img;
+    color: #384a6d;
+  }
+}
+.icon-b_export_pdf {
+  &:before {
+    content: $icon-b_export_pdf;
+    color: #db0f0f;
+  }
+}
+.icon-b_export_pjd {
+  &:before {
+    content: $icon-b_export_pjd;
+    color: #384a6d;
+  }
+}
+.icon-b_export_ppt {
+  &:before {
+    content: $icon-b_export_ppt;
+    color: #c15700;
+  }
+}
+.icon-b_export_zip {
+  &:before {
+    content: $icon-b_export_zip;
+    color: #384a6d;
+  }
+}
+.icon-b_folder {
+  &:before {
+    content: $icon-b_folder;
+    color: #384a6d;
+  }
+}
+.icon-b_full_left {
+  &:before {
+    content: $icon-b_full_left;
+    color: #384a6d;
+  }
+}
+.icon-b_full_right {
+  &:before {
+    content: $icon-b_full_right;
+    color: #384a6d;
+  }
+}
+.icon-b_fullleft {
+  &:before {
+    content: $icon-b_fullleft;
+    color: #384a6d;
+  }
+}
+.icon-b_fullright {
+  &:before {
+    content: $icon-b_fullright;
+    color: #384a6d;
+  }
+}
+.icon-b_horizontal_reverse {
+  &:before {
+    content: $icon-b_horizontal_reverse;
+    color: #384a6d;
+  }
+}
+.icon-b_import {
+  &:before {
+    content: $icon-b_import;
+    color: #384a6d;
+  }
+}
+.icon-b_init {
+  &:before {
+    content: $icon-b_init;
+    color: #384a6d;
+  }
+}
+.icon-b_left {
+  &:before {
+    content: $icon-b_left;
+    color: #384a6d;
+  }
+}
+.icon-b_left_arrow {
+  &:before {
+    content: $icon-b_left_arrow;
+    color: #384a6d;
+  }
+}
+.icon-b_left_fleche {
+  &:before {
+    content: $icon-b_left_fleche;
+    color: #384a6d;
+  }
+}
+.icon-b_modify_agent .path1 {
+  &:before {
+    content: $icon-b_modify_agent-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_modify_agent .path2 {
+  &:before {
+    content: $icon-b_modify_agent-path2;
+    margin-left: -1em;
+    color: rgb(14, 153, 114);
+  }
+}
+.icon-b_modify_date .path1 {
+  &:before {
+    content: $icon-b_modify_date-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_modify_date .path2 {
+  &:before {
+    content: $icon-b_modify_date-path2;
+    margin-left: -1em;
+    color: rgb(14, 153, 114);
+  }
+}
+.icon-b_modify_entreprise .path1 {
+  &:before {
+    content: $icon-b_modify_entreprise-path1;
+    color: rgb(14, 153, 114);
+  }
+}
+.icon-b_modify_entreprise .path2 {
+  &:before {
+    content: $icon-b_modify_entreprise-path2;
+    margin-left: -1em;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_modify_fold .path1 {
+  &:before {
+    content: $icon-b_modify_fold-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_modify_fold .path2 {
+  &:before {
+    content: $icon-b_modify_fold-path2;
+    margin-left: -1em;
+    color: rgb(14, 153, 114);
+  }
+}
+.icon-b_new_fold .path1 {
+  &:before {
+    content: $icon-b_new_fold-path1;
+    color: rgb(56, 74, 109);
+  }
+}
+.icon-b_new_fold .path2 {
+  &:before {
+    content: $icon-b_new_fold-path2;
+    margin-left: -1em;
+    color: rgb(14, 153, 114);
+  }
+}
+.icon-b_off {
+  &:before {
+    content: $icon-b_off;
+    color: #384a6d;
+  }
+}
+.icon-b_on {
+  &:before {
+    content: $icon-b_on;
+    color: #384a6d;
+  }
+}
+.icon-b_print {
+  &:before {
+    content: $icon-b_print;
+    color: #384a6d;
+  }
+}
+.icon-b_prohibite {
+  &:before {
+    content: $icon-b_prohibite;
+    color: #384a6d;
+  }
+}
+.icon-b_redo {
+  &:before {
+    content: $icon-b_redo;
+    color: #384a6d;
+  }
+}
+.icon-b_redo_empty {
+  &:before {
+    content: $icon-b_redo_empty;
+    color: #384a6d;
+  }
+}
+.icon-b_refresh {
+  &:before {
+    content: $icon-b_refresh;
+    color: #384a6d;
+  }
+}
+.icon-b_right {
+  &:before {
+    content: $icon-b_right;
+    color: #384a6d;
+  }
+}
+.icon-b_right_arrow {
+  &:before {
+    content: $icon-b_right_arrow;
+    color: #384a6d;
+  }
+}
+.icon-b_right_fleche {
+  &:before {
+    content: $icon-b_right_fleche;
+    color: #384a6d;
+  }
+}
+.icon-b_save {
+  &:before {
+    content: $icon-b_save;
+    color: #384a6d;
+  }
+}
+.icon-b_search {
+  &:before {
+    content: $icon-b_search;
+    color: #384a6d;
+  }
+}
+.icon-b_search_doc {
+  &:before {
+    content: $icon-b_search_doc;
+    color: #384a6d;
+  }
+}
+.icon-b_star {
+  &:before {
+    content: $icon-b_star;
+    color: #384a6d;
+  }
+}
+.icon-b_star_empty {
+  &:before {
+    content: $icon-b_star_empty;
+    color: #384a6d;
+  }
+}
+.icon-b_stop {
+  &:before {
+    content: $icon-b_stop;
+    color: #384a6d;
+  }
+}
+.icon-b_suspension {
+  &:before {
+    content: $icon-b_suspension;
+    color: #384a6d;
+  }
+}
+.icon-b_suspension_end {
+  &:before {
+    content: $icon-b_suspension_end;
+    color: #384a6d;
+  }
+}
+.icon-b_top {
+  &:before {
+    content: $icon-b_top;
+    color: #384a6d;
+  }
+}
+.icon-b_transmit {
+  &:before {
+    content: $icon-b_transmit;
+    color: #384a6d;
+  }
+}
+.icon-b_up {
+  &:before {
+    content: $icon-b_up;
+    color: #384a6d;
+  }
+}
+.icon-b_upload {
+  &:before {
+    content: $icon-b_upload;
+    color: #384a6d;
+  }
+}
+.icon-b_valid {
+  &:before {
+    content: $icon-b_valid;
+    color: #008000;
+  }
+}
+.icon-b_valid_1 {
+  &:before {
+    content: $icon-b_valid_1;
+    color: #384a6d;
+  }
+}
+.icon-b_valid_empty {
+  &:before {
+    content: $icon-b_valid_empty;
+    color: #384a6d;
+  }
+}
+.icon-b_vertical_reverse {
+  &:before {
+    content: $icon-b_vertical_reverse;
+    color: #384a6d;
+  }
+}
+.icon-contrainte {
+  &:before {
+    content: $icon-contrainte;
+    color: #384a6d;
+  }
+}
+.icon-contrainte_notifiee {
+  &:before {
+    content: $icon-contrainte_notifiee;
+    color: #384a6d;
+  }
+}
+.icon-courriel {
+  &:before {
+    content: $icon-courriel;
+    color: #384a6d;
+  }
+}
+.icon-courrier_postal {
+  &:before {
+    content: $icon-courrier_postal;
+    color: #384a6d;
+  }
+}
+.icon-error {
+  &:before {
+    content: $icon-error;
+    color: #f04833;
+  }
+}
+.icon-personne {
+  &:before {
+    content: $icon-personne;
+    color: #384a6d;
+  }
+}
+.icon-rendezvous {
+  &:before {
+    content: $icon-rendezvous;
+    color: #384a6d;
+  }
+}
+.icon-sms {
+  &:before {
+    content: $icon-sms;
+    color: #384a6d;
+  }
+}
+.icon-telephone {
+  &:before {
+    content: $icon-telephone;
+    color: #384a6d;
+  }
+}
+.icon-warning {
+  &:before {
+    content: $icon-warning;
+    color: #ff9000;
+  }
+}
+

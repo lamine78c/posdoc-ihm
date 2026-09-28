@@ -1,0 +1,5 @@
+mutation($deleteDTO: DeleteByStringIdInput!) {
+    deleteUtilisateur(deleteUtilisateur: $deleteDTO) {
+        ok
+    }
+}

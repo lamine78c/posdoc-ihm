@@ -1,0 +1,9 @@
+query getNotification {
+    getNotification {
+        id
+        recipientId
+        faq {
+            createdBy
+        }
+    }
+}

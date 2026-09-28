@@ -1,0 +1,24 @@
+extend type Query {
+    getRessourcesGam(query: SearchByEnvsOrgsAppProfilsQuery): [CreateOrUpdateRessourcePayload]!
+    getRessourcesGamSitRes(query: SearchRessourceByEnvOrgAppProfilQuery!): [RessourceGamSitRes]!
+}
+
+input SearchByEnvsOrgsAppProfilsQuery {
+    codesEnv: [String]
+    codesOrg: [String]
+    codeApp: String
+    isProfilAdmin: Boolean
+}
+
+input SearchRessourceByEnvOrgAppProfilQuery {
+    codenv: String!
+    codorg: String!
+    codapp: String!
+    isProfilAdmin: Boolean!
+}
+
+type RessourceGamSitRes {
+    codgam: String
+    codsit: String
+    codres: String
+}

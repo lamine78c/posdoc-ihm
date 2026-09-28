@@ -1,0 +1,75 @@
+extend type Query {
+    getOrgByEnvAppComFics(query: SearchOrgByEnvAppComFicsQuery): [String]
+    findFichiersForAffectationNotice(query: SearchNotficQuery): [NotficFichier]
+    findComDocLibFicInFichier: [Document]
+    findFicPrdImpByEnvOrgAppCom(query: SearchByEnvOrgsAppComQuery): [CodficRefimpCodprdDTO]
+}
+
+extend type Mutation {
+    updateFicAttByEnvOrgsAppComFic(query: SearchByEnvOrgsAppComFicQuery!, message: String): Boolean
+    updateFicAttByIds(ids: [FichierComposite], message: String): Boolean
+}
+
+input FichierComposite {
+    codeEnv: String
+    codeOrg: String
+    codeApp: String
+    codeCom: String
+    codeFich: String
+}
+
+input SearchByEnvOrgsAppComFicQuery {
+    codenv: String
+    codorgs: [String]
+    codapp: String
+    codcom: String
+    codfic: String
+}
+
+input SearchOrgByEnvAppComFicsQuery {
+    codeEnv: String!
+    codeApp: String!
+    codeCom: String!
+    codesFic: [String]!
+}
+
+input SearchNotficQuery {
+    codenv: String!
+    codorg: [String]!
+    codapp: String!
+    codcom: String
+    codfic: [String]
+    refimp: String
+}
+
+type NotficFichier {
+    codenv: String
+    codorg: String
+    codapp: String
+    codcom: String
+    codfic: String
+    codeProd: String
+    refImprime: String
+    dnotid: String
+    dnotit: String
+    maxnot: Int
+}
+
+type Document {
+    codcom: String
+    coddoc: String
+    libfic: String
+}
+
+input SearchByEnvOrgsAppComQuery {
+    codenv: String
+    codorgs: [String]
+    codapp: String
+    codcom: String
+}
+
+type CodficRefimpCodprdDTO {
+    codfic: String
+    refimp: String
+    codprd: String
+}

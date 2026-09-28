@@ -1,0 +1,10 @@
+mutation CreateAdressesRetour($var: CreateOrUpdateAdressesRetourInput!){
+    createAdressesRetour(createAdressesRetour: $var){
+        code
+        codeOrganisme
+        adresse1
+        adresse2
+        adresse3
+        adresse4
+    }
+}

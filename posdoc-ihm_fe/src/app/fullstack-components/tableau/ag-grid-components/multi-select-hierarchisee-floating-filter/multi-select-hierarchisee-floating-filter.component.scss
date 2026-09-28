@@ -1,0 +1,101 @@
+:host {
+  width: 100%;
+}
+
+::ng-deep .ag-floating-filter-full-body .row > * {
+  padding-right: 0rem !important;
+}
+
+::ng-deep .ag-floating-filter-full-body .fake-select {
+  width: calc(100%) !important;
+}
+
+::ng-deep .fake-select {
+  //border-radius: 0.357rem 0.357rem 0 0; // 5px
+
+  font-size: 0.929rem; // 13px
+  padding: 0.286rem; // 4px
+  width: calc(100%); // 1.643rem => espace a droite de l'input pour la potentielle icône // 23px
+
+  height: 1.857rem; // 26px
+  margin-top: 0.143rem; // 2px
+  line-height: inherit;
+
+  // Supprime la flèche
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-position:
+    top 50% right 0.571rem,
+    // 8px
+    100% 0;
+  background-size:
+    0.714rem 0.714rem,
+    // 10px
+    1.857rem 1.857rem; // 26px
+  background-repeat: no-repeat;
+  padding-right: 2.071rem; // 29px
+}
+
+::ng-deep .fake-select-container .dropdown-menu {
+  font-size: 0.929rem; // 13px
+  border: 0.071rem solid; // 1px
+  border-radius: 0 0 0.357rem 0.357rem; // 5px
+  margin: 0;
+  top: -0.236rem !important; // -3.3px
+  padding: 0.5rem 1rem 0.5rem 0.5rem; // 7px 14px
+  white-space: nowrap;
+  box-shadow: 0 0.286rem 0.429rem 0; // 4px 6px
+}
+
+::ng-deep .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/** Liste hiérarchisée **/
+::ng-deep .dropdown-menu {
+  padding: 0.5rem 1rem 0.5rem 0.5rem; // 7px 14px
+
+  // Pas de bold pour les checkboxes dans les listes
+  .form-check .form-check-label {
+    font-weight: 400;
+  }
+
+  .collapse-icon {
+    margin-right: 0.5rem; // 7px
+  }
+
+  .collapse-container {
+    margin-left: 3.143rem; // 44px
+    transform: translate3d(0, 0, 0);
+  }
+
+  .btn {
+    margin: 0 auto;
+    margin-top: 2rem; // 28px
+    margin-bottom: 1rem; // 14px // 21px - 7px (padding déjà présent) => 14px
+  }
+
+  .fake-select-scrollable-content {
+    max-height: 28.571rem; // 400px
+    overflow: auto;
+    width: calc(100% + 0.5rem); // 0.5rem => padding de la dropdown
+  }
+
+  /** FIX SCROLLBAR OVERLAP **/
+
+  /* Firefox */
+  @-moz-document url-prefix() {
+    .fake-select-scrollable-content {
+      padding-right: 1.214rem; // 17px
+    }
+  }
+
+  /* IE 10+ */
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .fake-select-scrollable-content {
+      padding-right: 1.143rem; // 16px
+    }
+  }
+}

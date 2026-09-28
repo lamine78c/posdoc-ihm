@@ -1,0 +1,95 @@
+@use 'src/scss/variables' as *;
+
+.profil-utilisateur,
+.visibilite-menu {
+  // display: flex;
+  //align-items: center;
+  //justify-content: center;
+  padding: 12px 12px 0px 12px;
+  border-radius: 0px;
+  background-color: $white-font-color;
+}
+
+.profil-utilisateur {
+  height: 100px;
+  margin-bottom: 16px;
+}
+
+.visibilite-menu {
+  height: 90%;
+}
+
+button {
+  margin-right: 5px;
+}
+
+.my-btn {
+  float: right;
+}
+
+/** pour la tree */
+
+.right-btn {
+  float: right;
+  margin-right: 0px;
+  margin-left: 10px;
+}
+
+.control-title {
+  height: 100px;
+  h2 {
+    padding-top: 60px;
+    padding-left: 115px;
+  }
+}
+
+button.all-non-visible {
+  margin: 5px;
+}
+
+button.all-visible {
+  margin: 5px;
+}
+
+// fot tree fullstack
+#tree-container {
+  height: 100%;
+}
+
+#myGrid {
+  width: 100%;
+  height: 600px;
+}
+
+.ag-group-expanded {
+  display: none;
+}
+
+// barre vertical
+.col-with-border {
+  border-left: 0.071rem solid #e8e8e8; // 1px
+  flex-wrap: wrap;
+  padding-left: 1.857rem; // 26px
+}
+
+.habilitation-tree {
+  max-height: 520px;
+}
+
+.btn-eye,
+.btn-eye:hover {
+  padding-left: 5px;
+  padding-right: 5px;
+  color: rgb(95, 95, 95);
+  border-color: rgba(95, 95, 95, 0.6);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+
+  width: 100%;
+  height: 50px;
+  background-color: rgb(215, 215, 215);
+}

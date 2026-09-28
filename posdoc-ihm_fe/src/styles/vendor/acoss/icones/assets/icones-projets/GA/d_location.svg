@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg fill="#33B993" version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="78.001px" height="123.19px" viewBox="0 0 78.001 123.19" enable-background="new 0 0 78.001 123.19" xml:space="preserve">
+<path d="M39,0C17.495,0,0,17.495,0,39c0,6.771,1.819,16.966,5.811,23.471l29.62,58.526
+	c0.682,1.345,2.062,2.193,3.569,2.193s2.888-0.848,3.569-2.193l29.622-58.526C76.182,55.964,78,45.77,78,39C78,17.495,60.505,0,39,0
+	z M39,20.917c9.972,0,18.084,8.112,18.084,18.083c0,9.971-8.112,18.083-18.084,18.083c-9.971,0-18.083-8.112-18.083-18.083
+	C20.917,29.028,29.029,20.917,39,20.917z"/>
+</svg>

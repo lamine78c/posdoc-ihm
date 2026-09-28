@@ -1,0 +1,5 @@
+mutation DeleteSupports($var: DeleteByArrayStringIdInput!){
+    deleteSupports(deleteSupports: $var){
+        ok
+    }
+}

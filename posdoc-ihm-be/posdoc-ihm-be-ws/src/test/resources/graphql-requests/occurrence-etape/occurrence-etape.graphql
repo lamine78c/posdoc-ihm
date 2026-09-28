@@ -1,0 +1,21 @@
+query searchOccurrenceEtape($occurrenceEtapePayload: OccurrenceEtapePayload!) {
+    searchOccurrenceEtape(occurrenceEtapePayload: $occurrenceEtapePayload) {
+        typetp
+        codenv
+        codorg
+        codapp
+        percod
+        codcom
+        codfic
+        codgam
+        codsit
+        codres
+        codser
+        statut
+        create
+        debute
+        termin
+        suspen
+        invali
+    }
+}

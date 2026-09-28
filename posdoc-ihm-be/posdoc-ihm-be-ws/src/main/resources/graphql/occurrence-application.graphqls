@@ -1,0 +1,316 @@
+extend type Mutation {
+    updateTypRefInGenApp(paramData: UpdateTypRefInGenAppInput): GenApp!
+    termineOccApp(paramData: TerminaisonGenAppInput): UtiLogPayload!
+}
+
+extend type Query {
+    getDetailsGeneralites(paramData: OngletsParamDataInput): [DetailsGeneralitesPayload]
+    getDetailsCommandesFichiers(paramData: OngletsParamDataInput): [DetailsCommandesFichiersPayload]
+    getDetailsIncident(paramData: ParamDataIncidentInput): [DetailsIncident]
+    getDetailsMassification(paramData: ParamDataMassificationInput): [DetailsMassification]
+    getDetailsFichiersProduits(paramData: OngletsParamDataInput): [DetailsFichiersProduitsDTO]
+    getDetailsFichesLiaison(paramData: OngletsParamDataInput): [DetailsFichesLiaison]
+    getDetailsFacturation(paramData: ParamDataFacturationInput): [DetailsFacturation]
+    getDetailsNotices(paramData: OngletsParamDataInput): [DetailsNoticesDTO]
+    searchOccurencePerApplication(currDate: String, codSit: String, codEnv: String, codOrgs: [String], codApp: String, tri: String, ext: Boolean): [OccurenceApplication]
+    getOccurrenceApplication(paramData: OccurrenceApplicationInput): OccurrenceApplication
+    getOccurrenceApplicationForSuiviProduction(query: OccurrenceApplicationSuiviProductionInput): OccurrenceApplicationSuiviProductionDTO
+    getDocDemOccurrenceApplication(query: SearchDocDemOccurrenceApplicationQuery!): [DocDemOccurrenceApplication]!
+}
+
+input OngletsParamDataInput {
+    codEnv: String
+    codOrg: String
+    codApp: String
+    perCod: String
+}
+
+type DetailsGeneralitesPayload {
+    libelle: String
+    arefec: String
+    typref: TypeRefection
+    appsta: String
+    appinf: String
+    dapplc: DateTime
+    dappld: DateTime
+    dapplt: DateTime
+    dappls: DateTime
+    dapplh: DateTime
+}
+
+type DetailsCommandesFichiersPayload {
+    codcom: String
+    numcom: String
+    codfic: String
+    libelle: String
+    codprd: String
+    refimp: String
+    libfic: String
+    ficsta: String
+    ficinf: String
+    dappcr: DateTime
+    dfichd: DateTime
+    dficht: DateTime
+    dfichs: DateTime
+    frefec: Boolean
+    ficvid: Boolean
+}
+
+input ParamDataIncidentInput {
+    codEnv: String
+    codOrg: String
+    codApp: String
+    perCod: String
+}
+
+type DetailsIncident {
+    signal: String
+    dcreat: DateTime
+    script: String
+    mesano: String
+    ficinf: String
+    typetp: String
+    codcom: String
+    codfic: String
+    numcom: String
+    codgam: String
+    codsit: String
+    codres: String
+}
+
+input ParamDataMassificationInput {
+    codEnv: String
+    codOrg: String
+    codApp: String
+    perCod: String
+    masGam: String
+}
+
+type DetailsMassification {
+    masper: String
+    mascom: String
+    masfic: String
+    masnum: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    libFichier: String
+    refImprime: String
+    codprd: String
+    masuti: String
+    pagFic: Int
+    pliFic: Int
+    codcli: String
+    masenv: String
+}
+
+type DetailsFichiersProduitsDTO {
+    codcom: String
+    codfic: String
+    numcom: String
+    refimp: String
+    codprd: String
+    libFichier: String
+    pagFic: Int
+    codgam: String
+    codsit: String
+    codres: String
+    coddes: String
+    nbrexe: Int
+}
+
+type DetailsFichesLiaison {
+    coddes: String
+    codcom: String
+    codfic: String
+    numcom: String
+    codgam: String
+    codprd: String
+    refimp: String
+    nbrexe: Int
+    pagfic: Int
+    libfic: String
+    libdes: String
+}
+
+input ParamDataFacturationInput {
+    codEnv: String
+    codOrg: String
+    codApp: String
+    perCod: String
+    isMasApp: Boolean
+}
+
+type DetailsFacturation {
+    codcom: String
+    codfic: String
+    numcom: String
+    codprd: String
+    codcli: String
+    typtar: String
+    nbplis: Int
+    coutot: Int
+    dfiexp: DateTime
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+}
+
+type DetailsNoticesDTO {
+    codcom: String
+    codfic: String
+    numcom: String
+    codprd: String
+    refimp: String
+    libfic: String
+    codnot: String
+    poinot: BigDecimal
+    fornot: String
+    pornot: String
+    libnot: String
+    codsit: String
+}
+
+type OccurenceApplication {
+    codEnv: String
+    codOrg: String
+    codApp: String
+    perCod: String
+    appsta: String
+    dapplc: DateTime
+    dappld: DateTime
+    dapplt: DateTime
+    codSit: String
+}
+
+input OccurrenceApplicationInput {
+    codEnv: String
+    codOrg: String
+    codApp: String
+    perCod: String
+}
+type OccurrenceApplication {
+    appsta: String
+    appinf: String
+    dapplc: DateTime
+    dappld: DateTime
+    dapplt: DateTime
+    dappls: DateTime
+    typref: TypeRefection
+    sitori: String
+}
+
+input UpdateTypRefInGenAppInput {
+    codEnv: String!
+    codOrg: String!
+    codApp: String!
+    perCod: String!
+    typRef: TypeRefection!
+    user: String!
+    formId: String!
+}
+
+input TerminaisonGenAppInput {
+    codEnv: String!
+    codOrg: String!
+    codApp: String!
+    perCod: String!
+    user: String!
+    formId: String!
+    isAnnule: Boolean!
+}
+
+type GenApp {
+    codeEnv: String
+    codeOrg: String
+    codeApp: String
+    perCod: String
+    appsta: String
+    appinf: String
+    arefec: Boolean
+    dapplc: DateTime
+    dappld: DateTime
+    dapplt: DateTime
+    dappls: DateTime
+    dapplh: DateTime
+    typref: TypeRefection
+    manuel: Boolean
+    sitori: String
+}
+
+type UtiLogPayload {
+    codulo: Int!
+    codsta: String!
+    codusr: String!
+    formid: String!
+    datulo: Date
+    action: String!
+    params: String
+    result: Boolean!
+    erreur: String
+    versio: String
+}
+
+input OccurrenceApplicationSuiviProductionInput {
+    codenv: String!
+    codorgs: [String]
+    codapp: String
+    percod: String
+    codsit: String
+}
+
+type OccurrenceApplicationSuiviProductionDTO {
+    occurrencesApplication: [OccurrenceApplicationSuiviProduction]
+    message: String
+}
+
+type OccurrenceApplicationSuiviProduction {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    appsta: String
+    appinf: String
+    arefec: Boolean
+    dappld: DateTime
+    dapplt: DateTime
+    dappls: DateTime
+    manuel: Boolean
+    codsit: String
+    codcom: String
+    codfic: String
+    numcom: String
+    codprd: String
+    ficsta: String
+    ficinf: String
+    frefec: Boolean
+    ficvid: Boolean
+    dappcr: DateTime
+    dfichd: DateTime
+    dficht: DateTime
+    dfichs: DateTime
+}
+
+input SearchDocDemOccurrenceApplicationQuery {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+}
+
+type DocDemOccurrenceApplication {
+    datdem: String
+    numdem: Int
+    coddoc: String
+    refdem: String
+    typact: String
+    ddodeb: String
+    ddofin: String
+}

@@ -1,0 +1,10 @@
+mutation MyQuery($var: CreateOrUpdateSiteCNPInput!){
+    createSiteCNP(createSiteCNP: $var){
+        code
+        host
+        username
+        password
+        ressourceDelestage
+        organismeMassification
+    }
+}

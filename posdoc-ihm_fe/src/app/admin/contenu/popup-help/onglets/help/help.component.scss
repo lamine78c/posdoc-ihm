@@ -1,0 +1,74 @@
+.content_help {
+  margin: 0 20px;
+  max-height: calc(100vh - 310px);
+  max-width: 80vw;
+  overflow-y: auto;
+
+  // Support des formats Quill Editor
+  ::ng-deep {
+    // Gras
+    strong, b {
+      font-weight: bold !important;
+    }
+
+    // Italique
+    em, i {
+      font-style: italic !important;
+    }
+
+    // Souligné
+    u {
+      text-decoration: underline !important;
+    }
+
+    // Barré
+    s {
+      text-decoration: line-through !important;
+    }
+
+    // Alignement
+    .ql-align-center {
+      text-align: center !important;
+    }
+
+    .ql-align-right {
+      text-align: right !important;
+    }
+
+    .ql-align-justify {
+      text-align: justify !important;
+    }
+
+    // Couleurs (Quill utilise des styles inline, mais on ajoute un support de classes)
+    [style*="color"] {
+      color: inherit;
+    }
+
+    [style*="background-color"] {
+      background-color: inherit;
+    }
+
+    // Listes
+    ol, ul {
+      padding-left: 1.5em;
+    }
+
+    // Titres
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+
+    // Liens
+    a {
+      color: #06c;
+      text-decoration: underline;
+    }
+
+    // Images
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}

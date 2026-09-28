@@ -1,0 +1,10 @@
+mutation UpdateTarif($var: UpdateTarifInput!){
+    updateTarif(updateTarif: $var){
+        type
+        numero
+        dateDebut
+        dateFin
+        coutPli
+        urgent
+    }
+}

@@ -1,0 +1,87 @@
+extend type Query {
+    searchPliByQuery(query: SearchPliQueryInput): [SearchPliResult]
+    searchPliByNumpli(numpli: String): SuiviAuPliDetailResult
+}
+
+input SearchPliQueryInput {
+    dtdeb: String
+    dtfin: String
+    numpli: String
+    idtpli: String
+    adress: String
+    isCnav: Boolean
+}
+
+type SearchPliResult {
+    status: String
+    numpli: String
+    idtpli: String
+    genpro: String
+    adres1: String
+    adres2: String
+    adres3: String
+    adres4: String
+    adres5: String
+    adres6: String
+    adres7: String
+    codgam: String
+    mpsidd: String
+    datdep: String
+}
+
+type SuiviAuPliDetailResult {
+    numpli: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    plista: String
+    pliinf: String
+    zoncli: String
+    dplidc: String
+    dplidd: String
+    dplidt: String
+    dplide: String
+    dplidh: String
+    nbpage: String
+    nbfeui: String
+    edtype: String
+    poipli: String
+    coupli: String
+    idtpli: String
+    codpos: String
+    codpay: String
+    adres1: String
+    adres2: String
+    adres3: String
+    adres4: String
+    adres5: String
+    adres6: String
+    adres7: String
+    expad1: String
+    expad2: String
+    expad3: String
+    expad4: String
+    genpro: String
+    infcl1: String
+    infcl2: String
+    datdep: String
+    mpsidd: String
+    status: String
+    cominf: String
+    codgam: String
+    prosta: String
+    proinf: String
+    prefec: Boolean
+    dprodc: String
+    dprodd: String
+    dprodt: String
+    dprods: String
+    dprodh: String
+    pagfic: String
+    plific: String
+    rejfic: String
+}

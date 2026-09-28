@@ -1,0 +1,5 @@
+mutation DeleteSitesCNP($var: DeleteByArrayStringIdInput!){
+    deleteSitesCNP(deleteSitesCNP: $var){
+        ok
+    }
+}

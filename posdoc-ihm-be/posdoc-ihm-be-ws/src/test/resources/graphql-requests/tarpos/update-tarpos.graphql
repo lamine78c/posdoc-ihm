@@ -1,0 +1,10 @@
+mutation UpdateTarpos($var: TarposInput!){
+    updateTarpos(updateTarpos: $var){
+        type
+        libelle
+        ordre
+        tlibre
+        compta
+        perime
+    }
+}

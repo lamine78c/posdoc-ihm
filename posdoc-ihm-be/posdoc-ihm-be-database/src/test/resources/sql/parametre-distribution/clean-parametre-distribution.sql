@@ -1,0 +1,4 @@
+DELETE FROM ressou;
+DELETE FROM Parres;
+DELETE FROM myslog;
+DELETE FROM utilog;

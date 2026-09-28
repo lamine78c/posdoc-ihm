@@ -1,0 +1,52 @@
+@if (!isEditing) {
+  <div
+    #textElement
+    class="overflow-ellipsis"
+    [ngbPopover]="params.valueFormatted || params.value"
+    container="body"
+    [disablePopover]="!enableTooltip"
+    triggers="mouseenter:mouseleave"
+  >
+    @if (!params.isLink || !pdfPath) {
+      {{ params.valueFormatted || params.value }}
+    } @else {
+      <a [href]="pdfPath" (click)="loadPdf($event)">{{ params.value }}</a>
+    }
+  </div>
+} @else {
+  <div class="d-flex input-container">
+    <input
+      #input
+      appNoSpecialCharacters
+      [allowedCharacters]="params.allowedCharacters ?? []"
+      [formControl]="form.get(params.formKey)"
+      (keypress)="params.inputKeypress ? inputKeypress($event) : null"
+      (input)="params.inputInput ? inputInput($event, input, params.formKey) : null"
+      (paste)="handlePaste($event)"
+      [ngClass]="{
+        warning: !form.valid && !form.disabled && !form.get(params.formKey).errors.isError && form.dirty,
+        error: !form.valid && !form.disabled && form.get(params.formKey).errors.isError && form.dirty,
+      }"
+      autocomplete="off"
+      name="input"
+      type="text"
+      class="form-control w-100"
+    />
+    <span
+      [ngbPopover]="form.get(params.formKey).errors.message"
+      triggers="mouseenter:mouseleave"
+      container="body"
+      *ngIf="!form.valid && !form.disabled && !form.get(params.formKey).errors.isError && form.dirty"
+      class="icon-warning d-flex align-items-center"
+      aria-hidden="true"
+    ></span>
+    <span
+      [ngbPopover]="form.get(params.formKey).errors.message"
+      triggers="mouseenter:mouseleave"
+      container="body"
+      *ngIf="!form.valid && !form.disabled && form.get(params.formKey).errors.isError && form.dirty"
+      class="icon-error d-flex align-items-center"
+      aria-hidden="true"
+    ></span>
+  </div>
+}

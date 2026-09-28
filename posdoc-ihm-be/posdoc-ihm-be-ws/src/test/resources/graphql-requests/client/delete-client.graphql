@@ -1,0 +1,5 @@
+mutation DeleteClients($var: DeleteByArrayStringIdInput!){
+    deleteClients(deleteClients: $var){
+        ok
+    }
+}

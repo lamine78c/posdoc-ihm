@@ -1,0 +1,30 @@
+<app-popup [modalRef]="modalRef" [isFormValid]="isFormValid" [title]="title" [firstButton]="null" [secondButton]="null" (saveEvent)="passBack()">
+  <div class="container">
+    <div class="form row">
+      <h3>Veuillez choisir le code client<br />pour les organismes sans régions :</h3>
+    </div>
+    <div class="formOrgCli">
+      <div class="form row" *ngFor="let item of form.controls | keyvalue; let index = index">
+        <app-liste-deroulante
+          [label]="item.key"
+          [form]="item.value"
+          [isError]="true"
+          [options]="clientOptions"
+          [labelColumns]="3"
+          [inputColumns]="9"
+          [errorMessage]="item.value.errors?.message || item.value.errors"
+        ></app-liste-deroulante>
+      </div>
+    </div>
+  </div>
+</app-popup>
+<div class="modal-footer">
+  <div class="button-group">
+    <button type="button" class="btn btn-outline-primary" (click)="closePopup()" *ngIf="secondButton">
+      <i *ngIf="secondButton.icone" class="{{ secondButton.icone }}" aria-hidden="true"></i><span>{{ secondButton.label }}</span>
+    </button>
+    <button type="button" class="btn btn-primary" (click)="passBack()" *ngIf="firstButton" [disabled]="!isFormValid()" style="border: none">
+      <i *ngIf="firstButton.icone" class="{{ firstButton.icone }}" aria-hidden="true"></i><span>{{ firstButton.label }}</span>
+    </button>
+  </div>
+</div>

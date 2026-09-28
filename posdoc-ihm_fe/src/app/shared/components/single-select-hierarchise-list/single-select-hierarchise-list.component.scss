@@ -1,0 +1,61 @@
+// Couleurs en cas d'erreur
+.fake-select.error {
+  border-color: #ff8080 !important;
+  border-bottom-color: #ff0000 !important;
+}
+
+.fake-select {
+  width: calc(100% - 1.643rem);
+}
+
+.row > * {
+  padding-right: 0.75rem;
+}
+
+// Couleurs en cas de warning
+div.warning {
+  border-color: #ffc380 !important;
+  border-bottom-color: #ff8600 !important;
+}
+
+/** Liste hi�rarchis�e **/
+::ng-deep .dropdown-menu {
+  padding: 0.5rem 1rem 0.5rem 0.5rem; // 7px 14px
+
+  .collapse-icon {
+    margin-right: 0.5rem; // 7px
+  }
+
+  .collapse-container {
+    margin-left: 3.143rem; // 44px
+    transform: translate3d(0, 0, 0);
+  }
+
+  .btn {
+    margin: 0 auto;
+    margin-top: 2rem; // 28px
+    margin-bottom: 1rem; // 14px // 21px - 7px (padding d�j� pr�sent) => 14px
+  }
+
+  .fake-select-scrollable-content {
+    max-height: 28.571rem; // 400px
+    overflow: auto;
+    width: calc(100% + 0.5rem); // 0.5rem => padding de la dropdown
+  }
+
+  /** FIX SCROLLBAR OVERLAP **/
+
+  /* Firefox */
+  @-moz-document url-prefix() {
+    .fake-select-scrollable-content {
+      padding-right: 1.214rem; // 17px
+    }
+  }
+
+  /* IE 10+ */
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .fake-select-scrollable-content {
+      padding-right: 1.143rem; // 16px
+    }
+  }
+}

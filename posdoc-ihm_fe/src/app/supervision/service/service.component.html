@@ -1,0 +1,112 @@
+<div class="container-fluid p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">
+      <i class="icon-b_server"></i> Supervision des Services
+    </h2>
+  </div>
+
+  <div *ngIf="services.length === 0" class="alert alert-info">
+    <i class="icon-b_info"></i> Aucun service disponible
+  </div>
+
+  <div class="row">
+    <div *ngFor="let service of services; let i = index" class="col-lg-4 col-md-6 mb-4">
+      <div class="service-card">
+        <div class="card-header-custom">
+          <div class="d-flex justify-content-between align-items-start">
+            <div class="flex-grow-1">
+              <h5 class="service-name">
+                <i class="icon-b_server"></i> {{ service.libelle }}
+              </h5>
+              <a [href]="service.url" target="_blank" class="service-url">
+                <i class="icon-b_link"></i> {{ service.url }}
+              </a>
+            </div>
+            <button
+              class="btn-refresh"
+              (click)="refreshHealthCheck(i)"
+              [disabled]="service.healthCheckLoading"
+              title="Rafraîchir le statut">
+              <i class="icon-b_refresh" [class.rotating]="service.healthCheckLoading"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="card-body-custom">
+          <!-- Loading State -->
+          <div *ngIf="service.healthCheckLoading" class="status-section text-center py-4">
+            <p class="mb-0 text-muted">
+              <i class="icon-b_refresh rotating"></i> Vérification du statut...
+            </p>
+          </div>
+
+          <!-- Error State -->
+          <div *ngIf="service.healthCheckError && !service.healthCheckLoading" class="status-section">
+            <div class="status-and-components">
+              <div class="status-badge status-error">
+                <i class="icon-b_error"></i>
+                <span class="status-text">ERREUR</span>
+              </div>
+            </div>
+            <div class="alert alert-danger mt-3 mb-0">
+              <i class="icon-b_error"></i> {{ service.healthCheckError }}
+            </div>
+          </div>
+
+          <!-- Success State -->
+          <div *ngIf="service.healthCheck && !service.healthCheckLoading">
+            <!-- Global Status & Components -->
+            <div class="status-and-components">
+              <div
+                class="status-badge"
+                [ngClass]="{
+                  'status-up': service.healthCheck.status === 'UP',
+                  'status-down': service.healthCheck.status === 'DOWN',
+                  'status-warning': service.healthCheck.status !== 'UP' && service.healthCheck.status !== 'DOWN'
+                }">
+                <i
+                  [ngClass]="{
+                    'icon-b_valid': service.healthCheck.status === 'UP',
+                    'icon-b_close status-icon-down': service.healthCheck.status === 'DOWN',
+                    'icon-b_warning': service.healthCheck.status !== 'UP' && service.healthCheck.status !== 'DOWN'
+                  }"></i>
+                <span class="status-text">{{ service.healthCheck.status }}</span>
+              </div>
+            </div>
+
+            <!-- Components Details -->
+            <div *ngIf="service.healthCheck.details" class="components-section mt-3">
+              <div class="components-accordion-manual">
+                <div class="accordion-header" (click)="toggleComponents(i)">
+                  <div class="components-title">
+                    <i class="icon-b_list"></i> Composants ({{ (service.healthCheck.details | keyvalue).length }})
+                  </div>
+                  <i class="icon-b_down accordion-chevron" [class.expanded]="isExpanded(i)"></i>
+                </div>
+                <div class="accordion-body" *ngIf="isExpanded(i)">
+                  <div class="components-grid">
+                    <div *ngFor="let detail of service.healthCheck.details | keyvalue" class="component-item">
+                      <div class="component-header">
+                        <span class="component-name">{{ detail.key }}</span>
+                        <i
+                          class="component-icon"
+                          [ngClass]="{
+                            'icon-b_valid text-success': detail.value.status === 'UP',
+                            'icon-b_close text-danger': detail.value.status === 'DOWN',
+                            'icon-b_warning text-warning': detail.value.status !== 'UP' && detail.value.status !== 'DOWN'
+                          }"></i>
+                      </div>
+                      <div *ngIf="detail.value.details" class="component-details">
+                        <pre>{{ detail.value.details | json }}</pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

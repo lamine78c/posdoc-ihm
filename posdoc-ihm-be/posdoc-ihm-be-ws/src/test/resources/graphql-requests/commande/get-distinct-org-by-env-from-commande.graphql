@@ -1,0 +1,3 @@
+query GetDistOrgByEnvFromCommande($codenvs:[String]) {
+    getDistOrgByEnvFromCommande(codenvs: $codenvs)
+}

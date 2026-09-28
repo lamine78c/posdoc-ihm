@@ -1,0 +1,2 @@
+DELETE FROM notfic;
+DELETE FROM fichie;

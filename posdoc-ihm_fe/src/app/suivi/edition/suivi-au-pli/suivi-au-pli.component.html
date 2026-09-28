@@ -1,0 +1,25 @@
+<div class="global-content">
+  <div class="normal-content">
+    <app-search-suivi-au-pli (applyEvent)="lister($event)"></app-search-suivi-au-pli>
+  </div>
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Suivi au pli :
+      <div class="badge badge-info ml-1 mt-auto">{{ nombreTotal }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [asynchronousErrors$]="asynchronousErrors$"
+      [pagination]="false"
+      [enableExportButtons]="true"
+      [disablePdfExportButton]="true"
+      (gridReady)="onGridReady($event)"
+      (exportAsExcel)="export($event)"
+    ></app-tableau>
+  </div>
+</div>

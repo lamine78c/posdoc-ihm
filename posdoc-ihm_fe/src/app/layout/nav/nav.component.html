@@ -1,0 +1,421 @@
+<mat-accordion multi="false">
+  <mat-expansion-panel class="home-panel" #homeMatExpansionPanel hideToggle [expanded]="isPanelOpen('/home')" (click)="homeMatExpansionPanel.open()">
+    <mat-expansion-panel-header [collapsedHeight]="'50px'" [expandedHeight]="'50px'">
+      <mat-panel-title class="home-title">
+        <mat-nav-list>
+          <mat-list-item [routerLink]="['/home']" [routerLinkActive]="['active']">
+            <mat-icon matListItemIcon>home</mat-icon>
+            <a matLine>ACCUEIL</a>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+  <mat-expansion-panel
+    #adminMatExpansionPanel
+    hideToggle
+    *appCheckPermission="AUTH.ADMINISTRATION.ID"
+    [expanded]="isPanelOpen('/admin')"
+    (click)="adminMatExpansionPanel.open()"
+  >
+    <mat-expansion-panel-header [collapsedHeight]="'50px'" [expandedHeight]="'50px'">
+      <mat-panel-title>
+        <mat-nav-list>
+          <mat-list-item>
+            <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
+            <a matLine>ADMINISTRATION</a>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-nav-list>
+      <mat-list-item
+        *appCheckPermission="AUTH.ADMINISTRATION.HABILITATION.ID"
+        class="sub-menu"
+        [routerLink]="['/admin/habilitation']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Habilitations</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.ADMINISTRATION.MOTEUR_ADELAIDE.ID"
+        class="sub-menu"
+        [routerLink]="['/admin/moteur-adelaide']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Moteur Adelaïde</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.ADMINISTRATION.ENVIRONNEMENTS.ID"
+        class="sub-menu"
+        [routerLink]="['/admin/environnement']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Environnements</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.ADMINISTRATION.ORGANISMES.ID"
+        class="sub-menu"
+        [routerLink]="['/admin/organisme']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Organismes</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.ADMINISTRATION.FABRICATION.ID"
+        class="sub-menu"
+        [routerLink]="['/admin/fabrication']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Fabrication</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.ADMINISTRATION.SPECIFICATION_FICHIER.ID"
+        class="sub-menu"
+        [routerLink]="['/admin/specification-fichier']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Spécification de fichiers</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.ADMINISTRATION.APPLICATIONS.ID"
+        class="sub-menu"
+        [routerLink]="['/admin/application']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Applications</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.ADMINISTRATION.CONTENU.ID"
+        class="sub-menu"
+        [routerLink]="['/admin/contenu']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Contenus</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.ADMINISTRATION.CLIENTS.ID"
+        class="sub-menu"
+        [routerLink]="['/admin/client']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Clients</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.ADMINISTRATION.TARPOS.ID"
+        class="sub-menu"
+        [routerLink]="['/admin/tarif']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Tarifs</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.ADMINISTRATION.SERVICE.ID"
+        class="sub-menu"
+        [routerLink]="['/admin/service']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Services</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-expansion-panel>
+  <mat-expansion-panel
+    *appCheckPermission="AUTH.FICHIER_EDITION.ID"
+    #produitMatExpansionPanel
+    hideToggle
+    [expanded]="isPanelOpen('/produit')"
+    (click)="produitMatExpansionPanel.open()"
+  >
+    <mat-expansion-panel-header [collapsedHeight]="'50px'" [expandedHeight]="'50px'">
+      <mat-panel-title>
+        <mat-nav-list>
+          <mat-list-item>
+            <mat-icon matListItemIcon>insert_chart_outlined</mat-icon>
+            <a matLine>GESTION DES FICHIERS D'EDITION</a>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-nav-list>
+      <mat-list-item
+        *appCheckPermission="AUTH.FICHIER_EDITION.DESTINATAIRES.ID"
+        class="sub-menu"
+        [routerLink]="['/produit/destinataire']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Destinataires</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.FICHIER_EDITION.COMMANDES.ID"
+        class="sub-menu"
+        [routerLink]="['/produit/commande']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Commandes</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.FICHIER_EDITION.PROPRIETES_DES_FICHIERS.ID"
+        class="sub-menu"
+        [routerLink]="['/produit/fichier']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Propriétés des fichiers</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.FICHIER_EDITION.PAPAAD.ID"
+        class="sub-menu"
+        [routerLink]="['/produit/papaad']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>PAPAAD</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.FICHIER_EDITION.FONDS_DE_PAGE.ID"
+        class="sub-menu"
+        [routerLink]="['/produit/fond-page']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Fonds de Page</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.FICHIER_EDITION.DISTRIBUTION.ID"
+        class="sub-menu"
+        [routerLink]="['/produit/distribution']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Distribution</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.FICHIER_EDITION.ADRESSES_RETOUR.ID"
+        class="sub-menu"
+        [routerLink]="['/produit/adresse-retour']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Adresses Retour</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.FICHIER_EDITION.NOTICES.ID"
+        class="sub-menu"
+        [routerLink]="['/produit/notice']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Notices</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-expansion-panel>
+  <mat-expansion-panel
+    *appCheckPermission="AUTH.EXPLOITATION_EDITIQUE.ID"
+    #exploitationEditiqueMatExpansionPanel
+    hideToggle
+    [expanded]="isPanelOpen('/exploitation-editique')"
+    (click)="exploitationEditiqueMatExpansionPanel.open()"
+  >
+    <mat-expansion-panel-header [collapsedHeight]="'50px'" [expandedHeight]="'50px'">
+      <mat-panel-title>
+        <mat-nav-list>
+          <mat-list-item>
+            <mat-icon matListItemIcon>folder_open</mat-icon>
+            <a matLine>EXPLOITATION EDITIQUE</a>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-nav-list>
+      <mat-list-item
+        *appCheckPermission="AUTH.EXPLOITATION_EDITIQUE.MASSIFICATIONS.ID"
+        class="sub-menu"
+        [routerLink]="['/exploitation-editique/massification']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Massifications</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.EXPLOITATION_EDITIQUE.REEDITIONS.ID"
+        class="sub-menu"
+        [routerLink]="['/exploitation-editique/reedition']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Rééditions</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.EXPLOITATION_EDITIQUE.BONS_TRAVAIL_MANUEL.ID"
+        class="sub-menu"
+        [routerLink]="['/exploitation-editique/bon-travail-manuel']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Bons de travail manuels</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.EXPLOITATION_EDITIQUE.CONSOLIDATION_FACTURATION.ID"
+        class="sub-menu"
+        [routerLink]="['/exploitation-editique/consolidation-facturation']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Consolidation facturation</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.EXPLOITATION_EDITIQUE.CONTROLE_INTEGRITE_PROD.ID"
+        class="sub-menu"
+        [routerLink]="['/exploitation-editique/controle-integrite-prod']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Contrôle de l'intégrité de la production</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-expansion-panel>
+  <mat-expansion-panel
+    *appCheckPermission="AUTH.SUIVI.ID"
+    #suiviMatExpansionPanel
+    hideToggle
+    [expanded]="isPanelOpen('/suivi')"
+    (click)="suiviMatExpansionPanel.open()"
+  >
+    <mat-expansion-panel-header [collapsedHeight]="'50px'" [expandedHeight]="'50px'">
+      <mat-panel-title>
+        <mat-nav-list>
+          <mat-list-item>
+            <mat-icon matListItemIcon>event_note</mat-icon>
+            <a matLine>SUIVI</a>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-nav-list>
+      <mat-list-item *appCheckPermission="AUTH.SUIVI.EDITIONS.ID" class="sub-menu" [routerLink]="['/suivi/edition']" [routerLinkActive]="['active']">
+        <a matLine>Editions</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.SUIVI.FACTURATIUON.ID"
+        class="sub-menu"
+        [routerLink]="['/suivi/facturation']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Facturation</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.SUIVI.VOLUMES_TRAITEES.ID"
+        class="sub-menu"
+        [routerLink]="['/suivi/volume-traite']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Volumes traités</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.SUIVI.MASSIFICATION.ID"
+        class="sub-menu"
+        [routerLink]="['/suivi/massification']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Massifications</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.SUIVI.BONS_TRAVAIL.ID"
+        class="sub-menu"
+        [routerLink]="['/suivi/bon-travail']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Bons de travail</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.SUIVI.PRODUCTION.ID"
+        class="sub-menu"
+        [routerLink]="['/suivi/production']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Production</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-expansion-panel>
+  <mat-expansion-panel
+    *appCheckPermission="AUTH.SUPERVISION.ID"
+    #supervisionMatExpansionPanel
+    hideToggle
+    [expanded]="isPanelOpen('/supervision')"
+    (click)="supervisionMatExpansionPanel.open()"
+  >
+    <mat-expansion-panel-header [collapsedHeight]="'50px'" [expandedHeight]="'50px'">
+      <mat-panel-title>
+        <mat-nav-list>
+          <mat-list-item>
+            <mat-icon matListItemIcon>dvr</mat-icon>
+            <a matLine>SUPERVISION</a>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-nav-list>
+      <mat-list-item
+        *appCheckPermission="AUTH.SUPERVISION.PRODUCTION.ID"
+        class="sub-menu"
+        [routerLink]="['/supervision/production']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Production</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.SUPERVISION.DOCUMENTS_DEMATERIALISES.ID"
+        class="sub-menu"
+        [routerLink]="['/supervision/document-dematerialise']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Documents dématérialisés</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.SUPERVISION.ACTIONS.ID"
+        class="sub-menu"
+        [routerLink]="['/supervision/action']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Actions</a>
+      </mat-list-item>
+      <mat-list-item
+        *appCheckPermission="AUTH.SUPERVISION.SERVICE.ID"
+        class="sub-menu"
+        [routerLink]="['/supervision/service']"
+        [routerLinkActive]="['active']"
+      >
+        <a matLine>Service</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-expansion-panel>
+</mat-accordion>
+<ng-template #releaseNotesTemplate>
+  @if (notes) {
+    @for (note of notes; track note.version) {
+      <div class="mb-6 border-b pb-4">
+        <h2 class="text-xl font-semibold">
+          Version {{ note.version }}
+          @if (note.date) {
+            <span class="text-gray-500">({{ note.date | date: 'dd/MM/yyyy' }})</span>
+          }
+        </h2>
+
+        @if (note.features?.length) {
+          <div>
+            <h3 class="text-lg mt-2 font-medium"><i class="icon-b_valid"></i> Nouvelles fonctionnalités</h3>
+            <ul class="list-disc list-inside">
+              @for (feature of note.features; track $index) {
+                <li>{{ feature }}</li>
+              }
+            </ul>
+          </div>
+        }
+
+        @if (note.fixes?.length) {
+          <div>
+            <h3 class="text-lg mt-2 font-medium"><i class="icon-b_modify"></i> Corrections</h3>
+            <ul class="list-disc list-inside">
+              @for (fix of note.fixes; track $index) {
+                <li>{{ fix }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    }
+  }
+</ng-template>
+<div class="version">
+  <span title="Version du back : {{ versionBack }}" (click)="openReleaseNotesPopup()"> {{ version }} {{ date }} </span>
+  <span title="Version Adelaide: {{ versionAdelaide }}">Adelaide {{ versionAdelaide }} &#64;urssaf tous droits réservés</span>
+</div>

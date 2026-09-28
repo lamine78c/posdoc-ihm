@@ -1,0 +1,73 @@
+<div
+  class="global-content"
+  [ngClass]="{
+    'nav-tabs-with-icon': type === ongletTypeEnum.PREMIER_NIVEAU_ICONE,
+    'nav-tabs-primary': type === ongletTypeEnum.PREMIER_NIVEAU,
+    'nav-tabs-secondary': type === ongletTypeEnum.DEUXIEME_NIVEAU,
+  }"
+>
+  <div class="normal-content" [ngClass]="{ 'd-flex w-100 nav-tabs-with-navigation': displayNav }">
+    <!-- Icône de navigation -->
+    <div *ngIf="displayNav" class="navigation-icon-container">
+      <div
+        class="navigation-icon"
+        [ngClass]="{ disabled: disableLeftNavigation }"
+        (click)="scrollLeft()"
+        tabindex="0"
+        (keyup.enter)="scrollLeft()"
+        title="Naviguer à gauche"
+      >
+        <i class="icon-b_left" aria-hidden="true"></i>
+      </div>
+    </div>
+    <!-- Liste des onglets -->
+    <ul
+      #ulElement
+      ngbNav
+      #nav="ngbNav"
+      style="height: 100%"
+      [(activeId)]="active"
+      (navChange)="navChange($event)"
+      (shown)="onShow()"
+      [ngClass]="{ 'nav-tabs': type !== ongletTypeEnum.DEUXIEME_NIVEAU, 'ul-with-navigation': displayNav }"
+    >
+      <li [ngbNavItem]="index" style="height: 100%" *ngFor="let headerComponent of headerComponents; index as index">
+        <!-- Header -->
+        <a ngbNavLink [routerLink]="'.'" [fragment]="tabs[index].label.toLowerCase()">
+          <ng-container *ngTemplateOutlet="headerComponent.template"></ng-container>
+        </a>
+        <!-- Contenu de l'onglet -->
+        <ng-template style="height: 100%" ngbNavContent>
+          <ng-content style="height: 100%"></ng-content>
+        </ng-template>
+      </li>
+    </ul>
+    <!-- Icône de navigation -->
+    <div *ngIf="displayNav" class="navigation-icon-container">
+      <div
+        class="navigation-icon"
+        [ngClass]="{ disabled: disableRightNavigation }"
+        (click)="scrollRight()"
+        tabindex="0"
+        (keyup.enter)="scrollRight()"
+        title="Naviguer à droite"
+      >
+        <i class="icon-b_right" aria-hidden="true"></i>
+      </div>
+
+      <div
+        *ngIf="displayCloseAll"
+        class="navigation-icon navigation-close"
+        [ngClass]="{ disabled: disableCloseButton }"
+        (click)="closeAllTabs()"
+        tabindex="0"
+        (keyup.enter)="closeAllTabs()"
+        title="Fermer tous les onglets"
+      >
+        <svg-icon [src]="'assets/icones-showcase/m_close.svg'" [svgStyle]="{ 'width.em': 1, 'height.em': 1, fill: '#384b6d' }"></svg-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="remain-content" [ngbNavOutlet]="nav"></div>
+</div>

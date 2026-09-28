@@ -1,0 +1,26 @@
+<div class="global-content">
+  <div class="normal-content">
+    <app-search-volume-traite (applyVolumesTraitesEvent)="lister($event)"></app-search-volume-traite>
+  </div>
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Liste des volumes traités
+      <div class="badge badge-info ml-1 mt-auto">{{ nombreLignesTotal }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="true"
+      [enableFullEdit]="false"
+      [enableExportButtons]="true"
+      [total]="{ labelId: 'codreg', valuesId: ['sumpagfic'] }"
+      (gridReady)="onGridReady($event)"
+      (exportAsPDF)="export($event)"
+      (exportAsExcel)="export($event)"
+    ></app-tableau>
+  </div>
+</div>

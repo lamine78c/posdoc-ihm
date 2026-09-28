@@ -1,0 +1,3 @@
+mutation updateFicAttByEnvOrgsAppComFic($query: SearchByEnvOrgsAppComFicQuery!, $message: String!) {
+    updateFicAttByEnvOrgsAppComFic(query: $query, message: $message)
+}

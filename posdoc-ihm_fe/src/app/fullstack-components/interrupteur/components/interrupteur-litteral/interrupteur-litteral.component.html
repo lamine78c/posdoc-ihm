@@ -1,0 +1,31 @@
+<div class="d-flex" (keypress)="keypress($event)">
+  <label class="literal-switch-label" (click)="toggle()">{{ label }}</label>
+  <div class="literal-switch" tabindex="0" (keyup.space)="toggle()">
+    <!-- Valeur récupérée en px -->
+    <div
+      *ngIf="element1Width"
+      #elementBg
+      class="switch-bg"
+      [ngStyle]="{
+        width: 'calc(' + selectedElementWidth + 'px + 1px )',
+        transform: firstElementSelected ? 'translateX(-1px)' : 'translateX(' + element1Width + 'px)',
+      }"
+    ></div>
+    <div
+      #element1
+      class="switch-text"
+      [ngClass]="{ 'switch-text-selected': firstElementSelected, 'switch-text-unselected': !firstElementSelected }"
+      (click)="toggle()"
+    >
+      {{ switchLabel1 }}
+    </div>
+    <div
+      #element2
+      class="switch-text"
+      [ngClass]="{ 'switch-text-selected': !firstElementSelected, 'switch-text-unselected': firstElementSelected }"
+      (click)="toggle()"
+    >
+      {{ switchLabel2 }}
+    </div>
+  </div>
+</div>

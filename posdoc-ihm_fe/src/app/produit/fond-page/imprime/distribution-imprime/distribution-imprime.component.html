@@ -1,0 +1,31 @@
+<div class="global-content">
+  <div class="normal-content">
+    <app-search-distribution-imprime (applySearchEvent)="lister($event)"></app-search-distribution-imprime>
+  </div>
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Liste des imprimés
+      <div class="badge badge-info ml-1 mt-auto">{{ nombreImprimesTotal }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="true"
+      [enableExportButtons]="true"
+      [canAddPerm]="canAddPermPosition"
+      [canRemovePerm]="canRemovePermPosition"
+      [enableAddButton]="addType"
+      [enableFullEdit]="false"
+      [asynchronousErrors$]="asynchronousErrors$"
+      (gridReady)="onGridReady($event)"
+      (deleteRows)="onDeleteRow($event)"
+      (saveEdition)="onSaveEdition($event)"
+      (exportAsPDF)="export($event)"
+      (exportAsExcel)="export($event)"
+    ></app-tableau>
+  </div>
+</div>

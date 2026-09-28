@@ -1,0 +1,14 @@
+mutation affectationNotfic($query: [NotFicInput]!) {
+    affectationNotfic(query: $query) {
+        codnot
+        codenv
+        codorg
+        codapp
+        codcom
+        codfic
+        dnotid
+        dnotit
+        maxnot
+        curnot
+    }
+}

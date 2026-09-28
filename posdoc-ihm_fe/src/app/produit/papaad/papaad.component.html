@@ -1,0 +1,28 @@
+<div class="global-content">
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Liste des papaads
+      <div class="badge badge-info ml-1 mt-auto">{{ nombrePapaadTotal }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="true"
+      [canAddPerm]="canAddPermPosition"
+      [canRemovePerm]="canRemovePermPosition"
+      [enableAddButton]="addType"
+      [enableFullEdit]="false"
+      [enableExportButtons]="true"
+      [asynchronousErrors$]="asynchronousErrors$"
+      (gridReady)="onGridReady($event)"
+      (saveEdition)="onSaveEdition($event)"
+      (deleteRows)="onDeleteRow($event)"
+      (exportAsPDF)="export($event)"
+      (exportAsExcel)="export($event)"
+    ></app-tableau>
+  </div>
+</div>

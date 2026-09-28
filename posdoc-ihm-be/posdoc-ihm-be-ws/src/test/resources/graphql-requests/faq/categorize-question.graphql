@@ -1,0 +1,14 @@
+mutation categorizeQuestion($id: Int!, $path: String!) {
+    categorizeQuestion(id: $id, path: $path) {
+        id
+        path
+        question
+        answer
+        status
+        viewCount
+        createdBy
+        updatedBy
+        createdAt
+        updatedAt
+    }
+}

@@ -1,0 +1,5 @@
+mutation DeleteTarifs($var: [DeleteTarifInput]!){
+    deleteTarifs(deleteTarifs: $var){
+        ok
+    }
+}

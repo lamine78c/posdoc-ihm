@@ -1,0 +1,11 @@
+<div class="d-flex" *ngIf="!isHidden">
+  <ng-container *ngIf="isAllTimeClickable; else allTimeClickableTemplate">
+    <select class="w-100" [formControl]="form.get(params.formKey)">
+      <option *ngIf="params.hasBlankOption" [ngValue]="''"></option>
+      <option *ngFor="let option of data" [ngValue]="option.value || option">{{ option.text || option }}</option>
+    </select>
+  </ng-container>
+</div>
+<ng-template #allTimeClickableTemplate>
+  <div>{{ form.get(params.formKey).value }}</div>
+</ng-template>

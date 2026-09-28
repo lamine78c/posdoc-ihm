@@ -1,0 +1,44 @@
+extend type Query {
+    getDistinctFiltreMassification: [SuiviMassificationFiltreDTO]
+    searchForSuiviMassification(suiviMassificationPayload: SuiviMassificationPayload): [SuiviMassificationDTO]
+    searchCountForSuiviMassification(suiviMassificationPayload: SuiviMassificationPayload): Int
+}
+
+type SuiviMassificationFiltreDTO {
+    masenv: String
+    masorg: String
+    masper: String
+    codsit: String
+    appsta: String
+    dappld: String
+    dapplt: String
+}
+
+input SuiviMassificationPayload {
+    codenv: String
+    sitesMas: [String]
+    periodeDebut: String
+    periodeFin: String
+}
+
+type SuiviMassificationDTO {
+    masper: String
+    mascom: String
+    masfic: String
+    masnum: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    codenv: String
+    libFichier: String
+    libsup: String
+    codprd: String
+    masuti: String
+    pagFic: Int
+    pliFic: Int
+    codcli: String
+    codsit: String
+}

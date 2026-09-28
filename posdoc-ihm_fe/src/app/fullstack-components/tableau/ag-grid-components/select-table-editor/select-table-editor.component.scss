@@ -1,0 +1,30 @@
+.selected-element-container {
+  border: 0.071rem solid lightgray;
+  border-bottom-color: black;
+  border-radius: 0.357rem 0.357rem 0 0;
+}
+
+.selected-element {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.icon-arrow-down {
+  padding: 0 2px;
+  border: 0.071rem solid lightgray;
+  background: lightgray;
+}
+
+.selected-element-container.disabled {
+  background: #f0f0f0;
+  color: #a0a0a0;
+  cursor: not-allowed;
+  pointer-events: auto;
+  opacity: 0.7;
+}
+
+.empty-option {
+  font-style: italic;
+  color: #999;
+}

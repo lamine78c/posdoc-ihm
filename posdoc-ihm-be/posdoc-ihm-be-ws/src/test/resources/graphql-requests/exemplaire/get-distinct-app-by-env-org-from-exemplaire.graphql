@@ -1,0 +1,3 @@
+query GetDistAppByEnvOrgFromExemplaire($codenvs:[String], $codorgs:[String]) {
+    getDistAppByEnvOrgFromExemplaire(codenvs: $codenvs, codorgs: $codorgs )
+}

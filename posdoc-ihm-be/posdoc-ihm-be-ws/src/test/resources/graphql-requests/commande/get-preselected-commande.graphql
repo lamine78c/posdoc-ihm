@@ -1,0 +1,14 @@
+query GetPreselectedCommande($codenvs:[String], $codorgs:[String], $codapp:String) {
+    getPreselectedCommande(codenvs: $codenvs, codorgs: $codorgs, codapp: $codapp) {
+        commandes {
+            code
+            libelle
+            codenv
+            codorg
+            codapp
+            codreg
+            isNotAuthorisedToBeDeleted
+        }
+        message
+    }
+}

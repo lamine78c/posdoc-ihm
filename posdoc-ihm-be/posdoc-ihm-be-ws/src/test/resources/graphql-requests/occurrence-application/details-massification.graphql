@@ -1,0 +1,22 @@
+query getDetailsMassification($paramData: ParamDataMassificationInput!) {
+    getDetailsMassification(paramData: $paramData)
+    {
+        masper
+        mascom
+        masfic
+        masnum
+        codorg
+        codapp
+        percod
+        codcom
+        codfic
+        numcom
+        libFichier
+        refImprime
+        codprd
+        masuti
+        pagFic
+        pliFic
+        codcli
+    }
+}

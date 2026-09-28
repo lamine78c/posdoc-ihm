@@ -1,0 +1,2 @@
+DELETE FROM statut;
+DELETE FROM utilog;

@@ -1,0 +1,8 @@
+extend type Query {
+    allStatuts: [StatutDTO]
+}
+
+type StatutDTO {
+    code: String
+    libelle: String
+}

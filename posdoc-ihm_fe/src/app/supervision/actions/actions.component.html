@@ -1,0 +1,13 @@
+<app-onglet [type]="ongletTypeEnum.PREMIER_NIVEAU" [tabs]="onglets" [active]="active" (activeChange)="activeChange($event)">
+  <ng-container *ngFor="let onglet of onglets; index as index">
+    <app-onglet-header-container *appCheckPermission="onglet.perm">
+      <app-onglet-header class="d-flex" [tab]="onglet" [type]="ongletTypeEnum.PREMIER_NIVEAU"></app-onglet-header>
+    </app-onglet-header-container>
+  </ng-container>
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_MISE_A_JOUR_IHM">
+    <app-action></app-action>
+  </div>
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_ACTION_UTILISATEUR">
+    <app-action-utilisateur></app-action-utilisateur>
+  </div>
+</app-onglet>

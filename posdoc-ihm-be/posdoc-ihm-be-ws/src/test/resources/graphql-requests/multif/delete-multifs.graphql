@@ -1,0 +1,5 @@
+mutation deleteMultifs($deletesDTO: DeleteByArrayStringIdInput!) {
+    deleteMultifs(deleteMultifs: $deletesDTO) {
+        ok
+    }
+}

@@ -1,0 +1,63 @@
+<div class="menu-group" [ngClass]="{ opened: displayChildMenu }" [routerLinkActive]="['active']">
+  <!-- mouseover et mouseleave sont nécessaires pour utiliser menuRow.matches(':hover') -->
+  <a
+    *ngIf="menuVertical.label"
+    #menuRow
+    class="menu-row"
+    (click)="toggleOrNavigate()"
+    (keyup.enter)="toggleOrNavigate()"
+    [ngClass]="{ active: menuVertical.activated }"
+    (mouseover)="('')"
+    (mouseleave)="('')"
+    tabindex="0"
+    [routerLink]="menuVertical.route"
+  >
+    <div class="menu-icons" *ngIf="menuVertical.icon">
+      <!-- Icône principale du menu -->
+      <svg-icon
+        [src]="menuVertical.icon"
+        class="menu-main-icon"
+        [svgStyle]="{ 'width.rem': 2.143, 'height.rem': 2.143, fill: menuVertical.activated || menuRow.matches(':hover') ? '#384A6D' : '#fff' }"
+      ></svg-icon>
+      <!-- Icône ouverture/fermeture, uniquement affichée si il y a des enfants-->
+      <svg-icon
+        class="toggle-icon"
+        *ngIf="menuVertical.children?.length > 0 && !alwaysOpened"
+        [src]="displayChildMenu ? 'assets/icones-projets/PORA/flechewb.svg' : 'assets/icones-projets/PORA/flechewd.svg'"
+        [svgStyle]="{ 'width.rem': 0.714, 'height.rem': 0.714, fill: menuRow.matches(':hover') ? '#03235F' : '#fff' }"
+      ></svg-icon>
+    </div>
+    <!-- Texte du menu parent -->
+    <div class="menu-label">
+      <span class="menu-label-big-letter">{{ menuVertical.label | slice: 0 : 1 }}</span
+      ><span>{{ menuVertical.label | slice: 1 }}</span>
+    </div>
+
+    <!-- Icône ouverture/fermeture, uniquement affichée si il y a des enfants (cas menu déplié) -->
+    <div class="toggle-icon-standalone" *ngIf="menuVertical.children?.length > 0" [ngClass]="{ 'always-opened': alwaysOpened }">
+      <svg-icon
+        [src]="displayChildMenu ? 'assets/icones-projets/PORA/flechewb.svg' : 'assets/icones-projets/PORA/flechewd.svg'"
+        [svgStyle]="{ 'width.rem': 0.714, 'height.rem': 0.714, fill: menuRow.matches(':hover') ? '#03235F' : '#fff' }"
+      ></svg-icon>
+    </div>
+  </a>
+
+  <div *ngIf="menuVertical.splitter">
+    <hr class="menu-hr" [ngClass]="{ 'always-opened': alwaysOpened }" />
+  </div>
+
+  <!-- Menu enfant -->
+  <ng-container *ngIf="menuVertical.children?.length > 0">
+    <div *ngFor="let childMenu of menuVertical.children" class="child-menu" [ngClass]="{ opened: displayChildMenu }">
+      <!-- Séparateur des enfants -->
+      <div *ngIf="childMenu.splitter" class="child-menu-splitter">
+        <span class="child-menu-splitter-big-letter">{{ childMenu.label | slice: 0 : 1 }}</span
+        ><span>{{ childMenu.label | slice: 1 }}</span>
+      </div>
+      <!-- Label du menu enfant -->
+      <div *ngIf="!childMenu.splitter" class="child-menu-label" [ngClass]="{ active: childMenu.activated }">
+        <a (click)="navigate(childMenu.route)" tabindex="{{ displayChildMenu ? '0' : '-1' }}" [routerLink]="childMenu.route">{{ childMenu.label }}</a>
+      </div>
+    </div>
+  </ng-container>
+</div>

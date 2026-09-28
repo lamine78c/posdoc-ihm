@@ -1,0 +1,133 @@
+extend type Mutation {
+    updateConsolidationFacturation(query: UpdateConsolidationFacturationQuery): Boolean!
+}
+
+extend type Query {
+    searchFacturationDetaillee(query: SearchFacturationDetailleeQuery): FacturationDetailleeWithAllColumnsDTO
+    searchConsolidationFacturation(query: SearchConsolidationFacturationQuery): ConsolidationFacturationWithAllColumnsDTO
+    findCodeOrganismesByTypeR: [CodeOrganisme]
+    findCodeEnv: [CodeEnv]
+    findCodeApp: [CodeApp]
+    findCodeAppByEnvOrgs(codenv: String, codorgs: [String]): [CodeApp]
+    findTyptarFromGentar: [Typtar]
+}
+
+input UpdateConsolidationFacturationQuery {
+    codenv: String
+    codorg: [String]
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    codsit: String
+    consolidations: [UpdateConsolidationFacturation]
+}
+
+input UpdateConsolidationFacturation {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    numcom: String
+    codfic: String
+    tarifs: [UpdateTarifConsolidationFacturation]
+}
+
+input UpdateTarifConsolidationFacturation {
+    typtar: String
+    nbplis: Int
+    coutot: Int
+    isCreate: Boolean
+    isUpdate: Boolean
+    isDelete: Boolean
+}
+
+input SearchFacturationDetailleeQuery {
+    dfiexpDeb: String
+    dfiexpFin: String
+    codorgs: [String]
+    codclis: [String]
+    typtars: [String]
+    codenv: String
+    codapp: String
+    codcom: String
+    codfic: String
+    codsit: String
+    showTotal: Boolean
+}
+
+type FacturationDetailleeWithAllColumns {
+    codorg: String
+    codapp: String
+    codcom: String
+    codfic: String
+    libfic: String
+    dfiexp: DateTime
+    codsit: String
+    codreg: String
+    codcli: String
+    totalPages: Int
+    totalPlis: Int
+    coutTotal: Float
+    tarifs: [TarifFacturationDetaillee]
+}
+
+type FacturationDetailleeWithAllColumnsDTO {
+    facturationDetailleeWithAllColumns: [FacturationDetailleeWithAllColumns]!
+    message: String!
+}
+
+type TarifFacturationDetaillee {
+    codeTar: String
+    plis: Int
+    cout: Float
+}
+
+input SearchConsolidationFacturationQuery {
+    codenv: String
+    codorg: [String]
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    codsit: String
+}
+
+type ConsolidationFacturationWithAllColumns {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    codprd: String
+    codcli: String
+    codsit: String
+    plific: Int
+    coufic: Float
+    dfiexp: DateTime
+    tarifs: [TarifFacturationDetaillee]
+}
+
+type ConsolidationFacturationWithAllColumnsDTO {
+    consolidationFacturationList: [ConsolidationFacturationWithAllColumns]!
+    message: String!
+}
+
+type CodeOrganisme {
+    code: String
+}
+
+type CodeEnv {
+    code: String
+}
+
+type CodeApp {
+    code: String
+}
+
+type Typtar {
+    typtar: String
+}

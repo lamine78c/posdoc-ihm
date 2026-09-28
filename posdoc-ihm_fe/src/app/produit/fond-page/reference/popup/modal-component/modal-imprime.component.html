@@ -1,0 +1,27 @@
+<app-popup [modalRef]="modalRef" [isFormValid]="isFormValid" [title]="title" [firstButton]="null" [secondButton]="null" (saveEvent)="apply()">
+  <app-liste-deroulante
+    *ngFor="let item of form.controls | keyvalue; let index = index"
+    [label]="'Nouvelle référence imprimée :'"
+    [index]="index"
+    [form]="item.value"
+    [isError]="item.key === 'listeDeroulante3Erreur'"
+    [options]="imprimes"
+    [errorMessage]="'La valeur sélectionnée est invalide'"
+    [size]="9"
+    [vertical]="true"
+    [labelColumns]="12"
+    [inputColumns]="9"
+    (changeEvent)="onChange($event)"
+  ></app-liste-deroulante>
+</app-popup>
+<div class="modal-footer">
+  <div class="button-group">
+    <button type="button" class="btn btn-outline-primary" (click)="closePopup()" *ngIf="secondButton">
+      <i *ngIf="secondButton.icone" class="{{ secondButton.icone }}" aria-hidden="true"></i><span>{{ secondButton.label }}</span>
+    </button>
+
+    <button type="button" class="btn btn-primary" (click)="apply()" *ngIf="firstButton" [disabled]="!isFormValid">
+      <i *ngIf="firstButton.icone" class="{{ firstButton.icone }}" aria-hidden="true"></i><span>{{ firstButton.label }}</span>
+    </button>
+  </div>
+</div>

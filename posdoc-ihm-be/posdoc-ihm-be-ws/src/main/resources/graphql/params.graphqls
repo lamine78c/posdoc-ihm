@@ -1,0 +1,4 @@
+extend type Query {
+    getCodeOrgOGUR: String
+    getValueDocDematerialises: String
+}

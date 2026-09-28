@@ -1,0 +1,5 @@
+mutation deleteAllExchanges($faqId: Int!) {
+    deleteAllExchanges(faqId: $faqId) {
+        ok
+    }
+}

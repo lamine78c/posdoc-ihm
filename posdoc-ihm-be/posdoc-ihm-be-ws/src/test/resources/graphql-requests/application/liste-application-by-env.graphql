@@ -1,0 +1,12 @@
+query GetApplicationsByEnvs($codesEnv: [String]) {
+    getApplicationsByEnvs(codesEnv: $codesEnv) {
+        code
+        libelle
+        codeOrganisation
+        codeEnvironnement
+        codeSystem
+        codeGroupe
+        lotNumber
+        typeRefection
+    }
+}

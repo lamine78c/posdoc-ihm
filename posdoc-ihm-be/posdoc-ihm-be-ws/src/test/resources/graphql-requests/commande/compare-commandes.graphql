@@ -1,0 +1,9 @@
+query CompareCommandes($codesEnv:[String], $codesOrg:[String], $codesApp:[String]) {
+    compareCommandes(codesEnv:$codesEnv, codesOrg:$codesOrg, codesApp: $codesApp ) {
+        application
+        organisme
+        codeReg
+        sortHelper
+        environnements
+    }
+}

@@ -1,0 +1,6 @@
+query findAllOrganiClient {
+  findAllOrganiClient {
+    codorg
+    codcli
+  }
+}

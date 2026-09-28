@@ -1,0 +1,33 @@
+<div *ngIf="dataInput && !dataInput?.length" class="alert alert-warning">Aucun élément pour ces critères de recherche</div>
+<div [ngClass]="{ 'hide-timeline': dataInput && !dataInput?.length }">
+  <div #timeline id="timeline"></div>
+  <div *ngIf="toShowStatus" class="row" id="legend">
+    <div class="col-3 text-center">
+      <button (click)="filterDataByStatusCree()" [disabled]="!isStatusCreeEnabled()" class="btn bg-cree" type="button">
+        <i *ngIf="toShowStatusCree" class="icone icon-b_valid_1"></i>Créé {{ nbrDataCree }}
+      </button>
+    </div>
+    <div class="col-3 text-center">
+      <button (click)="filterDataByStatusSuspendu()" [disabled]="!isStatusSuspenduEnabled()" class="btn bg-suspendu" type="button">
+        <i *ngIf="toShowStatusSuspendu" class="icone icon-b_valid_1"></i>Suspendu {{ nbrDataSuspendu }}
+      </button>
+    </div>
+    <div class="col-3 text-center">
+      <button (click)="filterDataByStatusDebute()" [disabled]="!isStatusDebuteEnabled()" class="btn bg-debute" type="button">
+        <i *ngIf="toShowStatusDebute" class="icone icon-b_valid_1"></i>Débuté {{ nbrDataDebute }}
+      </button>
+    </div>
+    <div class="col-3 text-center">
+      <button (click)="filterDataByStatusTermine()" [disabled]="!isStatusTermineEnabled()" class="btn bg-termine" type="button">
+        <i *ngIf="toShowStatusTermine" class="icone icon-b_valid_1"></i>Terminé {{ nbrDataTermine }}
+      </button>
+    </div>
+  </div>
+</div>
+<div (click)="$event.stopPropagation()" [ngStyle]="contextMenuStyle" class="context-menu">
+  <ul>
+    <li *ngFor="let option of contextMenuOptions" (click)="onMenuOptionClick(option)">
+      {{ option.label }}
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,13 @@
+mutation update($updateOrganisme: CreateOrUpdateOrganismeInput!) {
+    updateOrganisme(updateOrganisme: $updateOrganisme) {
+        code
+        libelle
+        adresse1
+        adresse2
+        adresse3
+        adresse4
+        type
+        codeRegion
+        codeSite
+    }
+}

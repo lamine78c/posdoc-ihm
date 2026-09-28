@@ -1,0 +1,3 @@
+DELETE FROM genpli;
+DELETE FROM genpro;
+DELETE FROM utilog;

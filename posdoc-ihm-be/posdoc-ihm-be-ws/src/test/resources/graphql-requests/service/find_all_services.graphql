@@ -1,0 +1,11 @@
+query findAllServices {
+    findAllServices {
+        id
+        libelle
+        url
+        createdAt
+        updatedAt
+        createdBy
+        updatedBy
+    }
+}

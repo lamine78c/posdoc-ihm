@@ -1,0 +1,10 @@
+<div class="table-container">
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [columnDefs]="columnDefs"
+      [rowData]="rowData$ | async"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+    ></app-tableau>
+  </div>
+</div>

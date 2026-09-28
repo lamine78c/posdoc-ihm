@@ -1,0 +1,5 @@
+mutation DeleteAllTarpos($var: DeleteByArrayStringIdInput!){
+    deleteAllTarpos(deleteAllTarpos: $var){
+        ok
+    }
+}

@@ -1,0 +1,7 @@
+query getContenusForAccueil($userOrganismes: [String]) {
+    getContenusForAccueil(userOrganismes: $userOrganismes) {
+        titre
+        message
+        regions
+    }
+}

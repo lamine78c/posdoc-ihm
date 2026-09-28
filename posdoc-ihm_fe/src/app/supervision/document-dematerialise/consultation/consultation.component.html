@@ -1,0 +1,36 @@
+<div class="global-content">
+  <div class="normal-content">
+    <app-search-document-dematerialise (applyEvent)="lister($event)"></app-search-document-dematerialise>
+  </div>
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Liste des documents dématérialisés
+      <div *ngIf="nombreLignesTotal >= 0" class="d-flex">
+        <div class="badge badge-info ml-1 mt-auto">{{ nombreLignesTotal }}</div>
+        (
+        <div class="badge badge-info ml-1 mt-auto">{{ nombreLignesDebute }}</div>
+        débutés
+        <div class="badge badge-info ml-1 mt-auto">{{ nombreLignesTermine }}</div>
+        terminés
+        <div class="badge badge-info ml-1 mt-auto">{{ nombreLignesSuspendu }}</div>
+        suspendus)
+      </div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="true"
+      [enableAddButton]="false"
+      [enableFullEdit]="false"
+      [enableExportButtons]="true"
+      [disablePdfExportButton]="true"
+      (gridReady)="onGridReady($event)"
+      (exportAsPDF)="export($event)"
+      (exportAsExcel)="export($event)"
+    ></app-tableau>
+  </div>
+</div>

@@ -1,0 +1,1 @@
+INSERT INTO Params (C32_Codpar,S32_Valpar,S32_Libpar) VALUES ('VERSIO','Versio','Version pour le test');

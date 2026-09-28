@@ -1,0 +1,3 @@
+# On ne commit jamais les fichiers de migration, présents en local pour test
+# sur Jenkins ils sont automatiquement copiés lorsque l'on en a besoin (deploy e2e)
+/src/main/resources/db/migration/*

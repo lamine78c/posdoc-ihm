@@ -1,0 +1,5 @@
+mutation valideGenEtp ($payload: [ValideGenEtpPayload]) {
+    valideGenEtp (payload: $payload) {
+        erreur
+    }
+}

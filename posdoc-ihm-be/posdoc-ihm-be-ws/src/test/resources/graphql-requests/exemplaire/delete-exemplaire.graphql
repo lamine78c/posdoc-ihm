@@ -1,0 +1,5 @@
+mutation delete ($ids: [DeleteExemplaireInput]!) {
+    deleteExemplaires (deleteExemplaires:  {ids:$ids}) {
+        ok
+    }
+}

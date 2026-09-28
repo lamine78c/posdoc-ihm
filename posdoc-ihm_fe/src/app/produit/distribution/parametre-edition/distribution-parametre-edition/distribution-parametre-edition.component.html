@@ -1,0 +1,42 @@
+<div class="global-content">
+  <div class="normal-content">
+    <app-preselection
+      [form]="formPreselection"
+      [applicationOptions]="applicationOptions"
+      [commandeOptions]="commandeOptions"
+      [fichierOptions]="fichierOptions"
+      [isDistribution]="true"
+      (validerEvent)="validerPreselection()"
+    >
+    </app-preselection>
+    <h3 class="d-flex">
+      Liste des paramètres d'édition
+      <div class="badge badge-info ml-1 mt-auto">{{ nombresTotal }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="true"
+      [enableExportButtons]="true"
+      [disablePdfExportButton]="true"
+      [asynchronousErrors$]="asynchronousErrors$"
+      [completeButton]="true"
+      [addGroupButton]="true"
+      [editGroupButton]="true"
+      (gridReady)="onGridReady($event)"
+      (addGroup)="openAddPopup($event)"
+      (completeRow)="openAddPopup($event)"
+      (deleteRows)="onDeleteRow($event)"
+      (updateRows)="openUpdateRowsPopup($event)"
+      [canAddPerm]="canAddPermPosition"
+      [canRemovePerm]="canRemovePermPosition"
+      [canEditPerm]="canEditPermPosition"
+      (exportAsExcel)="export($event)"
+      (saveEdition)="onSaveEdition($event)"
+    ></app-tableau>
+  </div>
+</div>

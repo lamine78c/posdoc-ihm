@@ -1,0 +1,21 @@
+query GetPreselectedExemplaire($query: ExemplaireByFilterQuery!) {
+    getPreselectedExemplaire(query: $query) {
+        codenv
+        codorg
+        codapp
+        codcom
+        exeact
+        nbrexe
+        coddes
+        codres
+        codfic
+        codgam
+        numexe
+        codsit
+        codeProd
+        refImprime
+        libFichier
+        isAdmin
+        ficatt
+    }
+}

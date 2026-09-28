@@ -1,0 +1,14 @@
+mutation increaseViewCount($id: Int!) {
+    increaseViewCount(id: $id) {
+        id
+        path
+        question
+        answer
+        status
+        viewCount
+        createdBy
+        updatedBy
+        createdAt
+        updatedAt
+    }
+}

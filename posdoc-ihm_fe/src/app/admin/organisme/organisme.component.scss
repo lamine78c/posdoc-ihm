@@ -1,0 +1,62 @@
+@use 'src/scss/variables' as *;
+
+.container {
+  background-color: #ffffff;
+  height: 100%;
+}
+
+.serveur-tab {
+  padding: 12px;
+  height: 100%;
+}
+
+.mat-tab-group {
+  height: 100%;
+  background-color: #ffffff;
+}
+:host ::ng-deep .mat-tab-body-wrapper {
+  flex-grow: 1;
+}
+:host ::ng-deep .mat-tab-body {
+  display: flex !important;
+  flex-direction: column;
+}
+
+:host ::ng-deep .mat-tab-body-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+:host ::ng-deep .mat-tab-labels {
+  background-color: $light-gray;
+}
+
+:host ::ng-deep .mat-tab-label {
+  background-color: #ffffff;
+  height: 35px;
+}
+
+:host ::ng-deep div.mat-form-field-infix {
+  border: 0px;
+}
+
+button {
+  height: 3px;
+  mat-icon.mat-icon {
+    font-size: 20px;
+    line-height: 12px;
+  }
+}
+
+tr {
+  height: 30px !important;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: $light-gray;
+}
+
+.onglet {
+  height: 100%;
+}

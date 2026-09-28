@@ -1,0 +1,27 @@
+<app-onglet [type]="ongletTypeEnum.PREMIER_NIVEAU" [tabs]="onglets" [active]="active" (activeChange)="activeChange($event)">
+  <ng-container *ngFor="let onglet of onglets; index as index">
+    <app-onglet-header-container *appCheckPermission="onglet.perm">
+      <app-onglet-header class="d-flex" [tab]="onglet" [type]="ongletTypeEnum.PREMIER_NIVEAU"></app-onglet-header>
+    </app-onglet-header-container>
+  </ng-container>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_SERVEUR">
+    <app-serveur></app-serveur>
+  </div>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_GAMME">
+    <app-gamme></app-gamme>
+  </div>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_VERROU">
+    <app-verrou></app-verrou>
+  </div>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_PARAM_DIST">
+    <app-parametre-distribution></app-parametre-distribution>
+  </div>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_RESSOURCE">
+    <app-ressource></app-ressource>
+  </div>
+</app-onglet>

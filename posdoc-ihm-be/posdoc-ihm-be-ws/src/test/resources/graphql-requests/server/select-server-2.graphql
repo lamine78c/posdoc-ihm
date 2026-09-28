@@ -1,0 +1,35 @@
+query toto {
+    servers: servers(queryParameters: {
+        paginationParameters: {
+            page: 0
+            size: 60
+            sort: [
+                {
+                    column: "systeme",
+                    direction: DESCENDING
+                }
+            ]
+        }
+        filterCriteria: {
+            criteria: [
+                {
+                    value: "TRUE"
+                    column: "teste"
+                    operation: EQUALS
+                }
+            ]
+        }
+    }){
+        totalElement
+        totalPages
+        elements {
+            ... on Server {
+                code
+                libelle
+                adresseIp
+                systeme
+                teste
+            }
+        }
+    }
+}

@@ -1,0 +1,154 @@
+<app-popup
+  [modalRef]="activeModal"
+  [isFormValid]="form.valid && isFormTouched"
+  [title]="id ? 'Remaniement d\'une question' : 'Création d\'une FAQ'"
+  [firstButton]="{ label: 'Remanier', icone: 'icon-b_valid' }"
+  [secondButton]="{ label: 'Quitter', icone: 'icon-b_cancel' }"
+  (saveEvent)="save()"
+>
+  <form [formGroup]="form">
+    <div class="modal-content-scroll">
+      <div ngbAccordion #acc="ngbAccordion" [closeOthers]="false">
+        @if (id && status === 'draft') {
+          <div ngbAccordionItem="panel-exchanges" [collapsed]="false" (shown)="onAccordionShown()" (hidden)="isExchangeAccordionOpen = false">
+            <h2 ngbAccordionHeader>
+              <button ngbAccordionButton class="accordion-button">
+                <span class="accordion-title">
+                  <i class="icon-b_comment me-2"></i>
+                  Échanges ({{ exchanges.length }})
+                </span>
+              </button>
+            </h2>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody>
+                <ng-template>
+                  <div class="question-header-sticky">
+                    <div class="question-display p-3 bg-light border-bottom">
+                      <strong class="d-block mb-1 text-primary"> <i class="icon-b_help_circle me-2"></i>Question en cours de traitement : </strong>
+                      <div class="question-text">{{ form.get('question').value || question }}</div>
+                      <div class="d-flex text-muted small mt-2">
+                        <p>{{ createdBy }} - {{ createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div #scrollContainer class="exchanges-container p-3">
+                    @if (exchanges.length === 0) {
+                      <div class="text-center text-muted py-3">Aucun échange pour le moment</div>
+                    }
+                    @for (exchange of exchanges; track exchange.id) {
+                      <div
+                        class="exchange-item mb-3"
+                        [ngClass]="{
+                          'exchange-item-left':
+                            (isCurrentUser(createdBy) && createdBy !== exchange.author) ||
+                            (!isCurrentUser(createdBy) && createdBy === exchange.author),
+
+                          'exchange-item-right':
+                            (isCurrentUser(createdBy) && createdBy === exchange.author) ||
+                            (!isCurrentUser(createdBy) && createdBy !== exchange.author),
+                        }"
+                      >
+                        <div class="d-flex align-items-start" [ngClass]="{ 'flex-row-reverse': exchange.author !== createdBy }">
+                          <div class="flex-grow-1">
+                            <div class="d-flex align-items-center mb-1" [ngClass]="{ 'justify-content-end': exchange.author !== createdBy }">
+                              @if (!isCurrentUser(exchange.author)) {
+                                <span class="exchange-author me-2">{{ exchange.author }}</span>
+                              }
+                              <span class="exchange-date">{{ exchange.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                            </div>
+                            <div class="exchange-bubble" [ngClass]="{ 'exchange-bubble-right': exchange.author === createdBy }">
+                              {{ exchange.message }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                  <div class="message-input-container mt-3 p-3 border-top" [formGroup]="messageForm">
+                    <div class="d-flex flex-row align-items-center">
+                      <app-champ-de-saisie-multiligne-seul
+                        class="flex-grow-1"
+                        [form]="messageForm.get('message')"
+                        [textareaRows]="2"
+                        [errorMessage]="'Ce champs ne peux pas rester vide !'"
+                      ></app-champ-de-saisie-multiligne-seul>
+                      <button type="button" class="btn btn-primary ms-2" (click)="saveMessage()" [disabled]="messageForm.invalid">Envoyer</button>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        }
+
+        <div
+          ngbAccordionItem="panel-faq"
+          [collapsed]="id ? status === 'draft' : false"
+          (shown)="isFaqAccordionOpen = true"
+          (hidden)="isFaqAccordionOpen = false"
+        >
+          <h2 ngbAccordionHeader>
+            <button ngbAccordionButton class="accordion-button">
+              <span class="accordion-title">
+                <i class="icon-b_edit me-2"></i>
+                Question et Réponse
+              </span>
+            </button>
+          </h2>
+          <div ngbAccordionCollapse style="padding: 1.25rem">
+            <div ngbAccordionBody>
+              <ng-template>
+                <div class="row mb-2">
+                  <div class="col-12">
+                    <app-liste-deroulante
+                      [label]="'Page (Chemin):'"
+                      [form]="form.get('path')"
+                      [options]="pathOptions"
+                      [labelColumns]="2"
+                      [inputColumns]="10"
+                      [isError]="true"
+                      [errorMessage]="form.get('path').errors?.message || form.get('path').errors"
+                    ></app-liste-deroulante>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-12">
+                    <app-champ-de-saisie
+                      [form]="form.get('question')"
+                      label="Question:"
+                      placeholder="Saisir la question ici"
+                      [labelColumns]="2"
+                      [inputColumns]="10"
+                      [isError]="true"
+                      [errorMessage]="form.get('question')?.errors?.message || 'Ce champ est requis'"
+                    ></app-champ-de-saisie>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-12">
+                    <label class="form-label">Réponse:</label>
+                    <quill-editor
+                      formControlName="answer"
+                      [modules]="quillModules"
+                      [styles]="{ height: '200px' }"
+                      class="content-editor"
+                      [placeholder]="'Saisir la réponse ici'"
+                    >
+                    </quill-editor>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      @if (isFormTouched && id && exchanges.length > 0) {
+        <div class="alert alert-warning mx-3 mt-3 mb-0" role="alert">
+          <i class="icon-b_warning me-2"></i>
+          <strong>Attention :</strong> Le remaniement de cette FAQ supprimera tous les échanges existants ({{ exchanges.length }} échange(s)).
+        </div>
+      }
+    </div>
+  </form>
+</app-popup>

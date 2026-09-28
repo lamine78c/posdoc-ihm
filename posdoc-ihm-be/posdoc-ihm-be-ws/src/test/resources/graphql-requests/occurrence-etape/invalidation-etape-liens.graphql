@@ -1,0 +1,5 @@
+mutation invalideGenEtpEtLiens($payload: InvalideGenEtpPayload) {
+    invalideGenEtpEtLiens(payload: $payload) {
+        erreur
+    }
+}

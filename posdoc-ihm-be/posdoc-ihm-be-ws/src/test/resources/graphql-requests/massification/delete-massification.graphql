@@ -1,0 +1,6 @@
+mutation deleteMassification($data: [UpdateOrDeleteMassificationInput]!) {
+    deleteMassification(data: $data) {
+        ok
+        error
+    }
+}

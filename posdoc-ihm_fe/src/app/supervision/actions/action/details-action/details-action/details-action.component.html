@@ -1,0 +1,46 @@
+<div class="popup-detail">
+  <app-popup [modalRef]="modalRef" [title]="title" [firstButton]="null" [secondButton]="null">
+    <div>
+      <table class="table table_condition" aria-describedby="table condition">
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>Utilisateur :</td>
+          <td>{{ rowData.utilisateur }}</td>
+          <td>Station :</td>
+          <td>{{ rowData.station }}</td>
+          <td rowspan="2">Date :</td>
+          <td rowspan="2">{{ insertionDate }}</td>
+        </tr>
+        <tr>
+          <td>Action :</td>
+          <td>{{ rowData.actionUtilisateur }}</td>
+          <td>Entité :</td>
+          <td colspan="3">{{ rowData.entite }}</td>
+        </tr>
+        <tr>
+          <td>Condition :</td>
+          <td colspan="5">{{ rowData.condition }}</td>
+        </tr>
+      </table>
+      <div *ngIf="detail && detail.length > 0" class="detail-action">
+        <table class="table table-striped table-bordered" aria-describedby="table action">
+          <thead>
+            <tr>
+              <th *ngFor="let colDef of columnDefs">{{ colDef.headerName }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rowDetail of detail" [ngClass]="{ 'odd-row': i % 2 === 0, 'even-row': i % 2 !== 0 }">
+              <td *ngFor="let colDef of columnDefs">{{ rowDetail[colDef.field] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </app-popup>
+</div>

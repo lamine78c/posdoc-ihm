@@ -1,0 +1,5 @@
+mutation delete($ids: [DeleteApplicationInput]!) {
+    deleteApplications(deleteApplications: { ids: $ids }) {
+        ok
+    }
+}

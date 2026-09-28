@@ -1,0 +1,12 @@
+query allExpiredNotices {
+    allExpiredNotices {
+        codnot
+        libnot
+        fornot
+        poinot
+        pornot
+        dnotir
+        perime
+        codsit
+    }
+}

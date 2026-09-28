@@ -1,0 +1,11 @@
+mutation updateServicePosdoc($var: ServicePosdocInput!){
+    updateServicePosdoc(updateService: $var){
+        id
+        libelle
+        url
+        createdAt
+        updatedAt
+        createdBy
+        updatedBy
+    }
+}

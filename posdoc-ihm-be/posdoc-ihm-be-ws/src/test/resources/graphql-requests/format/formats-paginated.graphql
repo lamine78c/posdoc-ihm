@@ -1,0 +1,12 @@
+query formats($queryParametersInputDTO: QueryParametersInput!) {
+    formats(queryParameters: $queryParametersInputDTO) {
+        totalElement
+        totalPages
+        elements {
+            ... on Format {
+                code
+                libelle
+            }
+        }
+    }
+}

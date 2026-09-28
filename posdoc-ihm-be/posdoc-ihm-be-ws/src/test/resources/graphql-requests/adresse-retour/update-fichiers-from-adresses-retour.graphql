@@ -1,0 +1,10 @@
+mutation UpdateFichiersFromAdressesRetour($var: [CreateOrUpdateFichierInputDTO]!){
+    updateFichiersFromAdressesRetour(fichiers: $var){
+        codeEnv
+        codeOrg
+        codeApp
+        codeCom
+        codeFich
+        codeAdr
+    }
+}

@@ -1,0 +1,18 @@
+mutation invaliderMassifications($massifications: [InvalidateMassificationInput!]!, $query: FindPremasInput!) {
+    invaliderMassifications(massifications: $massifications, query: $query) {
+        mascom
+        masfic
+        codsit
+        codenv
+        codorg
+        codapp
+        percod
+        codcom
+        codfic
+        numcom
+        presta
+        dprevc
+        dprevt
+        dprevi
+    }
+}

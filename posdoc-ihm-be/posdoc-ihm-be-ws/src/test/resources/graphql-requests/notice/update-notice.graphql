@@ -1,0 +1,12 @@
+mutation updateNotice($noticePayload: CreateOrUpdateNoticeInput!) {
+    updateNotice(noticePayload: $noticePayload) {
+        codnot
+        libnot
+        fornot
+        poinot
+        pornot
+        dnotir
+        perime
+        codsit
+    }
+}

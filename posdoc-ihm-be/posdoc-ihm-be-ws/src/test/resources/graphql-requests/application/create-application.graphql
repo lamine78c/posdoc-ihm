@@ -1,0 +1,12 @@
+mutation create($createApplication: CreateOrUpdateApplicationInput!) {
+    createApplication(createApplication: $createApplication) {
+        code
+        libelle
+        codeOrganisation
+        codeEnvironnement
+        codeSystem
+        codeGroupe
+        lotNumber
+        typeRefection
+    }
+}

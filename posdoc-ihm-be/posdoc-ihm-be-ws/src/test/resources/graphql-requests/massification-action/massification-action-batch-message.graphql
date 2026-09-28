@@ -1,0 +1,14 @@
+mutation MassifierFiles($data: [MassifierInput]!) {
+    massifierFiles(data: $data) {
+         utiLog {
+             codulo
+             codsta
+             codusr
+             erreur
+             formid
+             datulo
+             action
+         }
+         pdfBase64
+    }
+}

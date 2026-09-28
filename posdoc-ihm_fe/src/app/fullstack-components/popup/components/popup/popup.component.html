@@ -1,0 +1,45 @@
+<div *ngIf="!draggable">
+  <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+</div>
+
+<!-- Ajout d'une directive et d'une classe dans le cas draggable -->
+<div *ngIf="draggable" appDragPopup class="cursor-all-scroll">
+  <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+</div>
+
+<ng-template #headerTemplate>
+  <div class="modal-header d-flex align-items-baseline">
+    <div class="modal-title">{{ title }}</div>
+    <button class="close-modal" (click)="closePopup(numClose)">
+      <svg-icon [src]="'assets/icones-showcase/m_close.svg'" [svgStyle]="{ 'width.em': 1.5, 'height.em': 1.5 }"></svg-icon>
+    </button>
+  </div>
+</ng-template>
+
+<div class="modal-body">
+  <ng-content select="[toast]"></ng-content>
+  <div class="d-flex">
+    <div class="modal-icon" *ngIf="iconToDisplay">
+      <svg-icon [src]="iconToDisplay" [svgStyle]="{ 'width.em': 1, 'height.em': 1 }"></svg-icon>
+    </div>
+    <div class="modal-text-container">
+      <ng-content></ng-content>
+      <div class="custom-modal-content" *ngIf="isShowcontentTemplate">
+        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer" *ngIf="firstButton || secondButton || thirdButton">
+  <div class="button-group">
+    <button type="button" class="btn btn-outline-primary" (click)="closePopup(numThirdBtn)" *ngIf="thirdButton">
+      <i *ngIf="thirdButton.icone" class="{{ thirdButton.icone }}"></i><span>{{ thirdButton?.label }}</span>
+    </button>
+    <button type="button" class="btn btn-outline-primary" (click)="closePopup(numSecondBtn)" *ngIf="secondButton">
+      <i *ngIf="secondButton.icone" class="{{ secondButton.icone }}"></i><span>{{ secondButton.label }}</span>
+    </button>
+    <button type="button" class="btn btn-primary" (click)="save()" *ngIf="firstButton" [disabled]="!isFormValid || firstButton.isDisabled">
+      <i *ngIf="firstButton.icone" class="{{ firstButton.icone }}"></i><span>{{ firstButton.label }}</span>
+    </button>
+  </div>
+</div>

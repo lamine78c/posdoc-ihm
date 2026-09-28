@@ -1,0 +1,7 @@
+<ul>
+  <li class="nav-item" [routerLinkActive]="['active']">
+    <a class="nav-link" [ngClass]="{ active: menuLink.activated, disabled: disabled }" routerLink="{{ menuLink.route }}" data-toggle="pill">{{
+      menuLink.label
+    }}</a>
+  </li>
+</ul>

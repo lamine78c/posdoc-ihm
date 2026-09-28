@@ -1,0 +1,238 @@
+<ng-container>
+  <app-popup
+    [modalRef]="modalRef"
+    [isFormValid]="isFormValid"
+    [title]="'Modification en masse des paramètres d\'édition'"
+    [firstButton]="null"
+    [secondButton]="null"
+    (saveEvent)="updateMasseExemplaire()"
+  >
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button
+          (click)="toEditRessource()"
+          class="nav-link active"
+          id="nav-ressources-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-ressources"
+          type="button"
+          role="tab"
+          aria-controls="nav-ressources"
+          aria-selected="true"
+        >
+          Ressources
+        </button>
+        <button
+          (click)="toEditSite()"
+          class="nav-link"
+          id="nav-sites-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-sites"
+          type="button"
+          role="tab"
+          aria-controls="nav-sites"
+          aria-selected="true"
+        >
+          Sites
+        </button>
+        <button
+          (click)="toEditEtat()"
+          class="nav-link"
+          id="nav-etats-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-etats"
+          type="button"
+          role="tab"
+          aria-controls="nav-etats"
+          aria-selected="false"
+        >
+          Etats
+        </button>
+        <button
+          (click)="toEditMessage()"
+          class="nav-link"
+          id="nav-messages-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-messages"
+          type="button"
+          role="tab"
+          aria-controls="nav-messages"
+          aria-selected="false"
+        >
+          Messages
+        </button>
+      </div>
+    </nav>
+
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-ressources" role="tabpanel" aria-labelledby="nav-ressources-tab">
+        <div *ngIf="msgErrorOngletRessource" class="form row align-items-center">
+          <div class="col-auto modal-icon d-flex align-items-center">
+            <svg-icon [src]="'assets/icones-showcase/m_warning.svg'" [svgStyle]="{ 'width.em': 1, 'height.em': 1 }"></svg-icon>
+          </div>
+          <div class="col">
+            <h3 class="mb-0">{{ msgErrorOngletRessource }}</h3>
+            <ul *ngIf="adminExemplaires.length > 0">
+              <li *ngFor="let exemplaire of adminExemplaires">{{ exemplaire }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div *ngIf="showFormRessource" class="container">
+          <div class="form row">
+            <app-liste-deroulante
+              [form]="form.get('codgam')"
+              [label]="'Gamme :'"
+              [blankOptionValue]="' '"
+              [options]="gammeOptions$ | async"
+              [labelColumns]="4"
+              [inputColumns]="6"
+              [hasBlankOption]="true"
+              (change)="onGammeChange($event)"
+              [isError]="true"
+              [errorMessage]="form.get('codgam').errors?.message || form.get('codgam').errors"
+            ></app-liste-deroulante>
+          </div>
+
+          <div class="form row">
+            <app-liste-deroulante
+              [form]="form.get('codres')"
+              [label]="'Ressource :'"
+              [blankOptionValue]="' '"
+              [options]="ressourceOptions$ | async"
+              [labelColumns]="4"
+              [inputColumns]="6"
+              [hasBlankOption]="true"
+              [isError]="true"
+              [errorMessage]="form.get('codres').errors?.message || form.get('codres').errors"
+            ></app-liste-deroulante>
+          </div>
+
+          <div class="form row">
+            <app-liste-deroulante
+              [form]="form.get('coddes')"
+              [label]="'Destinataire :'"
+              [blankOptionValue]="' '"
+              [options]="destinataireOptions$ | async"
+              [labelColumns]="4"
+              [inputColumns]="6"
+              [hasBlankOption]="true"
+              [isError]="true"
+              [errorMessage]="form.get('coddes').errors?.message || form.get('coddes').errors"
+            ></app-liste-deroulante>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-sites" role="tabpanel" aria-labelledby="nav-sites-tab">
+        <div *ngIf="msgErrorOngletSite" class="form row align-items-center">
+          <div class="col-auto modal-icon d-flex align-items-center">
+            <svg-icon [src]="'assets/icones-showcase/m_warning.svg'" [svgStyle]="{ 'width.em': 1, 'height.em': 1 }"></svg-icon>
+          </div>
+          <div class="col">
+            <h3 class="mb-0">{{ msgErrorOngletSite }}</h3>
+            <ul *ngIf="adminExemplaires.length > 0">
+              <li *ngFor="let exemplaire of adminExemplaires">{{ exemplaire }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div *ngIf="showFormSite" class="form row">
+          <app-liste-deroulante
+            [form]="formSite.get('site')"
+            [label]="'Site :'"
+            [blankOptionValue]="' '"
+            [options]="siteOptions$ | async"
+            [labelColumns]="4"
+            [inputColumns]="6"
+            [hasBlankOption]="true"
+            [isError]="true"
+            [errorMessage]="formSite.get('site').errors?.message || formSite.get('site').errors"
+          ></app-liste-deroulante>
+        </div>
+        <div *ngIf="errorFormSite" class="errorForm">{{ msgErrorFormSite }}</div>
+      </div>
+
+      <div class="tab-pane fade" id="nav-etats" role="tabpanel" aria-labelledby="nav-etats-tab">
+        <div *ngIf="msgErrorOngletEtat" class="form row align-items-center">
+          <div class="col-auto modal-icon d-flex align-items-center">
+            <svg-icon [src]="'assets/icones-showcase/m_warning.svg'" [svgStyle]="{ 'width.em': 1, 'height.em': 1 }"></svg-icon>
+          </div>
+          <div class="col">
+            <h3 class="mb-0">{{ msgErrorOngletEtat }}</h3>
+            <ul *ngIf="adminExemplaires.length > 0">
+              <li *ngFor="let exemplaire of adminExemplaires">{{ exemplaire }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div *ngIf="showFormEtat" class="form row">
+          <app-interrupteur-simple
+            [label]="'Etat: '"
+            [form]="formEtat.get('etat')"
+            [labelColumns]="4"
+            [inputColumns]="8"
+            [isError]="true"
+            [errorMessage]="formEtat.get('etat').errors?.message || formEtat.get('etat').errors"
+          ></app-interrupteur-simple>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="nav-messages" role="tabpanel" aria-labelledby="nav-messages-tab">
+        <div *ngIf="msgErrorOngletMessage" class="form row align-items-center">
+          <div class="col-auto modal-icon d-flex align-items-center">
+            <svg-icon [src]="'assets/icones-showcase/m_warning.svg'" [svgStyle]="{ 'width.em': 1, 'height.em': 1 }"></svg-icon>
+          </div>
+          <div class="col">
+            <h3 class="mb-0">{{ msgErrorOngletMessage }}</h3>
+          </div>
+        </div>
+
+        <div *ngIf="showFormMessage" class="form row">
+          <app-champ-de-saisie
+            [label]="'Message: '"
+            [form]="formMessage.get('ficatt')"
+            [labelColumns]="4"
+            [inputColumns]="8"
+            [isError]="true"
+            [errorMessage]="formMessage.get('ficatt').errors?.message || formMessage.get('ficatt').errors"
+          ></app-champ-de-saisie>
+        </div>
+      </div>
+    </div>
+  </app-popup>
+  <div class="modal-footer">
+    <div class="button-group">
+      <button type="button" class="btn btn-outline-primary" (click)="closePopup()" *ngIf="secondButton">
+        <i *ngIf="secondButton.icone" class="{{ secondButton.icone }}" aria-hidden="true"></i><span>{{ secondButton.label }}</span>
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="updateMasseExemplaire()"
+        *ngIf="isOngletRessourceActif && firstButton && showFormRessource"
+        [disabled]="!form.valid"
+      >
+        <i *ngIf="firstButton.icone" class="{{ firstButton.icone }}" aria-hidden="true"></i><span>{{ firstButton.label }}</span>
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="updateSite()"
+        *ngIf="isOngletSiteActif && firstButton && showFormSite"
+        [disabled]="!formSite.valid"
+      >
+        <i *ngIf="firstButton.icone" class="{{ firstButton.icone }}" aria-hidden="true"></i><span>{{ firstButton.label }}</span>
+      </button>
+
+      <button type="button" class="btn btn-primary" (click)="updateEtat()" *ngIf="isOngletEtatActif && firstButton && showFormEtat">
+        <i *ngIf="firstButton.icone" class="{{ firstButton.icone }}" aria-hidden="true"></i><span>{{ firstButton.label }}</span>
+      </button>
+
+      <button type="button" class="btn btn-primary" (click)="updateMessage()" *ngIf="isOngletMessageActif && firstButton && showFormMessage">
+        <i *ngIf="firstButton.icone" class="{{ firstButton.icone }}" aria-hidden="true"></i><span>{{ firstButton.label }}</span>
+      </button>
+    </div>
+  </div>
+</ng-container>

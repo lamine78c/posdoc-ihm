@@ -1,0 +1,2 @@
+DELETE FROM Params;
+DELETE FROM utilog;

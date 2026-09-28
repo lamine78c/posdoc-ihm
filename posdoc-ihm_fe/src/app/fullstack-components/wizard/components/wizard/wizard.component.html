@@ -1,0 +1,51 @@
+<div class="wizard">
+  <!-- Icône de navigation -->
+  <div class="navigation-icon-container" *ngIf="!disableLeftNavigation || !disableRightNavigation || alwaysDisplayNavigation">
+    <div
+      class="navigation-icon"
+      [ngClass]="{ disabled: disableLeftNavigation }"
+      (click)="scrollLeft()"
+      tabindex="0"
+      (keyup.enter)="scrollLeft()"
+      title="Naviguer à gauche"
+    >
+      <i class="icon-b_left" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div #scrollContainer class="scroll-container">
+    <div
+      app-wizard-step
+      (keyup.enter)="onStepClicked(index + 1, wizardStep)"
+      (click)="onStepClicked(index + 1, wizardStep)"
+      *ngFor="let wizardStep of wizard; let index = index"
+      class="steps"
+      [ngClass]="{
+        active: active === index + 1,
+        'next-step': (index + 1 > active || (wizardStep.disableClick && index + 1 < active)) && !visited.includes(index + 1),
+        'cursor-pointer': (index + 1 < active && !wizardStep.disableClick) || visited.includes(index + 1),
+      }"
+      [ngStyle]="{ 'z-index': wizard.length - index }"
+      [style]="'--step-width:' + stepWidth + 'px'"
+      [number]="index + 1"
+      [wizardStep]="wizardStep"
+      [stepWidth]="stepWidth"
+      [active]="active"
+      [visited]="visited.includes(index + 1)"
+    ></div>
+  </div>
+
+  <!-- Icône de navigation -->
+  <div class="navigation-icon-container" *ngIf="!disableLeftNavigation || !disableRightNavigation || alwaysDisplayNavigation">
+    <div
+      class="navigation-icon"
+      [ngClass]="{ disabled: disableRightNavigation }"
+      (click)="scrollRight()"
+      tabindex="0"
+      (keyup.enter)="scrollRight()"
+      title="Naviguer à droite"
+    >
+      <i class="icon-b_right" aria-hidden="true"></i>
+    </div>
+  </div>
+</div>

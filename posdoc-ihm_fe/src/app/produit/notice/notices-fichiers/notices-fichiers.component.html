@@ -1,0 +1,27 @@
+<div class="global-content">
+  <div class="normal-content">
+    <app-search-affectation-notice [isNotFic]="true" (applySearchEvent)="lister($event)"></app-search-affectation-notice>
+  </div>
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Total articles :
+      <div class="badge badge-info badge-ml">{{ totalNotices }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="false"
+      [enableExportButtons]="false"
+      [enableAddButton]="false"
+      [canAddPerm]="false"
+      [canRemovePerm]="false"
+      [enableFullEdit]="false"
+      [asynchronousErrors$]="asynchronousErrors$"
+      (gridReady)="onGridReady($event)"
+    ></app-tableau>
+  </div>
+</div>

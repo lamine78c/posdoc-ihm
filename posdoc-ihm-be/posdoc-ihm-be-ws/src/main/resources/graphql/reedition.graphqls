@@ -1,0 +1,16 @@
+extend type Query {
+    checkIfGenEtpExists(query: GenEtpExistsQuery): Boolean
+}
+
+input GenEtpExistsQuery {
+    codenv: String!
+    codorg: String!
+    codapp: String!
+    percod: String!
+    codcom: String!
+    codfic: String!
+    numcom: String!
+    codsit: String!
+    codres: String!
+    codgam: String!
+}

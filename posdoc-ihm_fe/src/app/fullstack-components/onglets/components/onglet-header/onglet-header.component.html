@@ -1,0 +1,60 @@
+<ng-container *ngIf="type === ongletTypeEnum.PREMIER_NIVEAU">
+  <ng-template [ngTemplateOutlet]="icones"></ng-template>
+  <div class="nav-tabs-close-icon close-position-fix" *ngIf="tab.canClose" (click)="close($event)">
+    <svg-icon [src]="'assets/icones-showcase/m_close.svg'" [svgStyle]="{ 'width.em': 1.538, 'height.em': 1.538, fill: '#000' }"></svg-icon>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="type === ongletTypeEnum.PREMIER_NIVEAU_ICONE">
+  <div class="label-icon">
+    <svg-icon [src]="tab.icon" [svgStyle]="{ 'height.em': 1.2, fill: active === index ? '#000' : '#2462BC' }"></svg-icon>
+  </div>
+  <div class="label-container">
+    <div>{{ tab.label }}</div>
+    <div class="sub-label">{{ tab.subLabel }}</div>
+  </div>
+  <div class="nav-tabs-close-icon" *ngIf="tab.canClose" (click)="close($event)">
+    <svg-icon
+      [src]="'assets/icones-showcase/m_close.svg'"
+      [svgStyle]="{ 'width.em': 1.538, 'height.em': 1.538, fill: active === index ? '#000' : '#2462BC' }"
+    ></svg-icon>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="type === ongletTypeEnum.DEUXIEME_NIVEAU">
+  <div class="d-block">
+    <div class="nav-tab-title d-flex">
+      <ng-template [ngTemplateOutlet]="icones"></ng-template>
+      <div class="nav-tabs-close-icon close-position-fix" *ngIf="tab.canClose" (click)="close($event)">
+        <svg-icon [src]="'assets/icones-showcase/m_close.svg'" [svgStyle]="{ 'width.em': 1.538, 'height.em': 1.538, fill: '#000' }"></svg-icon>
+      </div>
+    </div>
+    <div class="nav-tab-line"></div>
+  </div>
+</ng-container>
+
+<!-- Template utilisé plus haut -->
+<ng-template #icones>
+  <svg-icon
+    *ngIf="tab.iconBefore"
+    class="nav-icon-before"
+    [src]="tab.iconBefore"
+    [svgStyle]="{ 'width.em': 1.313, 'height.em': 1.313 }"
+    ngbPopover="{{ tab.infobulle }}"
+    tabindex="{{ tab.infobulle ? '0' : '-1' }}"
+    triggers="mouseenter:mouseleave focus"
+  ></svg-icon>
+  {{ tab.label }}
+  <div class="nav-badge" *ngIf="tab.badgeValue" aria-hidden="true">
+    <div class="badge {{ tab.badge }}">{{ tab.badgeValue }}</div>
+  </div>
+  <svg-icon
+    *ngIf="tab.iconAfter"
+    class="nav-icon"
+    [src]="tab.iconAfter"
+    [svgStyle]="{ 'width.em': 1.313, 'height.em': 1.313 }"
+    ngbPopover="{{ tab.infobulle }}"
+    tabindex="{{ tab.infobulle ? '0' : '-1' }}"
+    triggers="mouseenter:mouseleave focus"
+  ></svg-icon>
+</ng-template>

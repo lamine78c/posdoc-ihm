@@ -1,0 +1,12 @@
+query multifs($queryParametersInputDTO: QueryParametersInput!) {
+    multifs(queryParameters: $queryParametersInputDTO) {
+        totalElement
+        totalPages
+        elements {
+            ... on Multif {
+                code
+                libelle
+            }
+        }
+    }
+}

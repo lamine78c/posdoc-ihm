@@ -1,0 +1,3 @@
+query getOrgByEnvAppComFics($query: SearchOrgByEnvAppComFicsQuery) {
+    getOrgByEnvAppComFics(query: $query)
+}

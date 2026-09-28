@@ -1,0 +1,7 @@
+mutation deleteNoticePdf($codnot: String!) {
+    deleteNoticePdf(codnot: $codnot) {
+        codnot
+        libnot
+        fornot
+    }
+}

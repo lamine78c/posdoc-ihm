@@ -1,0 +1,10 @@
+mutation UpdateServer($var: UpdateServerInput!){
+    updateServer(updateServer: $var){
+        code
+        systeme
+        libelle
+        adresseIp
+        teste
+        actif
+    }
+}

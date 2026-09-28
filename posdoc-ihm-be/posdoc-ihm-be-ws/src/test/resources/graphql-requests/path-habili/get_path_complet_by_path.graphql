@@ -1,0 +1,3 @@
+query getPathCompletByPath($path: String!) {
+    getPathCompletByPath(path: $path)
+}

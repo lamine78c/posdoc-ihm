@@ -1,0 +1,80 @@
+<div class="ps-2">
+  <form [formGroup]="form">
+    <div class="row row-with-border">
+      <div class="col-4 select-multi">
+        <app-liste-deroulante
+          [label]="'Application *'"
+          [labelWidth]="'120'"
+          [vertical]="true"
+          [form]="form.get('application')"
+          [isError]="true"
+          [options]="applicationOptions"
+          [labelColumns]="8"
+          [inputColumns]="8"
+          [errorMessage]="form.get('application').errors?.message || form.get('application').errors"
+          (changeEvent)="changeApplication($event)"
+        ></app-liste-deroulante>
+      </div>
+    </div>
+    <div class="row pt-4 row-with-border">
+      <div class="col-4 select-multi">
+        <app-liste-deroulante-multiple
+          [form]="form.get('environnement')"
+          [label]="'Environnements *'"
+          [labelColumns]="8"
+          [inputColumns]="8"
+          [vertical]="true"
+          [isError]="true"
+          [isWithValidAndRAZBtn]="false"
+          [errorMessage]="form.get('environnement').errors?.message || form.get('environnement').errors"
+          (changeEvent)="changeEnvironnement($event)"
+        ></app-liste-deroulante-multiple>
+      </div>
+      <div class="col-4">
+        <app-liste-deroulante
+          [label]="'Commande *'"
+          [form]="form.get('commande')"
+          [isError]="true"
+          [options]="commandeOptions"
+          [vertical]="true"
+          [labelColumns]="8"
+          [inputColumns]="8"
+          [hasBlankOption]="false"
+          [errorMessage]="form.get('commande').errors?.message || form.get('commande').errors"
+        ></app-liste-deroulante>
+      </div>
+      <div class="col-4">
+        <app-champ-de-saisie
+          [label]="'Nom fichier *'"
+          [index]="1"
+          [vertical]="true"
+          [toUpperCase]="true"
+          [form]="form.get('fichier')"
+          [labelColumns]="8"
+          [inputColumns]="8"
+          [isError]="true"
+          [errorMessage]="form.get('fichier').errors?.message || form.get('fichier').errors"
+        >
+        </app-champ-de-saisie>
+      </div>
+    </div>
+    <div class="row pt-4 pb-4">
+      <div class="col-12 select-multi">
+        <app-liste-deroulante-hierarchisee
+          [form]="form.get('organisme')"
+          [label]="'Organismes *'"
+          [labelColumns]="8"
+          [inputColumns]="8"
+          [vertical]="true"
+          [isError]="true"
+          [isWithValidAndRAZBtn]="false"
+          [errorMessage]="form.get('organisme').errors?.message || form.get('organisme').errors"
+        ></app-liste-deroulante-hierarchisee>
+        <div *ngIf="noOrganismFound" class="text-warning mt-1">
+          <i class="icon-warning me-1" aria-hidden="true"></i>
+          La création du fichier est impossible, car il est déjà disponible pour tous les organismes.
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

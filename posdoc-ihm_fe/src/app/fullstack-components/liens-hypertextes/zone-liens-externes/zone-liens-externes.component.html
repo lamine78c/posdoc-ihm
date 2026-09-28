@@ -1,0 +1,7 @@
+<div class="zone-liens-externes">
+  <ul *ngFor="let chunk of linksInChunks">
+    <li *ngFor="let link of chunk">
+      <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.name }}</a>
+    </li>
+  </ul>
+</div>

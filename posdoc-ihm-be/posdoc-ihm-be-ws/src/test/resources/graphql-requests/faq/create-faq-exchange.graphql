@@ -1,0 +1,20 @@
+mutation createFaqExchange($createFaqExchange: CreateFaqExchangeInputDTO!) {
+    createFaqExchange(createFaqExchange: $createFaqExchange) {
+        id
+        path
+        question
+        answer
+        status
+        viewCount
+        createdBy
+        updatedBy
+        createdAt
+        updatedAt
+        exchanges {
+            id
+            author
+            message
+            createdAt
+        }
+    }
+}

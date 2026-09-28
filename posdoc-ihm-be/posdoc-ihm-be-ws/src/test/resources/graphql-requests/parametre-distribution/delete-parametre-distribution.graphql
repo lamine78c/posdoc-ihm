@@ -1,0 +1,5 @@
+mutation DeleteParametreDistributions($var: DeleteByArrayStringIdInput!){
+    deleteParametreDistributions(deleteParametreDistributions: $var){
+        ok
+    }
+}

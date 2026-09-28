@@ -1,0 +1,6 @@
+<div class="d-flex" *ngIf="!fullScreen">
+  <div class="loader"></div>
+  <div *ngIf="text" class="loader-text my-auto">{{ text }}</div>
+</div>
+
+<div class="loader loader-full-screen" *ngIf="fullScreen"></div>

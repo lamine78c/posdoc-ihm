@@ -1,0 +1,5 @@
+mutation deleteFichiers($deleteFichiers: [CreateOrUpdateFichierInputDTO]!) {
+  deleteFichiers(deleteFichiers: $deleteFichiers) {
+    ok
+  }
+}

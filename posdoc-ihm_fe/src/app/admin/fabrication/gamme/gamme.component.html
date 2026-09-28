@@ -1,0 +1,28 @@
+<div class="global-content">
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Liste des gammes
+      <div class="badge badge-info ml-1 mt-auto">{{ nombreGammeTotal }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="true"
+      [enableAddButton]="addType"
+      [enableFullEdit]="false"
+      [enableExportButtons]="true"
+      [canAddPerm]="canAddPermPosition"
+      [canRemovePerm]="canRemovePermPosition"
+      [asynchronousErrors$]="asynchronousErrors$"
+      (gridReady)="onGridReady($event)"
+      (saveEdition)="onSaveEdition($event)"
+      (deleteRows)="onDeleteRow($event)"
+      (exportAsPDF)="export($event)"
+      (exportAsExcel)="export($event)"
+    ></app-tableau>
+  </div>
+</div>

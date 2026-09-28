@@ -1,0 +1,5 @@
+mutation MyQuery($var: DeleteByStringIdInput!){
+    deleteSiteOrganisme(deleteSiteOrganisme: $var){
+        ok
+    }
+}

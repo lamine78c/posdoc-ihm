@@ -1,0 +1,16 @@
+:host ::ng-deep .label-valeur {
+  margin-top: 0rem; // 7px
+}
+
+.checkbox-eclatement {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  padding-left: 23px;
+}
+
+:host ::ng-deep .icon-error,
+:host ::ng-deep .icon-warning {
+  left: auto;
+  right: 0.5rem;
+}

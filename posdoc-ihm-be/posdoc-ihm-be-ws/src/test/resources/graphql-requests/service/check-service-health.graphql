@@ -1,0 +1,3 @@
+query checkServiceHealth($url: String!) {
+    checkServiceHealth(url: $url)
+}

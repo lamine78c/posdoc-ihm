@@ -1,0 +1,15 @@
+::ng-deep .organisme-client-modal {
+  .modal-dialog {
+    min-width: 26rem;
+    width: 26rem;
+  }
+
+  .modal-footer {
+    padding-left: 1.571rem;
+  }
+
+  .formOrgCli {
+    max-height: 406px;
+    overflow-y: auto;
+  }
+}

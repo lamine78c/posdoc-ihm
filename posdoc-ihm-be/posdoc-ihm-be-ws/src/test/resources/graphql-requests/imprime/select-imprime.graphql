@@ -1,0 +1,26 @@
+query Query  ($page: Int!, $size: Int!, $sort:[SortInput]!, $criteria: [FilterCriterionInput]!) {
+    imprimes : imprimes(queryParameters: {
+        paginationParameters: {
+            page: $page
+            size: $size
+            sort: $sort
+        }
+        filterCriteria: {
+            criteria: $criteria
+        }
+
+    }) {
+        totalElement
+        totalPages
+        elements {
+            ... on Imprime {
+                reference
+                libelle
+                codeRND
+                typeComposition
+                typeCouleur
+                rectoVerso
+            }
+        }
+    }
+}

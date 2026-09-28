@@ -1,0 +1,176 @@
+graphql:
+  servlet:
+    mapping: /api/v1
+    enabled: true
+    corsEnabled: true
+    contextSetting: PER_REQUEST_WITH_INSTRUMENTATION
+    websocket.enabled: false
+
+graphiql:
+  mapping: /graphiql
+  endpoint:
+    graphql: /api/v1
+    subscriptions: /subscriptions
+  subscriptions:
+    timeout: 30
+    reconnect: false
+  static:
+    basePath: /
+  enabled: true
+  pageTitle: GraphiQL
+  cdn:
+    enabled: false
+    version: 0.13.0
+  props:
+    resources:
+      query: simple-query.graphql
+      defaultQuery: simple-query.graphql
+    #      variables: variables.graphql
+    variables:
+      editorTheme: "solarized light"
+
+prisme:
+  security:
+    #Activation du filtre de sécurité prisme
+    #defaut ->  enabled: "true"
+    enabled: "@POSDOC.PRISME_ACTIF@"
+    prisme-http-header: "Authorization"
+
+spring:
+  main:
+      banner-mode: log
+  profiles:
+    # Valeurs possibles :
+    #   verbose → logs INFO + requêtes SQL (sans valeur des paramètres)
+    #   quiet   → WARN et ERROR uniquement
+    #POSDOC.POSDOC_SPRING_PROFILE
+    active: quiet
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  # La DataSource @Primary est fournie par DataSourceRoutingJndiConfiguration
+  # quand posdoc.datasource.mode == "jndi" (défaut sur INT/PRE/PROD).
+  datasource: {}
+
+logging:
+  level:
+    root: WARN 
+    fr.acoss.posdoc: INFO 
+    org.springframework.boot.web.servlet.context: INFO
+
+management:
+  endpoints:
+    web:
+      base-path: "/"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+adelaide-server:
+  #Host du serveur adelaide
+  host: "@POSDOC.POSDOC_IHM_ADELAIDE_SERVER_HOST@"
+  #Port du service adelaide
+  port: "@POSDOC.POSDOC_IHM_ADELAIDE_SERVER_PORT@"
+  #Chemin d'export du serveur adelaide
+  export-path: "/Export"
+
+bon-travail:
+  #Chemin de stockage des fichiers de bon de travail
+  #directory:
+  directory: "@POSDOC.POSDOC_IHM_BON_TRAVAIL_DIR@"
+
+notices:
+  #Chemin de stockage des fichiers notices
+  directory: "@POSDOC.POSDOC_IHM_NOTICE_DIR@"
+  #directory: "/hawai/data/partage/posdoc/notices/"
+  #Valeur par défaut 5MB
+  file:
+    max-size: "@POSDOC.POSDOC_IHM_FILE_MAX_SIZE@"
+    #max-size: 5MB
+# Taille max des resultats pour une requete
+query:
+  results:
+    max-size: 200000
+
+anais:
+  wsdl-url: ""
+  namespace: ""
+  username: ""
+  password: ""
+  enrich-user-names: false
+
+posdoc:
+  datasource:
+    # mode = jndi  → DataSourceRoutingJndiConfiguration s'active (cf. context.xml Tomcat)
+    # mode = direct → DataSourceRoutingDevConfiguration s'active (2 pools HikariCP, profil dev)
+    # mode absent  → auto-config Spring Boot mono-DataSource (profil test H2)
+    mode: jndi
+    write:
+      jndi-name: "java:comp/env/posdocRWDS"
+    read:
+      jndi-name: "java:comp/env/posdocRODS"
+
+  bilan:
+    # Répertoire d'archivage des fichiers PDF de bilan (massification et simulation)
+    # Si vide ou non configuré, les PDFs ne seront pas archivés
+    # Si le répertoire n'existe pas, il sera créé automatiquement
+    archive-directory: "@POSDOC.POSDOC_IHM_BILAN_ARCHIVE_DIR@"
+    #archive-directory: "/hawai/data/partage/posdoc/bilans/"
+
+    # Durée de rétention des bilans en jours (par défaut: 90 jours = 3 mois)
+    retention-days: 90
+
+    # Configuration de la purge automatique des bilans obsolètes
+    purge:
+      # Active/désactive la purge automatique (par défaut: true)
+      #enabled: true
+      enabled: "@POSDOC.POSDOC_IHM_PURGE_BILAN_ENABLE@"
+
+      # Expression cron pour la planification de la purge
+      # Format: seconde minute heure jour mois jour_semaine
+      # Tous les dimanches à 1h00 du matin
+      #cron: "0 0 1 * * 0"
+      cron: "@POSDOC.POSDOC_IHM_PURGE_BILAN_CRON@"
+
+      # Mode dry-run: si true, affiche les fichiers qui seraient supprimés sans les supprimer réellement
+      # Utile pour tester la configuration (par défaut: false)
+      dry-run: false
+
+  bontravail:
+    #Chemin de stockage des fichiers de bon de travail
+    #archive-directory: /hawai/data/partage/posdoc/bonTravail
+    archive-directory: "@POSDOC.POSDOC_IHM_BON_TRAVAIL_DIR@"
+    retention-days: 90
+    purge:
+      #enabled: true
+      enabled: "@POSDOC.POSDOC_IHM_PURGE_BON_TRAVAIL_ENABLE@"
+      # Mode dry-run: si true, affiche les fichiers qui seraient supprimés sans les supprimer réellement
+      # Utile pour tester la configuration (par défaut: false)
+      dry-run: false
+      lock-retention-days: 1
+      # Expression cron pour la planification de la purge
+      # Format: seconde minute heure jour mois jour_semaine
+      # Tous les dimanches à 2h00 du matin
+      # cron: "0 0 2 * * 0"
+      cron: "@POSDOC.POSDOC_IHM_PURGE_BON_TRAVAIL_CRON@"
+
+
+scheduler:
+  log:
+    purge:
+      # lancer chaque dimanche à 00:30 et 01:30
+      cron: "0 30 0,1 * * SUN"
+      retention-days-utilog: 366
+      retention-days-myslog: 366
+      retention-days-lock: 1
+      batch-size: 30000

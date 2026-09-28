@@ -1,0 +1,3 @@
+query searchCountForSuiviMassification($suiviMassificationPayload: SuiviMassificationPayload!) {
+    searchCountForSuiviMassification(suiviMassificationPayload: $suiviMassificationPayload)
+}

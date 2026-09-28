@@ -1,0 +1,20 @@
+@use 'src/scss/variables' as *;
+
+mat-toolbar {
+  height: 36px;
+  // background-color: $light-gray;
+  display: flex;
+  color: $light-blue;
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+
+  a {
+    height: 20px;
+    color: $light-blue;
+    font-weight: lighter;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,14 @@
+<div class="arborescence-children">
+  <div class="form-check position-relative" *ngFor="let item of formGroup['controls'] | keyvalue; let index = index; let last = last">
+    <div class="tree-container" [ngClass]="{ 'subtree-container': !!parentsIndexes, 'pt-0': !parentsIndexes && index === 0 }">
+      <app-arborescence-collapse
+        [tree]="tree"
+        [parentsIndexes]="parentsIndexes"
+        [index]="index"
+        [formGroup]="formGroup"
+        [useCheckboxes]="useCheckboxes"
+        (output)="outputFn($event)"
+      ></app-arborescence-collapse>
+    </div>
+  </div>
+</div>

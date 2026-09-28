@@ -1,0 +1,10 @@
+mutation CreateRegion($var: CreateOrUpdateRegionInput!, $var2: CreateOrUpdateRegionInput!){
+    create1: createRegion(createRegion: $var){
+        code
+        libelle
+    }
+    create2: createRegion(createRegion: $var2){
+        code
+        libelle
+    }
+}

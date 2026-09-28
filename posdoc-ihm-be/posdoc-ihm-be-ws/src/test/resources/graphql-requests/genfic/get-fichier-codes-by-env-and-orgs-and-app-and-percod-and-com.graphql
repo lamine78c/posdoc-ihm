@@ -1,0 +1,3 @@
+query GetFichierFromGenficWithApp($codenv: String, $codorg: [String], $codapp: String, $periode: String, $commande: String) {
+    getFichierFromGenficWithApp(codenv: $codenv, codorg: $codorg, codapp: $codapp, periode: $periode, commande: $commande)
+}

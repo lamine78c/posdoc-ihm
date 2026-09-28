@@ -1,0 +1,5 @@
+query findCodeAppByEnvOrgs($codenv: String, $codorgs: [String]) {
+    findCodeAppByEnvOrgs(codenv: $codenv, codorgs: $codorgs) {
+        code
+    }
+}

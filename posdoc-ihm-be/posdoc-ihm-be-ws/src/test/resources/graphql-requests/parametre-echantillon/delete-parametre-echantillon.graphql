@@ -1,0 +1,5 @@
+mutation DeleteParametreEchantillons($var: DeleteByArrayStringIdInput!){
+    deleteParametreEchantillons(deleteParametreEchantillons: $var){
+        ok
+    }
+}

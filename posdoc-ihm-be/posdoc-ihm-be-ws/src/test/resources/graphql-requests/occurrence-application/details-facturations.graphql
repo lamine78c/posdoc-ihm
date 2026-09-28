@@ -1,0 +1,17 @@
+query getDetailsFacturation($paramData: ParamDataFacturationInput!) {
+    getDetailsFacturation(paramData: $paramData) {
+        codcom
+        codfic
+        numcom
+        codprd
+        codcli
+        typtar
+        nbplis
+        coutot
+        dfiexp
+        codenv
+        codorg
+        codapp
+        percod
+    }
+}

@@ -1,0 +1,12 @@
+DELETE FROM genfic;
+DELETE FROM gentar;
+DELETE FROM hisfic;
+DELETE FROM histar;
+DELETE FROM organi;
+DELETE FROM tarpos;
+DELETE FROM tarifs;
+DELETE FROM enviro;
+DELETE FROM applis;
+DELETE FROM genmas;
+DELETE FROM params;
+DELETE FROM hisapp;

@@ -1,0 +1,35 @@
+.popup_detail {
+  width: 1500px;
+  height: 660px;
+}
+
+.popup-tableau {
+  width: 100%;
+  height: 430px;
+}
+
+.pl-1 {
+  padding-left: 0.75rem;
+}
+
+@media (min-width: 1920px) {
+  .popup_detail {
+    width: 1800px;
+    height: 800px;
+  }
+
+  .popup-tableau {
+    height: 570px;
+  }
+}
+// Pour les écrans de résolution moins de 14 pouces
+@media (max-width: 1300px) {
+  .popup_detail {
+    width: 1200px;
+    height: 570px;
+  }
+
+  .popup-tableau {
+    height: 350px;
+  }
+}

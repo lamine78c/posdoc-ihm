@@ -1,0 +1,17 @@
+<div class="form row d-flex">
+  <label class="col-{{ labelColumns }} col-form-label" [ngStyle]="{ width: labelWidth + 'px' }" [ngClass]="{ 'col-form-label-fix': labelWidth }">
+    {{ label }}
+  </label>
+  <div
+    #valeurElement
+    class="col-{{ inputColumns }} label-valeur overflow-ellipsis"
+    [ngbPopover]="valeur"
+    container="body"
+    [disablePopover]="!enableTooltip"
+    triggers="mouseenter:mouseleave focus"
+    tabindex="{{ enableTooltip ? 0 : -1 }}"
+    [ngStyle]="fillInput && { width: 'calc(100% - ' + labelWidth + 'px)' }"
+  >
+    {{ valeur }}
+  </div>
+</div>

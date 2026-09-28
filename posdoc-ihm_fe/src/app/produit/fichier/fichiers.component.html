@@ -1,0 +1,44 @@
+<div class="global-content">
+  <div class="normal-content">
+    <app-preselection
+      [form]="formPreselection"
+      [applicationOptions]="applicationOptions"
+      [commandeOptions]="commandeOptions"
+      [fichierOptions]="fichierOptions"
+      [isEnvOptionsInitialized]="isEnvOptionsInitialized"
+      [isOrgOptionsInitialized]="isOrgOptionsInitialized"
+      (organismeChangeEvent)="onChangeOrganisme($event)"
+      (validerEvent)="validerPreselection()"
+    >
+    </app-preselection>
+  </div>
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Liste des fichiers
+      <div class="badge badge-info ml-1 mt-auto">{{ nombreFichierTotal }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="noDataMessage"
+      [pagination]="true"
+      [enableExportButtons]="true"
+      [canAddPerm]="canAddPermPosition"
+      [canEditPerm]="canEditPermPosition"
+      [canRemovePerm]="canRemovePermPosition"
+      [enableAddButton]="addType"
+      [asynchronousErrors$]="asynchronousErrors$"
+      [editGroupButton]="true"
+      (addEvent)="addModal()"
+      (gridReady)="onGridReady($event)"
+      (saveEdition)="updateFichier($event)"
+      (deleteRows)="onDeleteRow($event)"
+      (updateRows)="openUpdateRowsPopup($event)"
+      (exportAsPDF)="export($event)"
+      (exportAsExcel)="export($event)"
+    ></app-tableau>
+  </div>
+</div>

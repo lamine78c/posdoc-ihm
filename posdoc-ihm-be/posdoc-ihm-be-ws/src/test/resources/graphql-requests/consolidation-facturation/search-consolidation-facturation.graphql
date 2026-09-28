@@ -1,0 +1,25 @@
+query SearchConsolidationFacturation($query: SearchConsolidationFacturationQuery) {
+    searchConsolidationFacturation(query: $query) {
+        consolidationFacturationList {
+            codenv
+            codorg
+            codapp
+            percod
+            codcom
+            codfic
+            numcom
+            codprd
+            codcli
+            codsit
+            plific
+            coufic
+            dfiexp
+            tarifs {
+                codeTar
+                plis
+                cout
+            }
+        }
+        message
+    }
+}

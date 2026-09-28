@@ -1,0 +1,40 @@
+version: '3.2'
+
+services:
+  postgres:
+    container_name: postgres_posdoc
+    image: postgres:11.4
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4:4.17
+    environment:
+      PGADMIN_DEFAULT_EMAIL: posdoc
+      PGADMIN_DEFAULT_PASSWORD: mysecretpassword
+      PGADMIN_LISTEN_PORT: 5050
+    volumes:
+      - pgadmin:/root/.pgadmin
+    ports:
+      - "5050:5050"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:

@@ -1,0 +1,5 @@
+mutation DeleteGamme($var: DeleteByStringIdInput!){
+    deleteGamme(deleteGamme: $var){
+        ok
+    }
+}

@@ -1,0 +1,222 @@
+/* ==========================================================================
+== theme ag-grid (theme évolué, css déplacé dans src/styles)
+========================================================================== */
+@import "./ag-grid.css";
+@import "./ag-theme-blue.css";
+
+.ag-theme-blue {
+  font: 400 13px "Segoe UI", sans-serif;
+}
+
+.ag-header-viewport {
+  background-color: #5A76B7;
+  color: white;
+}
+
+.ag-font-style {
+  user-select: text !important;
+  font-size: 13px;
+  font-family: 'Segoe UI', 'Arial', sans-serif !important;
+}
+
+.ag-floating-filter-input {
+  border-style: none;
+}
+
+.ag-header-cell-text {
+  padding-right: 3px;
+}
+
+// Styles pour les icônes pour tirer les colonnes
+.ag-icon-none {
+  //background: url("~/assets/icons/tableau/sort_none.png") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size:  14px 14px !important;
+  height: 13px;
+  width: 13px;
+  position: absolute;
+  right: 6px;
+  margin-left: 5px !important;
+  bottom: 7px;
+}
+
+.ag-icon-asc {
+ // background: url("~/assets/icons/tableau/sort_up.png") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size:  14px 14px !important;
+  height: 13px;
+  width: 13px;
+  position: absolute;
+  right: 6px;
+  margin-left: 5px !important;
+  bottom: 7px;
+}
+
+.ag-icon-desc {
+  //background: url("~/assets/icons/tableau/sort_down.png") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size:  14px 14px !important;
+  height: 13px;
+  width: 13px;
+  position: absolute;
+  right: 6px;
+  margin-left: 5px !important;
+  bottom: 7px;
+}
+
+//supprimer content ajoute par le theme ag-grid-blue
+.ag-theme-blue .ag-icon-desc:before, .ag-theme-blue .ag-icon-asc:before, .ag-theme-blue .ag-icon-none:before {
+  content: none !important;
+}
+
+.row-disabled {
+  cursor: not-allowed !important;
+  text-decoration: none !important;
+  opacity: 0.35 !important;
+  pointer-events: none !important;
+}
+
+.ag-theme-blue .ag-header-cell {
+  font-size: 13px;
+  font-family: 'Segoe UI', 'Arial', sans-serif !important;
+  // remove the white line appeared after the migration to the new version
+  // border-bottom: 0 solid transparent !important;
+  // set app-colum-header to take full width in order to apply the flex positioning
+  & app-column-header{
+    width: 100%;
+  }
+}
+
+
+.ag-theme-blue .ag-header-cell-label .ag-header-cell-text {
+  overflow: hidden;
+  white-space: normal;
+  padding-top: 4px;
+  line-height: 16px;
+}
+
+.ag-theme-blue .ag-header-cell, .ag-theme-blue .ag-header-group-cell {
+  padding-left: 4px!important;
+  padding-right: 4px!important;
+  line-height: 16px;
+  background-color: #5A76B7;
+}
+.ag-theme-blue .ag-cell {
+  padding-left: 7px;
+  padding-right: 7px;
+  // request MOE 479044
+  display: flex;
+  align-items: center;
+  line-height: normal;
+}
+
+.ag-theme-blue .ag-header-cell-label .ag-header-icon {
+  padding-top: 4px!important;
+  align-items: center;
+}
+
+.ag-theme-blue .ag-header-cell-label .ag-header-icon img {
+  vertical-align: top;
+}
+
+.ag-details-grid, .ag-details-row {
+  padding: 20px;
+}
+
+.ag-header-cell-label {
+  text-overflow: clip;
+  overflow: visible;
+  white-space: normal;
+}
+
+.ag-floating-filter-full-body {
+  height: 100%;
+  width: 100%;
+}
+
+.ag-cell-word-wrap {
+  word-break: break-all;
+  overflow-wrap: break-all;
+  white-space: normal;
+  line-height: 12px !important;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ag-cell-word-cut {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ag-cell-no-ellipsis {
+  text-overflow: clip;
+}
+
+.ag-theme-blue .ag-row-even {
+background-color: #FFFFFF;
+}
+
+.ag-theme-blue .ag-row-odd {
+background-color: #EFEFEF;
+}
+
+.ag-theme-blue .ag-row-hover:not([row-id^='detail']) {
+  background-color:#9FAECF !important;
+}
+.ag-theme-blue .ag-input-wrapper{
+  & input::placeholder{
+    font-style: italic;
+  }
+  & app-date-filter {
+    width: 100%;
+  }
+}
+
+//Les passages à la ligne sont faits naturellement pour remplir les boîtes.
+.ag-theme-blue .three-lines-header, .ag-theme-blue .two-lines-header {
+    white-space: normal !important;
+}
+
+// style pinned row (fusionner la ligne)
+.ag-theme-blue .ag-floating-bottom-container .ag-cell {
+  border-right: 0 solid transparent !important;
+}
+
+.ag-theme-blue .no-rows {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  margin-bottom: 10px;
+  padding-left: 5px;
+}
+
+.ag-body-horizontal-scroll-viewport {
+  overflow-x: hidden;
+}
+
+
+//ajout mar tak
+.ag-cell.ag-cell-not-inline-editing{
+  height: 100%;
+  width: 100%;
+ }
+
+ .ag-cell-wrapper.ag-row-group {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: center;
+}
+
+//.ag-theme-blue .ag-group-checkbox:not(.ag-invisible) + .ag-group-value:not(:empty) {
+ // margin-left: 0px; }
+
+.ag-group-checkbox {
+  margin-left: 12px;
+}

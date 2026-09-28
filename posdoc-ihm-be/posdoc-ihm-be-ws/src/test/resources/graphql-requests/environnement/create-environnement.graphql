@@ -1,0 +1,6 @@
+mutation CreateEnvironnement($var: CreateEnvironnementInput!){
+    createEnvironnement(createEnvironnement: $var){
+        code
+        libelle
+    }
+}

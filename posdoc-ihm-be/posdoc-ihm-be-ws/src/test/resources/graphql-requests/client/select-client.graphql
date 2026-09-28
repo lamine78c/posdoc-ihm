@@ -1,0 +1,23 @@
+query Query  ($page: Int!, $size: Int!, $sort:[SortInput]!, $criteria: [FilterCriterionInput]!) {
+    clients : clients(queryParameters: {
+        paginationParameters: {
+            page: $page
+            size: $size
+            sort: $sort
+        }
+        filterCriteria: {
+            criteria: $criteria
+        }
+
+    }) {
+        totalElement
+        totalPages
+        elements {
+            ... on Client {
+                code
+                libelle
+                codeAlliage
+            }
+        }
+    }
+}

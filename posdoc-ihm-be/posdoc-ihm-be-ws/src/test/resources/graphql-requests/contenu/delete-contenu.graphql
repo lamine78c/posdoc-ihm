@@ -1,0 +1,5 @@
+mutation delete ($id: Int!) {
+    deleteContenu (deleteContenu: $id) {
+        ok
+    }
+}

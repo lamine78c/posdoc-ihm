@@ -1,0 +1,4 @@
+DELETE FROM ressou;
+DELETE FROM organi;
+DELETE FROM utilog;
+DELETE FROM Params;

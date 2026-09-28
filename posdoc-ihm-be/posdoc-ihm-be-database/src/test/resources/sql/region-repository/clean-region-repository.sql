@@ -1,0 +1,2 @@
+DELETE FROM organi;
+DELETE FROM Region;

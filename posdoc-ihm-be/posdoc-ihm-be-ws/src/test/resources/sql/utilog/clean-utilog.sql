@@ -1,0 +1,2 @@
+DELETE FROM myslog;
+DELETE FROM utilog;

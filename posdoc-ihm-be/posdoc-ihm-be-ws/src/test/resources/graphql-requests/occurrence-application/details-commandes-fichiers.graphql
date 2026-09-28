@@ -1,0 +1,20 @@
+query getDetailsCommandesFichiers($paramData: OngletsParamDataInput!) {
+    getDetailsCommandesFichiers(paramData: $paramData)
+    {
+        codcom
+        numcom
+        codfic
+        libelle
+        codprd
+        refimp
+        libfic
+        ficsta
+        ficinf
+        dappcr
+        dfichd
+        dficht
+        dfichs
+        frefec
+        ficvid
+    }
+}

@@ -1,0 +1,98 @@
+<div
+  #selectElement
+  *ngIf="!isEditing"
+  class="overflow-ellipsis"
+  [ngbPopover]="params.valueFormatted || params.value"
+  container="body"
+  [disablePopover]="!enableTooltip"
+  triggers="mouseenter:mouseleave"
+>
+  {{ params.valueFormatted || params.value }}
+</div>
+
+<div class="d-flex" *ngIf="isEditing">
+  <div
+    #dropdownRef
+    container="body"
+    ngbDropdown
+    class="d-inline-block w-100"
+    placement="bottom-left"
+    (openChange)="openChange($event)"
+    (keyup.enter)="toggleDropdown()"
+  >
+    <div
+      [tabindex]="disabled ? -1 : 0"
+      class="fake-select"
+      id="dropdownFormH{{ formIndex }}"
+      [ngClass]="{ 'fake-select-disabled': disabled, error: form.touched && !!!contentToDisplay }"
+      ngbDropdownToggle
+    >
+      {{ contentToDisplay }}
+    </div>
+    <div *ngIf="!disabled" ngbDropdownMenu attr.aria-labelledby="dropdownFormH{{ formIndex }}">
+      <div class="fake-select-scrollable-content">
+        <div *ngFor="let item of form.controls | keyvalue; let index = index">
+          <div
+            (click)="isDisable(item.value) ? setNewValue(item.key) : collapse.toggle()"
+            class="d-flex"
+            [ngClass]="{
+              pointer: !isDisable(item.value),
+              'hover-color': isDisable(item.value),
+              'selected-color': item.key === contentToDisplay && isDisable(item.value),
+            }"
+          >
+            <button
+              *ngIf="!isDisable(item.value)"
+              class="btn-no-style collapse-icon"
+              [attr.aria-expanded]="!isCollapsed[index]"
+              aria-controls="collapse"
+            >
+              <i *ngIf="isCollapsed[index]" aria-hidden="true" class="icon-plus"></i>
+              <i *ngIf="!isCollapsed[index]" aria-hidden="true" class="icon-minus"></i>
+            </button>
+            <div *ngIf="isDisable(item.value)" style="margin-left: 1.6em"></div>
+            <div class="form-check">
+              <label class="form-check-label font-weight-semi-bold" for="radio-group-{{ item.key }}">
+                {{ item.key }}
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[index]" class="collapse-container">
+              <div *ngIf="!isDisable(item.value)">
+                <div
+                  class="hover-color"
+                  [ngClass]="{ 'selected-color': elem.key === contentToDisplay }"
+                  *ngFor="let elem of item.value['controls'] | keyvalue; let index = index"
+                >
+                  <div class="form-check" (click)="setNewValue(elem.key)">
+                    <label class="form-check-label" for="checkbox-{{ index }}-{{ formIndex + '-' + index }}">
+                      {{ elem.key }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span
+    triggers="mouseenter:mouseleave focus"
+    container="body"
+    tabindex="0"
+    *ngIf="isTouchedAndEmpty()"
+    [ngbPopover]="list"
+    class="icon-error d-flex align-items-center"
+    aria-hidden="true"
+  ></span>
+</div>
+
+<ng-template #list>
+  <ng-container>
+    <div class="mb-2">La valeur ne peut pas être nulle</div>
+  </ng-container>
+</ng-template>

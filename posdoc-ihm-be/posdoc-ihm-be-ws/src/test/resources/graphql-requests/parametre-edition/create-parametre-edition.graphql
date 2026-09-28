@@ -1,0 +1,10 @@
+mutation CreateParametreEdition($var: CreateOrUpdateParametreEditionInput!){
+    createParametreEdition(createParametreEdition: $var){
+        reference
+        type
+        libelle
+        lineNumber
+        columnNumber
+        length
+    }
+}

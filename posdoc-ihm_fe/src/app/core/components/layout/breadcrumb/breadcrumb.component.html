@@ -1,0 +1,6 @@
+<mat-toolbar>
+  <a routerLink="/"><mat-icon>home</mat-icon></a>
+  <span *ngFor="let bc of breadcrumbs">
+    <mat-icon>chevron_right</mat-icon><a routerLink="{{ bc.url }}"> {{ bc.label }}</a>
+  </span>
+</mat-toolbar>

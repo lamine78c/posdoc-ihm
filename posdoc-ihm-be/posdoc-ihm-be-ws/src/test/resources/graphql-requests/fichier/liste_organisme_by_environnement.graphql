@@ -1,0 +1,3 @@
+query getDistOrgByEnvFromFichier($query: SearchFichierFilterQuery) {
+    getDistOrgByEnvFromFichier(query: $query)
+}

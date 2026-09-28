@@ -1,0 +1,9 @@
+DELETE FROM genmas;
+DELETE FROM fichie;
+DELETE FROM genfic;
+DELETE FROM genpro;
+DELETE FROM params;
+DELETE FROM sitcnp;
+DELETE FROM genapp;
+DELETE FROM suppor;
+DELETE FROM utilog;

@@ -1,0 +1,9 @@
+DELETE FROM gentar;
+DELETE FROM genmas;
+DELETE FROM params;
+DELETE FROM tarpos;
+DELETE FROM genfic;
+DELETE FROM tarifs;
+DELETE FROM hisfic;
+DELETE FROM hisapp;
+DELETE FROM utilog;

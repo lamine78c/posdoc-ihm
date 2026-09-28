@@ -1,0 +1,24 @@
+query getDocsDematerialises($query: SearchDocDemInput){
+    getDocsDematerialises(query: $query) {
+        datdem
+        numdem
+        codenv
+        codorg
+        percod
+        codapp
+        codcom
+        codfic
+        coddoc
+        refdem
+        typact
+        imprim
+        docsta
+        docinf
+        ddodeb
+        ddofin
+        ddosus
+        tpscom
+        libinf
+        codeSiteDematerialisation
+    }
+}

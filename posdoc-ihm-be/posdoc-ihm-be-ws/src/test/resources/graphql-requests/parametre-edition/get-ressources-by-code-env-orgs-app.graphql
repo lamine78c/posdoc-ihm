@@ -1,0 +1,7 @@
+query getRessourcesByCodeEnvOrgsApp($payload: CodeEnvOrgsAppPayload!) {
+    getRessourcesByCodeEnvOrgsApp(payload: $payload) {
+        codgam
+        codsit
+        codres
+    }
+}

@@ -1,0 +1,10 @@
+mutation updateFichiers($fichiers: [CreateOrUpdateFichierInputDTO]!) {
+  updateFichiers(fichiers: $fichiers) {
+    codeEnv
+    codeOrg
+    codeApp
+    codeCom
+    codeFich
+    libFichier
+  }
+}

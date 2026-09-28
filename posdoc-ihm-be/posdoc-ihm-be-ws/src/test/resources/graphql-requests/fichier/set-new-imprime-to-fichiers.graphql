@@ -1,0 +1,11 @@
+mutation setNewImprimeToFichiers($fichiers: [CreateOrUpdateFichierInputDTO!]!) {
+    setNewImprimeToFichiers(fichiers: $fichiers) {
+        codeEnv
+        codeOrg
+        codeApp
+        codeCom
+        codeFich
+        libFichier
+        refImprime
+    }
+}

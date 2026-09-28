@@ -1,0 +1,23 @@
+-- Nettoyage des tables dans l'ordre des dépendances
+DELETE FROM gennot;
+DELETE FROM notice;
+DELETE FROM gentar;
+DELETE FROM genscr;
+DELETE FROM genapp;
+DELETE FROM premas;
+DELETE FROM tmpmas;
+DELETE FROM genetp;
+DELETE FROM genpro;
+DELETE FROM genfic;
+DELETE FROM exempl;
+DELETE FROM produi;
+DELETE FROM ressou;
+DELETE FROM fichie;
+DELETE FROM comman;
+DELETE FROM destin;
+DELETE FROM applis;
+DELETE FROM sitcnp;
+DELETE FROM region;
+DELETE FROM organi;
+DELETE FROM enviro;
+DELETE FROM utilog;

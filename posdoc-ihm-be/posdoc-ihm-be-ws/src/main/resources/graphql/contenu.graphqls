@@ -1,0 +1,33 @@
+extend type Mutation {
+    createContenu(createContenu: CreateOrUpdateContenuInputDTO!): CreateOrUpdateContenuPayload!
+    deleteContenu(deleteContenu: Int!): DeletePayload!
+}
+
+extend type Query {
+    allContenus: [CreateOrUpdateContenuPayload]
+    getContenusForAccueil(userOrganismes: [String]): [ContenuForAccueil]
+}
+
+type CreateOrUpdateContenuPayload {
+    id: Int
+    titre: String
+    dateActivation: DateTime
+    dateExpiration: DateTime
+    message: String
+    regions: [CreateOrUpdateRegionPayload]
+}
+
+input CreateOrUpdateContenuInputDTO {
+    id: Int
+    titre: String!
+    dateActivation: DateTime
+    dateExpiration: DateTime
+    message: String
+    regions: [CreateOrUpdateRegionInput]
+}
+
+type ContenuForAccueil {
+    titre: String
+    message: String
+    regions: [String]
+}

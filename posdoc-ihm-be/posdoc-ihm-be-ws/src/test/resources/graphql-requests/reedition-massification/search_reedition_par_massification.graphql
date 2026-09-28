@@ -1,0 +1,25 @@
+query searchReeditionParMassification($searchReeditionParMassificationQuery: SearchReeditionParMassificationQuery!) {
+ searchReeditionParMassification(searchReeditionParMassificationQuery: $searchReeditionParMassificationQuery){
+    codcomOld
+    codficOld
+    numcomOld
+    pagficOld
+    plificOld
+    libficOld
+    codenv
+    codorg
+    codapp
+    percod
+    codcom
+    codfic
+    numcom
+    pagfic
+    plific
+    libfic
+    codcli
+    codsit
+    codres
+    coddes
+    nbrexe
+  }
+}

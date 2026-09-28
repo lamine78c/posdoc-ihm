@@ -1,0 +1,6 @@
+mutation create($createProfile: CreateProfileInput!) {
+    createProfile(createProfile: $createProfile) {
+        profile
+        libelleProfile
+    }
+}

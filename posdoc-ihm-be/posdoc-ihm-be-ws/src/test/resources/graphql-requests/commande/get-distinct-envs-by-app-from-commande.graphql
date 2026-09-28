@@ -1,0 +1,3 @@
+query getDistinctEnvsByApp($codapp:String) {
+    getDistinctEnvsByApp(codapp: $codapp)
+}

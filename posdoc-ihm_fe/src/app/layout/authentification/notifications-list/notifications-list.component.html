@@ -1,0 +1,17 @@
+<ng-template #notificationsTemplate>
+  <div class="notifications-list">
+    @for (notification of notifications; track notification.id) {
+      <div class="notification-item border-b pb-3 mb-3">
+        <div class="notification-path font-semibold text-sm text-gray-600 mb-1">
+          {{ getPathLabel(notification.faq.path) }}
+        </div>
+        <div class="notification-question">
+          {{ notification.faq.question }}
+        </div>
+        <div class="notification-date text-xs text-gray-400 mt-1">
+          {{ notification.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+        </div>
+      </div>
+    }
+  </div>
+</ng-template>

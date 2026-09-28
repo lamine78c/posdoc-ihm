@@ -1,0 +1,260 @@
+pipeline {
+
+    // Agent Jenkins utilisé par défaut
+    agent { label 'docker' }
+
+    options {
+        gitLabConnection('gitlab')
+    }
+
+    // Définition de variables qui sont utilisées dans le build
+    environment {
+        HOME = "."
+        SONAR_KEY = "POSDOC_posdoc-ihm-be"
+        ARTIFACT_ID = "posdoc-fe-ihm"
+        GROUP_ID = "fr.acoss.posdoc"
+        NEXUS_VERSION = "3.x"
+        // On ne peut pas mettre hawai@hwi31dev03gedoczbeapplitbe04.gidn.recouv" car il y a un problème d'execution de services
+        CONNECTION_SERVER_DEV = "hawai@10.207.91.63"
+        POSDOC_ENV = "http://gitlab.altair.recouv/adelaide-be/posdoc-env.git"
+    }
+
+    // Paramètres du build
+    parameters {
+        choice(name: 'DB_TARGET', choices: ['posdoc', 'posdoc_int', 'posdoc_e2e'],
+               description: 'Base de données cible')
+
+        booleanParam(defaultValue: false, description: 'Sauter les tests ?', name: 'skipTests')
+        booleanParam(defaultValue: true, description: 'Lancer l\'analyse SonarQube', name: 'sonar')
+        booleanParam(defaultValue: false, description: 'Déployer sur le serveur DEV', name: 'deployDev')
+        booleanParam(defaultValue: false, description: 'Publier le WAR sur Nexus et livraison Hawai', name: 'dep_posdoc_be')
+        booleanParam(defaultValue: false, description: 'Créer une branche et un tag versionnés + publish Nexus/Hawai', name: 'tagVersion')
+        booleanParam(defaultValue: false, description: 'Reinitialiser la base posdoc_e2e (clean+migrate)', name: 'e2eFlywayReset')
+        string(defaultValue: '', description: 'Numéro de version pour tagVersion (ex: 0.0.1)', name: 'POM_VERSION')
+        string(defaultValue: 'lot_9.0_ihm', description: 'Branche Hawai pour le déploiement', name: 'BRANCHE_HAWAI')
+    }
+
+    stages {
+        stage('Initialisation gitlab') {
+            steps {
+                updateGitlabCommitStatus name: 'Jenkins', state: 'pending'
+            }
+        }
+        stage('Docker Image') {
+            agent {
+                // Configuration de l'image utilisée pour les étapes suivantes
+                docker {
+                    image 'acoss/generique/node10-npm6-openjdk11-maven3.fr-sonar4-fedex:latest'
+                    alwaysPull true
+                    args '-v /etc/passwd:/etc/passwd -v /home/jenkins:/home/jenkins'
+                }
+            }
+            stages {
+                // ---- Flyway E2E ----
+                stage('Reinitialisation de la base posdoc e2e') {
+                    when {
+                        expression { params.e2eFlywayReset }
+                    }
+                    steps {
+                        dir('posdoc-env') {
+                            git branch: 'develop',
+                                    credentialsId: 'GITLAB_ID',
+                                    url: POSDOC_ENV
+                        }
+
+                        sh "mkdir -p ./posdoc-ihm-be-flyway/src/main/resources/db/migration"
+
+                        sh """
+                        cp -r ./posdoc-env/bdd/base_posdoc/sql/. \
+                            ./posdoc-ihm-be-flyway/src/main/resources/db/migration
+                        """
+
+                        configFileProvider([configFile(fileId: 'Global_Maven_Settings', variable: 'MAVEN_SETTINGS_XML')]) {
+                            sh 'mvn -s $MAVEN_SETTINGS_XML clean install -DskipTests'
+                            sh 'mvn -s $MAVEN_SETTINGS_XML exec:java -pl posdoc-ihm-be-flyway -DskipTests'
+                            sh 'mvn -s $MAVEN_SETTINGS_XML flyway:clean -pl posdoc-ihm-be-flyway'
+                            sh 'mvn -s $MAVEN_SETTINGS_XML flyway:migrate -pl posdoc-ihm-be-flyway'
+                        }
+                    }
+                }
+
+                // ---- Tests ----
+                stage('Test') {
+                    when {
+                        expression { !params.skipTests }
+                    }
+                    steps {
+                        configFileProvider([configFile(fileId: 'Global_Maven_Settings', variable: 'MAVEN_SETTINGS_XML')]) {
+                            sh "mvn --no-transfer-progress -s $MAVEN_SETTINGS_XML test"
+                        }
+                    }
+                }
+
+                // ---- Package ----
+                stage('Package') {
+                    when {
+                        expression { params.deployDev || params.dep_posdoc_be || params.tagVersion }
+                    }
+                    steps {
+                        configFileProvider([configFile(fileId: 'Global_Maven_Settings', variable: 'MAVEN_SETTINGS_XML')]) {
+                            sh "mvn --no-transfer-progress -s $MAVEN_SETTINGS_XML package -DskipTests"
+                        }
+                    }
+                }
+
+                // ---- Deploy dev ----
+                stage('Deploy dev') {
+                    when {
+                        expression { params.deployDev }
+                    }
+                    steps {
+                        echo "******** Begin: Déployer dev serveur : ${CONNECTION_SERVER_DEV}"
+                        sshagent(credentials: ['SSH_KEY_HAWAI']) {
+                            echo "*** Stop tomcat"
+                            sh "ssh -o StrictHostKeyChecking=no ${CONNECTION_SERVER_DEV} 'sudo -i service tomcat stop'"
+                            echo "*** Stop "
+                            echo "*** Copie posdoc_be_ihm.war"
+                            sleep 5
+                            sh "scp -o StrictHostKeyChecking=no posdoc-ihm-be-ws/target/posdoc_be_ihm.war ${CONNECTION_SERVER_DEV}:/hawai/system/hwi_install/applications/hwi_posdoc/bin/"
+                            sleep 5
+                            sh "ssh -o StrictHostKeyChecking=no ${CONNECTION_SERVER_DEV} 'yes | sudo -i sh /hawai/system/hwi_install/install.sh posdoc_be_ihm'"
+                            sleep 5
+                            script {
+                                def dbTarget = params.DB_TARGET
+                                if (dbTarget == 'posdoc_int') {
+                                    sh "ssh -o StrictHostKeyChecking=no ${CONNECTION_SERVER_DEV} 'yes | sudo -i sed -i \"s|jdbc:postgresql://10.207.89.197:5432/posdoc|jdbc:postgresql://10.207.89.197:5432/posdoc_int|g\" /hawai/composants/tomcat/conf/jboss.web/localhost/posdoc_be_ihm.xml'"
+                                } else if (dbTarget == 'posdoc_e2e') {
+                                    sh "ssh -o StrictHostKeyChecking=no ${CONNECTION_SERVER_DEV} 'yes | sudo -i sed -i \"s|jdbc:postgresql://10.207.89.197:5432/posdoc|jdbc:postgresql://10.207.89.197:5432/posdoc_e2e|g\" /hawai/composants/tomcat/conf/jboss.web/localhost/posdoc_be_ihm.xml'"
+                                    sh "ssh -o StrictHostKeyChecking=no ${CONNECTION_SERVER_DEV} 'yes | sudo -i sed -i \"s|username=\\\"pgposdoc\\\"|username=\\\"user_e2e\\\"|g\" /hawai/composants/tomcat/conf/jboss.web/localhost/posdoc_be_ihm.xml'"
+                                }
+                                // posdoc = défaut, pas de sed nécessaire
+                            }
+                            sleep 5
+                            echo "*** Start tomcat"
+                            sh "ssh -o StrictHostKeyChecking=no ${CONNECTION_SERVER_DEV} 'sudo -i service tomcat start'"
+                            echo "*** Start "
+                        }
+                        echo "******** End : Déployer dev"
+                    }
+                }
+
+                // ---- Sonar ----
+                stage('Sonar') {
+                    when {
+                        expression { params.sonar }
+                    }
+                    steps {
+                        withSonarQubeEnv('Sonarqube HORS-COBOL') {
+                            withCredentials([string(credentialsId: 'SONAR_AUTH_TOKEN_ID', variable: 'TOKEN')]) {
+                                configFileProvider([configFile(fileId: 'Global_Maven_Settings', variable: 'MAVEN_SETTINGS_XML')]) {
+                                    sh "mvn --no-transfer-progress -s $MAVEN_SETTINGS_XML clean install sonar:sonar -Ptest-report-sonar -Dsonar.projectKey=${SONAR_KEY} -Dsonar.branch.name=${GIT_BRANCH.replaceAll('origin/', '')} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.token=${TOKEN} -Dsonar.verbose=true -Dsonar.scm.disabled=true -Dsonar.coverage.jacoco.xmlReportPaths=$WORKSPACE/posdoc-ihm-be-ws/target/site/jacoco-aggregate/jacoco.xml"
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Cette étape permet de mettre le build en instable si des erreurs sonar sont détectée
+                stage("Quality Gate") {
+                    when {
+                        expression { params.sonar }
+                    }
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
+                            // Ne casse pas le build si qualityGate KO
+                            timeout(time: 2, unit: 'MINUTES') {
+                                waitForQualityGate abortPipeline: true
+                            }
+                        }
+                    }
+                }
+
+                // Déploiement des jar/war dans Nexus
+                stage('Deploy nexus') {
+                    when {
+                        expression { params.dep_posdoc_be }
+                    }
+                    steps {
+                        // Build maven en utilisant les settings maven configurés dans jenkins
+                        configFileProvider([configFile(fileId: 'Global_Maven_Settings', variable: 'MAVEN_SETTINGS_XML')]) {
+                            sh "mvn --no-transfer-progress -s $MAVEN_SETTINGS_XML deploy -DskipTests -Phawai"
+                        }
+                    }
+                }
+
+                // Déploiement dans Hawai
+                stage('Deploy hawai') {
+                    when {
+                        expression { params.dep_posdoc_be }
+                    }
+                    steps {
+                        withCredentials([string(credentialsId: 'JENKINS_API_TOKEN', variable: 'JENKINS_API_TOKEN')]) {
+                            configFileProvider([configFile(fileId: 'Global_Maven_Settings', variable: 'MAVEN_SETTINGS_XML')]) {
+                                sh "cd posdoc-ihm-be-ws; mvn --no-transfer-progress -s $MAVEN_SETTINGS_XML hawai:livraison -Dbranche.hawai=$BRANCHE_HAWAI -DskipTests"
+                            }
+                        }
+                    }
+                }
+
+                // Création de la branche du tag et de la version
+                stage('Création de version') {
+                    when {
+                        expression { return params.tagVersion && params.POM_VERSION != "" }
+                    }
+                    steps {
+                        echo " **********************************************************************************"
+                        echo " Création de la version : ${params.POM_VERSION} à partir de la branche $GIT_BRANCH"
+                        echo " **********************************************************************************"
+                        configFileProvider([configFile(fileId: 'Global_Maven_Settings', variable: 'MAVEN_SETTINGS_XML')]) {
+                            sh "mvn versions:set --no-transfer-progress -s $MAVEN_SETTINGS_XML -DnewVersion=${params.POM_VERSION} -DprocessAllModules -DgenerateBackupPoms=false"
+                        }
+                        withCredentials([string(credentialsId: 'JENKINS_API_TOKEN', variable: 'JENKINS_API_TOKEN'), usernamePassword(credentialsId: 'GITLAB_ID', usernameVariable: 'GIT_AUTH_USR', passwordVariable: 'GIT_AUTH_PSW')]) {
+                            sh 'git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"'
+                            // création de la branche
+                            echo " Création de la branche : B_${params.POM_VERSION}"
+                            sh "git branch  B_${params.POM_VERSION}"
+                            sh "git checkout B_${params.POM_VERSION}"
+                            // commit les pom.xml
+                            sh "git add pom.xml posdoc-ihm-be-commons/pom.xml posdoc-ihm-be-database/pom.xml posdoc-ihm-be-domain/pom.xml posdoc-ihm-be-security/pom.xml posdoc-ihm-be-ws/pom.xml posdoc-ihm-be-flyway/pom.xml"
+                            sh "git commit -m \"Création de la version ${params.POM_VERSION}\""
+                            echo " Création du tag : ${params.POM_VERSION}"
+                            sh "git tag ${params.POM_VERSION} -m \"version ${params.POM_VERSION} tag\""
+                            sh "git push origin HEAD:B_${params.POM_VERSION} ${params.POM_VERSION}"
+                        }
+                        echo " **********************************************************************************"
+                        echo " Deploy nexus : ${params.POM_VERSION} "
+                        echo " **********************************************************************************"
+                        configFileProvider([configFile(fileId: 'Global_Maven_Settings', variable: 'MAVEN_SETTINGS_XML')]) {
+                            sh "mvn --no-transfer-progress -s $MAVEN_SETTINGS_XML deploy -DskipTests -Phawai"
+                        }
+                        echo " **********************************************************************************"
+                        echo " Deploy hawai : ${params.POM_VERSION} "
+                        echo " **********************************************************************************"
+                        withCredentials([string(credentialsId: 'JENKINS_API_TOKEN', variable: 'JENKINS_API_TOKEN')]) {
+                            configFileProvider([configFile(fileId: 'Global_Maven_Settings', variable: 'MAVEN_SETTINGS_XML')]) {
+                                sh "cd posdoc-ihm-be-ws; mvn --no-transfer-progress -s $MAVEN_SETTINGS_XML hawai:livraison -Dbranche.hawai=$BRANCHE_HAWAI -DskipTests"
+                            }
+                        }
+                    }
+                }
+            }
+            post {
+                success {
+                    updateGitlabCommitStatus name: 'Jenkins', state: 'success'
+                }
+                failure {
+                    updateGitlabCommitStatus name: 'Jenkins', state: 'failed'
+                }
+                always {
+                    script {
+                        // Si skipTests à false et pas en mode e2e, on récupère les rapports junit
+                        if (params.skipTests == false) {
+                            junit '**/target/surefire-reports/*.xml'
+                        }
+                        cleanWs()
+                    }
+                }
+            }
+        }
+    }
+}

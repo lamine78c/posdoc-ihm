@@ -1,0 +1,12 @@
+query compositions($queryParametersInputDTO: QueryParametersInput!) {
+    compositions(queryParameters: $queryParametersInputDTO) {
+        totalElement
+        totalPages
+        elements {
+            ... on Composition {
+                code
+                libelle
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+<ngb-toast
+  *ngFor="let toast of notesService.toasts"
+  [class]="toast.classname"
+  [autohide]="true"
+  [delay]="toast.delay || 10000"
+  (hidden)="notesService.remove(toast)"
+>
+  <ng-template [ngTemplateOutlet]="template"></ng-template>
+
+  <ng-template #template>
+    <app-note-template [toast]="toast" (close)="closeToast($event)"></app-note-template>
+  </ng-template>
+</ngb-toast>

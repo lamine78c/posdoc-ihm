@@ -1,0 +1,9 @@
+query {
+    allHabilitations {
+        id
+        parentId
+        habilitationType
+        identite
+        ordre
+    }
+}

@@ -1,0 +1,2 @@
+DELETE FROM genpro;
+DELETE FROM gammes;

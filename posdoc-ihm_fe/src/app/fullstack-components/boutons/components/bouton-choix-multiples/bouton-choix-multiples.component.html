@@ -1,0 +1,30 @@
+<div ngbDropdown class="d-inline-block btn-dropdown">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    id="buttonDropdown"
+    ngbDropdownToggle
+    [disabled]="disable"
+    [ngClass]="{ 'three-dots': useThreeDotsStyle }"
+  >
+    <span *ngIf="!useThreeDotsStyle">{{ buttonName }}</span>
+    <div *ngIf="useThreeDotsStyle">...</div>
+    <svg-icon
+      *ngIf="!useThreeDotsStyle"
+      class="dropdown-icon"
+      [src]="'assets/icones-projets/PORA/flechewd.svg'"
+      [svgStyle]="{ 'width.em': 0.5, 'height.em': 0.5 }"
+    ></svg-icon>
+  </button>
+  <div ngbDropdownMenu aria-labelledby="buttonDropdown">
+    <button
+      *ngFor="let dropdownButton of dropdownButtons; let index = index"
+      ngbDropdownItem
+      [disabled]="dropdownButton.disable"
+      [tabindex]="dropdownButton.disable ? -1 : 0"
+      (click)="buttonDropdownClick(index)"
+    >
+      {{ dropdownButton.label }}
+    </button>
+  </div>
+</div>

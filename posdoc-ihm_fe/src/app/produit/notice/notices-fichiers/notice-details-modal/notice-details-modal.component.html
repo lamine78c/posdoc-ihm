@@ -1,0 +1,22 @@
+<app-popup
+  [modalRef]="modalRef"
+  [title]="'Détails des notices - Fichier ' + fichierLabel"
+  [firstButton]="null"
+  [secondButton]="{ label: 'Fermer', icone: 'icon-b_cancel' }"
+  (cancelEvent)="close()"
+>
+  <div class="d-flex mb-3">
+    <h5>Total notices : {{ totalNotices }}</h5>
+  </div>
+
+  <div class="popup-tableau">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="noticeDetails"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="false"
+      (gridReady)="onGridReady($event)"
+    ></app-tableau>
+  </div>
+</app-popup>

@@ -1,0 +1,7 @@
+mutation updateComposition($updateDTO: UpdateCompositionInput!) {
+    updateComposition(updateComposition: $updateDTO) {
+        code
+        libelle
+        isNotAuthorisedToBeDeleted
+    }
+}

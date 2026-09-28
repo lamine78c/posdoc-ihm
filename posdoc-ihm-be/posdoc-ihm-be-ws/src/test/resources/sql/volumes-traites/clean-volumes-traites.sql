@@ -1,0 +1,4 @@
+DELETE FROM genetp;
+DELETE FROM genpro;
+DELETE FROM hispro;
+DELETE FROM utilog;

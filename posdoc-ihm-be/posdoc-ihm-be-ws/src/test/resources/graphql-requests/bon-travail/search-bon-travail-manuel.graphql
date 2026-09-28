@@ -1,0 +1,10 @@
+query SearchBonTravailManuel($searchBonTravailManuelQuery: SearchBonTravailManuelQuery){
+    searchBonTravailManuel(searchBonTravailManuelQuery: $searchBonTravailManuelQuery){
+        codcom
+        codapp
+        percod
+        dfiexp
+        codfic
+        numcom
+    }
+}

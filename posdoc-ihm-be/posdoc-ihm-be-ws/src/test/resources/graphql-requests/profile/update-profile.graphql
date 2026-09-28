@@ -1,0 +1,6 @@
+mutation update($updateProfile: UpdateProfileInput!) {
+    updateProfile(updateProfile: $updateProfile) {
+        profile
+        libelleProfile
+    }
+}

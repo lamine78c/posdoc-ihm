@@ -1,0 +1,8 @@
+DELETE FROM destin;
+DELETE FROM ressou;
+DELETE FROM organi;
+DELETE FROM Params;
+DELETE FROM Parcle;
+DELETE FROM utilog;
+DELETE FROM myslog;
+DELETE FROM format;

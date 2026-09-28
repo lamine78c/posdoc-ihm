@@ -1,0 +1,17 @@
+query getDetailsIncident($paramData: ParamDataIncidentInput!) {
+    getDetailsIncident(paramData: $paramData)
+    {
+        signal
+        dcreat
+        script
+        mesano
+        ficinf
+        typetp
+        codcom
+        codfic
+        numcom
+        codgam
+        codsit
+        codres
+    }
+}

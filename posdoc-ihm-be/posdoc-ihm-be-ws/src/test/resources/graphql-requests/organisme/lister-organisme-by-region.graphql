@@ -1,0 +1,3 @@
+query GetCodesOrganismesByRegions($regions: [String]) {
+    getCodesOrganismesByRegions(regions: $regions)
+}

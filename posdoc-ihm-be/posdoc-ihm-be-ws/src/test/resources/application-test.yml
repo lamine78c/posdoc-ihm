@@ -1,0 +1,41 @@
+posdoc:
+  datasource:
+    mode: none
+
+  bilan:
+    purge:
+      enabled: false
+      cron: "0 0 1 * * 0"
+
+  bontravail:
+    archive-directory: ""
+    purge:
+      enabled: false
+      cron: "0 0 2 * * 0"
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+      use-new-id-generator-mappings: true
+    properties:
+      hibernate:
+        format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  datasource:
+    jndi-name: false
+    url: "jdbc:h2:mem:testdb;MODE=LEGACY"
+    username: "sa"
+    password: "sa"
+    driver-class-name: org.h2.Driver
+
+  h2:
+    console:
+      enabled: true
+      path: "/console"
+      settings:
+        web-allow-others: true
+

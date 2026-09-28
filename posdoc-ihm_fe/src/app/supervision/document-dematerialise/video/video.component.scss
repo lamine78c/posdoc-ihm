@@ -1,0 +1,53 @@
+.video-component {
+  .normal-content {
+    margin: 0;
+    padding: 10px;
+  }
+
+  .form-control {
+    height: 38px;
+  }
+
+  .col-form-label {
+    white-space: nowrap;
+    padding-right: 10px;
+  }
+
+  app-liste-deroulante {
+    width: 100%;
+  }
+}
+
+.table thead th {
+  background-color: lightgray;
+  font-weight: bold;
+  color: black;
+}
+
+.table tbody tr {
+  background-color: white;
+}
+
+.table th,
+.table td {
+  width: 33.33%;
+  text-align: center;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.clickable-cell {
+  cursor: pointer; /* Indique que la cellule est cliquable */
+  color: blue;
+  text-decoration: underline;
+}
+
+.empty-search-container {
+  display: flex;
+  height: 10rem;
+  align-items: center;
+  justify-content: center;
+}

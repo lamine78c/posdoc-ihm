@@ -1,0 +1,19 @@
+<div class="messages-container">
+  @if (messages$ | async; as messages) {
+    @if (tooltips$ | async; as tooltips) {
+      @for (message of messages; track message) {
+        <div class="card">
+          <div class="card-header">
+            <h2>{{ message.titre }}</h2>
+            @if (message.regions) {
+              <i class="icon-b_info" [ngbPopover]="tooltips[message.index]" triggers="mouseenter:mouseleave focus"></i>
+            }
+          </div>
+          <div class="card-body">
+            <div [innerHTML]="message.sanitizedMessage"></div>
+          </div>
+        </div>
+      }
+    }
+  }
+</div>

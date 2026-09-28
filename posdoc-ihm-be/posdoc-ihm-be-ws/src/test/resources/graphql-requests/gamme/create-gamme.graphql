@@ -1,0 +1,7 @@
+mutation CreateGamme($var: CreateGammeInput!){
+    createGamme(createGamme: $var){
+        code
+        libelle
+        codeVerrou
+    }
+}

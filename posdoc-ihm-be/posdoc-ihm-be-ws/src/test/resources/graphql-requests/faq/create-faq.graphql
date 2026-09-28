@@ -1,0 +1,14 @@
+mutation createFaq($createFaq: CreateOrUpdateFaqInputDTO!) {
+    createFaq(createFaq: $createFaq) {
+        id
+        path
+        question
+        answer
+        status
+        viewCount
+        createdBy
+        updatedBy
+        createdAt
+        updatedAt
+    }
+}

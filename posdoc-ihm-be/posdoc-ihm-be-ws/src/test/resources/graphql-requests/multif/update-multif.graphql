@@ -1,0 +1,7 @@
+mutation updateMultif($updateDTO: CreateOrUpdateMultifInput!) {
+    updateMultif(updateMultif: $updateDTO) {
+        code
+        libelle
+        isNotAuthorisedToBeDeleted
+    }
+}

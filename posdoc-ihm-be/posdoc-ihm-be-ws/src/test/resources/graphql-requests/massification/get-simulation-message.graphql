@@ -1,0 +1,9 @@
+query GetSimulationMessage($codenv: String, $codsit: String) {
+    getSimulationMessage(codenv: $codenv, codsit: $codsit) {
+        message,
+        codenv,
+        codorg,
+        codapp,
+        percod
+    }
+}

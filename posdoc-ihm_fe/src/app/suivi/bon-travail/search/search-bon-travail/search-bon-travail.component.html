@@ -1,0 +1,200 @@
+<div class="row pt-1 normal-content">
+  <div class="col-3 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Environnement :'"
+      [blankOptionValue]="' '"
+      [form]="formEnv"
+      [index]="indexForm.ENVIRONNEMENT"
+      [isError]="true"
+      [options]="optionsEnv$ | async"
+      [labelColumns]="5"
+      [labelClass]="'pl-0'"
+      [inputColumns]="5"
+      [hasBlankOption]="true"
+      [errorMessage]="formEnv.errors?.message || formEnv.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-3 p-0">
+    <app-liste-deroulante-hierarchisee
+      sessionDataSearchDirective
+      [form]="formOrg"
+      [formIndex]="indexForm.ORGANISME"
+      [label]="'Organismes :'"
+      [defaultText]="' '"
+      [labelColumns]="4"
+      [inputColumns]="6"
+      [isError]="true"
+      [isWithValidAndRAZBtn]="false"
+      [isOptTreeInit]="isOrgOptionsInitialized"
+      (changeEvent)="onChangeOrganisme($event)"
+      [errorMessage]="formOrg.errors?.message || formOrg.errors"
+    ></app-liste-deroulante-hierarchisee>
+  </div>
+  <div class="col-3 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Application :'"
+      [blankOptionValue]="' '"
+      [form]="formApp"
+      [index]="indexForm.APPLICATION"
+      [isError]="true"
+      [options]="optionsApp$ | async"
+      [labelColumns]="4"
+      [hasBlankOption]="true"
+      [inputColumns]="5"
+      [errorMessage]="formApp.errors?.message || formApp.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-3 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Période :'"
+      [blankOptionValue]="' '"
+      [form]="formPeriode"
+      [index]="indexForm.PERIODE"
+      [isError]="true"
+      [options]="optionsPeriode$ | async"
+      [labelColumns]="4"
+      [hasBlankOption]="true"
+      [inputColumns]="5"
+      [errorMessage]="formPeriode.errors?.message || formPeriode.errors"
+    ></app-liste-deroulante>
+  </div>
+</div>
+<div class="row pt-1 normal-content">
+  <div class="col-3 p-0">
+    <app-champ-de-saisie
+      sessionDataSearchDirective
+      [index]="indexForm.COMMANDE_TEXT"
+      [label]="'Commande :'"
+      [labelColumns]="5"
+      [labelClass]="'pl-0'"
+      [inputColumns]="5"
+      [fillInput]="false"
+      [form]="formCom"
+      [isError]="true"
+      [toUpperCase]="false"
+      [errorMessage]="formCom.errors?.message || formCom.errors"
+    ></app-champ-de-saisie>
+  </div>
+  <div class="col-3 p-0">
+    <app-champ-de-saisie
+      sessionDataSearchDirective
+      [index]="indexForm.FICHIER_TEXT"
+      [label]="'Fichier :'"
+      [labelColumns]="4"
+      [inputColumns]="6"
+      [fillInput]="false"
+      [form]="formFic"
+      [isError]="true"
+      [toUpperCase]="false"
+      [errorMessage]="formFic.errors?.message || formFic.errors"
+    ></app-champ-de-saisie>
+  </div>
+  <div class="col-3 p-0">
+    <app-liste-deroulante
+      [label]="'Client :'"
+      [blankOptionValue]="' '"
+      [form]="form.get('codcli')"
+      [isError]="true"
+      [options]="optionsClient"
+      [labelColumns]="4"
+      [hasBlankOption]="true"
+      [inputColumns]="5"
+      [errorMessage]="form.get('codcli').errors?.message || form.get('codcli').errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-3 p-0">
+    <app-champ-de-saisie
+      [label]="'Bon de travail :'"
+      [labelColumns]="4"
+      [inputColumns]="6"
+      [fillInput]="false"
+      [form]="form.get('codbon')"
+      [isError]="true"
+      [toUpperCase]="false"
+      [errorMessage]="form.get('codbon').errors?.message || form.get('codbon').errors"
+    ></app-champ-de-saisie>
+  </div>
+</div>
+<div class="row pt-1 normal-content">
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2">Date planif. début :</label>
+      <div class="col-7">
+        <app-date-picker #dappcrDeb [currentDate]="form.get('dappcrDeb')"></app-date-picker>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-3 p-0">
+    <div class="form form-group d-flex align-items-center">
+      <label class="col-5 me-2 col-form-label">Date expéd. début:</label>
+      <div class="col-7">
+        <app-date-picker #dfiexpDeb [currentDate]="form.get('dfiexpDeb')" [disabled]="form.get('isDateEmpty').value"></app-date-picker>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-3 p-0">
+    <app-liste-deroulante
+      [label]="'Site :'"
+      [blankOptionValue]="' '"
+      [form]="form.get('codsit')"
+      [isError]="true"
+      [options]="optionsSite"
+      [labelColumns]="4"
+      [hasBlankOption]="true"
+      [inputColumns]="5"
+      [errorMessage]="form.get('codsit').errors?.message || form.get('codsit').errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-3 p-0">
+    <div class="form-check radio-with-label d-flex align-items-center me-4 align-label">
+      <label class="pt-mr-1 me-2 col-7" for="checkbox-dates-non-saisies"> Dates non saisies seulement : </label>
+      <input [formControl]="form.get('isDateEmpty')" class="form-check-input" type="checkbox" id="checkbox-dates-non-saisies" />
+    </div>
+  </div>
+</div>
+<div class="row pt-1 normal-content">
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2">Date planif. fin :</label>
+      <div class="col-7">
+        <app-date-picker #dappcrFin [currentDate]="form.get('dappcrFin')"></app-date-picker>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 p-0">
+    <div class="form form-group d-flex align-items-center">
+      <label class="col-5 me-2 col-form-label">Date expéd. fin :</label>
+      <div class="col-7">
+        <app-date-picker #dfiexpFin [currentDate]="form.get('dfiexpFin')" [disabled]="form.get('isDateEmpty').value"></app-date-picker>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 p-0">
+    <app-liste-deroulante
+      [label]="'Délai :'"
+      [blankOptionValue]="' '"
+      [form]="form.get('delmsp')"
+      [isError]="true"
+      [options]="optionsDelmsp"
+      [labelColumns]="4"
+      [hasBlankOption]="true"
+      [inputColumns]="5"
+      [errorMessage]="form.get('delmsp').errors?.message || form.get('delmsp').errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-3 p-0">
+    <div class="button-group d-flex ms-auto">
+      <button type="button" class="btn btn-primary btn-recherche me-2" [disabled]="!(isFormValid() | async)" (click)="valider()">
+        <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+      <button type="button" class="btn btn-primary btn-sm d-flex" (click)="resetForm()">
+        <i class="icon-b_init m-auto" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</div>

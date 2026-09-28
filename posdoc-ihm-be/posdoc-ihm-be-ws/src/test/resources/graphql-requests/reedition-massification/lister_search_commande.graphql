@@ -1,0 +1,3 @@
+query getCommandeFromGenfic($codenv: String, $codorg: [String], $periode: String) {
+    getCommandeFromGenfic(codenv: $codenv, codorg: $codorg, periode: $periode)
+}

@@ -1,0 +1,10 @@
+query AllParametresEdition {
+    allParametresEdition {
+        reference
+        type
+        libelle
+        lineNumber
+        columnNumber
+        length
+    }
+}

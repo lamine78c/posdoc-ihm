@@ -1,0 +1,1 @@
+delete from organi_client_snv2;

@@ -1,0 +1,12 @@
+<app-search-occurrence-etape [isIntervalStart]="realTimeConsultation" (applySearchEvent)="lister($event)"> </app-search-occurrence-etape>
+
+<app-dag-network
+  [networkData]="networkData"
+  [statutListForBtns]="statutListForBtns"
+  (networkRightClick)="networkRightClick($event)"
+  (networkDoubleClick)="getMoreInformations($event)"
+  [realTimeConsultation]="realTimeConsultation"
+  (realTimeConsultationChange)="startStop()"
+></app-dag-network>
+
+<app-occurrence-etape-menu (applySearchEvent)="applySearch()" [menuData]="menuData"> </app-occurrence-etape-menu>

@@ -1,0 +1,27 @@
+<div class="global-content">
+  <div class="mb-3">
+    <h3>Contenu</h3>
+    <div class="d-flex mb-2">
+      <div class="button-group">
+        <button *ngIf="true" type="button" class="btn btn-secondary ml-0" (click)="addRow()">Ajouter</button>
+        <button *ngIf="true" type="button" class="btn btn-secondary" [disabled]="!nodeSelected" (click)="deleteContenu()">Supprimer</button>
+        <button *ngIf="true" type="button" class="btn btn-secondary" [disabled]="!nodeSelected" (click)="edit()">Modifier</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="remain-content" style="height: 100%; width: 100%">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [overlayLoadingTemplate]="overlayLoadingTemplate"
+      [pagination]="true"
+      [enableAddButton]="false"
+      [enableFullEdit]="false"
+      [enableExportButtons]="false"
+      (gridReady)="onGridReady($event)"
+    ></app-tableau>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+mutation CreateTarif($var: CreateTarifInput!){
+    createTarif(createTarif: $var){
+        type
+        numero
+        dateDebut
+        dateFin
+        coutPli
+        urgent
+    }
+}

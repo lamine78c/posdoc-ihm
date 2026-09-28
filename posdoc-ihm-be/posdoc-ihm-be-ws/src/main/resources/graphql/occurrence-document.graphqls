@@ -1,0 +1,9 @@
+extend type Query {
+    getDistinctOrgAppComFromGendoc: [GenDocOrgAppCom]
+}
+
+type GenDocOrgAppCom {
+    codorg: String
+    codapp: String
+    codcom: String
+}

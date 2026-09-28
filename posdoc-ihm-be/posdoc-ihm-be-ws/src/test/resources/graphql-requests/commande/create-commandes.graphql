@@ -1,0 +1,11 @@
+mutation createCommandes($createCommandes: CreateOrUpdateCommandesInput!) {
+    createCommandes(createCommandes: $createCommandes) {
+          codenv
+          codorg
+          codapp
+          code
+          libelle
+          codreg
+          isNotAuthorisedToBeDeleted
+    }
+}

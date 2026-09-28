@@ -1,0 +1,38 @@
+type HelpDto {
+    id: Int!
+    path: String!
+    message: String
+    state: HelpTypeState!
+    createdAt: DateTime
+    updatedAt: DateTime
+    createdBy: String
+    updatedBy: String
+}
+
+enum HelpTypeState {
+    DRAFT
+    DISABLED
+    ENABLED
+}
+
+input HelpCreatePayload {
+    path: String!
+    message: String!
+}
+
+input HelpUpdatePayload {
+    id: Int!
+    message: String!
+}
+
+extend type Mutation {
+    changeStateHelp(id: Int!): [HelpDto]
+    updateHelp(help: HelpUpdatePayload!): [HelpDto]
+    createHelp(help: HelpCreatePayload!): [HelpDto]
+    deleteHelp(id: Int!): DeletePayload!
+}
+
+extend type Query {
+    searchAll: [HelpDto]
+    getPublication(path: String!): [HelpDto]
+}

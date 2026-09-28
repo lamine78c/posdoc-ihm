@@ -1,0 +1,5 @@
+export const TYPE_STATE_HELP = {
+  DRAFT: 'DRAFT',
+  ENABLED: 'ENABLED',
+  DISABLED: 'DISABLED',
+};

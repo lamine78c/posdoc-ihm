@@ -1,0 +1,3 @@
+query GetFichiersToAddNewExemplaire($codeEnv: String, $codeOrg: String, $codeApp: String, $perCod: String, $codeGam: String) {
+    getFichiersToAddNewExemplaire(codeEnv: $codeEnv, codeOrg: $codeOrg, codeApp: $codeApp, perCod: $perCod, codeGam: $codeGam)
+}

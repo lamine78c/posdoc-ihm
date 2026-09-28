@@ -1,0 +1,56 @@
+<!-- RÉTROCOMPATIBILITÉ : Ajouter la classe date-picker-container -->
+<div class="d-flex flex-row date-picker-container" [ngClass]="{ 'space-for-control': spaceForControl }">
+  <div
+    class="date-input-container"
+    [ngClass]="{ 'w-100': fullWidth }"
+    (keyup.enter)="toggleCalendar($event)"
+    (click)="toggleCalendar($event)"
+    [formGroup]="dateFormGroup"
+  >
+    <input
+      appDateInput
+      class="form-control datepicker-input"
+      ngbDatepicker
+      #d="ngbDatepicker"
+      container="body"
+      placeholder="JJ/MM/AAAA"
+      (dateSelect)="dateSelected($event)"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [readonly]="readOnly"
+      [formControl]="currentDate"
+      (blur)="confirmDate()"
+      autocomplete="off"
+      maxlength="10"
+      [ngClass]="{ error: !isValid || isError || isStartDateBiggerThanFromDate }"
+      [footerTemplate]="footerTemplate"
+    />
+
+    <label class="date-input-img" [ngClass]="{ disabled: disabled }">
+      <i class="icon-b_calendar" aria-hidden="true"></i>
+    </label>
+
+    <ng-template #footerTemplate>
+      <ng-container *ngIf="displayBtnToday">
+        <hr class="my-0" />
+        <button class="btn btn-today btn-sm m-2 float-end" (click)="setToday()">Aujourd'hui</button>
+      </ng-container>
+    </ng-template>
+  </div>
+  <!-- RÉTROCOMPATIBILITÉ : Retirer la classe ml-1 -->
+  <span
+    [ngbPopover]="array.isArray(customErrorMessage) ? list : getErrorMessage()"
+    triggers="mouseenter:mouseleave focus"
+    tabindex="0"
+    *ngIf="!isValid || isError || isStartDateBiggerThanFromDate"
+    container="body"
+    class="icon-error icone-1x d-flex align-items-center"
+    aria-hidden="true"
+  ></span>
+</div>
+
+<ng-template #list>
+  <ng-container *ngFor="let error of customErrorMessage; let last = last">
+    <div [ngClass]="{ 'mb-2': !last }">{{ error.message }}</div>
+  </ng-container>
+</ng-template>

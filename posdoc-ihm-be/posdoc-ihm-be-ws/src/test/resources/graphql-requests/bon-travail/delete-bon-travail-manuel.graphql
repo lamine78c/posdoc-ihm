@@ -1,0 +1,5 @@
+mutation DeleteBonTravailManuel($query: DeleteBonTravailManuelQuery){
+    deleteBonTravailManuel(query: $query){
+        ok
+    }
+}

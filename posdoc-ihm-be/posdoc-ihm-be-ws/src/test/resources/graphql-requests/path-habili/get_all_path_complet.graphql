@@ -1,0 +1,6 @@
+query getAllPathComplet {
+    getAllPathComplet {
+        path
+        libelle
+    }
+}

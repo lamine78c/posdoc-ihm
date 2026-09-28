@@ -1,0 +1,28 @@
+extend type Query {
+    findUtiLogByQuery(query: FindUtiLogByQuery): [SearchUtilogPayload]
+    findDistinctUserUtilog: [String]
+    findDistinctActionUtilog: [String]
+    findDistinctFormIdUtilog: [String]
+}
+
+input FindUtiLogByQuery {
+    dtdeb: String!
+    dtfin: String!
+    user: String
+    action: String
+    form: String
+    result: Boolean
+}
+
+type SearchUtilogPayload {
+    codulo: Int
+    codsta: String
+    codusr: String
+    formid: String
+    datulo: String
+    action: String
+    params: String
+    result: Boolean
+    erreur: String
+    versio: String
+}

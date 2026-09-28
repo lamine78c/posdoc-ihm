@@ -1,0 +1,11 @@
+<div class="popup_detail">
+  <app-popup [modalRef]="activeModal" [title]="modalTitle" [firstButton]="null" [secondButton]="{ label: 'Fermer', icone: 'icon-b_cancel' }">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" (navChange)="activeChange($event)" class="nav-tabs">
+      <li *ngFor="let onglet of onglets; let i = index" [ngbNavItem]="i" class="nav-item">
+        <a ngbNavLink class="nav-link">{{ onglet.label }}</a>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+    <ng-template #dynamicComponentContainer></ng-template>
+  </app-popup>
+</div>

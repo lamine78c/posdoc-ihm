@@ -1,0 +1,29 @@
+<app-popup
+  [modalRef]="activeModal"
+  [title]="'Duplication d\'un profil utilisateur'"
+  [firstButton]="{ label: 'Confirmer duplication', icone: 'icon-b_valid' }"
+  [secondButton]="{ label: 'Abandonner duplication', icone: 'icon-b_cancel' }"
+  (saveEvent)="save()"
+>
+  <form>
+    <div class="row">
+      <div class="col-12">
+        <app-label-valeur [label]="'Profil à dupliquer'" [valeur]="profile" [labelWidth]="180" [inputColumns]="7"></app-label-valeur>
+        <app-champ-de-saisie
+          [label]="'Code profil'"
+          [index]="0"
+          [form]="form.get('nouveauCodeProfile')"
+          [labelWidth]="180"
+          [inputColumns]="7"
+        ></app-champ-de-saisie>
+        <app-champ-de-saisie
+          [label]="'Libelle profil'"
+          [index]="1"
+          [form]="form.get('nouveauLibelleProfile')"
+          [labelWidth]="180"
+          [inputColumns]="7"
+        ></app-champ-de-saisie>
+      </div>
+    </div>
+  </form>
+</app-popup>

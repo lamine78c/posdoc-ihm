@@ -1,0 +1,18 @@
+query findPremas($findPremasInput: FindPremasInput) {
+    findPremas(findPremasInput: $findPremasInput) {
+        mascom
+        masfic
+        codsit
+        codenv
+        codorg
+        codapp
+        percod
+        codcom
+        codfic
+        numcom
+        presta
+        dprevc
+        dprevt
+        dprevi
+    }
+}

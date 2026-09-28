@@ -1,0 +1,69 @@
+<div class="row pt-1 normal-content">
+  <div class="col-flex p-0">
+    <app-champ-de-saisie-date-intervalle
+      [formFrom]="formFromDate"
+      [formTo]="formToDate"
+      [fromMinDate]="fromMinDate"
+      [toMaxDate]="toMaxDate"
+    ></app-champ-de-saisie-date-intervalle>
+  </div>
+  <div class="col-flex p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [form]="formEnv"
+      [index]="indexForm.ENVIRONNEMENT"
+      [label]="'Environnement: '"
+      [options]="optionsEnv$ | async"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [hasBlankOption]="true"
+      [blankOptionValue]="' '"
+      [isError]="true"
+      [errorMessage]="formEnv.errors?.message || formEnv.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-flex p-0">
+    <app-liste-deroulante-hierarchisee
+      sessionDataSearchDirective
+      [form]="formOrg"
+      [formIndex]="indexForm.ORGANISME"
+      [isOptTreeInit]="isOrgOptionsInitialized"
+      [label]="'Organisme: '"
+      [defaultText]="' '"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [isError]="true"
+      [isWithValidAndRAZBtn]="false"
+      (changeEvent)="onChangeOrganisme($event)"
+      [errorMessage]="formOrg.errors?.message || formOrg.errors"
+    ></app-liste-deroulante-hierarchisee>
+  </div>
+  <div class="col-flex p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [form]="formApp"
+      [index]="indexForm.APPLICATION"
+      [label]="'Application: '"
+      [options]="optionsApp$ | async"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [hasBlankOption]="true"
+      [blankOptionValue]="' '"
+      [isError]="true"
+      [errorMessage]="formApp.errors?.message || formApp.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-flex p-0">
+    <div class="form-check radio-with-label d-flex align-items-center me-4 align-label">
+      <label class="pt-mr-1 me-2 col-10" for="checkbox-dates-non-saisies"> Dates non saisies : </label>
+      <input [formControl]="formIsDateEmpty" class="form-check-input" type="checkbox" id="checkbox-dates-non-saisies" />
+    </div>
+  </div>
+  <div class="col-flex p-0">
+    <div class="button-group ms-auto">
+      <button type="button" class="btn btn-primary btn-recherche" [disabled]="!isFormValid()" (click)="lister($event)">
+        <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+    </div>
+  </div>
+</div>

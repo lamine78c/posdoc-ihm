@@ -1,0 +1,9 @@
+query GetMassificationMessage($codenv: String, $typtar: String, $codsit: String, $isTarifUrgent: Boolean) {
+    getMassificationMessage(codenv: $codenv, typtar: $typtar, codsit: $codsit, isTarifUrgent: $isTarifUrgent) {
+        message,
+        codenv,
+        codorg,
+        codapp,
+        percod
+    }
+}

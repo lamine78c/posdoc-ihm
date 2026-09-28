@@ -1,0 +1,15 @@
+<div class="d-flex h-100" [tabindex]="(number > active || (wizardStep.disableClick && number < active)) && !visited ? -1 : 0" role="link">
+  <div
+    class="my-auto number-container"
+    [ngClass]="{
+      'number-container-active': active === number,
+      'number-container-next': (number > active || (wizardStep.disableClick && number < active)) && !visited,
+    }"
+  >
+    <span class="number">{{ number }}</span>
+  </div>
+  <div *ngIf="wizardStep.badge && wizardStep.badgeValue" class="badge {{ wizardStep.badge }} wizard-badge" aria-hidden="true">
+    {{ wizardStep.badgeValue }}
+  </div>
+  <div class="my-auto">{{ wizardStep.text }}</div>
+</div>

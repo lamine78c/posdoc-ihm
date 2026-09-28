@@ -1,0 +1,12 @@
+query allActiveNotices {
+    allActiveNotices {
+        codnot
+        libnot
+        fornot
+        poinot
+        pornot
+        dnotir
+        perime
+        codsit
+    }
+}

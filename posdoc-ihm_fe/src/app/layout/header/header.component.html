@@ -1,0 +1,20 @@
+<div class="d-flex align-items-center justify-content-between">
+  <div class="d-flex ps-3 col-sm-8">
+    <svg-icon
+      *ngIf="isConnected()"
+      class="icon-menu"
+      src="assets/icones-showcase/menu.svg"
+      [svgStyle]="{ 'width.em': 1, 'height.em': 1 }"
+      (click)="toggleSideBar()"
+    ></svg-icon>
+    <img src="assets/icons/logo/logo_posdoc.png" alt="log posdoc" />
+    <div class="adelaide px-2 pt-4">
+      <span>POSDOC</span>
+      <span class="environment-badge">{{ environmentName.trim() }}</span>
+    </div>
+  </div>
+
+  <div class="p-3">
+    <app-authentification></app-authentification>
+  </div>
+</div>

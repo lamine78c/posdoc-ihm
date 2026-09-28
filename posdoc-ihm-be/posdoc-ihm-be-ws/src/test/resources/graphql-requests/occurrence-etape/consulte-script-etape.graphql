@@ -1,0 +1,6 @@
+query consulteScriptEtape($scriptPayload: ScriptPayload!) {
+    consulteScriptEtape(scriptPayload: $scriptPayload) {
+       result
+       error
+    }
+}

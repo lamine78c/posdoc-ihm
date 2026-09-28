@@ -1,0 +1,23 @@
+.draggable {
+  position: absolute;
+  background: white;
+  width: max-content;
+  cursor: move;
+}
+
+::ng-deep .modal-imprime {
+  .modal-dialog {
+    min-width: 26rem;
+    width: 26rem;
+  }
+  .modal-content {
+    border-color: transparent;
+  }
+  .modal-footer {
+    padding-left: 0;
+    margin-top: 1rem;
+  }
+  .position-relative {
+    cursor: default;
+  }
+}

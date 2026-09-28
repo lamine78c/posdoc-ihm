@@ -1,0 +1,3 @@
+query getDistinctOrg($codeEnv: [String], $codeApp: String, $codeCom: String, $codeFic: String) {
+    getDistinctOrg(codeEnv: $codeEnv, codeApp: $codeApp, codeCom: $codeCom, codeFic: $codeFic)
+}

@@ -1,0 +1,177 @@
+extend type Mutation {
+    createNotice(noticePayload: CreateOrUpdateNoticeInput!): [NoticesDTO]!
+    updateNotice(noticePayload: CreateOrUpdateNoticeInput!): [NoticesDTO]!
+    deleteNotice(codnot: String!): [NoticesDTO]!
+    uploadNoticePdf(codnot: String!, file: Base64FileInput!): [NoticesDTO]!
+    deleteNoticePdf(codnot: String!): [NoticesDTO]!
+    updateNotfic(query: UpdateNotficsInput): [NotficFichier]
+    updateNotfics(notfics: [UpdateNotficsInput]!): [NotficFichier]!
+    deleteNotfic(query: DeleteNotficQuery): DeletePayload!
+    deleteNotfics(notficIds: [DeleteNotficQuery]!): DeletePayload!
+    affectationNotfic(query: [NotFicInput]!): [NotFic]
+}
+
+extend type Query {
+    allNotices: [NoticesDTO]!
+    allActiveNotices: [NoticesDTO]!
+    allExpiredNotices: [NoticesDTO]!
+    getNoticePdf(codnot: String!): String
+    findNotficByParam(query: SearchNotficQuery!): [NotficFichier]!
+    findNoticesFichiers(payload: SearchNoticesFichiersPayload!): [NoticesFichiersDTO]!
+    findNoticeDetailsByFichier(payload: FindNoticeDetailsByFichierPayload!): [NoticeDetail]!
+    getNoticesOccurrenceApplication(query: SearchNoticesOccurrenceApplicationQuery!): [NoticeOccurrenceApplication]!
+}
+
+type NoticesDTO {
+    codnot: String
+    libnot: String
+    fornot: String
+    poinot: BigDecimal
+    pornot: String
+    dnotir: String
+    perime: Short
+    codsit: String
+    pdfFilePath: String
+    isNotAuthorisedToBeDeleted: Boolean
+}
+
+input CreateOrUpdateNoticeInput {
+    codnot: String!
+    libnot: String!
+    fornot: String!
+    poinot: BigDecimal!
+    pornot: String!
+    dnotir: String
+    perime: Short
+    codsit: String
+    pdfFilePath: String
+}
+
+input Base64FileInput {
+    filename: String!
+    content: String!
+}
+
+input SearchNotficQuery {
+    codnot: String!
+    codenv: String
+    codorg: [String]
+    codapp: String
+    codcom: String
+    codfic: [String]
+    refimp: String
+}
+
+type NotficFichier {
+    codenv: String
+    codorg: String
+    codapp: String
+    codcom: String
+    codfic: String
+    codeProd: String
+    refImprime: String
+    dnotid: String
+    dnotit: String
+    maxnot: Int
+}
+
+input DeleteNotficQuery {
+    codenv: String
+    codorg: String
+    codapp: String
+    codcom: String
+    codfic: String
+    codnot: String
+}
+
+input UpdateNotficsInput {
+    codnot: String
+    codenv: String
+    codorg: String
+    codapp: String
+    codcom: String
+    codfic: String
+    dnotid: String
+    dnotit: String
+    maxnot: Int
+}
+
+input NotFicInput {
+    codnot: String!
+    codenv: String!
+    codorg: String!
+    codapp: String!
+    codcom: String!
+    codfic: String!
+    dnotid: String
+    dnotit: String
+}
+
+type NotFic {
+    codnot: String
+    codenv: String
+    codorg: String
+    codapp: String
+    codcom: String
+    codfic: String
+    dnotid: String
+    dnotit: String
+    maxnot: BigDecimal
+    curnot: BigDecimal
+}
+
+input SearchNoticesOccurrenceApplicationQuery {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+}
+
+type NoticeOccurrenceApplication {
+    codnot: String
+    poinot: Int
+    fornot: String
+    pornot: String
+    libnot: String
+    codsit: String
+}
+
+input SearchNoticesFichiersPayload {
+    codenv: String
+    codorg: [String]
+    codapp: String
+    codcom: String
+    codfic: [String]
+    refimp: String
+}
+
+input FindNoticeDetailsByFichierPayload {
+    codenv: String!
+    codorg: String!
+    codapp: String!
+    codcom: String!
+    codfic: String!
+}
+
+type NoticesFichiersDTO {
+    codenv: String
+    codorg: String
+    codapp: String
+    codcom: String
+    codfic: String
+    codeProd: String
+    refImprime: String
+    notices: [String]
+}
+
+type NoticeDetail {
+    codeNotice: String
+    format: String
+    poids: Float
+    portee: String
+    dateDebut: String
+    dateFin: String
+}

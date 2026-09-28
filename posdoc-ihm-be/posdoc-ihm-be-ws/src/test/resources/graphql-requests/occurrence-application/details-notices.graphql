@@ -1,0 +1,16 @@
+query getDetailsNotices($paramData: OngletsParamDataInput!) {
+    getDetailsNotices(paramData: $paramData) {
+        codcom
+        codfic
+        numcom
+        codprd
+        refimp
+        libfic
+        codnot
+        poinot
+        fornot
+        pornot
+        libnot
+        codsit
+    }
+}

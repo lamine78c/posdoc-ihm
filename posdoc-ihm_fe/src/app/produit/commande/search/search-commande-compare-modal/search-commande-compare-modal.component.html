@@ -1,0 +1,43 @@
+<div style="border: inset; padding: 1.6%">
+  <div class="row search-block" style="padding-left: 1rem">
+    <div style="width: 25%">
+      <app-liste-deroulante-multiple
+        [form]="formEnv"
+        [inputColumns]="12"
+        [label]="'Environnement :'"
+        [defaultText]="' '"
+        [labelWidth]="151"
+        [isWithValidAndRAZBtn]="false"
+        (changeEvent)="onChangeEnvCompare($event)"
+      ></app-liste-deroulante-multiple>
+    </div>
+
+    <div style="width: 25%">
+      <app-liste-deroulante-multiple
+        [form]="formApp"
+        [inputColumns]="12"
+        [label]="'Application :'"
+        [defaultText]="' '"
+        [labelWidth]="151"
+        [isWithValidAndRAZBtn]="false"
+        (changeEvent)="onChangeApplication($event)"
+      ></app-liste-deroulante-multiple>
+    </div>
+
+    <div style="width: 25%">
+      <app-liste-deroulante-hierarchisee
+        [form]="formOrg"
+        [inputColumns]="12"
+        [label]="'Organisme/Région :'"
+        [defaultText]="' '"
+        [isWithValidAndRAZBtn]="false"
+        (changeEvent)="onChangeOrganisme($event)"
+        [labelWidth]="151"
+      ></app-liste-deroulante-hierarchisee>
+    </div>
+
+    <div class="d-flex" style="width: 25%; margin-left: auto; margin-bottom: 0.3rem; justify-content: end; flex-direction: column">
+      <button [disabled]="form.invalid" (click)="lister()" type="button" class="btn btn-primary" style="border: none">Comparer</button>
+    </div>
+  </div>
+</div>

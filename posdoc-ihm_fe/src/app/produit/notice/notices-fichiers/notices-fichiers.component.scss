@@ -1,0 +1,14 @@
+.global-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.normal-content {
+  flex: 0 0 auto;
+}
+
+.remain-content {
+  flex: 1 1 auto;
+  overflow: hidden;
+}

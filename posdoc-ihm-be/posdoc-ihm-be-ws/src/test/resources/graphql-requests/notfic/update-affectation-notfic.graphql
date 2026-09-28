@@ -1,0 +1,14 @@
+mutation update($notfics: [UpdateNotficsInput]!) {
+    updateNotfics(notfics: $notfics) {
+        codenv
+        codorg
+        codapp
+        codcom
+        codfic
+        codeProd
+        refImprime
+        dnotid
+        dnotit
+        maxnot
+    }
+}

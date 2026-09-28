@@ -1,0 +1,26 @@
+query GetRessources {
+  allRessources  {
+    codeEnvironnement
+    codeOrganisme
+    codeApplication
+    codeGamme
+    codeSite
+    codeRessource
+    codeServeur
+    libelle
+    type
+    logicielDistribution
+    referenceDistributionProduit
+    referenceDistributionProduitRecap
+    userId
+    password
+    typeFusion
+    destinataire
+    fileImpression
+    informationUtilisateur
+    fileBloquee
+    miseSousPli
+    profil
+    isNotAuthorisedToBeDeleted
+  }
+}

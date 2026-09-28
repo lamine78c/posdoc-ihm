@@ -1,0 +1,3 @@
+mutation UpdateConsolidationFacturation($query: UpdateConsolidationFacturationQuery) {
+    updateConsolidationFacturation(query: $query)
+}

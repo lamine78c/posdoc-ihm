@@ -1,0 +1,18 @@
+<div class="global-content">
+  <div class="normal-content search-container">
+    <app-search-occurrence-application (applySearchEvent)="onSearchOccurrencesApplication($event)"></app-search-occurrence-application>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [columnDefs]="columnDefs"
+      [rowData]="rowData$ | async"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="false"
+      [enableExportButtons]="true"
+      [disablePdfExportButton]="true"
+      (gridReady)="onGridReady($event)"
+      (exportAsExcel)="export($event)"
+    ></app-tableau>
+  </div>
+</div>

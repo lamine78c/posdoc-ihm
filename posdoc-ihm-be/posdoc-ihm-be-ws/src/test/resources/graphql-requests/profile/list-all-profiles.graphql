@@ -1,0 +1,6 @@
+query GetProfiles {
+    allProfiles {
+        profile
+        libelleProfile
+    }
+}

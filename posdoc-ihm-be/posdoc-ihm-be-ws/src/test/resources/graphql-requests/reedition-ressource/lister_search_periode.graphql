@@ -1,0 +1,3 @@
+query getPeriodeFromGenfic($codenv: String, $codorg: [String], $codapp: String) {
+  getPeriodeFromGenfic(codenv: $codenv, codorg: $codorg, codapp: $codapp)
+}

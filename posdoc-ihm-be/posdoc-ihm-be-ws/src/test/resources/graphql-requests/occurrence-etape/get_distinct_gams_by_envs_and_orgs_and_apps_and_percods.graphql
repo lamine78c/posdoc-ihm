@@ -1,0 +1,3 @@
+query GetDistinctGamsAndComsByEnvsAndOrgsAndAppsAndPercods($codenvs: [String], $codorgs: [String], $codapps: [String], $percods: [String]) {
+    getDistinctGamsByEnvsAndOrgsAndAppsAndPercods(codenvs: $codenvs, codorgs: $codorgs, codapps: $codapps, percods: $percods)
+}

@@ -1,0 +1,22 @@
+mutation createPapaad($createDTO: CreatePapaadInput!) {
+    createPapaad(createPapaad: $createDTO) {
+        codeCommande
+        codeFichier
+        codeNotif
+        libelle
+        periode
+        codeRND
+        appPro
+        typeHas
+        format
+        isUrib
+        nsTruc
+        imprime
+        huissier
+        numNot
+        strRaf
+        contrat
+        medele
+        idtbcc
+    }
+}

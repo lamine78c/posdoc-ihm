@@ -1,0 +1,47 @@
+<div class="ps-2">
+  <div class="row row-with-border">
+    <div class="row p-0">
+      <div class="col-5 p-0">
+        <app-label-valeur [label]="'Environnement'" [valeur]="getEnvironnement()" [labelColumns]="6" [inputColumns]="6"></app-label-valeur>
+      </div>
+      <div class="col-3 p-0">
+        <app-label-valeur [label]="'Application'" [valeur]="dataDefinition.application" [labelColumns]="6" [inputColumns]="6"></app-label-valeur>
+      </div>
+    </div>
+    <div class="row p-0">
+      <div class="col-5 p-0">
+        <app-label-valeur [label]="'Organisme/Région'" [valeur]="getOrganisme()" [labelColumns]="6" [inputColumns]="6"></app-label-valeur>
+      </div>
+      <div class="col-3 p-0">
+        <app-label-valeur [label]="'Commande'" [valeur]="dataDefinition.commande" [labelColumns]="6" [inputColumns]="6"></app-label-valeur>
+      </div>
+      <div class="col-4 p-0">
+        <app-label-valeur [label]="'Nom fichier'" [valeur]="dataDefinition.fichier" [labelColumns]="5" [inputColumns]="7"></app-label-valeur>
+      </div>
+    </div>
+  </div>
+  <div class="pt-3">
+    <h3>Gammes et ressources</h3>
+  </div>
+  <div class="all-env" style="display: flex">
+    <div class="" *ngFor="let data of ressourcesByEnv" style="width: 150px; min-width: 180px">
+      <h6>Environnement {{ data.env }}</h6>
+      <div class="pt-2 row-with-border-horizontal">
+        <div class="form-check" *ngFor="let box of data.exem; index as i">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="checkbox-{{ i }}-{{ data.env }}"
+            role="checkbox"
+            name="checkbox-{{ i }}-{{ data.env }}"
+            (ngModel)="boxClick(box.value)"
+            (change)="boxClick($event.target.checked, box)"
+          />
+          <label class="form-check-label" for="checkbox-{{ i }}-{{ data.env }}">
+            {{ box.codeGamme }}/{{ box.codeSite }}/{{ box.codeRessource }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

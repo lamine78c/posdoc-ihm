@@ -1,0 +1,5 @@
+mutation DeleteImprime($var: DeleteByStringIdInput!){
+    deleteImprime(deleteImprime: $var){
+        ok
+    }
+}

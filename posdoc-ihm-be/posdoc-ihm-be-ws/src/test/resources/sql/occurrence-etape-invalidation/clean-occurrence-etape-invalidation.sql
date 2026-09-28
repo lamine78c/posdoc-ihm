@@ -1,0 +1,4 @@
+DELETE FROM genetp;
+DELETE FROM genlie;
+DELETE FROM genapp;
+DELETE FROM utilog;

@@ -1,0 +1,111 @@
+<div class="global-content">
+  <div class="normal-content mb-2" *ngIf="!!asynchronousErrors$">
+    <app-note-statique [category]="toastCategoryEnum.ERROR"></app-note-statique>
+  </div>
+
+  <div
+    class="d-flex normal-content pb-2"
+    *ngIf="enableAddButton || displayDeleteSelectedButton || enableFullEdit || enableExportButtons || editGroupButton || validerButton"
+  >
+    <div *ngIf="!isEditing" class="button-group">
+      <ng-container *appCheckPermission="canAddPerm">
+        <button *ngIf="enableAddButton" type="button" class="btn btn-secondary" (click)="addRow()" [disabled]="disableAddBtn">Ajouter</button>
+        <button
+          *ngIf="addGroupButton"
+          type="button"
+          class="btn btn-secondary"
+          [disabled]="disableAjouterEnMasseIfNoRowSelected && !!!gridApi?.getSelectedNodes()?.length"
+          (click)="openPopup('add')"
+        >
+          Ajouter en masse
+        </button>
+        <button *ngIf="validerButton" type="button" class="btn btn-secondary" [disabled]="disableValiderBtn" (click)="openPopup('valider')">
+          Valider
+        </button>
+      </ng-container>
+      <ng-container *appCheckPermission="canEditPerm">
+        <button *ngIf="editGroupButton" type="button" class="btn btn-secondary" [disabled]="!isEnableButton()" (click)="openPopup('edit')">
+          Modifier en masse
+        </button>
+      </ng-container>
+      <ng-container *appCheckPermission="canRemovePerm">
+        <button
+          *ngIf="displayDeleteSelectedButton"
+          type="button"
+          class="btn btn-secondary"
+          [disabled]="!isEnableButton()"
+          (click)="deleteAllSelected()"
+        >
+          Supprimer en masse
+        </button>
+      </ng-container>
+      <button *ngIf="enableFullEdit" type="button" class="btn btn-secondary" (click)="startEditing()">Démarrer édition</button>
+      <ng-container *appCheckPermission="canAddPerm">
+        <button 
+          *ngIf="completeButton" 
+          [disabled]="!isEnableCompleteButton()"
+          type="button" class="btn btn-secondary" (click)="openPopup('complete')">
+          Compléter
+        </button>
+      </ng-container>
+      <button *ngIf="searchButton" type="button" class="btn btn-secondary" (click)="openSearchModal(true)">
+        <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+    </div>
+    <div *ngIf="enableExportButtons && !isEditing" class="button-group ms-auto">
+      <button *ngIf="compareButton" type="button" class="btn btn-secondary" (click)="openPopup('compare')">Comparer</button>
+      <button *ngIf="!disableExcelExportButton" type="button" class="btn btn-outline-secondary" (click)="exportAsExcelStart()">
+        <i class="icon-b_export_csv" aria-hidden="true"></i><span>Exporter excel</span>
+      </button>
+      <button *ngIf="!disablePdfExportButton" type="button" class="btn btn-outline-secondary" (click)="exportAsPDFStart()">
+        <i class="icon-b_export_pdf" aria-hidden="true"></i><span>Exporter PDF</span>
+      </button>
+    </div>
+    <div class="button-group ms-auto tableau-edit-buttons" *ngIf="isEditing">
+      <button type="button" class="btn btn-outline-primary" (click)="saveOrCancelEdition(true)">
+        <i class="icon-b_cancel" aria-hidden="true"></i><span>Annuler</span>
+      </button>
+      <button type="button" class="btn btn-primary" (click)="saveOrCancelEdition()" [disabled]="disableSaveForAsyncErrors">
+        <i class="icon-b_valid" aria-hidden="true"></i><span>Enregistrer</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="grid-theme-wrapper" class="remain-content" style="height: 100%; width: 100%" [className]="'red-theme'">
+    <ag-grid-angular
+      #agGrid
+      id="{{ uniqueUiID }}"
+      class="ag-theme-alpine"
+      style="height: 100%"
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [context]="context"
+      [columnDefs]="columnDefs"
+      (gridReady)="onGridReady($event)"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [overlayLoadingTemplate]="overlayLoadingTemplate"
+    >
+    </ag-grid-angular>
+  </div>
+
+  <!-- RÉTROCOMPATIBILITÉ : Ajouter la classe has-total-row -->
+  <div class="normal-content">
+    <app-pagination
+      *ngIf="pagination"
+      [agGrid]="agGrid"
+      [ngClass]="{ 'has-total-row': !!total }"
+      [defaultNbreLignes]="defaultNbreLignes"
+    ></app-pagination>
+  </div>
+
+  <div class="d-flex mt-2 normal-content" *ngIf="isEditing">
+    <div class="button-group ms-auto">
+      <button type="button" class="btn btn-outline-primary" (click)="saveOrCancelEdition(true)">
+        <i class="icon-b_cancel" aria-hidden="true"></i><span>Annuler</span>
+      </button>
+      <button type="button" class="btn btn-primary" (click)="saveOrCancelEdition()" [disabled]="disableSaveForAsyncErrors">
+        <i class="icon-b_valid" aria-hidden="true"></i><span>Enregistrer</span>
+      </button>
+    </div>
+  </div>
+</div>

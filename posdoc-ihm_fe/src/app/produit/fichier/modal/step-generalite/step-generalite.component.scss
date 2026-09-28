@@ -1,0 +1,16 @@
+.row-with-border {
+  border-bottom: 0.1rem solid #d8d8d8; // 1px
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+}
+
+.checkbox-eclatement {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.icon-b_modify {
+  cursor: pointer;
+  vertical-align: bottom;
+}

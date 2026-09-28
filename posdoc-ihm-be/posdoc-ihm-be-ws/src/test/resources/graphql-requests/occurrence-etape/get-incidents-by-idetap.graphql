@@ -1,0 +1,8 @@
+query getIncidentsByIdetap($idetap: Int, $idtfus: Int) {
+    getIncidentsByIdetap(idetap: $idetap, idtfus: $idtfus)
+    {
+        dcreat
+        script
+        mesano
+    }
+}

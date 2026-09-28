@@ -1,0 +1,2 @@
+DELETE FROM premas;
+DELETE FROM utilog;

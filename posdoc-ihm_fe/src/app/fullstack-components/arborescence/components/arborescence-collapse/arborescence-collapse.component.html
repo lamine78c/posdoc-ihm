@@ -1,0 +1,41 @@
+<div class="arborescence-collapse">
+  <div class="tree-element d-flex position-relative" [ngClass]="{ 'with-checkboxes': useCheckboxes }">
+    <div>
+      <input
+        (ngModelChange)="checkboxClicked(index)"
+        *ngIf="useCheckboxes"
+        class="form-check-input"
+        type="checkbox"
+        [id]="'checkbox-' + parentsIndexes + '-' + index"
+        [formControl]="formGroup['controls'][index]"
+        [(ngModel)]="tree[index].value"
+      />
+      <label class="form-check-label" [for]="useCheckboxes ? 'checkbox-' + parentsIndexes + '-' + index : ''">
+        <span [ngClass]="{ checked: formGroup['controls'][index].value === null || formGroup['controls'][index].value }">
+          <button
+            (click)="itemClicked(tree[index])"
+            *ngIf="!tree[index].children"
+            type="button"
+            class="btn btn-primary"
+            [class.itemSelected]="tree[index].id === classReference.idItemSelected"
+          >
+            <span>{{ tree[index].text }}</span>
+          </button>
+          <span *ngIf="tree[index].children">{{ tree[index].text }}</span>
+        </span>
+      </label>
+    </div>
+  </div>
+
+  <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="collapse-container position-relative">
+    <app-arborescence-children
+      *ngIf="tree[index].children"
+      [tree]="tree[index].children"
+      [parentForm]="formGroup.get('' + index)"
+      s
+      [parentsIndexes]="parentsIndexes ? parentsIndexes + '-' + index : '' + index"
+      [useCheckboxes]="useCheckboxes"
+      (output)="outputFn($event)"
+    ></app-arborescence-children>
+  </div>
+</div>

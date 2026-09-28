@@ -1,0 +1,170 @@
+<div class="row pt-1 normal-content">
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2">Date début :</label>
+      <div class="col-7">
+        <app-date-picker [currentDate]="form.get('dfiexpDeb')"></app-date-picker>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2">Date fin :</label>
+      <div class="col-7">
+        <app-date-picker [currentDate]="form.get('dfiexpFin')" [minDate]="dfiexpFinMinDate"></app-date-picker>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2">Organismes :</label>
+      <div class="col-7">
+        <app-liste-deroulante-hierarchisee
+          [form]="form.get('codorgs')"
+          [defaultText]="' '"
+          [labelColumns]="5"
+          [inputColumns]="7"
+          [isError]="true"
+          [isWithValidAndRAZBtn]="false"
+          [errorMessage]="form.get('codorgs').errors?.message || form.get('codorgs').errors"
+        ></app-liste-deroulante-hierarchisee>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2">Client :</label>
+      <div class="col-7">
+        <app-liste-deroulante-multiple
+          [form]="form.get('codclis')"
+          [defaultText]="' '"
+          [labelColumns]="5"
+          [inputColumns]="7"
+          [isError]="true"
+          [isWithValidAndRAZBtn]="false"
+          [errorMessage]="form.get('codclis').errors?.message || form.get('codclis').errors"
+        ></app-liste-deroulante-multiple>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row pt-1 normal-content">
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2">Tarifs :</label>
+      <div class="col-7">
+        <app-liste-deroulante-multiple
+          [form]="form.get('typtars')"
+          [defaultText]="' '"
+          [labelColumns]="5"
+          [inputColumns]="7"
+          [isError]="true"
+          [isWithValidAndRAZBtn]="false"
+          [errorMessage]="form.get('typtars').errors?.message || form.get('typtars').errors"
+        ></app-liste-deroulante-multiple>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2">Environnement :</label>
+      <div class="col-7">
+        <app-liste-deroulante
+          [form]="form.get('codenv')"
+          [blankOptionValue]="' '"
+          [options]="optionsEnv"
+          [labelColumns]="5"
+          [inputColumns]="7"
+          [hasBlankOption]="true"
+          [isError]="true"
+          [errorMessage]="form.get('codenv').errors?.message || form.get('codenv').errors"
+        ></app-liste-deroulante>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2">Application :</label>
+      <div class="col-7">
+        <app-liste-deroulante
+          [form]="form.get('codapp')"
+          [blankOptionValue]="' '"
+          [options]="optionsApp"
+          [labelColumns]="4"
+          [inputColumns]="7"
+          [hasBlankOption]="true"
+          [isError]="true"
+          [errorMessage]="form.get('codapp').errors?.message || form.get('codapp').errors"
+        ></app-liste-deroulante>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2">Commande :</label>
+      <div class="col-7">
+        <app-champ-de-saisie
+          [labelColumns]="5"
+          [inputColumns]="7"
+          [index]="1"
+          [fillInput]="false"
+          [form]="form.get('codcom')"
+          [isError]="true"
+          [toUpperCase]="false"
+          [errorMessage]="form.get('codcom').errors?.message || form.get('codcom').errors"
+        ></app-champ-de-saisie>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row pt-1 normal-content">
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2">Fichier :</label>
+      <div class="col-7">
+        <app-champ-de-saisie
+          [labelColumns]="4"
+          [inputColumns]="7"
+          [index]="2"
+          [fillInput]="false"
+          [form]="form.get('codfic')"
+          [isError]="true"
+          [toUpperCase]="false"
+          [errorMessage]="form.get('codfic').errors?.message || form.get('codfic').errors"
+        ></app-champ-de-saisie>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2">Site exp. :</label>
+      <div class="col-7">
+        <app-liste-deroulante
+          [form]="form.get('codsit')"
+          [blankOptionValue]="' '"
+          [options]="optionsSite"
+          [labelColumns]="4"
+          [inputColumns]="7"
+          [hasBlankOption]="true"
+          [isError]="true"
+          [errorMessage]="form.get('codsit').errors?.message || form.get('codsit').errors"
+        ></app-liste-deroulante>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 p-0">
+    <div class="form-group d-flex align-items-center">
+      <label class="col-5 me-2 col-form-label" for="checkbox-totaux">Totaux ? :</label>
+      <div class="col-7">
+        <input [formControl]="form.get('totaux')" class="form-check-input" type="checkbox" id="checkbox-totaux" />
+      </div>
+    </div>
+  </div>
+  <div class="col-3 p-0">
+    <div class="button-group d-flex">
+      <button type="button" class="btn btn-primary btn-recherche me-2" [disabled]="!isFormValid()" (click)="valider()">
+        <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="popup_detail">
+  <app-popup
+    [modalRef]="activeModal"
+    [title]="modalTitle"
+    [firstButton]="{ label: 'Valider', icone: 'icon-b_valid' }"
+    [secondButton]="{ label: 'Fermer', icone: 'icon-b_cancel' }"
+    (saveEvent)="invalideGenEtpEtLiens()"
+  >
+    <p>Êtes-vous sûr de vouloir invalider l'étape ?</p>
+  </app-popup>
+</div>

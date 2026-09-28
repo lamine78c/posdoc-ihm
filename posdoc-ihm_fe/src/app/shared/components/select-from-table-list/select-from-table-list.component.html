@@ -1,0 +1,73 @@
+<div class="form row" [ngStyle]="vertical ? { 'flex-direction': 'column' } : {}">
+  <label
+    *ngIf="label"
+    for="select{{ index }}"
+    class="col-{{ labelColumns }} col-form-label"
+    [ngStyle]="{ width: labelWidth + 'px' }"
+    [class.ps-0]="vertical"
+    [ngClass]="{ 'col-form-label-fix': labelWidth }"
+    >{{ label }}</label
+  >
+  <div
+    class="table-select col-{{ inputColumns }} position-relative {{ tableSelectClass }} d-flex"
+    (click)="!isDisabled && openCloseSelect()"
+    [ngStyle]="fillInput && { width: 'calc(100% - ' + labelWidth + 'px)' }"
+    [ngClass]="{ error: isTouchedAndEmpty(), disabled: isDisabled }"
+  >
+    <div class="context-cursor">
+      <div class="selected-element">{{ getSelectedElement() }}</div>
+      <button class="icon-arrow-down">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" fill="grey" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+          <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+        </svg>
+      </button>
+    </div>
+    <span
+      *ngIf="isTouchedAndEmpty()"
+      [ngbPopover]="array.isArray(errorMessage) ? list : errorMessage"
+      triggers="mouseenter:mouseleave focus"
+      tabindex="0"
+      class="icon-error d-flex"
+    ></span>
+    <table
+      aria-describedby="table selector"
+      id="table{{ index }}"
+      class="table-selector"
+      [ngClass]="{ 'table-before': tableAlignment === 'before', 'single-select': !isMultipleSelect }"
+      [ngStyle]="displayTable"
+    >
+      <thead>
+        <tr (click)="stopPropagation($event)">
+          <th *ngIf="isMultipleSelect && this.options.length > 0">
+            <input type="checkbox" (change)="selectAll($event)" [(ngModel)]="selectAllChecked" />
+          </th>
+          <th *ngFor="let columnLabel of getHeaderColumns()">
+            {{ columnLabel }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of options"
+          id="{{ item.value }}"
+          [ngClass]="{ 'disabled-item': item.disabled }"
+          (click)="selectRow(item.value)"
+          [class.selected]="!isMultipleSelect && getSelectedElement() === item.value"
+        >
+          <td *ngIf="isMultipleSelect">
+            <input type="checkbox" [checked]="isChecked(item.value)" (change)="addToSelected($event, item.value)" (click)="stopPropagation($event)" />
+          </td>
+          <td *ngFor="let column of item.columns">
+            <div>{{ column.value }}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #list>
+  <ng-container *ngFor="let error of errorMessage; let last = last">
+    <div [ngClass]="{ 'mb-2': !last }">{{ error.message }}</div>
+  </ng-container>
+</ng-template>

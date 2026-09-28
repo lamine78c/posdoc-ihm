@@ -1,0 +1,55 @@
+extend type Mutation {
+    updateFaq(id: Int!, faq: CreateOrUpdateFaqInputDTO!): [Faq]
+    updateStatus(id: Int!, status: String!): [Faq]
+    increaseViewCount(id: Int!): [Faq]
+    createFaq(createFaq: CreateOrUpdateFaqInputDTO!): [Faq]
+    deleteFaq(id: Int!): DeletePayload
+    createFaqExchange(createFaqExchange: CreateFaqExchangeInputDTO!): Faq
+    deleteAllExchanges(faqId: Int!): DeletePayload
+}
+
+extend type Query {
+    searchAllFaq: [Faq]
+    searchFaqByPath(path: String!): [Faq]
+    searchFaqByUserId(userId: String!): [Faq]
+    getNotification: [FaqNotification]
+}
+
+type FaqNotification {
+    id: Int
+    recipientId: String
+    faq: Faq
+    createdAt: DateTime
+}
+
+type Faq {
+    id: Int
+    path: String
+    question: String
+    answer: String
+    status: String
+    viewCount: Int
+    createdBy: String
+    updatedBy: String
+    createdAt: DateTime
+    updatedAt: DateTime
+    exchanges: [FaqExchange]
+}
+
+type FaqExchange {
+    id: Int
+    author: String
+    message: String
+    createdAt: DateTime
+}
+
+input CreateOrUpdateFaqInputDTO {
+    path: String
+    question: String
+    answer: String
+}
+
+input CreateFaqExchangeInputDTO {
+    message: String
+    faqId: Int
+}

@@ -1,0 +1,64 @@
+<div class="row pt-1 normal-content search-container">
+  <div class="col-20 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Environnement:'"
+      [blankOptionValue]="' '"
+      [form]="formEnv"
+      [index]="indexForm.ENVIRONNEMENT"
+      [isError]="true"
+      [options]="optionsEnv"
+      [labelColumns]="7"
+      [labelClass]="'pl-0'"
+      [hasBlankOption]="true"
+      [inputColumns]="5"
+      [errorMessage]="formEnv.errors?.message || formEnv.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-20 p-0">
+    <app-liste-deroulante-multiple
+      [form]="form.get('site')"
+      [label]="'Sites:'"
+      [defaultText]="' '"
+      [labelColumns]="4"
+      [inputColumns]="8"
+      [isError]="true"
+      [isWithValidAndRAZBtn]="false"
+      [errorMessage]="form.get('site').errors?.message || form.get('site').errors"
+    ></app-liste-deroulante-multiple>
+  </div>
+  <div class="col-20 p-0">
+    <app-select-from-table-list
+      sessionDataSearchDirective
+      [label]="'Période début:'"
+      [form]="formPeriodeDebut"
+      [index]="indexForm.PERIODE_TB"
+      [isError]="true"
+      [options]="optionsPeriodeDebut"
+      [labelColumns]="5"
+      [inputColumns]="6"
+      [errorMessage]="formPeriodeDebut.errors?.message || formPeriodeDebut.errors"
+      [tableSelectClass]="'periode-debut'"
+    ></app-select-from-table-list>
+  </div>
+  <div class="col-20 p-0">
+    <app-select-from-table-list
+      [label]="'Période fin:'"
+      [form]="form.get('periodeFin')"
+      [isError]="true"
+      [options]="optionsPeriodeFin"
+      [labelColumns]="5"
+      [inputColumns]="6"
+      [tableAlignment]="'before'"
+      [errorMessage]="form.get('periodeFin').errors?.message || form.get('periodeFin').errors"
+      [tableSelectClass]="'periode-fin'"
+    ></app-select-from-table-list>
+  </div>
+  <div class="col-20 p-0">
+    <div class="button-group ms-auto">
+      <button type="button" class="btn btn-primary btn-recherche" [disabled]="!isFormValid()" (click)="valider()">
+        <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+    </div>
+  </div>
+</div>

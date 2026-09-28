@@ -1,0 +1,7 @@
+mutation MyQuery($var: CreateOrUpdateSiteOrganismeInput!){
+    createSiteOrganisme(createSiteOrganisme: $var){
+        codeOrganisme
+        codeSiteDematerialisation
+        codeSiteProdocs
+    }
+}

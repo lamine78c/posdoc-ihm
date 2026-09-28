@@ -1,0 +1,113 @@
+<div class="row pt-1 normal-content">
+  <div class="p-0 col-2">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [form]="formEnv"
+      [index]="indexForm.ENVIRONNEMENT"
+      [label]="'Environnement:'"
+      [options]="optionsEnv$ | async"
+      [labelColumns]="6"
+      [labelClass]="'pl-0'"
+      [inputColumns]="6"
+      [hasBlankOption]="true"
+      [blankOptionValue]="' '"
+      [isError]="true"
+      [errorMessage]="formEnv.errors?.message || formEnv.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-2">
+    <app-liste-deroulante-hierarchisee
+      sessionDataSearchDirective
+      [form]="formOrg"
+      [formIndex]="indexForm.ORGANISME"
+      [label]="'Organismes:'"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [isWithValidAndRAZBtn]="false"
+      [isOptTreeInit]="isOrgOptionsInitialized"
+      [defaultText]="' '"
+      (changeEvent)="onChangeOrganisme($event)"
+      [isError]="true"
+      [errorMessage]="formOrg.errors?.message || formOrg.errors"
+    ></app-liste-deroulante-hierarchisee>
+  </div>
+  <div class="col-2">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [form]="formApp"
+      [index]="indexForm.APPLICATION"
+      [label]="'Application:'"
+      [options]="optionsApp$ | async"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [hasBlankOption]="true"
+      [blankOptionValue]="' '"
+      [isError]="true"
+      [errorMessage]="formApp.errors?.message || formApp.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-3">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [form]="formCom"
+      [index]="indexForm.COMMANDE"
+      [label]="'Commande:'"
+      [options]="optionsCom$ | async"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [hasBlankOption]="true"
+      [blankOptionValue]="' '"
+      [isError]="true"
+      [errorMessage]="formCom.errors?.message || formCom.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-3">
+    <app-select-from-table-list
+      sessionDataSearchDirective
+      [form]="formFic"
+      [index]="indexForm.FICHIER_TB"
+      [label]="'Fichier:'"
+      [options]="optionsFic$ | async"
+      [isMultipleSelect]="true"
+      [labelColumns]="6"
+      [inputColumns]="5"
+      [isError]="true"
+      [errorMessage]="formFic.errors?.message || formFic.errors"
+    ></app-select-from-table-list>
+  </div>
+  <div class="p-0 col-2">
+    <app-liste-deroulante-multiple
+      [form]="formRes"
+      [label]="'Ressources:'"
+      [defaultText]="' '"
+      [labelColumns]="6"
+      [labelClass]="'pl-0'"
+      [inputColumns]="6"
+      (changeEvent)="onChangeResource($event)"
+      [isRessourceCustomSort]="true"
+      [isError]="true"
+      [isWithValidAndRAZBtn]="false"
+      [errorMessage]="formRes.errors?.message || formRes.errors"
+    ></app-liste-deroulante-multiple>
+  </div>
+  <div class="col-2 form-check radio-with-label d-flex align-items-center">
+    <label class="pt-mr-1 me-2 col-10" for="checkbox-ressources-absentes"> Ressources absentes : </label>
+    <input [formControl]="form.get('ressourcesAbsentes')" class="form-check-input" type="checkbox" id="checkbox-ressources-absentes" />
+  </div>
+  <div class="col-5">
+    <app-champ-de-saisie
+      [form]="form.get('message')"
+      [label]="'Message:'"
+      [labelColumns]="2"
+      [inputColumns]="10"
+      [isError]="true"
+      [toUpperCase]="false"
+      [errorMessage]="form.get('message').errors?.message || form.get('message').errors"
+    ></app-champ-de-saisie>
+  </div>
+  <div class="validate-button-container">
+    <button type="button" class="btn btn-primary btn-recherche" [disabled]="!isFormValid()" (click)="valider()">
+      <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+    </button>
+  </div>
+</div>

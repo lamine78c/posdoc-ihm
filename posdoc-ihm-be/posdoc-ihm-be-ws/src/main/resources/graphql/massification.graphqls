@@ -1,0 +1,176 @@
+extend type Mutation {
+    updateMassification(data: [UpdateMassificationInput]!, codsit: String): [SearchMassificationPayload]!
+    deleteMassification(data: [UpdateOrDeleteMassificationInput]!): DeleteMassificationPayload!
+    massifierFiles(data: [MassifierInput]!): MassificationResultPayload!
+    simulerFiles(data: [MassifierInput]!): MassificationResultPayload!
+}
+
+extend type Query {
+    getDistinctFieldsFromTmpMasGenFicGenProOrg: [OptionFields]
+    searchForMassification(searchMassificationPayload: SearchMassificationInput): [SearchMassificationPayload]
+    getPoolElementsForMassification(masfics : [String]): [MassificationPoolPayload]
+    getMassificationMessage(codenv : String, typtar: String, codsit: String, isTarifUrgent: Boolean): MassificationMessage
+    getSimulationMessage(codenv : String, codsit: String): MassificationMessage
+}
+
+type OptionFields {
+    codenv: String
+    codorg: String
+    codapp: String
+    codcom: String
+    codfic: String
+    codcli: String
+    percod: String
+    masuti: String
+    codsit: String
+}
+
+input SearchMassificationInput {
+    codenv: String,
+    codorgs: [String],
+    codapp: String,
+    codcom: String,
+    codfic: String,
+    codcli: String,
+    percod: String,
+    masuti: String,
+    codsit: String
+}
+
+type SearchMassificationPayload {
+    mascom: String
+    masfic: String
+    codsit: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    pagFic: Int
+    pliFic: Int
+    codcli: String
+    codbon: String
+    masuti: String
+    libfic: String
+    typsup: String
+}
+
+type MassificationPoolPayload {
+    mascom: String
+    masfic: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+}
+
+type MassificationMessage {
+    message: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+}
+
+input UpdateMassificationInput {
+    mascom: String
+    masfic: String
+    codsit: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    codeGam: String
+    pagFic: String
+    pliFic: String
+    codcli: String
+    codbon: String
+    masuti: String
+    libfic: String
+    typsup: String
+    isAllFichiersInPoolSelected: Boolean
+}
+
+input UpdateOrDeleteMassificationInput {
+    mascom: String
+    masfic: String
+    codsit: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    codeGam: String
+    pagFic: String
+    pliFic: String
+    codcli: String
+    codbon: String
+    masuti: String
+    libfic: String
+    typsup: String
+}
+
+input MassifierInput {
+    codEnv: String
+    codApp: String
+    codOrg: String
+    perCod: String
+    typar: String
+    isSimu: Boolean
+    listeFic: String
+    user: String
+    formId: String
+    bilanItems: [BilanItemInput]
+}
+
+input BilanItemInput {
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    numcom: String
+    pagFic: Int
+    pliFic: Int
+    codbon: String
+    codcli: String
+    mascom: String
+    masfic: String
+    codsit: String
+    libfic: String
+    masuti: String
+}
+
+type DeleteMassificationPayload{
+    ok: Boolean!
+    error : String
+}
+
+type UtiLogPayload {
+    codulo: Int!
+    codsta: String!
+    codusr: String!
+    formid: String!
+    datulo: Date
+    action: String!
+    params: String
+    result: Boolean!
+    erreur: String
+    versio: String
+}
+
+type MassificationResultPayload {
+    utiLog: UtiLogPayload!
+    pdfBase64: String
+}

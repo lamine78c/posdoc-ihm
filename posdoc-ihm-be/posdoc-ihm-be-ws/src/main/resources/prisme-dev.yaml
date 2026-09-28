@@ -1,0 +1,118 @@
+# Prisme config YAML via ConfigGenerator - Prisme-Client - PRISME Version 1.1.12
+
+# Definit le client http, Implemente IHttpClient
+http_client: fr.recouv.securite.prisme.client.HttpClientWithOkHttp3SupportSSL
+
+# URL du endpoint producteur de jetons
+token_endpoint: https://gatewayintra.gidn.recouv/security/v1/pss/token
+
+# URL du endpoint producteur de code authorisation
+authz_endpoint: https://gatewayintra.gidn.recouv/security/v1/pss/authz
+
+# URL du endpoint d enrolement client
+registry_endpoint: https://gatewayintra.gidn.recouv/security/v1/pss/registry
+
+# URL du endpoint d enrichissement de contexte
+populate_endpoint: https://gatewayintra.gidn.recouv/security/v1/pss/populate
+
+# Backend d authentification, Implemente IAuthenticator
+# Il met en oeuvre IAuthenticator, qui est utilisé pour vérifier la validité du jeton.
+# Valeur possible :
+# - AllowAllAuthenticator : Aucun filtre
+#   fr.recouv.securite.prisme.resourceserver.authenticator.AllowAllAuthenticator
+# - JSONSimpleAuthenticator : Jeton d'acces au format JSON
+#   fr.recouv.securite.prisme.resourceserver.authenticator.JSONSimpleAuthenticator
+# - JWTAuthenticator : Jeton d'acces au format JWT
+#   fr.recouv.securite.prisme.resourceserver.authenticator.JWTAuthenticator
+# Valeur par defaut: vide
+authenticator: fr.recouv.securite.prisme.resourceserver.authenticator.JWTAuthenticator
+
+# Backend des autorisations, Implemente IAuthorizer
+# Il met en oeuvre IAuthorizer, qui limite l acces et/ou fournit des autorisations.
+# Valeur possible :
+# - AllowAllAuthorizer : Aucun filtre, Desactive l autorisation; permet l action de tout utilisateur.
+#   fr.recouv.securite.prisme.resourceserver.authorizer.AllowAllAuthorizer
+# - WithPermissionsStoreAuthorizer : Autorisations enrichies a partir d un fichier de reference local ou distant
+#   fr.recouv.securite.prisme.resourceserver.authorizer.WithPermissionsStoreAuthorizer
+# - WithDualModeAuthorizer : Autorisations enrichies au demarrage par fichier local ou distant puis chargement complementaire par populateEndPoint PSS
+#   fr.recouv.securite.prisme.resourceserver.authorizer.WithDualModeAuthorizer
+# Valeur par defaut: vide
+authorizer:
+
+# Permission Loader
+# Parametrage du Loader de Permission, en lien avec le fichier de Permissions
+# Valeur possible : 
+# - NoneLoader : Sans permission
+#   fr.recouv.securite.prisme.commun.providers.business.NoneLoader
+# - TxtPermissionsLoader : Pour un format txt
+#   fr.recouv.securite.prisme.commun.providers.business.TxtPermissionsLoader
+# - YamlPermissionsLoader : Pour un format yaml
+#   fr.recouv.securite.prisme.commun.providers.business.YamlPermissionsLoader
+# - ListUrlPermissionsLoader : Pour un fichier d'url de Permissions
+#   fr.recouv.securite.prisme.commun.providers.business.ListUrlPermissionsLoader
+# Valeur par defaut: fr.recouv.securite.prisme.commun.providers.business.NoneLoader
+provider_permissions_loader: fr.recouv.securite.prisme.commun.providers.business.NoneLoader
+
+# Permission File
+# Liste du fichier contenant les Permissions ou les URL pour la construction des Permissions
+# Par defaut inspecte le classpath sinon preciser une URL
+# - Pour un fichier local : file:\\\my\path\fichier.txt ou fichier.txt si present dans le claspath
+# - Pour un fichier distant : http://domaine/my/path/fichier.txt
+#         (exemple pour test: http://localhost:8081/prisme-resourceserver-mock/mediation/snv2/list/listeUrlMetiersNat.txt)
+# Valeur par defaut: vide
+provider_permissions_file:
+
+
+#
+# Store : Definit le gestionnaire de magasin pour les identite, les jetons et les permissions
+# 
+
+# Valeur possible pour le magasin des identites : 
+# - fr.recouv.securite.prisme.commun.store.IdentityStoreWithGuavaCache
+identity_store: fr.recouv.securite.prisme.commun.store.IdentityStoreWithGuavaCache
+
+# Valeur possible pour le magasin des jetons : 
+# - fr.recouv.securite.prisme.commun.store.TokenStoreWithGuavaCache
+token_store: fr.recouv.securite.prisme.commun.store.TokenStoreWithGuavaCache
+
+
+#
+# Configuration securite suivant le mecanisme utilise
+# 
+
+# Exemple pour la gestion des cles (private_key_file) :
+# - Classpath : private_key_file=/FilePrivateKey.pem
+# -     Local : private_key_file=file:\\\C:\tmp\FilePrivateKey.pem
+# -       URL : private_key_file=http://serveur:port/application/FilePrivateKey.pem
+security_options: private_key_file=file:POSDOC-BE-PrivateKey.pem,public_key_file=file:POSDOC-BE-PublicKey.pem,truststore_url=file:magasin-certificats-POSDOC-BE.jks,truststore_password=POSDOC-BE:PassW18
+
+
+#
+# Client
+# 
+
+# identifiants du compte technique Anais et mot de passe
+client_id: cn=USR_READ_NAT_APP_POSDOC-BE,ou=POSDOC-BE,ou=Applications,ou=Technique,dc=recouv
+client_secret: POSDOC-BE:PassW18
+
+
+
+
+#
+# OIDC
+# 
+
+# Url de retour cote client apres authentification
+# Cote front (mode web)
+# Precision : inclus le script prismeKit.js
+url_client_callback:
+
+# Point de traitement apres authentification
+# Cote webapp (mode serveur)
+# Precision : Traite les donnees recuperes avec PrismeAuthentificationContext
+url_backend_redirect_after_auth:
+
+# Point de traitement pour deconnexion
+# Cote webapp (mode serveur)
+# Precision : Supprime le contenu de PrismeAuthentificationContext
+url_backend_logout: 

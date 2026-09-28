@@ -1,0 +1,7 @@
+mutation createMultif($createDTO: CreateOrUpdateMultifInput!) {
+    createMultif(createMultif: $createDTO) {
+        code
+        libelle
+        isNotAuthorisedToBeDeleted
+    }
+}

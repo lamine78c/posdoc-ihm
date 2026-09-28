@@ -1,0 +1,3 @@
+query getDistinctEnvOrgAppPerFromGenApp($bonTravailPeriodeFilterPayload: BonTravailPeriodeFilterPayload) {
+    getDistinctEnvOrgAppPerFromGenApp(bonTravailPeriodeFilterPayload: $bonTravailPeriodeFilterPayload)
+}

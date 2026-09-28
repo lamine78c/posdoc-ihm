@@ -1,0 +1,22 @@
+query Query  ($page: Int!, $size: Int!, $sort:[SortInput]!, $criteria: [FilterCriterionInput]!) {
+    regions : regions(queryParameters: {
+        paginationParameters: {
+            page: $page
+            size: $size
+            sort: $sort
+        }
+        filterCriteria: {
+            criteria: $criteria
+        }
+
+    }) {
+        totalElement
+        totalPages
+        elements {
+            ... on Region{
+                code
+                libelle
+            }
+        }
+    }
+}

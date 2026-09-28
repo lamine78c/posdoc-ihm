@@ -1,0 +1,12 @@
+query SearchAll {
+    searchAll {
+        id
+        path
+        message
+        state
+        createdAt
+        updatedAt
+        createdBy
+        updatedBy
+    }
+}

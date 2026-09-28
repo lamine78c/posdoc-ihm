@@ -1,0 +1,8 @@
+mutation uploadNoticePdf($codnot: String!, $file: Base64FileInput!) {
+    uploadNoticePdf(codnot: $codnot, file: $file) {
+        codnot
+        libnot
+        fornot
+        poinot
+    }
+}

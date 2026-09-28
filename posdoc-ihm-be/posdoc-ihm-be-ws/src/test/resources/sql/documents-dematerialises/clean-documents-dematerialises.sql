@@ -1,0 +1,4 @@
+DELETE FROM gendoc;
+DELETE FROM sitorg;
+DELETE FROM stadoc;
+DELETE FROM utilog;

@@ -1,0 +1,24 @@
+query Query ($page: Int!, $size: Int!, $sort:[SortInput]!, $criteria: [FilterCriterionInput]!) {
+    servers: servers(queryParameters: {
+        paginationParameters: {
+            page: $page
+            size: $size
+            sort: $sort
+        }
+        filterCriteria: {
+            criteria: $criteria
+        }
+    }){
+        totalElement
+        totalPages
+        elements {
+            ... on Server {
+                code
+                libelle
+                adresseIp
+                systeme
+                teste
+            }
+        }
+    }
+}

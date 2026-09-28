@@ -1,0 +1,11 @@
+query findFichiersForAffectationNotice($query: SearchNotficQuery) {
+    findFichiersForAffectationNotice(query: $query) {
+        codenv
+        codorg
+        codapp
+        codcom
+        codfic
+        codeProd
+        refImprime
+    }
+}

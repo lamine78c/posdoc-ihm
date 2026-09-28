@@ -1,0 +1,16 @@
+mutation create ($exemplaires: [CreateOrUpdateExemplaireInput]!, $message: String) {
+    createExemplaires (createExemplaires:  {exemplaires:$exemplaires}, message:$message) {
+        codenv
+        codorg
+        codapp
+        codcom
+        exeact
+        nbrexe
+        coddes
+        codres
+        codfic
+        codgam
+        numexe
+        codsit
+    }
+}

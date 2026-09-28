@@ -1,0 +1,16 @@
+<app-popup
+  [modalRef]="activeModal"
+  [title]="title"
+  [iconToDisplay]="'assets/icones-showcase/m_warning.svg'"
+  [firstButton]="firstButton"
+  [secondButton]="secondButton"
+>
+  <div *ngIf="rowDataArray.length === 1">{{ messages[1] }} : {{ rowDataArray[0] }}</div>
+
+  <div *ngIf="rowDataArray.length > 1">
+    {{ messages[2] }} :
+    <ul class="mb-0">
+      <li *ngFor="let rowData of rowDataArray">{{ rowData }}</li>
+    </ul>
+  </div>
+</app-popup>

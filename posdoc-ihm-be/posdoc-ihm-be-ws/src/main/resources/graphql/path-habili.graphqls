@@ -1,0 +1,9 @@
+extend type Query {
+    getPathCompletByPath(path: String!): String
+    getAllPathComplet: [PathHabiliCompletDTO]
+}
+
+type PathHabiliCompletDTO {
+    path: String
+    libelle: String
+}

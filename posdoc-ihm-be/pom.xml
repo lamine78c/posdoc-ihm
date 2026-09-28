@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>posdoc-ihm-be-commons</module>
+        <module>posdoc-ihm-be-database</module>
+        <module>posdoc-ihm-be-security</module>
+        <module>posdoc-ihm-be-ws</module>
+        <module>posdoc-ihm-be-domain</module>
+        <module>posdoc-ihm-be-flyway</module>
+    </modules>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.18</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>fr.acoss.posdoc</groupId>
+    <artifactId>posdoc-ihm-be</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>posdoc-ihm-be</name>
+    <description>POSDOC-IHM-BE</description>
+
+    <properties>
+        <java.version>11</java.version>
+        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <lombok.version>1.18.12</lombok.version>
+        <commons-text.version>1.8</commons-text.version>
+        <hawai-maven-plugin.version>6.1.0</hawai-maven-plugin.version>
+        <!-- JaCoCo Properties -->
+        <jacoco.version>0.8.12</jacoco.version>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/posdoc-ihm-ws/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.language>java</sonar.language>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphql-java</artifactId>
+                <version>14.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.11</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+
+                <!-- Version 5.x requise par SonarQube Server 2025.x : provisionne
+                     automatiquement un JRE 17 pour l'analyse (le build reste en Java 11) -->
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>5.1.0.4751</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.5.1</version> <!-- or newer version -->
+                    <configuration>
+                        <source>11</source> <!-- depending on your project -->
+                        <target>11</target> <!-- depending on your project -->
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                            <!-- other annotation processors -->
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+
+                <!-- Permet de livrer sur la plateforme hawai -->
+                <!--dépot : http://svn.hawai.recouv/apps-v6/hwi_postdoc/trunk -->
+                <plugin>
+                    <groupId>fr.acoss.industrialisation.maven</groupId>
+                    <artifactId>hawai-maven-plugin</artifactId>
+                    <version>${hawai-maven-plugin.version}</version>
+                    <configuration>
+                        <!-- Nom du projet dans le repo hawai : posdoc => /apps-v6/hwi_posdoc -->
+                        <projectName>posdoc</projectName>
+                        <applicationBinFileName>${project.build.finalName}.war</applicationBinFileName>
+                        <hawaiVersion>hawai6</hawaiVersion>
+                        <fedex>false</fedex>
+                        <updateApplicationVersion>false</updateApplicationVersion>
+                        <onlyUpdateProjectVersionLastDigit>true</onlyUpdateProjectVersionLastDigit>
+                        <!--                    production de document untitaire inexistant sur la branche lot_6.0_cereus pour le moment-->
+                        <branchName>${branche.hawai}</branchName>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+        <id>test-report-sonar</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jacoco</groupId>
+                            <artifactId>jacoco-maven-plugin</artifactId>
+                            <version>${jacoco.version}</version>
+                            <executions>
+                                <execution>
+                                    <id>prepare-agent</id>
+                                    <goals>
+                                        <goal>prepare-agent</goal>
+                                    </goals>
+                                </execution>
+                                <execution>
+                                    <id>report</id>
+                                    <goals>
+                                        <goal>report</goal>
+                                    </goals>
+                                    <configuration>
+                                        <formats>
+                                            <format>XML</format>
+                                        </formats>
+                                    </configuration>
+                                </execution>
+                                <execution>
+                                    <id>report-aggregate</id>
+                                    <phase>verify</phase>
+                                    <goals>
+                                        <goal>report-aggregate</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
+
+    <!-- URL de déploiement dans Nexus -->
+    <distributionManagement>
+        <repository>
+            <id>maven-releases</id>
+            <name>NEXUS BT Releases Maven Repository</name>
+            <url>http://nexus.urssaf.recouv/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <name>NEXUS BT Snapshots Maven Repository</name>
+            <url>http://nexus.urssaf.recouv/repository/maven-snapshots/</url>
+        </snapshotRepository>
+        <site>
+            <id>websites-hosted</id>
+            <name>Nexus BT Websites Repository</name>
+            <url>dav: http://nexus.urssaf.recouv/repository/websites-hosted/</url>
+        </site>
+    </distributionManagement>
+
+</project>

@@ -1,0 +1,46 @@
+.nav-item {
+  &.active {
+    .nav-link {
+      color: white;
+
+      &:hover {
+        color: white;
+        background-color: #5a76b7;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &:hover {
+    background-color: #f8d48c;
+    .nav-link {
+      color: #976707;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  .nav-link {
+    color: #0042a0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 0.924em;
+    font-style: normal;
+    font-weight: 600;
+  }
+}
+
+.nav-link.active,
+.nav-item.show .nav-link {
+  background-color: #5a76b7;
+}
+
+.nav-link.active,
+.show > .nav-link {
+  background-color: #5a76b7;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: #5a76b7;
+  color: white;
+}

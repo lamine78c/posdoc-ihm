@@ -1,0 +1,14 @@
+query searchProduitsByFichier($fichierPayload: SearchProduitsByFichierInput) {
+    searchProduitsByFichier(fichierPayload: $fichierPayload) {
+        codgam
+        libgam
+        prosta
+        proinf
+        dprodd
+        dprodt
+        dprods
+        pagfic
+        plific
+        rejfic
+    }
+}

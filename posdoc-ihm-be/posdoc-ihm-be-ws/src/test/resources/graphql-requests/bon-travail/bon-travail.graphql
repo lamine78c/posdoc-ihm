@@ -1,0 +1,26 @@
+query SearchBonTravail($bonTravailPayload: BonTravailPayload) {
+    searchBonTravail(bonTravailPayload: $bonTravailPayload) {
+        groupedBonTravail {
+            codbon
+            codenv
+            codorg
+            codapp
+            percod
+            codcom
+            codfic
+            numcom
+            pagfic
+            dappcr
+            drecep
+            dfiexp
+            delmsp
+            inform
+            codpal
+            libfic
+            codnot
+            libnot
+            codsit
+        }
+        message
+    }
+}

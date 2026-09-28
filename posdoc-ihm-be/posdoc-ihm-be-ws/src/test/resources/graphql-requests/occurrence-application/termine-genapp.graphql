@@ -1,0 +1,5 @@
+mutation termine($paramData: TerminaisonGenAppInput!) {
+    termineOccApp(paramData: $paramData) {
+        erreur
+    }
+}

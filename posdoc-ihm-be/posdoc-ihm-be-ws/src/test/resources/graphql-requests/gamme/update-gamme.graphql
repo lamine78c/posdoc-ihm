@@ -1,0 +1,7 @@
+mutation UpdateGamme($var: UpdateGammeInput!){
+    updateGamme(updateGamme: $var){
+        code
+        libelle
+        codeVerrou
+    }
+}

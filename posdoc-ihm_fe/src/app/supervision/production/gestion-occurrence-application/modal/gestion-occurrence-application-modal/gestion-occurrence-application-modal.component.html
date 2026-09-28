@@ -1,0 +1,9 @@
+<div class="popup_modification">
+  <app-popup [modalRef]="activeModal" [title]="modalTitle" [firstButton]="null" [secondButton]="null">
+    <ng-template #gestionOccurrenceApplicationComponentContainer></ng-template>
+
+    <div class="button-group">
+      <button type="button" class="btn btn-outline-primary" (click)="closePopup()"><i class="icon-b_cancel"></i><span>Abandonner</span></button>
+    </div>
+  </app-popup>
+</div>

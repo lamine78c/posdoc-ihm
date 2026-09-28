@@ -1,0 +1,2 @@
+DELETE FROM stainf;
+DELETE FROM utilog;

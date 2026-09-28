@@ -1,0 +1,265 @@
+extend type Mutation {
+    createExemplaire(createExemplaire: CreateOrUpdateExemplaireInput!): Exemplaire!
+    createExemplaires(createExemplaires: CreateOrUpdateExemplairesInput!, message: String): [Exemplaire]!
+    updateExemplaire(updateExemplaire: CreateOrUpdateExemplaireInput!): Exemplaire!
+    updateExemplaires(updateExemplaires: CreateOrUpdateExemplairesInput!): [Exemplaire]!
+    deleteExemplaire(deleteExemplaire: DeleteExemplaireInput!): DeletePayload!
+    deleteExemplaires(deleteExemplaires: DeleteByArrayExemplaireCompositeIdInput!): DeletePayload!
+    updateMasseExemplaires(ressourcePayload: RessourcePayloadInput!, exemplaires: [UpdateMasseExemplaireInput]!): [Exemplaire]!
+}
+
+extend type Query {
+    allExemplaires: [Exemplaire]!
+    getExemplaires(filterCriteriaSort: FilterCriteriaSortInput!): [Exemplaire]!
+    findExemplaires(findExemplaireQuery: FindExemplaireQuery) : [ExemplaireRegionPayload]!
+    getPreselectedExemplaire(query: ExemplaireByFilterQuery): [ExemplaireFichier]!
+    getDistinctEnvsFromExemplaire : [String]
+    getDistOrgByEnvFromExemplaire(codenvs: [String]): [String]
+    getDistAppByEnvOrgFromExemplaire(codenvs: [String], codorgs: [String]): [String]
+    getDistComByEnvOrgAppFromExemplaire(codenvs: [String], codorgs: [String], codapp: String): [String]
+    getDistFicByEnvOrgAppComFromExemplaire(query: ExemplaireByFilterQuery): [ExemplaireFichierCodficRefimpCodprdDTO]
+    getDistRessourceByEnvOrgAppComFicFromExemplaire(query: ExemplaireByFilterQuery): [ExemplaireGammeSiteRessourceDTO]
+    getDestinatairesToAddNewExemplaire(codeOrg: String): [DestinataireToAddNewExemplaire]
+    getRessourcesByCodeEnvOrgsApp(payload: CodeEnvOrgsAppPayload!): [RessourcesCodeEnvOrgsAppDTO]!
+    getCodeDestinatairesByCodeOrgs(codorgs: [String]!): [String]!
+    getExemplairesByRessource(query: ExemplaireByRessourceQuery): [ExemplaireByResource]
+    findExemplaireOrganismeToComplete(input: FindOrganismesToCompleteInput): [String]
+}
+
+input FindOrganismesToCompleteInput {
+    codenv : String!
+    codapp : String!
+    codcom : String!
+    codfic : String!
+    codgam : String!
+    codsit : String!
+    codres : String!
+    isadmin : Boolean!
+}
+
+type ExemplaireRegionPayload {
+    codenv : String
+    codorg : String
+    codapp : String
+    codcom : String
+    codfic : String
+    codgam : String
+    numexe : String
+    codsit : String
+    codres : String
+    coddes : String
+    nbrexe : Int
+    exeact : Boolean
+    codreg : String
+}
+
+type ExemplaireFichier {
+    codenv : String
+    codorg : String
+    codapp : String
+    codcom : String
+    codfic : String
+    codgam : String
+    numexe : String
+    codsit : String
+    codres : String
+    coddes : String
+    nbrexe : Int
+    exeact : Boolean
+    codeProd : String
+    refImprime : String
+    libFichier : String
+    isAdmin : Boolean
+    ficatt : String
+}
+
+type Exemplaire {
+    codenv : String
+    codorg : String
+    codapp : String
+    codcom : String
+    codfic : String
+    codgam : String
+    numexe : String
+    codsit : String
+    codres : String
+    coddes : String
+    nbrexe : Int
+    exeact : Boolean
+}
+
+type DeletePayload {
+    ok: Boolean!
+}
+
+input FilterCriteriaSortInput {
+    filterCriteria: FilterCriteriaInput
+    sortList: SortListInput
+}
+
+input FilterCriteriaInput {
+    criteria: [FilterCriterionInput]!
+}
+
+input FilterCriterionInput {
+    value: String!
+    column: String!
+    operation: SearchOperation!
+}
+
+input SortListInput {
+    sort: [SortInput]!
+}
+
+input SortInput {
+    column: String!
+    direction: Direction!
+}
+
+input ExemplaireByFilterQuery {
+    codesEnv: [String]
+    codesOrg: [String]
+    codesApp: [String]
+    codesCom: [String]
+    codesFic: [String]
+}
+
+input FindExemplaireQuery {
+    codesEnv: [String]
+    codesOrg: [String]
+    codesApp: [String]
+    codesSit: [String]
+    codesCom: [String]
+    codesFic: [String]
+    codesGam: [String]
+    codesRes: [String]
+    codesDes: [String]
+}
+
+input CreateOrUpdateExemplairesInput {
+    exemplaires: [CreateOrUpdateExemplaireInput]!
+}
+
+input CreateOrUpdateExemplaireInput {
+    codenv : String
+    codorg : String
+    codapp : String
+    codcom : String
+    codfic : String
+    codgam : String
+    numexe : String
+    codsit : String
+    codres : String
+    coddes : String
+    nbrexe : Int
+    exeact : Boolean
+}
+
+input UpdateMasseExemplaireInput {
+    codenv : String
+    codorg : String
+    codapp : String
+    codcom : String
+    codfic : String
+    codgam : String
+    numexe : String
+    codsit : String
+    codres : String
+    coddes : String
+    nbrexe : Int
+    exeact : Boolean
+}
+
+input DeleteByArrayExemplaireCompositeIdInput {
+    ids: [DeleteExemplaireInput]!
+}
+
+input DeleteExemplaireInput {
+    codenv: String
+    codorg: String
+    codapp: String
+    codcom: String
+    codfic: String
+    codgam: String
+    numexe: String
+    codres: String
+    codsit: String
+}
+
+input RessourcePayloadInput {
+    codgam : String
+    codres: String
+    coddes: String
+}
+
+input CodeEnvOrgsAppPayload {
+    codenv: String!
+    codorgs: [String]!
+    codapp: String!
+    isProfilAdmin: Boolean!
+}
+
+type RessourcesCodeEnvOrgsAppDTO {
+    codgam: String
+    codsit: String
+    codres: String
+}
+
+type ExemplaireFichierCodficRefimpCodprdDTO {
+    codfic: String
+    refImprime: String
+    codeProd: String
+}
+
+type ExemplaireGammeSiteRessourceDTO {
+    codgam: String
+    codsit: String
+    codres: String
+}
+
+type DestinataireToAddNewExemplaire {
+    code: String
+    text: String
+}
+
+enum Direction {
+    ASCENDING
+    DESCENDING
+}
+
+enum SearchOperation {
+    EQUALS
+    LIKE
+}
+
+input ExemplaireByRessourceQuery {
+    codenv: String!
+    codorgs: [String]!
+    codapp: String!
+    codcom: String!
+    codfics: [String]!
+    ressources: [String]!
+    message: String
+    isRessourcesAbsentes: Boolean!
+}
+
+type ExemplaireByResource {
+    codenv: String
+    codorg: String
+    codapp: String
+    codcom: String
+    codfic: String
+    message: String
+    ressources: [ExemplaireRessource]
+}
+
+type ExemplaireRessource {
+    exemplaireExists: Boolean
+    codgam: String
+    codres: String
+    codsit: String
+    codorg: String
+    etat: Boolean
+    coddes: String
+    hasProfil: Boolean
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="#2461bb">
+  <g id="Icone" transform="translate(-16 -12)">
+    <g id="Information">
+      <rect id="Carré_Rond" data-name="Carré Rond" width="40" height="40" rx="12" transform="translate(16 12)"/>
+      <path id="Icone_Info" data-name="Icone Info" d="M12.852-19.852H2.352V-17.5h10.5Zm0,9.352H2.352v2.352h10.5Zm6.234-4.648L14.93-19.3l1.641-1.641,2.461,2.461,4.977-4.922,1.641,1.641Zm0,9.3-4.156-4.1,1.641-1.641,2.461,2.461,4.977-4.922,1.641,1.641Z" transform="translate(22 47)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

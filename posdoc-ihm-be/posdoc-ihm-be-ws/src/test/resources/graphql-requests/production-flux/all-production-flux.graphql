@@ -1,0 +1,11 @@
+query allProductionFlux {
+    allProductionFlux {
+        id
+        nomArchiveRetour
+        nomFichierRetour
+        dateProduction
+        datePoste
+        nombrePlisFabriques
+        details
+    }
+}

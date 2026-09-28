@@ -1,0 +1,74 @@
+<div
+  #textElement
+  *ngIf="!isEditing"
+  class="overflow-ellipsis"
+  [ngbPopover]="params.valueFormatted || params.value"
+  container="body"
+  [disablePopover]="!enableTooltip"
+  triggers="mouseenter:mouseleave"
+>
+  {{ params.valueFormatted || params.value }}
+</div>
+
+<div class="form row" *ngIf="isEditing">
+  <div class="col-12 px-0">
+    <div container="body" ngbDropdown class="d-inline-block fake-select-container" placement="bottom-left" (openChange)="openChange($event)">
+      <div class="p-relative flex-grow-1">
+        <input
+          ngbDropdownToggle
+          #input
+          name="input"
+          type="text"
+          class="form-control scroll-text-input"
+          autocomplete="off"
+          [formControl]="form.get(params.formKey)"
+          (keypress)="params.inputKeypress ? inputKeypress($event) : null"
+          (input)="params.inputInput ? inputInput($event, input, params.formKey) : null"
+          (click)="dropdownMenu.dropdown.open()"
+          (keydown.tab)="dropdownMenu.dropdown.isOpen() && dropdownMenu.dropdown.close()"
+          [ngClass]="{
+            warning: !form.valid && !form.disabled && !form.get(params.formKey).errors.isError && form.dirty,
+            error: !form.valid && !form.disabled && form.get(params.formKey).errors.isError && form.dirty,
+          }"
+        />
+        <button
+          ngbDropdownToggle
+          class="icon-arrow-down"
+          [ngClass]="{
+            'btn-error': !form.valid && !form.disabled && form.get(params.formKey).errors.isError && form.dirty,
+          }"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="grey" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+          </svg>
+        </button>
+      </div>
+      <span
+        [ngbPopover]="form.get(params.formKey).errors.message"
+        triggers="mouseenter:mouseleave"
+        container="body"
+        *ngIf="!form.valid && !form.disabled && !form.get(params.formKey).errors.isError && form.dirty"
+        class="icon-warning d-flex align-items-center"
+        aria-hidden="true"
+      ></span>
+      <span
+        [ngbPopover]="form.get(params.formKey).errors.message"
+        triggers="mouseenter:mouseleave"
+        container="body"
+        *ngIf="!form.valid && !form.disabled && form.get(params.formKey).errors.isError && form.dirty"
+        class="icon-error d-flex align-items-center"
+        aria-hidden="true"
+      ></span>
+      <div #dropdownMenuRef ngbDropdownMenu attr.aria-labelledby="dropdownForm">
+        <div class="form-check">
+          {{ !!getFiltredData(data).length ? 'Veuillez sélectionner un élément' : 'Après le filtre, aucun élément à sélectionner' }}
+        </div>
+        <div class="fake-select-scrollable-content">
+          <div *ngFor="let option of getFiltredData(data)" class="row option" (click)="closeToggleDropdown(option)">
+            <span class="font-weight-semi-bold" [value]="option">{{ option }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

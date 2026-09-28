@@ -1,0 +1,21 @@
+query getExpeditions($searchExpeditionQuery: SearchExpeditionQuery) {
+    getExpeditions(searchExpeditionQuery: $searchExpeditionQuery) {
+          expeditionList {
+              pagfic
+              codcom
+              codfic
+              numcom
+              codprd
+              refimp
+              codsit
+              codenv
+              codorg
+              codapp
+              percod
+              codcli
+              dfiexp
+              libfic
+          }
+          message
+    }
+}

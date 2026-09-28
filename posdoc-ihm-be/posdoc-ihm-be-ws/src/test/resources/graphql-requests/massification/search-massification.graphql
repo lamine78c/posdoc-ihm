@@ -1,0 +1,22 @@
+query searchForMassification($searchMassificationPayload: SearchMassificationInput!) {
+    searchForMassification(searchMassificationPayload: $searchMassificationPayload)
+    {
+        mascom
+        masfic
+        codsit
+        codenv
+        codorg
+        codapp
+        percod
+        codcom
+        codfic
+        numcom
+        pagFic
+        pliFic
+        codcli
+        codbon
+        masuti
+        libfic
+        typsup
+    }
+}

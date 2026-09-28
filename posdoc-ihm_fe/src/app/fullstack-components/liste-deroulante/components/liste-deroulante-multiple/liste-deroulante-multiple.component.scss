@@ -1,0 +1,22 @@
+.fake-select.error {
+  border-color: #ff8080 !important;
+  border-bottom-color: #ff0000 !important;
+}
+
+.fake-select {
+  width: calc(100% - 1.643rem);
+}
+
+.row > * {
+  padding-right: 0.75rem;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.disabled-icon {
+  opacity: 0.5;
+  pointer-events: none;
+}

@@ -1,0 +1,277 @@
+<div class="card mb-3 mat-elevation-z4 ml-5">
+  <div class="card-body">
+    <div class="card mb-3 mat-elevation-z4">
+      <div class="card-body">
+        <div class="row mb-3 pr-5" *ngIf="!isEditing">
+          <div class="row pr-4">
+            <app-label-valeur
+              [label]="'Designation:'"
+              [valeur]="form.get('designation').value"
+              [labelWidth]="200"
+              [fillInput]="true"
+            ></app-label-valeur>
+          </div>
+          <div class="row">
+            <div class="col-9">
+              <div class="row">
+                <div class="col-6">
+                  <app-label-valeur
+                    [label]="'Type:'"
+                    [valeur]="getTectByValue(form.get('type').value, optionsType)"
+                    [labelWidth]="200"
+                    [fillInput]="true"
+                  ></app-label-valeur>
+                  <app-label-valeur
+                    [label]="'Type de fusion:'"
+                    [valeur]="getTectByValue(form.get('typeFusion').value, optionsTypeFision)"
+                    [labelWidth]="200"
+                    [fillInput]="true"
+                  ></app-label-valeur>
+                </div>
+                <div class="col-6">
+                  <app-label-valeur
+                    [label]="'Logiciel:'"
+                    [valeur]="getTectByValue(form.get('logiciel').value, optionsLogiciel)"
+                    [labelWidth]="200"
+                    [fillInput]="true"
+                  ></app-label-valeur>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <app-label-valeur
+                    [label]="'Commande produit:'"
+                    [valeur]="form.get('commandeProduit').value"
+                    [labelWidth]="200"
+                    [fillInput]="true"
+                  ></app-label-valeur>
+                  <app-label-valeur
+                    [label]="'Serveur:'"
+                    [valeur]="getTectByValue(form.get('serveur').value, optionsServeur)"
+                    [labelWidth]="200"
+                    [fillInput]="true"
+                  ></app-label-valeur>
+                </div>
+                <div class="col-6">
+                  <app-label-valeur
+                    [label]="'Commande récap:'"
+                    [valeur]="form.get('commandeRecap').value"
+                    [labelWidth]="200"
+                    [fillInput]="true"
+                  ></app-label-valeur>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <app-label-valeur
+                    [label]="'Utilisateur:'"
+                    [valeur]="form.get('utilisateur').value"
+                    [labelWidth]="200"
+                    [fillInput]="true"
+                  ></app-label-valeur>
+                  <app-label-valeur
+                    [label]="'File d\'impression:'"
+                    [valeur]="form.get('fileImpression').value"
+                    [labelWidth]="200"
+                    [fillInput]="true"
+                  ></app-label-valeur>
+                </div>
+                <div class="col-6">
+                  <app-label-valeur
+                    [label]="'Mot de passe:'"
+                    [valeur]="!!form.get('motDePasse').value ? '***' : ''"
+                    [labelWidth]="200"
+                    [fillInput]="true"
+                  ></app-label-valeur>
+                  <app-label-valeur
+                    [label]="'Infos Particulières:'"
+                    [valeur]="form.get('informationParticuliere').value"
+                    [labelWidth]="200"
+                    [fillInput]="true"
+                  ></app-label-valeur>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding-top: 65px; padding-left: 50px" class="col-3">
+              <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" [id]="'gesion'" [formControl]="form.get('destinataire')" />
+                <label class="form-check-label" [for]="'gesion'">Gestion destinataire</label>
+              </div>
+              <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" [id]="'file'" [formControl]="form.get('fileBloquee')" />
+                <label class="form-check-label" [for]="'file'">File bloquée</label>
+              </div>
+              <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" [id]="'pli'" [formControl]="form.get('miseSousPli')" />
+                <label class="form-check-label" [for]="'pli'">Mise sous plis</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- lors de l'edition du formulaire  -->
+
+        <div class="row mb-3 pr-5" *ngIf="isEditing">
+          <div class="row pr-4">
+            <app-champ-de-saisie
+              [label]="'Designation:'"
+              [labelWidth]="200"
+              [fillInput]="true"
+              [form]="form.get('designation')"
+              [isError]="true"
+              [toUpperCase]="true"
+              [errorMessage]="form.get('designation').errors?.message || form.get('designation').errors"
+            ></app-champ-de-saisie>
+          </div>
+          <div class="row">
+            <div class="col-9">
+              <div class="row">
+                <div class="col-6">
+                  <app-liste-deroulante
+                    [label]="'Type:'"
+                    [form]="form.get('type')"
+                    [options]="optionsType"
+                    [labelWidth]="200"
+                    [fillInput]="false"
+                    [isError]="true"
+                    [isDisabled]="form.get('type').disabled"
+                    [errorMessage]="form.get('type').errors?.message || form.get('type').errors"
+                  ></app-liste-deroulante>
+
+                  <app-liste-deroulante
+                    [label]="'Type de fusion:'"
+                    [form]="form.get('typeFusion')"
+                    [options]="optionsTypeFision"
+                    [labelWidth]="200"
+                    [fillInput]="false"
+                    [isError]="true"
+                    [isDisabled]="form.get('typeFusion').disabled"
+                    [errorMessage]="form.get('typeFusion').errors?.message || form.get('typeFusion').errors"
+                  ></app-liste-deroulante>
+                </div>
+                <div class="col-6">
+                  <app-liste-deroulante
+                    [label]="'Logiciel:'"
+                    [form]="form.get('logiciel')"
+                    [options]="optionsLogiciel"
+                    [labelWidth]="200"
+                    [fillInput]="false"
+                    [isError]="true"
+                    [isDisabled]="form.get('logiciel').disabled"
+                    [errorMessage]="form.get('logiciel').errors?.message || form.get('logiciel').errors"
+                    (changeEvent)="onChangeLogiciel($event)"
+                  ></app-liste-deroulante>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <app-liste-deroulante
+                    [label]="'Commande produit:'"
+                    [form]="form.get('commandeProduit')"
+                    [options]="optionsCommande"
+                    [labelWidth]="200"
+                    [fillInput]="false"
+                    [isError]="true"
+                    [hasBlankOption]="true"
+                    [blankOptionValue]="''"
+                    [isDisabled]="form.get('commandeProduit').disabled"
+                    [errorMessage]="form.get('commandeProduit').errors?.message || form.get('commandeProduit').errors"
+                  ></app-liste-deroulante>
+
+                  <app-liste-deroulante
+                    [label]="'Serveur:'"
+                    [form]="form.get('serveur')"
+                    [options]="optionsServeur"
+                    [labelWidth]="200"
+                    [fillInput]="false"
+                    [isError]="true"
+                    [isOptionsWithActifAttribute]="true"
+                    [isDisabled]="form.get('serveur').disabled"
+                    [errorMessage]="form.get('serveur').errors?.message || form.get('serveur').errors"
+                  ></app-liste-deroulante>
+                </div>
+                <div class="col-6">
+                  <app-liste-deroulante
+                    [label]="'Commande récap:'"
+                    [form]="form.get('commandeRecap')"
+                    [options]="optionsCommande"
+                    [labelWidth]="200"
+                    [fillInput]="false"
+                    [isError]="true"
+                    [hasBlankOption]="true"
+                    [blankOptionValue]="''"
+                    [isDisabled]="form.get('commandeRecap').disabled"
+                    [errorMessage]="form.get('commandeRecap').errors?.message || form.get('commandeRecap').errors"
+                  ></app-liste-deroulante>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <app-champ-de-saisie
+                    [label]="'Utilisateur:'"
+                    [index]="5"
+                    [labelWidth]="200"
+                    [fillInput]="false"
+                    [form]="form.get('utilisateur')"
+                    [isError]="true"
+                    [errorMessage]="form.get('utilisateur').errors?.message || form.get('utilisateur').errors"
+                  ></app-champ-de-saisie>
+                  <app-champ-de-saisie
+                    [label]="'File d\'impression:'"
+                    [index]="6"
+                    [labelWidth]="200"
+                    [fillInput]="false"
+                    [form]="form.get('fileImpression')"
+                    [toUpperCase]="true"
+                    [isError]="true"
+                    [errorMessage]="form.get('fileImpression').errors?.message || form.get('fileImpression').errors"
+                  ></app-champ-de-saisie>
+                </div>
+                <div class="col-6">
+                  <app-champ-de-saisie
+                    [label]="'Mot de passe:'"
+                    [index]="7"
+                    [labelWidth]="200"
+                    [fillInput]="false"
+                    [typeInput]="'password'"
+                    [form]="form.get('motDePasse')"
+                    [isError]="true"
+                    [errorMessage]="form.get('motDePasse').errors?.message || form.get('motDePasse').errors"
+                  ></app-champ-de-saisie>
+                  <app-champ-de-saisie
+                    [label]="'Infos Particulières:'"
+                    [index]="8"
+                    [labelWidth]="200"
+                    [fillInput]="false"
+                    [form]="form.get('informationParticuliere')"
+                    [toUpperCase]="true"
+                    [isError]="true"
+                    [errorMessage]="form.get('informationParticuliere').errors?.message || form.get('informationParticuliere').errors"
+                  ></app-champ-de-saisie>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding-top: 65px; padding-left: 50px" class="col-3">
+              <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" [id]="'gesion'" [formControl]="form.get('destinataire')" />
+                <label class="form-check-label" [for]="'gesion'">Gestion destinataire</label>
+              </div>
+              <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" [id]="'file'" [formControl]="form.get('fileBloquee')" />
+                <label class="form-check-label" [for]="'file'">File bloquée</label>
+              </div>
+              <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" [id]="'pli'" [formControl]="form.get('miseSousPli')" />
+                <label class="form-check-label" [for]="'pli'">Mise sous plis</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

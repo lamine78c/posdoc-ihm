@@ -1,0 +1,12 @@
+DELETE FROM genfic WHERE c15_codcom IN ('MANU', 'NEW1', 'NEW2');
+DELETE FROM gennot WHERE c28_codcom IN ('MANU', 'NEW1', 'NEW2');
+DELETE FROM notice WHERE c26_codnot IN ('NOTICE1', 'NOTICE2', 'NOTICE3');
+DELETE FROM gentar WHERE c45_codcom IN ('MANU', 'NEW1', 'NEW2');
+DELETE FROM genmas WHERE c31_mascom IN ('MANU', 'NEW1', 'NEW2');
+DELETE FROM genapp WHERE b14_manuel = 1;
+DELETE FROM fichie WHERE c07_codcom IN ('MANU', 'NEW1', 'NEW2');
+DELETE FROM tarifs WHERE c44_typtar = 'RG';
+DELETE FROM tarpos WHERE c43_typtar = 'RG';
+DELETE FROM genbon WHERE c80_clebon = 'COD';
+DELETE FROM organi WHERE c00_codorg = '750';
+DELETE FROM utilog;

@@ -1,0 +1,3 @@
+query ImprimerBonTravail($bonTravailInput: BonTravailInput){
+    imprimerBonTravail(bonTravailInput: $bonTravailInput)
+}

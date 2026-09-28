@@ -1,0 +1,142 @@
+<div class="popup-ajout">
+  <app-popup [modalRef]="activeModal" [isFormValid]="isFormValid" [title]="title" [firstButton]="null" [secondButton]="null">
+    <div class="row pt-0 pb-3 normal-content">
+      <div class="col-4 p-0">
+        <app-interrupteur-simple
+          [label]="'Etat: '"
+          [form]="formEtat"
+          [labelColumns]="6"
+          [inputColumns]="6"
+          [isError]="true"
+          [errorMessage]="formEtat.errors?.message || formEtat.errors"
+        ></app-interrupteur-simple>
+      </div>
+    </div>
+    <div class="row pt-3 pb-3 normal-content">
+      <div class="col-4 p-0">
+        <app-liste-deroulante
+          [label]="'Application: '"
+          [form]="formApp"
+          [options]="optionsApp"
+          [labelColumns]="6"
+          [inputColumns]="6"
+          [isError]="true"
+          [errorMessage]="formApp.errors?.message || formApp.errors"
+        ></app-liste-deroulante>
+      </div>
+    </div>
+    <div class="row pt-3 pb-3 normal-content">
+      <div class="col-4 p-0">
+        <app-liste-deroulante
+          [label]="'Environnement: '"
+          [form]="formEnv"
+          [options]="optionsEnv"
+          [hasBlankOption]="true"
+          [blankOptionValue]="' '"
+          [labelColumns]="6"
+          [inputColumns]="6"
+          [isError]="true"
+          [errorMessage]="formEnv.errors?.message || formEnv.errors"
+        ></app-liste-deroulante>
+      </div>
+      <div class="col-4 p-0">
+        <app-liste-deroulante
+          [label]="'Commande: '"
+          [form]="formCom"
+          [options]="optionsCom"
+          [hasBlankOption]="true"
+          [blankOptionValue]="' '"
+          [labelColumns]="6"
+          [inputColumns]="6"
+          [isError]="true"
+          [errorMessage]="formCom.errors?.message || formCom.errors"
+        ></app-liste-deroulante>
+      </div>
+      <div class="col-4 p-0">
+        <app-liste-deroulante-multiple
+          [label]="'Fichier: '"
+          [form]="formFic"
+          [hasBlankOption]="true"
+          [labelColumns]="6"
+          [inputColumns]="6"
+          [isWithValidAndRAZBtn]="false"
+          [isError]="true"
+          [errorMessage]="formFic.errors?.message || formFic.errors"
+        ></app-liste-deroulante-multiple>
+      </div>
+    </div>
+    <div class="row pt-3 pb-3 normal-content">
+      <div class="col-4 p-0">
+        <app-liste-deroulante-hierarchisee
+          [label]="'Organismes: '"
+          [form]="formOrg"
+          [isWithValidAndRAZBtn]="false"
+          (changeEvent)="onChangeOrganisme($event)"
+          [labelColumns]="6"
+          [inputColumns]="6"
+          [isError]="true"
+          [errorMessage]="formOrg.errors?.message || formOrg.errors"
+        ></app-liste-deroulante-hierarchisee>
+      </div>
+    </div>
+    <div class="row pt-3 pb-3 normal-content">
+      <div class="col-4 p-0">
+        <app-multi-select-section
+          [form]="formRes"
+          [isRessourceCustomSort]="true"
+          [label]="'Gammes et ressources:'"
+          [isError]="true"
+          [errorMessage]="formRes.errors?.message || formRes.errors"
+        ></app-multi-select-section>
+      </div>
+      <div class="col-4 p-0">
+        <app-champ-de-saisie
+          [label]="'Copies: '"
+          [form]="formCop"
+          [typeInput]="'number'"
+          [fillInput]="true"
+          [labelColumns]="6"
+          [inputColumns]="6"
+          [isError]="true"
+          [errorMessage]="formCop.errors?.message || formCop.errors"
+        ></app-champ-de-saisie>
+      </div>
+      <div class="col-4 p-0">
+        <app-liste-deroulante
+          [label]="'Destinataire: '"
+          [form]="formDes"
+          [options]="optionsDes"
+          [hasBlankOption]="true"
+          [blankOptionValue]="' '"
+          [labelColumns]="6"
+          [inputColumns]="6"
+          [isError]="true"
+          [errorMessage]="formDes.errors?.message || formDes.errors"
+        ></app-liste-deroulante>
+      </div>
+    </div>
+    <div class="row pt-3 pb-3 normal-content">
+      <div class="col-12 p-0">
+        <app-champ-de-saisie
+          appNoSpecialCharacters
+          [label]="'Message: '"
+          [form]="formMsg"
+          [fillInput]="true"
+          [allowedCharacters]="['-', ' ', '(', ')', '_', '*', '/', ':', '.', '+']"
+          [labelColumns]="4"
+          [inputColumns]="8"
+          [isError]="true"
+          [errorMessage]="formMsg.errors?.message || formMsg.errors"
+        ></app-champ-de-saisie>
+      </div>
+    </div>
+  </app-popup>
+  <div class="modal-footer">
+    <div class="button-group">
+      <button type="button" class="btn btn-outline-primary" (click)="closePopup()"><i class="icon-b_cancel"></i><span>Abandonner</span></button>
+      <button type="button" class="btn btn-primary" (click)="passBack()" [disabled]="!isFormValid()">
+        <i class="icon-b_valid"></i><span>Sauvegarder</span>
+      </button>
+    </div>
+  </div>
+</div>

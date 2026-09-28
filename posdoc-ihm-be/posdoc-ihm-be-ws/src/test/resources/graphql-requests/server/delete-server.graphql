@@ -1,0 +1,5 @@
+mutation DeleteServer($var: DeleteByStringIdInput!){
+    deleteServer(deleteServer: $var){
+        ok
+    }
+}

@@ -1,0 +1,3 @@
+query checkIfGenEtpExists($query: GenEtpExistsQuery) {
+    checkIfGenEtpExists(query: $query)
+}

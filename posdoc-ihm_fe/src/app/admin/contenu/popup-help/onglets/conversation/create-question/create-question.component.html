@@ -1,0 +1,37 @@
+<div class="create-question-container m-1">
+  <div ngbAccordion>
+    <div ngbAccordionItem [collapsed]="isAccordionCollapsed" (hidden)="onAccordionHidden()" (shown)="onAccordionShown()">
+      <h2 ngbAccordionHeader>
+        <button ngbAccordionButton class="p-1">Poser une question</button>
+      </h2>
+      <div ngbAccordionCollapse>
+        <div ngbAccordionBody>
+          <app-liste-deroulante
+            [label]="'Page:'"
+            [form]="form.get('path')"
+            [options]="pathOptions"
+            [labelColumns]="2"
+            [inputColumns]="10"
+            [errorMessage]="form.get('question')?.errors?.message || 'Ce champ est requis'"
+          ></app-liste-deroulante>
+          <app-champ-de-saisie
+            [form]="form.get('question')"
+            [label]="'Question:'"
+            [placeholder]="'Saisir la question ici'"
+            [labelColumns]="2"
+            [inputColumns]="10"
+            [isError]="true"
+            [errorMessage]="form.get('question')?.errors?.message || 'Ce champ est requis'"
+          ></app-champ-de-saisie>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="saveNewConversation()"
+            [disabled]="form.invalid">
+            Enregistrer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

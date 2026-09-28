@@ -1,0 +1,21 @@
+<div class="d-flex w-100" *ngIf="params.displayName">
+  <div class="custom-column-header">{{ params.displayName }}</div>
+  <div *ngIf="displayFilterIcon" class="ag-icon ag-icon-filter"></div>
+  <div [class.disabled-icon]="isDisabled" class="ag-header-icon-container">
+    <div *ngIf="params.enableSorting && ascSort" class="ag-icon-asc" title="Trier" (click)="onSortRequested($event)"></div>
+    <div *ngIf="params.enableSorting && descSort" class="ag-icon-desc" title="Trier" (click)="onSortRequested($event)"></div>
+    <div *ngIf="params.enableSorting && noSort" class="ag-icon-none" title="Trier" (click)="onSortRequested($event)"></div>
+  </div>
+</div>
+
+<div [class.disabled-icon]="isDisabled" *ngIf="!params.displayName && params.enableSorting">
+  <div>{{ params.displayName }}</div>
+  <div *ngIf="ascSort" class="ag-icon-asc" title="Trier" (click)="onSortRequested($event)"></div>
+  <div *ngIf="descSort" class="ag-icon-desc" title="Trier" (click)="onSortRequested($event)"></div>
+  <div *ngIf="noSort" class="ag-icon-none" title="Trier" (click)="onSortRequested($event)"></div>
+</div>
+
+<div *ngIf="enableCollapsing || enableGrouping" class="d-flex align-items-center">
+  <div *ngIf="!isExpandedAll" class="icon-b_all_plus m-auto" title="Déplier" (click)="onExpandAll(enableGrouping)"></div>
+  <div *ngIf="isExpandedAll" class="icon-b_all_minus m-auto" title="Plier" (click)="onCollapseAll(enableGrouping)"></div>
+</div>

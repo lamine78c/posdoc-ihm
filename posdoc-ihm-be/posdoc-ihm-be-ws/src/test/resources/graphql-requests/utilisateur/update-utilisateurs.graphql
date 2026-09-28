@@ -1,0 +1,11 @@
+mutation($updatesDTO: UpdateUtilisateursInput!) {
+    updateUtilisateurs(updateUtilisateurs: $updatesDTO) {
+        codeUtilisateur
+        libelleUtilisateur
+        profile
+        password
+        actif
+        codeEnvironnement
+        codeSite
+    }
+}

@@ -1,0 +1,17 @@
+.normal-content .form-check.radio-with-label,
+.normal-content .button-group {
+  padding-left: 0.857em;
+}
+
+.col-smartdata {
+  padding-left: 0.4em;
+}
+
+// Pour changer couleur tooltip
+::ng-deep .tooltip .tooltip-inner {
+  background-color: #C4BCBB;
+  color: #fff;
+}
+::ng-deep .tooltip .tooltip-arrow::before {
+  border-top-color: #C4BCBB;
+}

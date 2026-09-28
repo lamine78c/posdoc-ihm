@@ -1,0 +1,25 @@
+<div class="global-content">
+  <div class="normal-content">
+    <app-search-occurrences-fichiers
+      (applySearchEvent)="onSearchOccurrencesFichiers($event)"
+    ></app-search-occurrences-fichiers>
+
+    <h3 class="d-flex mt-3">
+      Total articles
+      <div class="badge badge-info ml-1 mt-auto"> {{ totalArticles }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [gridOptions]="gridOptions"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="true"
+      [enableExportButtons]="true"
+      [disablePdfExportButton]="true"
+      (exportAsExcel)="export($event)"
+      (gridReady)="onGridReady($event)"
+    ></app-tableau>
+  </div>
+</div>

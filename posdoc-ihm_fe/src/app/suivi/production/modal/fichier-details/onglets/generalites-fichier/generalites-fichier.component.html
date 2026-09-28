@@ -1,0 +1,88 @@
+<div class="normal-content">
+  <div *ngIf="error" class="errorForm">{{ error }}</div>
+  <div *ngIf="!error && detail">
+    <div class="row pt-3">
+      <div class="col-12 p-0">
+        <label>Désignation: </label><span>{{ detail.libfic }}</span>
+      </div>
+    </div>
+    <div class="row pt-3 pb-3">
+      <div class="col-flex p-0">
+        <label>Code Prd: </label><span>{{ detail.codprd }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Report Exp: </label><span>{{ detail.repexp }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Client: </label><span>{{ detail.codcli }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Statut: </label><span>{{ detail.ficsta }}-{{ detail.ficinf }}</span>
+      </div>
+    </div>
+    <div class="row groupment">
+      <div class="col-flex p-0">
+        <label>Appli: </label><span>{{ detail.dappcr }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Début: </label><span>{{ detail.dfichd }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Fin: </label><span>{{ detail.dficht }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Suspension: </label><span>{{ detail.dfichs }}</span>
+      </div>
+    </div>
+    <div class="row pt-3 mb-0"><label class="p-0">Types</label></div>
+    <div class="row groupment">
+      <div class="col-flex p-0">
+        <label>Format: </label><span>{{ detail.libfor }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Support: </label><span>{{ detail.libsup }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Feuillets: </label><span>{{ detail.libmul }}</span>
+      </div>
+    </div>
+    <div class="row pt-3 mb-0"><label class="p-0">Références</label></div>
+    <div class="row groupment reference">
+      <div class="col-flex p-0">
+        <label>Format: </label><span>{{ detail.reffor }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Support: </label><span>{{ detail.refsup }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>RND: </label><span>{{ detail.codrnd }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Tri: </label><span>{{ detail.reftri }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Echantillon: </label><span>{{ detail.refech }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Imprimé: </label><span>{{ detail.refimp }}</span>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-flex p-0"><label>Eclatement: </label><input type="checkbox" disabled [checked]="detail.eclate" /></div>
+      <div class="col-flex p-0">
+        <label>Limite regroupement: </label><span>{{ detail.maxpag }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Signature: </label><span>{{ detail.typsig }}</span>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-flex p-0">
+        <label>Message: </label><span>{{ detail.ficatt }}</span>
+      </div>
+      <div class="col-flex p-0">
+        <label>Site: </label><span>{{ detail.codsit }}</span>
+      </div>
+    </div>
+  </div>
+</div>

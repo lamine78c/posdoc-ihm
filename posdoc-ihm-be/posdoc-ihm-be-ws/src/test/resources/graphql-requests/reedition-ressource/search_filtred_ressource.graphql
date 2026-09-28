@@ -1,0 +1,20 @@
+query searchReeditionPerRessurce($codenv: String, $codorg: [String], $codapp: String, $periode: String) {
+    searchReeditionPerRessurce(codenv: $codenv, codorg: $codorg, codapp: $codapp, periode: $periode){
+        percod
+        codres
+        codsit
+        codgam
+        codcom
+        codfic
+        numcom
+        codprd
+        refimp
+        codorg
+        pagFic
+        nbrexe
+        libfic
+        coddes
+        reedit
+
+    }
+}

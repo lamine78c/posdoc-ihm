@@ -1,0 +1,7 @@
+mutation createComposition($createDTO: CreateCompositionInput!) {
+    createComposition(createComposition: $createDTO) {
+        code
+        libelle
+        isNotAuthorisedToBeDeleted
+    }
+}

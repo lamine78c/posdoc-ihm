@@ -1,0 +1,22 @@
+extend type Mutation {
+    createVerrou(createVerrou: CreateOrUpdateVerrouInput!): CreateOrUpdateVerrouPayload!
+    updateVerrou(updateVerrou: CreateOrUpdateVerrouInput!): CreateOrUpdateVerrouPayload!
+    deleteVerrous(deleteVerrous: DeleteByArrayStringIdInput!): DeletePayload!
+}
+
+extend type Query {
+    allVerrous: [CreateOrUpdateVerrouPayload]!
+}
+
+input CreateOrUpdateVerrouInput {
+    code: String!
+    libelle: String!
+    maxExecution: Int!
+}
+
+type CreateOrUpdateVerrouPayload {
+    code: String!
+    libelle: String!
+    maxExecution: Int!
+    isNotAuthorisedToBeDeleted:Boolean!
+}

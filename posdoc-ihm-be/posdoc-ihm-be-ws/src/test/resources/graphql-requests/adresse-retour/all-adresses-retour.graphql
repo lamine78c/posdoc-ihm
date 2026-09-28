@@ -1,0 +1,10 @@
+query AllAdressesRetour {
+    allAdressesRetour {
+        code
+        codeOrganisme
+        adresse1
+        adresse2
+        adresse3
+        adresse4
+    }
+}

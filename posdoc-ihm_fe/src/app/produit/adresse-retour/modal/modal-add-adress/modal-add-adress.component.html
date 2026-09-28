@@ -1,0 +1,111 @@
+<app-popup [modalRef]="modalRef" [title]="'Ajouter en masse des adresses retour'" [firstButton]="null" [secondButton]="null" (saveEvent)="passBack()">
+  <app-champ-de-saisie
+    appNoSpecialCharacters
+    [allowedCharacters]="['_']"
+    [form]="formGroup.get('codeAdresse')"
+    [label]="'Code adresse'"
+    [labelWidth]="labelWidth"
+    [index]="1"
+    [placeholder]=""
+    [toUpperCase]="true"
+    [isError]="formGroup.get('codeAdresse').errors != null"
+    [errorMessage]="formGroup.get('codeAdresse').errors === null ? '' : formGroup.get('codeAdresse').errors.message"
+  ></app-champ-de-saisie>
+
+  <app-champ-de-saisie
+    appNoSpecialCharacters
+    [allowedCharacters]="['-', ' ']"
+    [form]="formGroup.get('adresse1')"
+    [label]="'Adresse1'"
+    [labelWidth]="labelWidth"
+    [index]="2"
+    [placeholder]=""
+    [toUpperCase]="true"
+    [isError]="formGroup.get('adresse1').errors != null"
+    [errorMessage]="formGroup.get('adresse1').errors === null ? '' : formGroup.get('adresse1').errors.message"
+  ></app-champ-de-saisie>
+
+  <app-champ-de-saisie
+    appNoSpecialCharacters
+    [allowedCharacters]="['-', ' ']"
+    [form]="formGroup.get('adresse2')"
+    [label]="'Adresse2'"
+    [labelWidth]="labelWidth"
+    [index]="3"
+    [placeholder]=""
+    [toUpperCase]="true"
+    [isError]="formGroup.get('adresse2').errors != null"
+    [errorMessage]="formGroup.get('adresse2').errors === null ? '' : formGroup.get('adresse2').errors.message"
+  ></app-champ-de-saisie>
+
+  <app-champ-de-saisie
+    appNoSpecialCharacters
+    [allowedCharacters]="['-', ' ']"
+    [form]="formGroup.get('adresse3')"
+    [label]="'Adresse3'"
+    [labelWidth]="labelWidth"
+    [index]="4"
+    [placeholder]=""
+    [toUpperCase]="true"
+    [isError]="formGroup.get('adresse3').errors != null"
+    [errorMessage]="formGroup.get('adresse3').errors === null ? '' : formGroup.get('adresse3').errors.message"
+  ></app-champ-de-saisie>
+
+  <app-champ-de-saisie
+    appNoSpecialCharacters
+    [allowedCharacters]="['-', ' ']"
+    [form]="formGroup.get('adresse4')"
+    [label]="'Adresse4'"
+    [labelWidth]="labelWidth"
+    [index]="5"
+    [placeholder]=""
+    [toUpperCase]="true"
+    [isError]="formGroup.get('adresse4').errors != null"
+    [errorMessage]="formGroup.get('adresse4').errors === null ? '' : formGroup.get('adresse4').errors.message"
+  ></app-champ-de-saisie>
+
+  <app-liste-deroulante-multiple
+    [label]="'Environnement :'"
+    [form]="getEnvironnementsControl()"
+    [labelWidth]="labelWidth"
+    [hasBlankOption]="false"
+    [isWithValidAndRAZBtn]="false"
+    (changeEvent)="onChangeEnvironnement($event)"
+  ></app-liste-deroulante-multiple>
+
+  <app-liste-deroulante
+    [label]="'Application :'"
+    [labelWidth]="labelWidth"
+    [form]="getApplicationsControl()"
+    [hasBlankOption]="true"
+    [blankOptionValue]="''"
+    [options]="applicationsList"
+    (changeEvent)="onChangeApplication($event)"
+  ></app-liste-deroulante>
+
+  <app-liste-deroulante-hierarchisee
+    *ngIf="showOrganismesComponent"
+    [form]="orgGroup"
+    [label]="'Organisme/Région :'"
+    [labelWidth]="labelWidth"
+    (changeEvent)="onChangeOrganisme($event)"
+    [isWithValidAndRAZBtn]="false"
+    [isError]="getOrganismesControl().errors != null"
+    [errorMessage]="getOrganismesControl().errors === null ? '' : getOrganismesControl().errors.message"
+  ></app-liste-deroulante-hierarchisee>
+
+  <!-- error -->
+  <div class="errorForm">{{ errorPass }}</div>
+</app-popup>
+
+<div class="modal-footer">
+  <div class="button-group">
+    <button type="button" class="btn btn-outline-primary" (click)="closePopup()">
+      <i class="icon-b_cancel" aria-hidden="true"></i><span>Abandonner</span>
+    </button>
+
+    <button type="button" class="btn btn-primary" (click)="passBack()" [disabled]="!isFormValid()">
+      <i class="icon-b_valid" aria-hidden="true"></i><span>Confirmer</span>
+    </button>
+  </div>
+</div>

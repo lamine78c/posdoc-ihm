@@ -1,0 +1,9 @@
+query getDetailsPeriodeFromGenApp($paramData: DetailsPeriodeInput!) {
+    getDetailsPeriodeFromGenApp(paramData: $paramData) {
+        perCod
+        appsta
+        dappld
+        dapplt
+        manuel
+    }
+}

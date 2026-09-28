@@ -1,0 +1,10 @@
+mutation CreateTarpos($var: TarposInput!){
+    createTarpos(createTarpos: $var){
+        type
+        libelle
+        ordre
+        tlibre
+        compta
+        perime
+    }
+}

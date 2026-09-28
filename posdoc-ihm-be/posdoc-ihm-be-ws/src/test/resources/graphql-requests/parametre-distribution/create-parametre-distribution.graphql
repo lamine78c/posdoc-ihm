@@ -1,0 +1,8 @@
+mutation CreateParametreResource($var: CreateOrUpdateParametreDistributionInput!){
+    createParametreDistribution(createParametreDistribution: $var){
+        reference
+        commandeDistribution
+        libelle
+        logicielDistribution
+    }
+}

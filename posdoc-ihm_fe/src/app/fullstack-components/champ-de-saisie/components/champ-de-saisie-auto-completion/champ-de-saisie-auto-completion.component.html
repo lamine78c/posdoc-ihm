@@ -1,0 +1,47 @@
+<div class="form row" *ngIf="form" [ngStyle]="vertical ? { 'flex-direction': 'column' } : {}">
+  <label
+    *ngIf="label"
+    for="input{{ index }}"
+    class="col-{{ labelColumns }} col-form-label {{ labelClass }}"
+    [class.ps-0]="vertical"
+    [ngStyle]="{ width: labelWidth + 'px' }"
+    [ngClass]="{ 'col-form-label-fix': labelWidth }"
+  >
+    {{ label }}
+  </label>
+  <div class="col-{{ inputColumns }} position-relative d-flex">
+    <i class="icon-b_search autocomplete-search-icon" aria-hidden="true" *ngIf="!form.value && displaySearchIcon"></i>
+    <input
+      id="input{{ index }}"
+      name="input{{ index }}"
+      type="text"
+      class="form-control"
+      [formControl]="form"
+      [ngbTypeahead]="search"
+      [placeholder]="placeholder"
+      [editable]="editable"
+      [placement]="placement"
+      [ngClass]="{
+        warning: !form.valid && !form.disabled && !isError && form.touched,
+        error: !form.valid && !form.disabled && isError && form.touched,
+        empty: !form.value,
+      }"
+    />
+    <span
+      *ngIf="!form.valid && !form.disabled && !isError && form.touched"
+      class="icon-warning d-flex align-items-center ml-03"
+      aria-hidden="true"
+      ngbPopover="{{ errorMessage }}"
+      triggers="mouseenter:mouseleave focus"
+      tabindex="0"
+    ></span>
+    <span
+      *ngIf="!form.valid && !form.disabled && isError && form.touched"
+      class="icon-error d-flex align-items-center ml-03"
+      aria-hidden="true"
+      ngbPopover="{{ errorMessage }}"
+      triggers="mouseenter:mouseleave focus"
+      tabindex="0"
+    ></span>
+  </div>
+</div>

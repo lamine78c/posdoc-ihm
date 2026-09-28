@@ -1,0 +1,6 @@
+query findAllCodeDestinsAndCodeOrg{
+    findAllCodeDestinsAndCodeOrg{
+        code
+        codeOrg
+    }
+}

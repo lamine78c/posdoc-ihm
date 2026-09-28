@@ -1,0 +1,12 @@
+query GetContenus {
+              allContenus{
+                id
+                titre
+                dateActivation
+                dateExpiration
+                message
+                regions {
+                   code
+                }
+              }
+            }

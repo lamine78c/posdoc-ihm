@@ -1,0 +1,22 @@
+<div *ngIf="!resultats.length" class="alert alert-warning">Aucune facturation</div>
+<div *ngIf="resultats.length" class="global-content">
+  <div class="d-flex justify-content-end mb-2">
+    <button type="button" class="btn btn-outline-secondary" (click)="exportAsExcel()">
+      <i class="icon-b_export_csv"></i><span>Exporter excel</span>
+    </button>
+  </div>
+  <div class="table-wrapper">
+    <table class="table table-striped table-bordered" aria-describedby="table facturation">
+      <thead>
+        <tr>
+          <th *ngFor="let obj of coldef; let i = index" [ngStyle]="{ width: obj.width }">{{ obj.header }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of resultats; let i = index" [ngClass]="{ 'odd-row': i % 2 === 0, 'even-row': i % 2 !== 0 }">
+          <td *ngFor="let obj of coldef; let i = index" [ngStyle]="{ width: obj.width }">{{ row[obj.field] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

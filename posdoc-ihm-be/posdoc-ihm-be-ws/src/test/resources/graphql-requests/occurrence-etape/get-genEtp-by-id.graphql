@@ -1,0 +1,39 @@
+query GetGenEtpById($id: Int!) {
+    getGenEtpById(id: $id) {
+        id
+        codenv
+        codorg
+        codapp
+        percod
+        codcom
+        codfic
+        numcom
+        typetp
+        idtfus
+        codgam
+        numexe
+        codres
+        codsit
+        coddes
+        nbrexe
+        codser
+        codsig
+        signal
+        reedit
+        fabsim
+        statut
+        codinf
+        create
+        valide
+        debute
+        termin
+        invali
+        suspen
+        histor
+        script
+        stepno
+        numpid
+        etpfus
+        clefus
+    }
+}

@@ -1,0 +1,24 @@
+query getFichiersByApp($codenv: String, $codesOrg: [String], $codesApp: [String], $codesCom: [String]) {
+  getFichiersByApp(codenv: $codenv, codesOrg: $codesOrg, codesApp: $codesApp, codesCom: $codesCom) {
+    codeEnv
+    codeOrg
+    codeApp
+    codeCom
+    codeFich
+    libFichier
+    refImprime
+    codeAdr
+    codeProd
+    refFormat
+    typeFormat
+    page
+    codeClient
+    typeMultif
+    typeSig
+    typeSupport
+    codeDocument
+    eclatement
+    refSupport
+    isNotAuthorisedToBeDeleted
+  }
+}

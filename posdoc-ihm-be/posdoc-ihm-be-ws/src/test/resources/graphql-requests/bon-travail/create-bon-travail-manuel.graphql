@@ -1,0 +1,11 @@
+mutation CreateBonTravailManuel($payload: CreateOrUpdateBonTravailManuelPayload){
+    createBonTravailManuel(payload: $payload){
+        codenv
+        codorg
+        codapp
+        percod
+        codcom
+        numcom
+        codfic
+    }
+}

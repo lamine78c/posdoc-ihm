@@ -1,0 +1,100 @@
+{
+
+    #    organismes : organismes{
+    #        code,
+    #        libelle
+    #    }
+
+    infosOrganismes: informationOrganismes{
+        id,
+        organisme {
+            code,
+            libelle
+        }
+        message,
+        actif
+    }
+
+    environnements: environnements {
+        code
+        libelle
+    }
+
+}
+
+{
+  environnements(
+    queryParameters: {
+      			paginationParameters: {
+              		page: 1,
+              		size: 3,
+              		sort: {
+                    column: "code",
+                    direction: ASCENDING
+                  }
+            }
+    },
+
+    filterCriteria: {
+
+
+    }
+
+  ) {
+    	totalElement
+    	totalPages
+    	elements {
+      	... on Environnement {
+        	code
+        	libelle
+      }
+    }
+  }
+}
+
+
+# requete de test fait par takfa
+
+{
+  servers (queryParameters: {
+    paginationParameters: {
+      page: 0,
+      size: 5,
+      sort: {
+        column: "code",
+        direction: ASCENDING
+      }
+    },
+    filterCriteria: {
+      criteria: {
+        value: "%",
+        column: "code",
+        operation: LIKE
+      }
+    }
+  })
+  {
+      totalPages
+      totalElement
+      elements {
+        ... on Server {
+                  code
+                  libelle
+                  systeme
+                  adresseIp
+                  teste
+                  actif
+                  }
+     					 }
+  }
+}
+
+# creation plusieur serveur
+mutation {
+  createServers (createServers: { servers: [{code: "dd1", systeme: WINDOWS, libelle:"fff1", adresseIp:"dfdfd1", teste:true, actif:true},
+  															{code: "dd2", systeme: WINDOWS, libelle:"fff2", adresseIp:"dfdfd2", teste:true, actif:true}]}) {
+    code
+    libelle
+    adresseIp
+  }
+}

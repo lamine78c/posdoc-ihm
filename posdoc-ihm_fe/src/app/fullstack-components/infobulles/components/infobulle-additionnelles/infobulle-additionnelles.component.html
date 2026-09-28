@@ -1,0 +1,54 @@
+<!-- Titre de la popover -->
+<ng-template #popTitle>
+  <div class="d-flex">
+    <div>
+      <ng-content select="[titre]"></ng-content>
+    </div>
+    <!-- Icône de fermeture -->
+    <svg-icon
+      class="popover-close"
+      [src]="'assets/icones-showcase/m_close.svg'"
+      tabindex="0"
+      [svgStyle]="{ 'width.em': 1.5, 'height.em': 1.5, fill: '#5b77b8' }"
+      (click)="p.close()"
+      (keyup.enter)="p.close()"
+    ></svg-icon>
+  </div>
+</ng-template>
+
+<!-- Contenu de la popover -->
+<ng-template #popContent>
+  <div class="d-flex">
+    <div>
+      <ng-content select="[body]"></ng-content>
+    </div>
+
+    <!-- Icône de fermeture dans le cas où il n'y a pas de titre -->
+    <svg-icon
+      *ngIf="!displayTitle"
+      class="body-popover-close"
+      [src]="'assets/icones-showcase/m_close.svg'"
+      [svgStyle]="{ 'width.em': 1.5, 'height.em': 1.5, fill: '#5b77b8' }"
+      (click)="p.close()"
+      (keyup.enter)="p.close()"
+      tabindex="0"
+    ></svg-icon>
+  </div>
+</ng-template>
+
+<!-- Icône affichant la popover -->
+<i
+  #p="ngbPopover"
+  autoClose="outside"
+  [ngbPopover]="popContent"
+  [popoverTitle]="displayTitle ? popTitle : null"
+  placement="{{ placement }}"
+  [popoverClass]="displayTitle ? '' : 'without-title'"
+  tabindex="0"
+  (keyup.enter)="p.open()"
+  class="icon-b_tooltip_ad"
+  aria-hidden="true"
+>
+  <span class="path1"></span>
+  <span class="path2"></span>
+</i>

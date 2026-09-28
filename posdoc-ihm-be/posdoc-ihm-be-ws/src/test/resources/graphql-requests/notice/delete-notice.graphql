@@ -1,0 +1,7 @@
+mutation deleteNotice($codnot: String!) {
+    deleteNotice(codnot: $codnot) {
+        codnot
+        libnot
+        perime
+    }
+}

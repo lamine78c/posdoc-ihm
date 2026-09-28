@@ -1,0 +1,7 @@
+mutation UpdateClient($var: UpdateClientInput!){
+    updateClient(updateClient: $var){
+        code
+        libelle
+        codeAlliage
+    }
+}

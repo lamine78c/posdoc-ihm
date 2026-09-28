@@ -1,0 +1,13 @@
+<div
+  #dateElement
+  class="overflow-ellipsis"
+  [ngbPopover]="!date && !isTotalRow ? '-' : (date | date: 'dd/MM/yyyy')"
+  container="body"
+  [disablePopover]="!enableTooltip"
+  triggers="mouseenter:mouseleave"
+>
+  <ng-container *ngIf="date">
+    {{ date | date: 'dd/MM/yyyy' }}
+  </ng-container>
+  <ng-container *ngIf="!date && !isTotalRow">-</ng-container>
+</div>

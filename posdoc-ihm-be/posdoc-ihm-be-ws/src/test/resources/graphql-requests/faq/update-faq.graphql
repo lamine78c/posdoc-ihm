@@ -1,0 +1,14 @@
+mutation updateFaq($id: Int!, $faq: CreateOrUpdateFaqInputDTO!) {
+    updateFaq(id: $id, faq: $faq) {
+        id
+        path
+        question
+        answer
+        status
+        viewCount
+        createdBy
+        updatedBy
+        createdAt
+        updatedAt
+    }
+}

@@ -1,0 +1,3 @@
+query getDistComByEnvOrgAppFromFichier($query: SearchFichierFilterQuery) {
+    getDistComByEnvOrgAppFromFichier(query: $query)
+}

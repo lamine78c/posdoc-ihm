@@ -1,0 +1,5 @@
+mutation($deletesDTO: DeleteByArrayStringIdInput!) {
+    deleteHabilitations(deletesDTO: $deletesDTO) {
+        ok
+    }
+}

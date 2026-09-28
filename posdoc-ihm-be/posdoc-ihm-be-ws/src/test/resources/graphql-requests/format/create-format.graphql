@@ -1,0 +1,7 @@
+mutation createFormat($createDTO: CreateOrUpdateFormatInput!) {
+    createFormat(createFormat: $createDTO) {
+        code
+        libelle
+        isNotAuthorisedToBeDeleted
+    }
+}

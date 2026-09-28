@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <property name="APPLI_NAME" value="posdoc_be_ihm"/>
+    <property name="LOGS_FOLDER" value="/hawai/logs/tomcat/posdoc_be_ihm"/>
+    <property name="LOGS_TO_COLLECT_FOLDER" value="/hawai/logs/tomcat/posdoc_be_ihm"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{36}.%M) \(L.%line\) - %yellow(%msg%n)</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_1" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOGS_FOLDER}/${APPLI_NAME}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOGS_TO_COLLECT_FOLDER}/${APPLI_NAME}.%d{yyyy-MM-dd}.%i.log.zip</FileNamePattern>
+            <maxHistory>16</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M \(L.%line\) - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.apache" additivity="false">
+        <appender-ref ref="FILE_1"/>
+    </logger>
+
+    <logger name="org.hibernate" additivity="false">
+        <appender-ref ref="FILE_1"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework.web" additivity="false">
+        <appender-ref ref="FILE_1"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="fr" additivity="false">
+        <appender-ref ref="FILE_1"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="FILE_1"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

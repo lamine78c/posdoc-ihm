@@ -1,0 +1,22 @@
+query searchFacturationsByFichier($fichierPayload: SearchFacturationsByFichierInput) {
+    searchFacturationsByFichier(fichierPayload: $fichierPayload) {
+        facturations {
+            typtar
+            libtar
+            nbplis
+            coutot
+        }
+        fichiersMas {
+            codenv
+            codorg
+            codapp
+            percod
+            codcom
+            codfic
+            numcom
+            libtar
+            nbplis
+            coutot
+        }
+    }
+}

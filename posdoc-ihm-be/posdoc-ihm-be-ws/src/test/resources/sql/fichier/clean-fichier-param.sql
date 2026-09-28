@@ -1,0 +1,2 @@
+DELETE FROM fichie;
+DELETE FROM params;

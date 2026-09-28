@@ -1,0 +1,39 @@
+mutation {
+
+    createInformationOrganisme(
+        createOrganisme: {
+            organismeId: "750"
+            message: "Serveur à l'arrêt du 12/04/2020 au 14/05/2020"
+            actif: true
+        }
+    ){
+        id,
+        organismeId,
+        message,
+        actif
+    }
+
+    #    updateInformationOrganisme(
+    #        informationOrganisme: {
+    #            id: 31
+    #            message: "Salut à tous ! (Modifié)"
+    #            actif: true
+    #        }
+    #    ) {
+    #        id,
+    #        organismeId,
+    #        message,
+    #        actif
+    #    }
+    #
+    #    deleteInformationOrganisme(
+    #        informationOrganisme: {
+    #            ids: 31
+    #        }
+    #    ){
+    #        ok
+    #    }
+
+
+
+}

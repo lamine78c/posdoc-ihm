@@ -1,0 +1,13 @@
+.help-container {
+  position: relative;
+}
+
+.notification {
+  position: absolute;
+  border-radius: 50%;
+  background-color: red;
+  left: 60%;
+  top: -20%;
+  padding: 0.1rem 0.3rem;
+  color: white;
+}

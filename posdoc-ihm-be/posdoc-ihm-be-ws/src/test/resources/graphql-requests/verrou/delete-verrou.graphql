@@ -1,0 +1,5 @@
+mutation DeleteVerrous($var: DeleteByArrayStringIdInput!){
+    deleteVerrous(deleteVerrous: $var){
+        ok
+    }
+}

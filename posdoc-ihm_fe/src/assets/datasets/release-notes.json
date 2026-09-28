@@ -1,0 +1,188 @@
+[ 
+  {
+    "version": null,
+    "date": null,
+    "features": [
+      "Gestion des fichiers d'édition / Distribution [Paramètre d'édition] : modification en masse de sites", 
+      "Gestion des fichiers d'édition / Distribution [Exemplaire, Paramètre d'édition en liste] : optimisation des requêtes",
+      "Gestion des fichiers d'édition / Distribution [Paramètre d'édition en liste] : ajout en masse",
+      "Gestion des fichiers d'édition / Notices [Affectation notices, Notices de fichiers] : ajout d'un menu déroulant pour les commandes et les fichiers",
+      "Gestion des fichiers d'édition / Propriétés des fichiers : dans l'ajout, modification du composant de recherche par l'ajout d'un ascenseur",
+      "Supervision / Production  [Occurrences d'étapes] : amélioration de la recherche",
+      "Supervision > Production [Occurrences d'application] : optimisation de la requête",
+      "Exploitation Editique / Réédition / [Réédition de fichiers] : dans l'ajout, modification du filtre des ressources",
+      "Exploitation Editique / Massifications : création d'un bouton RAZ à côté du bouton de recherche",
+      "Suivi / Production [Occurrences de fichiers] : ajout d'un filtre sur le fond de page",
+      "Optimisation des requêtes sur les entités Region, Ressource, Application, Format, Multif, ParametreDistribution, Verrou, ParametreEchantillon, Destinataire, AdresseRetour et Site" 
+    ],
+    "fixes":
+      [
+     "Général : les messages de succès prennent trop d'espace et restent trop longtemps",
+     "Général : modification du temps d'expiration du jeton",
+     "Général : le sélecteur d'organisme doit focaliser directement sur les éléments déjà sélectionnés",
+     "Administration / Tarifs : correction du problème de modification du coût",
+     "Administration / Tarifs : correction du problème de modification de période",
+     "Administration / Spécification de fichiers / Compositions : optimisation des requêtes", 
+     "Administration > Services : il faut pouvoir modifier le nom du service",  
+     "Gestion des fichiers d'édition / Distribution [Paramètre édition en liste] : optimisation de la requête",
+     "Gestion des fichiers d'édition / Distribution [Paramètre édition par ressource] : contrôle des ressources génériques en fonction du site",
+     "Gestion des fichiers d'édition / Distribution [Exemplaire] : l'export doit pouvoir se faire sans renseigner de commande ou de fichier",
+     "Gestion des fichiers d'édition / Distribution [Paramètre d'édition en liste] : La modification unitaire doit enregistrer que le message",
+     "Gestion des fichiers d'édition / Distribution [Paramètres édition par ressource]",
+     "Gestion des fichiers d'édition / Propriété des fichiers : modification en masse avec plusieurs région",
+     "Gestion des fichiers d'édition / Propriétés des fichiers : correction dans le tri des fichiers",
+     "Gestion des fichiers d'édition / Distribution [Exemplaires] : la recherche doit pouvoir se faire en sélectionnant un seule région",
+     "Gestion des fichiers d'édition / Propriétés des fichiers : le nom du fichier doit être renommé dans la pop-up",
+     "Gestion des fichiers d'édition / Commande : correction du problème de comparaison des environnements",
+     "Gestion des fichiers d'édition / Distribution / Paramètre édition en liste : modification en masse de site",
+     "Exploitation Editique / Massifications : renommer le fichier téléchargé et ne garder qu'une seule fenêtre de téléchargement",
+     "Exploitation Editique / Consolidation facturation : problème de modification manuelle",
+     "Exploitation Editique / Rééditions [Réédition par produit] : il faut ajouter l'itération dans le nommage de fichier",
+     "Exploitation Editique / Rééditions [Réédition par produit] : il ne faut plus cocher les organismes de la sélection précédente",
+     "Exploitation Editique / Massifications : ajout du nombre de fichiers à massifier dans la colonne pool",
+     "Exploitation Editique / Massifications : filtrer la liste des dates d'acheminement en fonction du site",
+     "Exploitation Editique / Consolidation facturation : après la modification, la liste doit rester visible",
+     "Exploitation Editique / Consolidation facturation : le comptage des plis est erroné",
+     "Supervision / Production [Occurrences d'application] problèmes d'affichage de la 'timeline'",
+     "Supervision / Production : ajout d'un ascenseur", 
+     "Suivi / Bons de travail : changement du libellé dates non saisies seulement",
+     "Suivi / Bon de travail : correction du filtre commande pour la requête ",
+     "Suivi / Bons de travail : supprimé la place perdue entre le requêteur et le tableau de données"
+    ]
+  },
+  {
+    "version": "1.37.1",
+    "date": "2026-06-10",
+    "features": [
+      "Optimisation des requêtes des repository suivant : FichierRepository, OrganismeRepository, CommandeRepository,  ",
+      "DataSouce JNDI + Routing readDB et writeDB : Pouvoir switcher d'une dataSource RW à une DataSource Read ",
+      "Gestion des fichiers d'édition / Fichiers : ajouter dans le sélecteur fichier les informations, ajouter l'action de la modification en masse",
+      "Supervision / Document dématérialisés / Consultation : ajouter la commande au requêteur",
+      "Exploitation Editique > Massifications : Ajout de la colonne support au tableau de liste des massifications",
+      "Supervision / Production : Le champ environnement est laissé vide",
+      "Exploitation Editique  / Réédition / [Réédition par produit,Réédition par ressouce] : La pop-up d'ajout s'affiche lorsque l'on clique sur le fichier"
+    ],
+    "fixes": [
+      "Gestion des fichiers d'édition : Notices de fichiers : éviter d'afficher le tiret en cas du site non spécifié",
+      "Tableau AG Grid : mettre par défaut le select de pagination à 500, pour tous les tableaux",
+      "Exploitation éditique / Massifications : Filtrage de la date d'acheminement, en fonction du site choisi, dans le requêteur",
+      "Gestion des fichiers d'édition / Fichiers : plusieurs changements dans la création du fichier",
+      "Gestion des fichiers d'édition / Fonds de page / Onglet Références : centrer l'option sélectionnée pour la modification en masse",
+      "Gestion des fichiers d'édition / PAPAAD : préremplir à la saisie TypeHas et Format",
+      "Supervision / Production / Occurrences d'étapes : Affichage d'un tooltip au survol d'un nœud du graphe et possibilité de scroller verticalement",
+      "Exploitation Editique / Massifications : ajout de la période codifiée dans le titre du bilan",
+      "Supervision > Production : suppression de la valeur par défaut(P) du select de l'environnement",
+      "IMPACT FACTURATION (Massification IHM) : correction du message envoyé au moteur adelaide, lors de la massification"
+    ]
+  },
+  {
+    "version": "1.35.0",
+    "date": "2026-04-10",
+    "features": [
+      "Gestion des fichiers d'édition : Notices [Notices de fichiers]",
+      "Supervision : Documents dématérialisés : [Consultation] (Amélioration du requêteur)",
+      "Gestion des fichiers d'édition : Fonds de page [Imprimé] (La saisie du code RND n'est plus obligatoire)",
+      "Gestion des fichiers d'édition : PAPAAD (Ajout de la colonne idNRAF dans la liste)",
+      "Gestion des fichiers d'édition : Distribution [Paramètre Edition en liste] (Pouvoir ajouter plusieurs fichiers)",
+      "Suivi : Edition [Suivi au pli] (Ajout de bulles d'information dans le requêteur)",
+      "Suivi : Edition [Suivi au pli] (Pouvoir requêter avec une date dans le futur + 7 jours)",
+      "Exploitation Editique : Massification (Il ne faut pas garder les requêtes précédentes. Il faut TOUT voir par défaut)",
+      "Suivi : Bons de travail (Modification du téléchargement d'un bon de travail)",
+      "Purge des tables utilog et myslog)",
+      "Purge des bilans de massification "
+    ],
+    "fixes": [
+      "Alignement des composants de recherche",
+      "Administration : Service (Correction du chargement de la liste)",
+      "Gestion des fichiers d'édition : Propriétés des fichiers (La création des fichiers se fait sans exemplaire)",
+      "Gestion des fichiers d'édition : Fonds de page [Imprimé] (Autoriser le caractère tiret dans le champ libellé)",
+      "Administration : Contenu (Pour le champ titre limitation de la saisie à 50 caractères)",
+      "FAQ : Mes questions (Correction du problème de clique sur l'icône enregistrer)",
+      "Le bandeau d'erreur doit pouvoir être fermé",
+      "Ajout de la période codifiée dans le bilan de massification",
+      "Gestion des fichiers d'édition : Distribution [Paramètre d'édition par ressource] (Correction du problème de sélection des cases à cocher avec le sélecteur Fichier)"
+    ]
+  },
+  {
+    "version": "1.33.2",
+    "date": "2026-03-06",
+    "features": [
+      "Administration : Contenus [FAQ] (Inversion de la rubrique question réponses et échanges)",
+      "Exploitation Editique : Contrôle de l’intégrité de la production",
+      "Exploitation Editique : Massifications (Création d'un bilan de massification et simulation)",
+      "Suivi : Bon de travail (Amélioration de la cohérence entre les dates d'expéditions et la case Dates non saisies)",
+      "Suivi : Bon de travail (Débloquer l'obligation de saisir une période pour les recherches avec les organismes 00L et 00T)",
+      "Supervision : Service"
+    ],
+    "fixes": [
+      "Administration : Fabrication [Ressources] (Correction du problème d'affichage lorsque les champs sont vide)",
+      "Gestion des fichiers d'édition : Notices [Affectation notices] (Correction du message de confirmation)",
+      "Gestion des fichiers d'édition : Destinataires (Correction des caractères autorisés dans le champ de saisie désignation)",
+      "Gestion des fichiers d'édition : Destinataires (Correction de la validation sur la modal d'ajout en masse)",
+      "Problème de cache",
+      "Suivi : production [Occurrences d'application] (Correction du sélecteur période, ajout de la possibilité de sélectionner une valeur vide)"
+    ]
+  },
+ {
+    "version": "1.31.1",
+    "date": "2026-01-16",
+    "features": [
+      "Suivi : Production [Occurrences des fichiers, Occurrences d'application] ",
+      "Administration : Contenus [Aide, FAQ]",
+      "Administration : Services",
+      "Supervision : Production [Occurrences d'application] (Amélioration de la navigation vers occurrences)"
+    ],
+    "fixes": [
+      "Gestion des fichiers d'édition : Destinataires (Autoriser les caractères spéciaux dans la désignation)",
+      "Supervision : Production [Occurrences d'étapes] (Correction des écarts du calcul des états)",
+      "Supervision : Production [Occurrences d'étapes] (Correction de l'alignement des étapes)",
+      "Gestion des fichiers d'édition : Distribution [Paramètres Edition en liste, Paramètres Edition par ressource] (Autoriser la modification du destinataire à vide)" ,
+      "Gestion des fichiers d'édition : PAPAAD (Correction du problème de création d'une ligne PAPAAD)",
+      "Gestion des fichiers d'édition : Propriétés des fichiers (Modfier le formatage de la liste \"Type Format\" et Ajout d'un message \"La création du fichier est impossible, car il existe pour tous les organismes\")",
+      "Gestion des fichiers d'édition : Paramètres Edition en liste (Correction du problème de modification en masse du message)",
+      "Gestion des fichiers d'édition : Destinataire (Autoriser la modification du champ désignation avec des espaces)",
+      "Gestion des fichiers d'édition : Notices [Affectation notices] (Fenêtre contextuelle a été reformulée)",
+      "Exploitation éditique : Réédition facturation [Réédition massification] (Correction de la fonction de réédition par massification)",
+      "Exploitation éditique : Consolidation facturation (Correction du problème de modification du coût)"
+    ]
+  },
+  {
+    "version": "1.27.3",
+    "date": "2025-10-20",
+    "features": [
+      "Initialisation du projet",
+      "Accueil",
+      "Administration : Habilitations",
+      "Administration : Moteur Adelaïde",
+      "Administration : Environnement",
+      "Administration : Organismes [Organismes, Région, Sites]",
+      "Administration : Fabrication [Serveurs, Gammes, Verrous, Paramètres Distribution, Ressources]",
+      "Administration : Spécification de fichiers [Compositions, Formats, Multi feuillets, Supports, Echantillons, Rééditions]",
+      "Administration : Applications",
+      "Administration : Contenus [Page d'accueil]",
+      "Administration : Clients",
+      "Administration : Tarifs",
+      "Gestion des fichiers d'édition : Destinataires",
+      "Gestion des fichiers d'édition : Commandes",
+      "Gestion des fichiers d'édition : Propriétés des fichiers",
+      "Gestion des fichiers d'édition : PAPAAD",
+      "Gestion des fichiers d'édition : Fonds de Page [Imprimés, Références]",
+      "Gestion des fichiers d'édition : Distribution [Exemplaires, Paramètres Edition en liste, Paramètres Edition par ressource]",
+      "Gestion des fichiers d'édition : Adresses retour",
+      "Gestion des fichiers d'édition : Notices [Notices actives, Notices périmées, Affectation notices]",
+      "Exploitation éditique : Massifications",
+      "Exploitation éditique : Rééditions [Réédition massification, Réédition par produit, Réédition par ressource]",
+      "Exploitation éditique : Bons de travail manuels",
+      "Exploitation éditique : Consolidation facturation",
+      "Suivi : Editions [Expédition, Suivi au pli]",
+      "Suivi : Facturation [Facturation détaillée]",
+      "Suivi : Volumes traités",
+      "Suivi : Massifications",
+      "Suivi : Bons de travail",
+      "Supervision : Production [Occurrences d'application, Gestion des occurrences d'application, Gestion des occurrences d'étapes, Occurrences d'étapes]",
+      "Supervision : Documents dématérialisés [Consultation, Vidéo]",
+      "Supervision : Actions [Mise à jour IHM, Actions des utilisateurs]"
+    ],
+    "fixes": []
+  }
+]

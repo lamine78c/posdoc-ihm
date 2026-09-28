@@ -1,0 +1,76 @@
+<div class="list-question-container p-2 d-flex flex-column h-100">
+
+  <p class="mb-1">Vos questions:</p>
+
+  <div class="overflow-y-auto card mat-elevation-z4 p-2">
+
+    @for (faq of faqs; track faq.id) {
+      <div
+        [class.selected-card]="questionSelected?.id === faq.id"
+        [class.notified-card]="hasNotification(faq)"
+        class="card mat-elevation-z4 d-flex justify-content-between my-1 flex-row p-1">
+
+        <div class="d-flex flex-column w-100">
+
+          <p
+            class="m-0 small text-muted"
+          > {{ getPathLabel(faq.path) }} </p>
+
+          @if (!(questionUpdating && faq.id == questionUpdating.id)) {
+            <p
+              class="m-0 text-break fw-bold"
+            > {{ faq.question }} </p>
+          }
+
+          @if (questionUpdating && questionUpdating.id === faq.id) {
+            <div
+              class="d-flex w-100 flex-row me-3">
+              <app-champ-de-saisie
+                class="flex-grow-1 position-relative ps-3"
+                [form]="form.get('question')"
+                [placeholder]="'Saisir la question ici'"
+                [isError]="true"
+                [errorMessage]="form.get('question')?.errors?.message || 'Ce champ est requis'"
+              ></app-champ-de-saisie>
+              <div class="d-flex gap-2 ms-3">
+                <button class="btn btn-link text-decoration-none text-dark p-0 border-0"
+                        (click)="saveUpdateQuestion()"
+                        [disabled]="form.invalid">
+                  <i class="icon-b_save fs-5"></i>
+                </button>
+                <button class="btn btn-link text-decoration-none text-dark p-0 border-0"
+                        (click)="closeUpdatingQuestion()">
+                  <i class="icon-b_off fs-5"></i>
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+
+        @if (!questionUpdating) {
+          <div class="d-flex gap-1">
+            @if (!faq?.exchanges?.length && !this.questionSelected) {
+              <button class="btn btn-link text-decoration-none text-dark p-0 border-0"
+                      (click)="editQuestion(faq)"
+                      title="Modifier votre question tant qu'aucun échange n'a eu lieu">
+                <i class="icon-b_modify fs-5"></i>
+              </button>
+            }
+            <button class="btn btn-link text-decoration-none text-dark p-0 border-0"
+                    (click)="selectConversation(faq)"
+                    title="Voir les échanges liés à la question">
+              <i class="icon-b_historic fs-5"></i>
+            </button>
+          </div>
+        }
+      </div>
+    }
+
+
+    @if (!faqs || faqs?.length === 0) {
+      <div class="text-center p-4 text-muted">
+        <p class="m-0 small">Aucune question pour le moment.</p>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,26 @@
+query Query  ($page: Int!, $size: Int!, $sort:[SortInput]!, $criteria: [FilterCriterionInput]!) {
+    tarifs : tarifs(queryParameters: {
+        paginationParameters: {
+            page: $page
+            size: $size
+            sort: $sort
+        }
+        filterCriteria: {
+            criteria: $criteria
+        }
+
+    }) {
+        totalElement
+        totalPages
+        elements {
+            ... on Tarif {
+                type
+                libelle
+                ordre
+                tlibre
+                compta
+                perime
+            }
+        }
+    }
+}

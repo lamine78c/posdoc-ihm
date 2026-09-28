@@ -1,0 +1,7 @@
+query getDistinctEnvOrgAppFromGenfic {
+  getDistinctEnvOrgAppFromGenfic {
+    codenv
+    codorg
+    codapp
+  }
+}

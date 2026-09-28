@@ -1,0 +1,10 @@
+mutation CreateImprime($var: CreateOrUpdateImprimeInput!){
+    createImprime(createImprime: $var){
+        reference
+        libelle
+        codeRND
+        typeComposition
+        typeCouleur
+        rectoVerso
+    }
+}

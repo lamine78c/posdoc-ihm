@@ -1,0 +1,9 @@
+<app-popup
+  [modalRef]="activeModal"
+  [title]="'Confirmer la fermeture'"
+  [iconToDisplay]="'assets/icones-showcase/m_warning.svg'"
+  [firstButton]="{ label: 'Confirmer fermeture', icone: 'icon-b_valid' }"
+  [secondButton]="{ label: 'Abandonner fermeture', icone: 'icon-b_cancel' }"
+>
+  <p>Vous êtes sur le point de fermer {{ closedNumber }} onglet{{ closedNumber > 1 ? 's' : '' }}.</p>
+</app-popup>

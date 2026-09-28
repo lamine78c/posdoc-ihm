@@ -1,0 +1,5 @@
+DELETE FROM gentar;
+DELETE FROM params;
+DELETE FROM tarpos;
+DELETE FROM genfic;
+DELETE FROM utilog;

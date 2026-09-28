@@ -1,0 +1,15 @@
+<div class="card mb-3 ml-5">
+  <div class="card-body">
+    <app-champ-de-saisie-multiligne
+      [label]="'Commande:'"
+      [index]="1"
+      [form]="form.get('commandeDistribution')"
+      [maxLength]="null"
+      [labelWidth]="95"
+      [inputColumns]="11"
+      [textareaRows]="4"
+      [isError]="true"
+      [errorMessage]="form.get('commandeDistribution').errors?.message || form.get('commandeDistribution').errors"
+    ></app-champ-de-saisie-multiligne>
+  </div>
+</div>

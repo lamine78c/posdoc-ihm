@@ -1,0 +1,37 @@
+.draggable {
+  position: absolute;
+  background: white;
+  width: max-content;
+  cursor: move;
+}
+
+::ng-deep .position-relative {
+  cursor: default;
+}
+
+::ng-deep .modal-content {
+  border-color: transparent;
+}
+
+.spinner-border {
+  position: absolute;
+  z-index: 9;
+  top: 50%;
+  left: 45%;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.container {
+  margin-top: 7%;
+  width: 500px;
+}
+
+.error-form {
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px;
+}

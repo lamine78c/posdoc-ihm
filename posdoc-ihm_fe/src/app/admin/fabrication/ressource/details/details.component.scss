@@ -1,0 +1,28 @@
+:host ::ng-deep .label-valeur {
+  margin-top: 0rem; // 7px
+}
+
+// .form {
+//   .icon-error, .icon-warning {
+//     height: 1.857rem; // 26px
+//     margin-top: 0.143rem; // 2px
+//     position: absolute;
+//     top: 0;
+//     right: 1rem; // 14px
+//   }
+
+//   .icon-error:before {
+//     font-size: 1.143rem; // 16px
+//     color: blue
+//   }
+//   .icon-warning:before {
+//     font-size: 1.143rem; // 16px
+//     color: red
+//   }
+// }
+
+:host ::ng-deep .icon-error,
+:host ::ng-deep .icon-warning {
+  left: auto;
+  right: 0.5rem;
+}

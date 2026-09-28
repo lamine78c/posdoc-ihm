@@ -1,0 +1,6 @@
+query GetCodLibCommandeByEnvOrgApp($filters: CommandeFiltersInput!) {
+    getCodLibCommandeByEnvOrgApp(filters: $filters) {
+        code
+        libelle
+    }
+}

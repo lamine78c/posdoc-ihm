@@ -1,0 +1,10 @@
+query GetAllApplications {
+  allApplications {
+    code
+    libelle
+    codeOrganisation
+    codeEnvironnement
+    codeSystem
+    codeGroupe
+  }
+}

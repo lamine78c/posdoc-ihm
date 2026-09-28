@@ -1,0 +1,6 @@
+mutation SetNewStatusForListOfGenEtp($etapes: [OccurrenceEtapeInput]) {
+    setNewStatusForListOfGenEtp(etapes: $etapes) {
+        id
+        statut
+    }
+}

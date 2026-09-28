@@ -1,0 +1,40 @@
+extend type Query {
+    getExpeditions(searchExpeditionQuery: SearchExpeditionQuery): ExpeditionPayloadDTO!
+}
+
+input SearchExpeditionQuery {
+    codenv: String!
+    codorg: [String]!
+    codapp: String!
+    codcom: String
+    codfic: String
+    codcli: String
+    percod: String
+    codsit: String
+    isNotNullDfiexp: Boolean
+    dfiexpDeb: String
+    dfiexpFin: String
+}
+
+type ExpeditionPayloadDTO {
+    expeditionList: [Expedition]!
+    message: String
+}
+
+type Expedition {
+    pagfic: Int
+    codcom: String
+    codfic: String
+    numcom: String
+    codprd: String
+    refimp: String
+    codsit: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcli: String
+    dfiexp: DateTime
+    libfic: String
+}
+

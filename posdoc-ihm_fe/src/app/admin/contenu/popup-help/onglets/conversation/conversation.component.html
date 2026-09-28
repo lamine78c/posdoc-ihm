@@ -1,0 +1,31 @@
+<div class="popup-container mx-3 mb-5 d-flex flex-column">
+
+  <app-create-question
+    style="flex: 0 0 auto;"
+    [path]="path"
+    [pathOptions]="pathOptions"
+    [isConversationSelected]="!!selectedFaq"
+    (newFaqCreated)="handleCreatedQuestion($event)"
+    (actionOnCreateComponent)="handleActionOnCreateComponent()"
+  ></app-create-question>
+
+  <app-list-question
+    class="d-block min-height-0 overflow-hidden"
+    [style.flex]="selectedFaq ? '40' : '100'"
+    [faqs]="faqs"
+    [pathOptions]="pathOptions"
+    [questionSelected]="selectedFaq"
+    [faqNotifications]="faqNotifications"
+    (questionsUpdate)="handleUpdatedQuestion($event)"
+    (questionSelect)="setSelectedFaq($event)"
+  ></app-list-question>
+
+  @if (selectedFaq) {
+    <app-answer-question
+      class="d-block min-height-0 overflow-hidden border-top mt-2 pt-2"
+      style="flex: 60;"
+      [faqToDisplay]="selectedFaq"
+      (messageCreated)="handleMessageCreated($event)"
+    ></app-answer-question>
+  }
+</div>

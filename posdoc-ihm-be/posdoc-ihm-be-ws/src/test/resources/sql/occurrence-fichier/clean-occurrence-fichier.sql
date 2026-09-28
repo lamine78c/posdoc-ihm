@@ -1,0 +1,12 @@
+DELETE FROM genfic;
+DELETE FROM organi;
+DELETE FROM format;
+DELETE FROM multif;
+DELETE FROM suppor;
+DELETE FROM genpro;
+DELETE FROM gammes;
+DELETE FROM genmas;
+DELETE FROM gentar;
+DELETE FROM tarpos;
+DELETE FROM params;
+DELETE FROM utilog;

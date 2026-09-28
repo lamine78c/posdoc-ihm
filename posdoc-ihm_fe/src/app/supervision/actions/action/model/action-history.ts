@@ -1,0 +1,7 @@
+export const ACTION_HISTORY_INSERT = 'INSERT';
+export const ACTION_HISTORY_UPDATE = 'UPDATE';
+export const ACTION_HISTORY_DELETE = 'DELETE';
+
+export function getListActionMiseAJourIhm() {
+  return [ACTION_HISTORY_INSERT, ACTION_HISTORY_UPDATE, ACTION_HISTORY_DELETE];
+}

@@ -1,0 +1,290 @@
+<div class="card mb-3 mat-elevation-z4 ml-5">
+  <div class="card-body">
+    <div class="card mb-3 mat-elevation-z4">
+      <div class="card-body">
+        <div class="row mb-3 pr-5" *ngIf="!isEditing">
+          <div class="row pr-4">
+            <div class="col-8">
+              <app-label-valeur
+                [label]="'Designation:'"
+                [valeur]="form.get('libFichier').value"
+                [labelWidth]="150"
+                [fillInput]="true"
+              ></app-label-valeur>
+            </div>
+            <div class="col-4">
+              <app-label-valeur
+                [label]="'Code Produit:'"
+                [valeur]="form.get('codeProd').value"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+              ></app-label-valeur>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <app-label-valeur
+                [label]="'Référence Format:'"
+                [valeur]="form.get('refFormat').value"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+              ></app-label-valeur>
+            </div>
+            <div class="col-4">
+              <app-label-valeur
+                [label]="'Type Format:'"
+                [valeur]="getTectByValue(form.get('typeFormat').value, typFormatOption)"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+              ></app-label-valeur>
+            </div>
+            <div class="col-4">
+              <app-label-valeur
+                [label]="'Fond De Page:'"
+                [valeur]="form.get('fondPage').value"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+              ></app-label-valeur>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <app-label-valeur
+                [label]="'Code client:'"
+                [valeur]="form.get('codeClient').value"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+              ></app-label-valeur>
+            </div>
+            <div class="col-4">
+              <app-label-valeur
+                [label]="'Signature:'"
+                [valeur]="getTectByValue(form.get('signature').value, signatureOptions)"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+              ></app-label-valeur>
+            </div>
+            <div class="col-4">
+              <app-label-valeur
+                [label]="'Code Document:'"
+                [valeur]="form.get('codeDocument').value"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+              ></app-label-valeur>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <app-label-valeur
+                [label]="'Référence Support:'"
+                [valeur]="form.get('refSupport').value"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+              ></app-label-valeur>
+            </div>
+            <div class="col-4">
+              <app-label-valeur
+                [label]="'Type Support:'"
+                [valeur]="getTectByValue(form.get('typeSupport').value, typSupportOption)"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+              ></app-label-valeur>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4 checkbox-eclatement">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="eclatement"
+                  role="checkbox"
+                  name="eclatement"
+                  [formControl]="form.get('eclatement')"
+                />
+                <label class="form-check-label" for="eclatement"> Eclatement </label>
+              </div>
+            </div>
+            <div class="col-4">
+              <app-label-valeur
+                [label]="'Limite Regroupement:'"
+                [valeur]="form.get('page').value"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+              ></app-label-valeur>
+            </div>
+          </div>
+        </div>
+
+        <!-- lors de l'edition du formulaire  -->
+        <div class="row mb-3 pr-5" *ngIf="isEditing">
+          <div class="row pr-4">
+            <div class="col-8">
+              <app-champ-de-saisie
+                [label]="'Designation: *'"
+                [labelWidth]="150"
+                [fillInput]="true"
+                [form]="form.get('libFichier')"
+                [isError]="true"
+                [toUpperCase]="true"
+                [errorMessage]="getErrorMessage('libFichier')"
+              ></app-champ-de-saisie>
+            </div>
+            <div class="col-4">
+              <app-champ-de-saisie
+                [label]="'Code Produit: '"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+                [form]="form.get('codeProd')"
+                [toUpperCase]="true"
+                [isError]="true"
+                [errorMessage]="form.get('codeProd').errors?.message || form.get('codeProd').errors"
+              ></app-champ-de-saisie>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <app-champ-de-saisie
+                [label]="'Référence Format:'"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+                [form]="form.get('refFormat')"
+                [isError]="true"
+                [errorMessage]="form.get('refFormat').errors?.message || form.get('refFormat').errors"
+              ></app-champ-de-saisie>
+            </div>
+            <div class="col-4">
+              <app-liste-deroulante
+                [label]="'Type Format: '"
+                [form]="form.get('typeFormat')"
+                [options]="typFormatOption"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="false"
+                [isError]="true"
+                [errorMessage]="form.get('typeFormat').errors?.message || form.get('typeFormat').errors"
+              ></app-liste-deroulante>
+            </div>
+            <div class="col-4">
+              <app-champ-de-saisie-auto-completion
+                [label]="'Fond De Page: *'"
+                [index]="1"
+                [form]="form.get('fondPage')"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [autoCompleteResults]="imprimeData"
+                [editable]="false"
+                [placeholder]="'auto-completion'"
+                [displaySearchIcon]="false"
+                [isError]="true"
+                [errorMessage]="form.get('fondPage').errors?.message || form.get('fondPage').errors"
+              ></app-champ-de-saisie-auto-completion>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <app-liste-deroulante
+                [label]="'Code Client:'"
+                [form]="form.get('codeClient')"
+                [options]="clientOption"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="false"
+                [isError]="true"
+                [errorMessage]="form.get('codeClient').errors?.message || form.get('codeClient').errors"
+              ></app-liste-deroulante>
+            </div>
+            <div class="col-4">
+              <app-liste-deroulante
+                [label]="'Signature:'"
+                [form]="form.get('signature')"
+                [isError]="true"
+                [options]="signatureOptions"
+                [hasBlankOption]="true"
+                [blankOptionValue]="''"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [errorMessage]="form.get('signature').errors?.message || form.get('signature').errors"
+              ></app-liste-deroulante>
+            </div>
+            <div class="col-4">
+              <app-champ-de-saisie
+                [label]="'Code Document:'"
+                [form]="form.get('codeDocument')"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [isError]="true"
+                [errorMessage]="form.get('codeDocument').errors?.message || form.get('codeDocument').errors"
+              ></app-champ-de-saisie>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <app-champ-de-saisie
+                [label]="'Référence Support:'"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="true"
+                [form]="form.get('refSupport')"
+                [isError]="true"
+                [errorMessage]="form.get('refSupport').errors?.message || form.get('refSupport').errors"
+              ></app-champ-de-saisie>
+            </div>
+            <div class="col-4">
+              <app-liste-deroulante
+                [label]="'Type Support: '"
+                [form]="form.get('typeSupport')"
+                [options]="typSupportOption"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="false"
+                [isError]="true"
+                [errorMessage]="form.get('typeSupport').errors?.message || form.get('typeSupport').errors"
+              ></app-liste-deroulante>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4 checkbox-eclatement">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="eclatement"
+                  role="checkbox"
+                  name="eclatement"
+                  [formControl]="form.get('eclatement')"
+                  (change)="form.get('eclatement').value = form.get('eclatement').value ? 1 : 0"
+                />
+                <label class="form-check-label" for="eclatement"> Eclatement </label>
+              </div>
+            </div>
+            <div class="col-4">
+              <app-champ-de-saisie
+                [label]="'Limite Regroupement:'"
+                [labelColumns]="5"
+                [inputColumns]="7"
+                [fillInput]="false"
+                [typeInput]="'number'"
+                [form]="form.get('page')"
+                [isError]="true"
+                [errorMessage]="form.get('page').errors?.message || form.get('page').errors"
+              ></app-champ-de-saisie>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

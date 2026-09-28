@@ -1,0 +1,11 @@
+query getRessourcesGam($query: SearchByEnvsOrgsAppProfilsQuery) {
+    getRessourcesGam(query: $query) {
+        codeEnvironnement
+        codeOrganisme
+        codeApplication
+        codeGamme
+        codeSite
+        codeRessource
+        codeServeur
+    }
+}

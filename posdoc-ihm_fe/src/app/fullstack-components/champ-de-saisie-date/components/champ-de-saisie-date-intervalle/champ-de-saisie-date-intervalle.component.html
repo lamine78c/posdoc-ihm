@@ -1,0 +1,35 @@
+<div class="d-flex align-items-baseline">
+  <!-- RÉTROCOMPATIBILITÉ : Remplacer la classe mr-2 par mr-label -->
+  <label class="mr-label" for="datepicker1">{{ label }}Du</label>
+  <!-- RÉTROCOMPATIBILITÉ : Utiliser un reactive form pour currentDate -->
+  <app-date-picker
+    [currentDate]="formFrom"
+    [disabled]="formFrom.disabled"
+    [maxDate]="fromMaxDate"
+    [minDate]="fromMinDate"
+    [readOnly]="fromReadOnly"
+    [isError]="fromIsError"
+    (dateSelect)="fromDateSelected()"
+    [isStartDateBiggerThanFromDate]="isToDateIsBiggerThanFromDate"
+    [displayBtnToday]="isTodayDisplayedForFromField()"
+    [id]="'datepicker1'"
+  >
+  </app-date-picker>
+
+  <!-- RÉTROCOMPATIBILITÉ : Remplacer la classe me-2 par mr-label -->
+  <label class="mr-label" for="datepicker2">Au</label>
+  <!-- RÉTROCOMPATIBILITÉ : Utiliser un reactive form pour currentDate -->
+  <app-date-picker
+    [currentDate]="formTo"
+    [disabled]="formTo.disabled"
+    [maxDate]="toMaxDate"
+    [minDate]="toMinDate"
+    [readOnly]="toReadOnly"
+    [isError]="toIsError"
+    (dateSelect)="toDateSelected()"
+    [isStartDateBiggerThanFromDate]="isToDateIsBiggerThanFromDate"
+    [displayBtnToday]="isTodayDisplayedForToField()"
+    [id]="'datepicker2'"
+  >
+  </app-date-picker>
+</div>

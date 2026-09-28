@@ -1,0 +1,13 @@
+query GetPoolElementsForMassification($masfics: [String]) {
+    getPoolElementsForMassification(masfics: $masfics) {
+        mascom,
+        masfic,
+        codenv,
+        codorg,
+        codapp,
+        percod,
+        codcom,
+        codfic,
+        numcom
+    }
+}

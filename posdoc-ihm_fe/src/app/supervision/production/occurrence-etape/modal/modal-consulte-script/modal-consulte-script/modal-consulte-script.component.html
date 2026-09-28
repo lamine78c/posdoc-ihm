@@ -1,0 +1,11 @@
+<div class="popup_detail">
+  <app-popup
+    [modalRef]="activeModal"
+    [title]="modalTitle"
+    [iconToDisplay]="iconToDisplay"
+    [firstButton]="null"
+    [secondButton]="{ label: 'Fermer', icone: 'icon-b_cancel' }"
+  >
+    <div [innerHtml]="consulteScript" class="consulte_script"></div>
+  </app-popup>
+</div>

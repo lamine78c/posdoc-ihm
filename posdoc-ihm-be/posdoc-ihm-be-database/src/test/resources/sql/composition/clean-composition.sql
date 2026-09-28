@@ -1,0 +1,2 @@
+DELETE FROM compos;
+DELETE FROM imprim;

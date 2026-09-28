@@ -1,0 +1,12 @@
+mutation update($updateApplication: CreateOrUpdateApplicationInput!) {
+    updateApplication(updateApplication: $updateApplication) {
+        code
+        libelle
+        codeOrganisation
+        codeEnvironnement
+        codeSystem
+        codeGroupe
+        lotNumber
+        typeRefection
+    }
+}

@@ -1,0 +1,20 @@
+{
+
+    #    organismes : organismes{
+    #        code,
+    #        libelle
+    #    }
+
+    infosOrganismes: informationOrganismes{
+        id,
+        organisme {
+            code,
+            libelle
+        }
+        message,
+        actif,
+        date
+    }
+
+}
+

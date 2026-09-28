@@ -1,0 +1,159 @@
+@use 'src/scss/variables' as *;
+
+/* Styles globaux sans encapsulation pour les éléments MDC */
+:host ::ng-deep {
+  /* Style de base pour les panneaux d'expansion */
+  .mat-accordion .mat-expansion-panel,
+  .mat-accordion .mat-mdc-expansion-panel {
+    background-color: $dark-blue !important;
+    z-index: 10;
+  }
+
+  /* Forcer les couleurs d'icônes */
+  mat-icon,
+  .mat-icon {
+    color: $white-font-color !important;
+    margin-right: 8px !important;
+    vertical-align: middle !important;
+  }
+
+  /* Styles pour les mat-list-item */
+  mat-list-item,
+  .mat-mdc-list-item {
+    display: flex !important;
+    height: 48px !important;
+    width: 100% !important;
+
+    &:hover {
+      background-color: dimgray !important;
+    }
+
+    &.active {
+      background-color: $white-font-color !important;
+
+      a[matLine],
+      .mdc-list-item__primary-text {
+        color: $dark-gray !important;
+      }
+
+      mat-icon {
+        color: $dark-gray !important;
+      }
+    }
+  }
+
+  /* Correction de l'alignement des éléments dans mat-list-item */
+  .mat-mdc-list-item-content {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  /* Forcer le bon alignement des textes */
+  a[matLine],
+  [matLine],
+  .mdc-list-item__primary-text {
+    color: $white-font-color !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  /* Suppression des marges non désirées */
+  .mat-mdc-list-base {
+    padding: 0 !important;
+  }
+
+  /* Assurer que les liens prennent toute la largeur */
+  .mat-nav-list a,
+  .mat-mdc-nav-list a {
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  /* Alignement des éléments d'en-tête */
+  mat-expansion-panel-header,
+  .mat-expansion-panel-header,
+  .mat-mdc-expansion-panel-header {
+    padding: 0 4px !important;
+  }
+
+  /* Style pour les panneaux expandés */
+  .mat-expanded,
+  .mat-mdc-expanded {
+    background-color: $light-blue !important;
+    border-top-left-radius: 30px;
+    margin: 0;
+  }
+
+  /* Suppression des paddings par défaut dans les panneaux */
+  .mat-expansion-panel-body,
+  .mat-mdc-expansion-panel-body {
+    padding: 0 !important;
+  }
+
+  /* Style spécifique pour les sous-menus */
+  .sub-menu {
+    height: 38px !important;
+    font-size: 14px !important;
+    padding-left: 16px !important;
+
+    a {
+      text-decoration: none !important;
+    }
+  }
+
+  /* Correction pour les titres de panneau */
+  mat-panel-title {
+    .mat-nav-list,
+    .mat-mdc-nav-list {
+      width: 100% !important;
+    }
+  }
+
+  /* Correction spécifique pour les éléments imbriqués */
+  mat-expansion-panel-header mat-nav-list mat-list-item,
+  mat-expansion-panel-header .mat-mdc-nav-list .mat-mdc-list-item {
+    display: flex !important;
+    align-items: center !important;
+
+    &:hover,
+    &.active {
+      border-top-left-radius: 30px;
+      height: 50px !important;
+    }
+  }
+
+  /* Correction pour les icônes dans Mat Material 3 */
+  .mat-mdc-list-item-icon {
+    margin-right: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+}
+
+/* Styles pour le panneau d'accueil */
+.home-panel {
+  border-top-left-radius: 30px;
+  height: 50px;
+}
+
+.home-title {
+  margin-right: 0px !important;
+}
+
+/* Styles pour l'affichage de la version */
+.version {
+  color: $white-font-color !important;
+  position: absolute;
+  bottom: 0;
+  z-index: 0;
+  left: 20px;
+  cursor: pointer;
+}
+
+.version span:not(:first-child) {
+  padding-left: 20px;
+}

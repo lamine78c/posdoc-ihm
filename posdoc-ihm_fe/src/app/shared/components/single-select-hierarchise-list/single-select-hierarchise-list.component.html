@@ -1,0 +1,61 @@
+<div class="form row" [ngStyle]="vertical ? { 'flex-direction': 'column' } : {}">
+  <label
+    *ngIf="label"
+    for="dropdownFormH{{ formIndex }}"
+    class="col-{{ labelColumns }} col-form-label {{ labelClass }}"
+    [class.ps-0]="vertical"
+    [ngStyle]="{ width: labelWidth + 'px' }"
+    [ngClass]="{ 'col-form-label-fix': labelWidth }"
+    >{{ label }}</label
+  >
+  <div class="col-{{ inputColumns }} position-relative d-flex">
+    <div
+      #dropdownRef
+      container="body"
+      ngbDropdown
+      class="d-inline-block fake-select-container"
+      placement="bottom-left"
+      (openChange)="openChange($event)"
+      (keyup.enter)="toggleDropdown()"
+    >
+      <div
+        [ngStyle]="{ width: labelWidth + 'px' }"
+        [tabindex]="disabled ? -1 : 0"
+        class="fake-select"
+        id="dropdownFormH{{ formIndex }}"
+        [ngClass]="{ 'fake-select-disabled': disabled, error: isTouchedAndEmpty() }"
+        ngbDropdownToggle
+      >
+        {{ getElementToDisplay() }}
+      </div>
+      <div *ngIf="!disabled" ngbDropdownMenu attr.aria-labelledby="dropdownFormH{{ formIndex }}">
+        <div #scrollableContent class="fake-select-scrollable-content">
+          <app-single-liste-hierarchise-form
+            *ngFor="let item of form.controls | keyvalue; let index = index"
+            [form]="item.value"
+            [key]="item.key"
+            [parentIndex]="formIndex + '-' + index"
+            [selectedElement]="getElementToDisplay()"
+            (selectedElementEvent)="setSelectedElement($event)"
+          ></app-single-liste-hierarchise-form>
+        </div>
+      </div>
+    </div>
+
+    <span
+      triggers="mouseenter:mouseleave focus"
+      container="body"
+      tabindex="0"
+      *ngIf="isTouchedAndEmpty()"
+      [ngbPopover]="list"
+      class="icon-error d-flex align-items-center ml--13"
+      aria-hidden="true"
+    ></span>
+  </div>
+</div>
+
+<ng-template #list>
+  <ng-container>
+    <div class="mb-2">La valeur ne peut pas être nulle</div>
+  </ng-container>
+</ng-template>

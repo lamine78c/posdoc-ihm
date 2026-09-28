@@ -1,0 +1,12 @@
+<div class="popup_detail">
+  <app-popup
+    [modalRef]="activeModal"
+    [title]="modalTitle"
+    [iconToDisplay]="'assets/icones-showcase/m_warning.svg'"
+    [firstButton]="{ label: 'Confirmer validation', icone: 'icon-b_valid' }"
+    [secondButton]="{ label: 'Abandonner validation', icone: 'icon-b_cancel' }"
+    (saveEvent)="valideStep()"
+  >
+    <div class="d-flex">Veuillez confirmer la validation de l'étape</div>
+  </app-popup>
+</div>

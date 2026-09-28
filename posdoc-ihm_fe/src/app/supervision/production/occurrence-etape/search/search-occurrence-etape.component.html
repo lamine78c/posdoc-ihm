@@ -1,0 +1,121 @@
+<div class="row pt-1 normal-content search">
+  <div class="col-2 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Environnement:'"
+      [blankOptionValue]="' '"
+      [form]="formEnv"
+      [index]="indexForm.ENVIRONNEMENT"
+      [isError]="true"
+      [options]="optionsEnv"
+      [labelColumns]="6"
+      [hasBlankOption]="true"
+      [inputColumns]="6"
+      [isDisabled]="isIntervalStart"
+      [errorMessage]="formEnv.errors?.message || formEnv.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-2 p-0">
+    <app-single-select-hierarchise-list
+      sessionDataSearchDirective
+      [form]="formOrg"
+      [formIndex]="indexForm.ORGANISME"
+      [label]="'Organismes:'"
+      [defaultText]="' '"
+      [labelColumns]="5"
+      [inputColumns]="7"
+      [isError]="true"
+      [isOptTreeUniInit]="isOrgOptionsInitialized"
+      [disabled]="isIntervalStart"
+      (changeEvent)="onChangeOrganisme($event)"
+      [errorMessage]="formOrg.errors?.message || formOrg.errors"
+    ></app-single-select-hierarchise-list>
+  </div>
+  <div class="col-2 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Application:'"
+      [blankOptionValue]="' '"
+      [form]="formApp"
+      [index]="indexForm.APPLICATION"
+      [isError]="true"
+      [options]="optionsApp"
+      [labelColumns]="5"
+      [hasBlankOption]="true"
+      [inputColumns]="7"
+      [isDisabled]="isIntervalStart"
+      [errorMessage]="formApp.errors?.message || formApp.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-2 p-0">
+    <app-select-from-table-list
+      sessionDataSearchDirective
+      [label]="'Période:'"
+      [form]="formPeriode"
+      [index]="indexForm.PERIODE_TB"
+      [isError]="true"
+      [options]="optionsPeriode"
+      [labelColumns]="5"
+      [inputColumns]="7"
+      [isDisabled]="isIntervalStart"
+      [errorMessage]="formPeriode.errors?.message || formPeriode.errors"
+    ></app-select-from-table-list>
+  </div>
+</div>
+<div class="row pt-1 normal-content search">
+  <div class="col-2 p-0">
+    <app-liste-deroulante
+      [isDisabled]="isAnnexSearchDisabled()"
+      [label]="'Filtre:'"
+      [blankOptionValue]="' '"
+      [form]="form.get('filtre')"
+      [isError]="true"
+      [options]="optionsFiltre"
+      [labelColumns]="5"
+      [inputColumns]="7"
+      [hasBlankOption]="true"
+      [errorMessage]="form.get('filtre').errors?.message || form.get('filtre').errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-2 p-0" *ngIf="isCommandeToShow()">
+    <app-select-list-with-input
+      [label]="'Commande:'"
+      [form]="form.get('commande')"
+      [options]="optionsCommande"
+      [isDisabled]="isAnnexSearchDisabled()"
+      [toUpperCase]="true"
+      [labelColumns]="5"
+      [inputColumns]="6"
+    ></app-select-list-with-input>
+  </div>
+  <div class="col-2 p-0" *ngIf="isGammeToShow()">
+    <app-select-list-with-input
+      [label]="'Gamme:'"
+      [form]="form.get('gamme')"
+      [isDisabled]="isAnnexSearchDisabled()"
+      [options]="optionsGamme"
+      [toUpperCase]="true"
+      [labelColumns]="5"
+      [inputColumns]="6"
+    ></app-select-list-with-input>
+  </div>
+  <div class="col-2 p-0" *ngIf="isStatutToShow()">
+    <app-liste-deroulante
+      [label]="'Statut:'"
+      [blankOptionValue]="' '"
+      [form]="form.get('statut')"
+      [isDisabled]="isAnnexSearchDisabled()"
+      [isError]="true"
+      [options]="optionsStatut"
+      [labelColumns]="5"
+      [inputColumns]="7"
+      [hasBlankOption]="true"
+      [errorMessage]="form.get('statut').errors?.message || form.get('statut').errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-2 p-0">
+    <button (click)="lister()" type="button" class="btn btn-primary btn-recherche" [disabled]="isAnnexSearchDisabled()">
+      <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+    </button>
+  </div>
+</div>

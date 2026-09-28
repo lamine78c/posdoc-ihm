@@ -1,0 +1,99 @@
+.messages-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-height: 85vh;
+  max-width: 80vw;
+  overflow: auto;
+}
+
+.card {
+  flex: 50%;
+  margin: 0 1rem 1rem 0;
+  max-width: 48%;
+}
+
+.card-header {
+  background-color: #dfe7f4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon-b_info {
+  font-size: 1.5rem;
+}
+
+// Support des formats Quill Editor dans le contenu des messages
+::ng-deep .card-body {
+  // Gras
+  strong, b {
+    font-weight: bold !important;
+  }
+
+  // Italique
+  em, i {
+    font-style: italic !important;
+  }
+
+  // Souligné
+  u {
+    text-decoration: underline !important;
+  }
+
+  // Barré
+  s {
+    text-decoration: line-through !important;
+  }
+
+  // Alignement
+  .ql-align-center {
+    text-align: center !important;
+  }
+
+  .ql-align-right {
+    text-align: right !important;
+  }
+
+  .ql-align-justify {
+    text-align: justify !important;
+  }
+
+  // Couleurs (support des styles inline)
+  [style*="color"] {
+    color: inherit;
+  }
+
+  [style*="background-color"] {
+    background-color: inherit;
+  }
+
+  // Listes
+  ol, ul {
+    padding-left: 1.5em;
+  }
+
+  // Titres
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  // Liens
+  a {
+    color: #06c;
+    text-decoration: underline;
+  }
+
+  // Images
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  // Paragraphes
+  p {
+    margin-bottom: 0.5rem;
+  }
+}

@@ -1,0 +1,58 @@
+<div class="global-content">
+  <div class="row normal-content col-with-border">
+    <h3 class="mb-0">Critères de recherche</h3>
+  </div>
+  <div class="row pt-2 pb-3 normal-content">
+    <div class="col-3">
+      <app-liste-deroulante
+        [label]="'Type données'"
+        [form]="form.get('typeDonnees')"
+        [options]="options"
+        [labelWidth]="110"
+        [fillInput]="true"
+      ></app-liste-deroulante>
+    </div>
+    <div class="col-2">
+      <div class="d-flex align-items-baseline">
+        <label class="mr-label">Date production</label>
+        <!-- RÉTROCOMPATIBILITÉ : Utiliser un reactive form pour currentDate -->
+        <app-date-picker [currentDate]="form.get('dateProduction')"></app-date-picker>
+      </div>
+    </div>
+    <div class="col-2 pt-2">
+      <app-interrupteur-litteral [switchLabel1]="'0'" [switchLabel2]="'%'" [form]="form.get('switch')" [label]="'Plis fabriquées'">
+      </app-interrupteur-litteral>
+    </div>
+    <div class="col-3">
+      <div class="button-group ms-auto">
+        <button type="button" class="btn btn-primary btn-recherche"><i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span></button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h3 class="d-flex normal-content">
+      Liste des flux
+      <div class="badge badge-info ml-1 mt-auto">{{ nombreFluxTotal }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="true"
+      [enableExportButtons]="true"
+      (deleteRows)="onDeleteRow($event)"
+      (gridReady)="onGridReady($event)"
+      (exportAsPDF)="export($event)"
+      (exportAsExcel)="export($event)"
+    ></app-tableau>
+  </div>
+  <div class="row mt-3 normal-content">
+    <div class="col-3"><button type="button" class="btn btn-secondary agent-btn">1. Relancer posdoc_ag_dca_suivi_prod</button></div>
+    <div class="col-3"><button type="button" class="btn btn-secondary agent-btn">2. Relancer posdoc_ag_dca_traitement_retour</button></div>
+    <div class="col-3"><button type="button" class="btn btn-secondary agent-btn">3. Relancer posdoc_ag_dca_transfert_retour</button></div>
+    <div class="col-3"><button type="button" class="btn btn-secondary agent-btn">4. Relancer posdoc_ag_dca_transfert_anomalie</button></div>
+  </div>
+</div>

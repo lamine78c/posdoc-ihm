@@ -1,0 +1,36 @@
+<div class="normal-content">
+  <div *ngIf="error" class="errorForm">{{ error }}</div>
+  <table *ngIf="!error" class="table table-striped table-bordered" aria-describedby="table produit">
+    <thead>
+      <tr>
+        <th>Gamme</th>
+        <th>Désignation</th>
+        <th>Statut</th>
+        <th>Date début</th>
+        <th>Date fin</th>
+        <th>Date suspension</th>
+        <th>Nb Pages</th>
+        <th>Nb Plis</th>
+        <th>Nb Rejets</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="details.length === 0">
+        <td colspan="9" class="text-center">
+          <span class="no-rows">Aucun produit</span>
+        </td>
+      </tr>
+      <tr *ngFor="let data of details; let i = index">
+        <td>{{ data.codgam }}</td>
+        <td>{{ data.libgam }}</td>
+        <td>{{ data.prosta }}-{{ data.proinf }}</td>
+        <td>{{ data.dprodd }}</td>
+        <td>{{ data.dprodt }}</td>
+        <td>{{ data.dprods }}</td>
+        <td>{{ data.pagfic }}</td>
+        <td>{{ data.plific }}</td>
+        <td>{{ data.rejfic }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

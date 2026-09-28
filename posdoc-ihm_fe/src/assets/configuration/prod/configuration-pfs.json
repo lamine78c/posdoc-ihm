@@ -1,0 +1,41 @@
+{
+  "environnement": {
+    "name": "prod"
+  },
+  "application": {
+    "name": "psfe",
+    "version": "1.0.0-feature-charte-graphique-7-SNAPSHOT"
+  },
+  "logging": {
+    "console": true,
+    "level": 0,
+    "logLevelDescription": "TRACE = 0, DEBUG = 1, INFO = 2, LOG = 3, WARN = 4, ERROR = 5, FATAL = 6, OFF = 7"
+  },
+  "apiServer": {
+    "baseUrl": "{{ .Values.frontend.configuration.backendUrl }}"
+  },
+  "inactivityLogoutDelay": 10800000,
+  "prismeConfiguration": {
+    "prismeAuthzEndpoint": "{{ .Values.frontend.configuration.prisme.url.base }}{{ .Values.frontend.configuration.prisme.url.authz }}",
+    "prismeTokenEndpoint": "{{ .Values.frontend.configuration.prisme.url.base }}{{ .Values.frontend.configuration.prisme.url.token }}",
+    "prismeKeysEndpoint": "{{ .Values.frontend.configuration.prisme.url.base }}{{ .Values.frontend.configuration.prisme.url.keys }}",
+    "prismeUserEndpoint": "{{ .Values.frontend.configuration.prisme.url.base }}{{ .Values.frontend.configuration.prisme.url.userinfo }}",
+    "prismeClientId": "{{ .Values.frontend.configuration.prisme.client_id }}",
+    "prismeClientSecret": "{{ .Values.frontend.configuration.prisme.client_secret }}",
+    "prismeCodeApp": "PSFE",
+    "prismeIss": "https://gateway.urssaf.recouv",
+    "prismeScopeFront": "{{ .Values.frontend.configuration.prisme.prismeScopeFront }}",
+    "prismeScopeBack": "{{ .Values.frontend.configuration.prisme.prismeScopeBack }}",
+    "prismeRefreshTokensInterval": {{ .Values.frontend.configuration.prisme.prismeRefreshTokensInterval }}000,
+    "applicationUri": "http://{{ .Values.frontend.host }}",
+    "iFrameRenouvellement": "iframeFullstackBoFe",
+    "pageApresConnexion": "/",
+    "chargerUserInfosFront": true,
+    "chargerUserInfosBack": true,
+    "jetonReadyTopic": "prisme:authentication-request",
+    "jetonMessageTopic": "prisme:set-token",
+    "waitWebMessageURLFragment": "wait_token"
+  }
+}
+
+

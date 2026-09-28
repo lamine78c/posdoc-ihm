@@ -1,0 +1,7 @@
+query getAllDistinctCodComCodFicCodPrd {
+    getAllDistinctCodComCodFicCodPrd {
+        codeCom
+        codeFic
+        codePrd
+    }
+}

@@ -1,0 +1,21 @@
+.popup-detail {
+  width: 1000px;
+}
+
+table td {
+  padding: 5px 0;
+}
+
+table td:nth-child(odd),
+table th:nth-child(odd) {
+  width: 120px;
+}
+
+table td:nth-child(odd) {
+  font-weight: bold;
+}
+
+.popup-tableau {
+  width: 930px;
+  height: 460px;
+}

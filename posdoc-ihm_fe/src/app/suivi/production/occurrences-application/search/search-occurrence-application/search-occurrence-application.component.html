@@ -1,0 +1,86 @@
+<div class="row pt-1 normal-content">
+  <div class="col-2 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Environnement:'"
+      [blankOptionValue]="' '"
+      [form]="formEnv"
+      [index]="indexForm.ENVIRONNEMENT"
+      [isError]="true"
+      [options]="optionsEnv()"
+      [labelColumns]="6"
+      [labelClass]="'pl-0'"
+      [hasBlankOption]="true"
+      [inputColumns]="6"
+      [errorMessage]="formEnv.errors?.message || formEnv.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-2 p-0">
+    <app-liste-deroulante-hierarchisee
+      sessionDataSearchDirective
+      [form]="formOrg"
+      [formIndex]="indexForm.ORGANISME"
+      [label]="'Organismes:'"
+      [defaultText]="' '"
+      [labelColumns]="5"
+      [inputColumns]="7"
+      [isError]="false"
+      [isWithValidAndRAZBtn]="false"
+      [isLikeRadioBouton]="false"
+      [isOptTreeInit]="isOrgOptionsInitialized"
+      [errorMessage]="formOrg.errors?.message || formOrg.errors"
+      (changeEvent)="onChangeOrganisme($event)"
+    ></app-liste-deroulante-hierarchisee>
+  </div>
+  <div class="col-2 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Application:'"
+      [blankOptionValue]="' '"
+      [form]="formApp"
+      [index]="indexForm.APPLICATION"
+      [isError]="false"
+      [options]="optionsApp()"
+      [labelColumns]="5"
+      [hasBlankOption]="true"
+      [inputColumns]="7"
+      [errorMessage]="formApp.errors?.message || formApp.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-2 p-0">
+    <app-select-from-table-list
+      sessionDataSearchDirective
+      [label]="'Période:'"
+      [form]="formPeriode"
+      [index]="indexForm.PERIODE_TB"
+      [isError]="false"
+      [options]="optionsPeriode()"
+      [labelColumns]="4"
+      [inputColumns]="7"
+      [errorMessage]="formPeriode.errors?.message || formPeriode.errors"
+    ></app-select-from-table-list>
+  </div>
+  <div class="col-2">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Site:'"
+      [blankOptionValue]="' '"
+      [form]="formSite"
+      [index]="indexForm.SITE"
+      [isError]="false"
+      [options]="optionsSite()"
+      [labelColumns]="4"
+      [labelClass]="'pl-0'"
+      [hasBlankOption]="true"
+      [inputColumns]="7"
+      [errorMessage]="formSite.errors?.message || formSite.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-2 p-0">
+    <div class="search-button-container">
+      <button (click)="valider()" type="button" class="btn btn-primary btn-recherche" [disabled]="!isFormValid()">
+        <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+    </div>
+  </div>
+</div>

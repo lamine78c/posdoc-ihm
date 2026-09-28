@@ -1,0 +1,12 @@
+<app-popup
+  [modalRef]="activeModal"
+  [title]="messages[0]"
+  [iconToDisplay]="'assets/icones-showcase/m_warning.svg'"
+  [firstButton]="{ label: 'Non' }"
+  [secondButton]="{ label: 'Oui' }"
+>
+  <!-- Contenu customisable à 100% de la popup -->
+
+  <p>{{ messages[1] }}</p>
+  <div>{{ messages[2] }}</div>
+</app-popup>

@@ -1,0 +1,10 @@
+mutation CreateServer($var: CreateServerInput!){
+    createServer(createServer: $var){
+        code
+        systeme
+        libelle
+        adresseIp
+        teste
+        actif
+    }
+}

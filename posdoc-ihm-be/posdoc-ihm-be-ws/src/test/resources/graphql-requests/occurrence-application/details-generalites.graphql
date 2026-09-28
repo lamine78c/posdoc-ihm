@@ -1,0 +1,15 @@
+query getDetailsGeneralites($paramData: OngletsParamDataInput!) {
+    getDetailsGeneralites(paramData: $paramData)
+    {
+        libelle
+        arefec
+        typref
+        appsta
+        appinf
+        dapplc
+        dappld
+        dapplt
+        dappls
+        dapplh
+    }
+}

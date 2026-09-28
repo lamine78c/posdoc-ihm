@@ -1,0 +1,71 @@
+::ng-deep .notifications-modal {
+  .modal-dialog {
+    max-width: 600px;
+    width: 600px;
+  }
+
+  .modal-content {
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-header {
+    flex-shrink: 0;
+  }
+
+  .modal-body {
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: calc(80vh - 140px);
+
+    .custom-modal-content {
+      max-height: none;
+      overflow-y: visible;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  .modal-footer {
+    flex-shrink: 0;
+  }
+}
+
+.notifications-list {
+  max-height: none;
+  overflow-y: visible;
+}
+
+.notification-item {
+  padding: 12px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.notification-path {
+  color: #666;
+  font-size: 0.875rem;
+  margin-bottom: 4px;
+}
+
+.notification-question {
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.notification-date {
+  color: #999;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}

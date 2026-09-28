@@ -1,0 +1,113 @@
+<span *ngIf="showSpinner" class="spinner-border"></span>
+<div [class.disabled]="showSpinner">
+  <app-popup [modalRef]="modalRef" [isFormValid]="isFormValid" [title]="title" [firstButton]="null" [secondButton]="null" (saveEvent)="passBack()">
+    <ng-container *ngTemplateOutlet="isCompleteStep ? completeCommandTemplate : addCommandTemplate"></ng-container>
+
+    <div class="container">
+      <div class="form row">
+        <app-champ-de-saisie
+          [label]="'Commande :'"
+          [labelColumns]="4"
+          [inputColumns]="8"
+          [index]="1"
+          [fillInput]="true"
+          [form]="formGroup.get('commande')"
+          [isError]="true"
+          [toUpperCase]="true"
+          [errorMessage]="formGroup.get('commande').errors?.message || formGroup.get('commande').errors"
+        ></app-champ-de-saisie>
+      </div>
+
+      <div class="form row">
+        <app-champ-de-saisie
+          appNoSpecialCharacters
+          [allowedCharacters]="['-', '_', ' ', '(', ')', '.', '<', '>', '=', ',', '?', '/', '$', '*', '\\', '+']"
+          [label]="'Désignation :'"
+          [labelColumns]="4"
+          [inputColumns]="8"
+          [index]="2"
+          [fillInput]="true"
+          [form]="formGroup.get('designation')"
+          [isError]="true"
+          [toUpperCase]="true"
+          [errorMessage]="formGroup.get('designation').errors?.message || formGroup.get('designation').errors"
+        ></app-champ-de-saisie>
+      </div>
+
+      <div class="form row">
+        <app-liste-deroulante
+          [label]="'Environnement :'"
+          [labelColumns]="4"
+          [inputColumns]="8"
+          [fillInput]="true"
+          [form]="formGroup.get('environnements')"
+          [isError]="true"
+          [hasBlankOption]="true"
+          [blankOptionValue]="' '"
+          [options]="environnementsList"
+          [errorMessage]="formGroup.get('environnements').errors?.message || formGroup.get('environnements').errors"
+          (changeEvent)="onChangeEnvironnement($event)"
+        ></app-liste-deroulante>
+      </div>
+
+      <div class="form row">
+        <app-liste-deroulante
+          [label]="'Application :'"
+          [labelColumns]="4"
+          [inputColumns]="8"
+          [fillInput]="true"
+          [form]="getApplicationsControl()"
+          [isError]="true"
+          [hasBlankOption]="true"
+          [blankOptionValue]="' '"
+          [options]="applicationsList"
+          [errorMessage]="formGroup.get('applications').errors?.message || formGroup.get('applications').errors"
+          (changeEvent)="onChangeApplication($event)"
+        ></app-liste-deroulante>
+      </div>
+
+      <div class="form row">
+        <app-liste-deroulante-hierarchisee
+          [form]="getOrganismesControl()"
+          [label]="'Organisme/Région :'"
+          [labelColumns]="4"
+          [inputColumns]="8"
+          [isError]="false"
+          [defaultText]="' '"
+          (changeEvent)="onChangeOrganisme($event)"
+          [isWithValidAndRAZBtn]="false"
+        ></app-liste-deroulante-hierarchisee>
+      </div>
+
+      <div style="color: red; font-size: 14px; font-weight: bold; padding: 5px">{{ errorForm }}</div>
+    </div>
+  </app-popup>
+
+  <div class="modal-footer">
+    <div class="button-group">
+      <button type="button" class="btn btn-outline-primary" (click)="closePopup()" *ngIf="secondButton">
+        <i *ngIf="secondButton.icone" class="{{ secondButton.icone }}" aria-hidden="true"></i><span>{{ secondButton.label }}</span>
+      </button>
+
+      <button type="button" class="btn btn-primary" (click)="passBack()" *ngIf="firstButton" [disabled]="!isFormValid">
+        <i *ngIf="firstButton.icone" class="{{ firstButton.icone }}" aria-hidden="true"></i><span>{{ firstButton.label }}</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #addCommandTemplate>
+  <label>
+    <h3>Vous êtes sur le point d'ajouter une ou plusieurs commandes :</h3>
+  </label>
+</ng-template>
+<ng-template #completeCommandTemplate>
+  <label>
+    <h3>
+      Vous êtes sur le point de compléter la commande {{ commandeSelected.codenv }}-{{ commandeSelected.codorg }}-{{ commandeSelected.codapp }}-{{
+        commandeSelected.code
+      }}
+      :
+    </h3>
+  </label>
+</ng-template>

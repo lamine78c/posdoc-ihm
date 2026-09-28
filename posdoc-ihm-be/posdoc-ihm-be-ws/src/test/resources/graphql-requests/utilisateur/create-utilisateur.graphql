@@ -1,0 +1,11 @@
+mutation($createDTO: CreateUtilisateurInput!) {
+    createUtilisateur(createUtilisateur: $createDTO) {
+        codeUtilisateur
+        libelleUtilisateur
+        profile
+        password
+        actif
+        codeEnvironnement
+        codeSite
+    }
+}

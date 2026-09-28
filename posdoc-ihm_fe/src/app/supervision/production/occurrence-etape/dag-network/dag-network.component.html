@@ -1,0 +1,22 @@
+<div #visWrapper class="vis-wrapper">
+  <div #network class="vis-container"></div>
+  <div #vScrollTrack class="v-scroll-track" (mousedown)="onTrackMouseDown($event)">
+    <div #vScrollThumb class="v-scroll-thumb" (mousedown)="onThumbMouseDown($event)"></div>
+  </div>
+</div>
+
+<div *ngIf="isNetworkDisplayed" class="row container">
+  <div *ngFor="let btn of listOfButtons" class="col-2 text-center">
+    <button class="w-70" [class]="btn.class" (click)="hoverNextNode(btn.statut)" type="button">
+      {{ btn.label }}
+    </button>
+  </div>
+</div>
+
+<div *ngIf="isNetworkDisplayed" class="row container-bottom">
+  <div class="col-12 text-center">
+    <button class="btn btn-primary" type="button" (click)="startStop()">
+      <i class="icone" [ngClass]="{ 'icon-b_play': !realTimeConsultation, 'icon-b_pause': realTimeConsultation }"></i>{{ realTimeConsultation ? 'Arrêter' : 'Démarrer' }}
+    </button>
+  </div>
+</div>

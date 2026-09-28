@@ -1,0 +1,12 @@
+query findNoticesFichiers($payload: SearchNoticesFichiersPayload!) {
+  findNoticesFichiers(payload: $payload) {
+    codenv
+    codorg
+    codapp
+    codcom
+    codfic
+    codeProd
+    refImprime
+    notices
+  }
+}

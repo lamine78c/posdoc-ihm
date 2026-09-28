@@ -1,0 +1,50 @@
+<div class="popup-detail">
+  <app-popup [modalRef]="modalRef" [title]="title" [firstButton]="null" [secondButton]="null">
+    <table class="table" aria-describedby="table action">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>Utilisateur :</td>
+        <td>{{ rowData.codusr }}</td>
+        <td>Version Adelaïde :</td>
+        <td>{{ rowData.versio }}</td>
+      </tr>
+      <tr>
+        <td>Station :</td>
+        <td>{{ rowData.codsta }}</td>
+        <td>Date :</td>
+        <td>{{ datulo }}</td>
+      </tr>
+      <tr>
+        <td>Formulaire :</td>
+        <td>{{ rowData.formid }}</td>
+        <td>Action :</td>
+        <td>{{ rowData.action }}</td>
+      </tr>
+      <tr>
+        <td>Paramètres :</td>
+        <td colspan="3">{{ rowData.params }}</td>
+      </tr>
+      <tr>
+        <td>Anomalie :</td>
+        <td colspan="3">{{ rowData.erreur }}</td>
+      </tr>
+    </table>
+    <div class="popup-tableau">
+      <app-tableau
+        [gridOptions]="gridOptions"
+        [rowData]="details"
+        [columnDefs]="columnDefs"
+        [pagination]="false"
+        [enableAddButton]="false"
+        [enableFullEdit]="false"
+        [enableExportButtons]="false"
+        (gridReady)="onGridReady($event)"
+      ></app-tableau>
+    </div>
+  </app-popup>
+</div>

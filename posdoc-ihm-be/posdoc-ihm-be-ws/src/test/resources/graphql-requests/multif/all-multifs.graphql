@@ -1,0 +1,7 @@
+query allMultifs {
+    allMultifs {
+        code
+        libelle
+        isNotAuthorisedToBeDeleted
+    }
+}

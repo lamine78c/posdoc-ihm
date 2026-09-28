@@ -1,0 +1,11 @@
+mutation createServicePosdoc($var: ServicePosdocInput!){
+    createServicePosdoc(createService: $var){
+        id
+        libelle
+        url
+        createdAt
+        updatedAt
+        createdBy
+        updatedBy
+    }
+}

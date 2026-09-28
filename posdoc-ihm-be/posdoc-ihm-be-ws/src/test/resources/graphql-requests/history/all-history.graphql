@@ -1,0 +1,13 @@
+query GetActions {
+    allHistory {
+        id
+        station
+        utilisateur
+        insertionDate
+        actionUtilisateur
+        condition
+        entite
+        entree
+        sortie
+    }
+}

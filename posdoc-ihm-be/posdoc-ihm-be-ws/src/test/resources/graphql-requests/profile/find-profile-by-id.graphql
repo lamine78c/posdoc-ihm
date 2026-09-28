@@ -1,0 +1,12 @@
+query getProfileById($id: String!) {
+    profile(id: $id) {
+        profile
+        libelleProfile
+        habilitations {
+            id
+            parentId
+            habilitationType
+            identite
+        }
+    }
+}

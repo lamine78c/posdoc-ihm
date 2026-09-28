@@ -1,0 +1,3 @@
+mutation updateFicAttByIds ($ids: [FichierComposite], $message: String){
+    updateFicAttByIds (ids: $ids, message: $message)
+}

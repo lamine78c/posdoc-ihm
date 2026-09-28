@@ -1,0 +1,2 @@
+DELETE FROM genpli;
+DELETE FROM genpro;

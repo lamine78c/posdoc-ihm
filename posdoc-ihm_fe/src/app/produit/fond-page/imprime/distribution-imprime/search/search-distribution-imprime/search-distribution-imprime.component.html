@@ -1,0 +1,18 @@
+<div class="row pt-1 normal-content search">
+  <div class="col-3 p-0">
+    <app-champ-de-saisie
+      [label]="'Filtre imprimé :'"
+      [labelColumns]="5"
+      [labelColumns]="5"
+      [fillInput]="false"
+      [form]="filterForm"
+      [labelClass]="'pl-0'"
+      [toUpperCase]="false"
+    ></app-champ-de-saisie>
+  </div>
+  <div class="col-9">
+    <button (click)="lister()" type="button" class="btn btn-primary btn-recherche">
+      <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+    </button>
+  </div>
+</div>

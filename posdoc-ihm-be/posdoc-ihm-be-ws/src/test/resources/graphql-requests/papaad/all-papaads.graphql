@@ -1,0 +1,22 @@
+query allPapaads {
+    allPapaads {
+        codeCommande
+        codeFichier
+        codeNotif
+        libelle
+        periode
+        codeRND
+        appPro
+        typeHas
+        format
+        isUrib
+        nsTruc
+        imprime
+        huissier
+        numNot
+        strRaf
+        contrat
+        medele
+        idtbcc
+    }
+}

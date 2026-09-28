@@ -1,0 +1,29 @@
+<app-onglet [type]="ongletTypeEnum.PREMIER_NIVEAU" [tabs]="onglets" [active]="active" (activeChange)="activeChange($event)">
+  <app-onglet-header-container *ngFor="let onglet of onglets; index as index">
+    <app-onglet-header class="d-flex" [tab]="onglet" [type]="ongletTypeEnum.PREMIER_NIVEAU"></app-onglet-header>
+  </app-onglet-header-container>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_COMPOSITION">
+    <app-compositions></app-compositions>
+  </div>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_FORMAT">
+    <app-formats></app-formats>
+  </div>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_MULTIF">
+    <app-multifs></app-multifs>
+  </div>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_SUPPORT">
+    <app-supports></app-supports>
+  </div>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_ECHANT">
+    <app-echantillons></app-echantillons>
+  </div>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_EDIT">
+    <app-reeditions></app-reeditions>
+  </div>
+</app-onglet>

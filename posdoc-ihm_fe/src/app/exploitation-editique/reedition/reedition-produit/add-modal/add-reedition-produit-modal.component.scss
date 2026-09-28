@@ -1,0 +1,14 @@
+.draggable {
+  position: absolute;
+  background: white;
+  width: max-content;
+  cursor: move;
+}
+
+::ng-deep .position-relative {
+  cursor: default;
+}
+
+::ng-deep .modal-content {
+  border-color: transparent;
+}

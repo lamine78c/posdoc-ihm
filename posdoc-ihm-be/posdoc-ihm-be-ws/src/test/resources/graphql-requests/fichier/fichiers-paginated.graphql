@@ -1,0 +1,8 @@
+query fichiers($queryParametersInputDTO: QueryParametersInputDTO) {
+    fichiers(queryParametersInputDTO: $queryParametersInputDTO) {
+        totalRecords
+        pageSize
+        currentPage
+        data
+    }
+}

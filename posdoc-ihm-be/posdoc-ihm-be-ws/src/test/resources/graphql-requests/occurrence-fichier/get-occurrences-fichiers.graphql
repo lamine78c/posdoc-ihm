@@ -1,0 +1,22 @@
+query getOccurrencesFichiers($filtersPayload: OccurrencesFichiersFiltersInput!) {
+    getOccurrencesFichiers(filtersPayload: $filtersPayload) {
+        occurrencesFichiers {
+            codenv
+            codorg
+            codapp
+            percod
+            codcom
+            codfic
+            numcom
+            codprd
+            ficsta
+            ficinf
+            frefec
+            ficvid
+            dappcr
+            dfichd
+            dficht
+        }
+        message
+    }
+}

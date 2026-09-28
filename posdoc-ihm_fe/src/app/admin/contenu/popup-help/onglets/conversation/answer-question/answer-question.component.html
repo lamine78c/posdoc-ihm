@@ -1,0 +1,38 @@
+<div class="answer-question-container card mat-elevation-z4 m-2">
+  <div #scrollContainer class="overflow-y-auto flex-grow-1 card mat-elevation-z4 p-1 m-1">
+    @if (!faqToDisplay?.exchanges?.length) {
+      <p class="text-muted">Aucune conversation</p>
+    }
+    @for (exchange of faqToDisplay.exchanges; track exchange.id) {
+      <div
+        class="exchange-item mb-3"
+        [ngClass]="{ 'exchange-item-right': isCurrentUser(exchange.author), 'exchange-item-left': !isCurrentUser(exchange.author) }"
+      >
+        <div class="d-flex align-items-start" [ngClass]="{ 'flex-row-reverse': isCurrentUser(exchange.author) }">
+          <div class="flex-grow-1">
+            <div class="d-flex align-items-center mb-1" [ngClass]="{ 'justify-content-end': isCurrentUser(exchange.author) }">
+              @if (!isCurrentUser(exchange.author)) {
+                <span class="exchange-author me-2">{{ exchange.author }}</span>
+              }
+              <span class="exchange-date">{{ exchange.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+            <div class="exchange-bubble" [ngClass]="{ 'exchange-bubble-right': isCurrentUser(exchange.author) }">
+              {{ exchange.message }}
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="d-flex flex-row align-items-center m-1">
+    <app-champ-de-saisie-multiligne-seul
+      class="flex-grow-1"
+      [form]="form.get('message')"
+      [textareaRows]="2"
+      [errorMessage]="'Ce champs ne peux pas rester vide !'"
+      [placeholder]="'Saisissez votre message ici'"
+    ></app-champ-de-saisie-multiligne-seul>
+    <button type="button" class="btn btn-primary me-4" (click)="saveMessage()" [disabled]="form.invalid">Envoyer</button>
+  </div>
+</div>

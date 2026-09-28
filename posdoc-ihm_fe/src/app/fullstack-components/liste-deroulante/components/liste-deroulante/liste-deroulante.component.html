@@ -1,0 +1,61 @@
+<div class="form row d-flex" [ngStyle]="vertical ? { 'flex-direction': 'column' } : {}">
+  <label
+    *ngIf="label"
+    for="select{{ index }}"
+    class="col-{{ labelColumns }} col-form-label {{ labelClass }}"
+    [ngStyle]="{ width: labelWidth + 'px' }"
+    [class.ps-0]="vertical"
+    [ngClass]="{ 'col-form-label-fix': labelWidth }"
+    >{{ label }}</label
+  >
+  <div class="col-{{ inputColumns }} position-relative d-flex" [ngStyle]="fillInput && { width: 'calc(100% - ' + labelWidth + 'px)' }">
+    <select
+      #sel
+      [attr.disabled]="isDisabled ? isDisabled : null"
+      class="form-select"
+      [formControl]="form"
+      id="select{{ index }}"
+      (change)="onChange()"
+      [ngClass]="{
+        warning: !form.valid && !form.disabled && !isError && form.touched,
+        error: !form.valid && !form.disabled && isError && form.touched,
+        'form-select-with-size': size,
+      }"
+      [attr.size]="size"
+    >
+      <option *ngIf="!options?.length && isLoadingOptions" disabled>Loading...</option>
+      <option *ngIf="hasBlankOption" [ngValue]="''">{{ blankOptionValue }}</option>
+      <ng-container *ngIf="options">
+        <option
+          *ngFor="let option of options"
+          [ngValue]="option.value || option"
+          [ngStyle]="{ 'background-color': isColoredOptionsTemplate(option) }"
+        >
+          {{ option.text || option }}
+        </option>
+      </ng-container>
+    </select>
+    <span
+      *ngIf="!form.valid && !form.disabled && !isError && form.touched"
+      class="icon-warning d-flex align-items-center"
+      aria-hidden="true"
+      [ngbPopover]="array.isArray(errorMessage) ? list : errorMessage"
+      triggers="mouseenter:mouseleave focus"
+      tabindex="0"
+    ></span>
+    <span
+      *ngIf="!form.valid && !form.disabled && isError && form.touched"
+      class="icon-error d-flex align-items-center"
+      aria-hidden="true"
+      [ngbPopover]="array.isArray(errorMessage) ? list : errorMessage"
+      triggers="mouseenter:mouseleave focus"
+      tabindex="0"
+    ></span>
+  </div>
+</div>
+
+<ng-template #list>
+  <ng-container *ngFor="let error of errorMessage; let last = last">
+    <div [ngClass]="{ 'mb-2': !last }">{{ error.message }}</div>
+  </ng-container>
+</ng-template>

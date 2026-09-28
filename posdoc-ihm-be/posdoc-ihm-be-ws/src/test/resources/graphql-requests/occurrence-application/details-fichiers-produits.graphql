@@ -1,0 +1,17 @@
+query getDetailsFichiersProduits($paramData: OngletsParamDataInput!) {
+    getDetailsFichiersProduits(paramData: $paramData)
+    {
+        codcom
+        codfic
+        numcom
+        refimp
+        codprd
+        libFichier
+        pagFic
+        codgam
+        codsit
+        codres
+        coddes
+        nbrexe
+    }
+}

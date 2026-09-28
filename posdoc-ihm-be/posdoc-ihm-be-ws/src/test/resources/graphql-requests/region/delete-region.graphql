@@ -1,0 +1,5 @@
+mutation DeleteRegion($var: DeleteByStringIdInput!){
+    deleteRegion(deleteRegion: $var){
+        ok
+    }
+}

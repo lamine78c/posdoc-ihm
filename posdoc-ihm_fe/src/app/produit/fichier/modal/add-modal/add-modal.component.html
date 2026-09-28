@@ -1,0 +1,50 @@
+<app-popup [modalRef]="activeModal" [title]="'Création d\'un fichier'" [firstButton]="null" [secondButton]="null">
+  <app-wizard
+    [wizard]="wizard"
+    [active]="active"
+    (stepClicked)="stepClicked($event)"
+    [stepWidth]="'200'"
+    [alwaysDisplayNavigation]="alwaysDisplayNavigation"
+  ></app-wizard>
+
+  <div class="card mb-3 mt-3">
+    <div class="card-body">
+      <div class="bloc-exemple">
+        <div *ngIf="active === 1">
+          <app-step-definition [form]="formDefinition" [allOrgReg]="allOrgReg" [(commandeOptions)]="commandeDataStore"></app-step-definition>
+        </div>
+        <div *ngIf="active === 2">
+          <app-step-generalite
+            [form]="formGeneralite"
+            [clientOption]="clientOption"
+            [formatOption]="formatOption"
+            [dataDefinition]="dataDefinition"
+            [imprimeData]="imprimeData"
+            [typSupportOption]="typSupportOption"
+            [noRegionFound]="noRegionFound"
+            [noRegionFoundb]="noRegionFoundb"
+            (editOrganismeClientClick)="toShowOrganismeClientModal()"
+          ></app-step-generalite>
+        </div>
+        <div *ngIf="active === 3">
+          <app-step-exemplaire [dataDefinition]="dataDefinition" [ressource]="ressources"></app-step-exemplaire>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-group float-end">
+    <button type="button" class="btn btn-outline-primary" (click)="abandonner()">
+      <i class="icon-b_cancel" aria-hidden="true"></i><span>Abandonner</span>
+    </button>
+    <button type="button" class="btn btn-primary" (click)="previousStep()" [disabled]="active <= 1">
+      <i class="icon-b_left" aria-hidden="true"></i><span>Précédent</span>
+    </button>
+    <button *ngIf="active < wizard.length" type="button" class="btn btn-primary" (click)="nextStep()" [disabled]="!enableNextButton()">
+      <span>Suivant</span><i class="icon-b_right icon-on-right" aria-hidden="true"></i>
+    </button>
+    <button *ngIf="active === wizard.length" type="button" class="btn btn-primary" (click)="save()" [disabled]="!isAllStepsValid()">
+      <i class="icon-b_valid" aria-hidden="true"></i><span>Finaliser</span>
+    </button>
+  </div>
+</app-popup>

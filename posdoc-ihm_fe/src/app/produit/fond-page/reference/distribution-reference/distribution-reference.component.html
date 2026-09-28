@@ -1,0 +1,33 @@
+<div class="global-content">
+  <div class="normal-content" [ngClass]="{ showSearch: !showSearch }">
+    <app-imprime-search-component
+      [synchroniseReferenceList]="synchroniseReferenceList"
+      (applyImprimesEvent)="lister($event)"
+      (reduireSearchEvent)="reduireSearchDiv($event)"
+      (openSearch)="showSearchDiv($event)"
+    ></app-imprime-search-component>
+  </div>
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Liste des références
+      <div class="badge badge-info ml-1 mt-auto">{{ nombreReferencesTotal }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="true"
+      [editGroupButton]="true"
+      [canEditPerm]="canEditPermPosition"
+      [asynchronousErrors$]="asynchronousErrors$"
+      [searchButton]="!showSearch"
+      (gridReady)="onGridReady($event)"
+      (updateRows)="openAddPopup($event)"
+      (openSearch)="showSearchDiv($event)"
+      (saveEdition)="onSaveEdition($event)"
+    ></app-tableau>
+  </div>
+</div>

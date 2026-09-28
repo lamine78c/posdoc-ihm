@@ -1,0 +1,14 @@
+query findUtiLogByQuery($query: FindUtiLogByQuery) {
+    findUtiLogByQuery(query: $query) {
+        codulo
+        codsta
+        codusr
+        formid
+        datulo
+        action
+        params
+        result
+        versio
+        erreur
+    }
+}

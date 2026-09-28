@@ -1,0 +1,7 @@
+mutation UpdateSupport($var: CreateOrUpdateSupportInput!){
+    updateSupport(updateSupport: $var){
+        type
+        libelle
+        poids
+    }
+}

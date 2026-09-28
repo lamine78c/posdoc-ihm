@@ -1,0 +1,232 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* ==========================================================================
+== theme acoss
+========================================================================== */
+@use '@acoss/theme-intranet/scss/theme.scss' as *;
+
+/* ==========================================================================
+== theme acoss
+========================================================================== */
+// @use 'node_modules/@acoss/theme-intranet/scss/theme.scss' as *;
+// TODO à corriger
+
+/* ==========================================================================
+== theme ag-grid
+========================================================================== */
+//@use './styles/theme-ag-grid.scss';
+@use 'styles/ag-grid-icons-override';
+
+@import '@ng-select/ng-select/themes/default.theme.css';
+
+@import 'quill/dist/quill.core.css';
+@import 'quill/dist/quill.bubble.css';
+@import 'quill/dist/quill.snow.css';
+
+html,
+body {
+  height: 100%;
+}
+
+.modal-backdrop {
+  z-index: 1000 !important;
+}
+/* Toggle Button */
+.cm-toggle {
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  margin: 10px;
+}
+
+/* To create surface of toggle button */
+.cm-toggle:after {
+  content: '';
+  width: 60px;
+  height: 28px;
+  display: inline-block;
+  background: rgba(196, 195, 195, 0.55);
+  border-radius: 18px;
+  clear: both;
+}
+
+/* Contents before checkbox to create toggle handle */
+.cm-toggle:before {
+  content: '';
+  width: 32px;
+  height: 32px;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: -3px;
+  border-radius: 50%;
+  background: rgb(255, 255, 255);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Shift the handle to left on check event */
+.cm-toggle:checked:before {
+  left: 32px;
+  box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+/* Background color when toggle button will be active */
+.cm-toggle:checked:after {
+  background: #16a085;
+}
+
+/** ajustement des div  */
+.global-content {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+.normal-content {
+  flex: 0 1 auto;
+}
+.remain-content {
+  flex: 1 1 auto;
+}
+/* appliquer lors des requete au back, waiting cursor */
+.cursor-loader {
+  cursor: progress; // url(assets/icons/svg/spinner2.svg),auto;
+  //pointer-events: none;
+  * {
+    cursor: progress; //url(assets/icons/svg/spinner2.svg),auto;
+    pointer-events: none !important;
+  }
+}
+
+.badge {
+  border: 0px;
+  margin: 0px;
+  top: 2px;
+  left: 0px;
+  font-size: 13px;
+}
+
+.resizable-table th {
+  position: relative;
+}
+
+.resizable-table th::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 100%;
+  cursor: col-resize;
+  background-color: transparent;
+}
+
+.col-flex {
+  flex: 1;
+}
+
+.ag-header-cell-filtered {
+  background-color: #bb922457 !important;
+}
+
+/* Thème du composant ag-grid select-table-editor */
+app-select-table-editor {
+  width: 100vw;
+}
+
+.table-selector {
+  border: 0.071rem solid #e4e4e4;
+  border-collapse: collapse;
+  background-color: white;
+  overflow: auto;
+  max-height: 300px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 6px rgba(14, 11, 11, 0.2);
+}
+
+.table-selector thead {
+  position: sticky;
+  top: 0;
+  background-color: lightslategrey;
+}
+
+.table-selector th,
+.table-selector td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table-selector tbody td {
+  width: auto;
+}
+
+.table-selector tbody tr td div {
+  min-height: 1rem;
+}
+
+.table-selector tbody tr:hover {
+  background-color: #276cc8;
+  cursor: pointer;
+}
+
+.table-selector .selected {
+  background-color: darkgrey;
+  color: black;
+}
+/* ---------------------------------------------- */
+
+.badge-vide {
+  border: 1px solid gray;
+  width: 50px;
+}
+
+.badge-error {
+  background-color: #dd3810;
+  color: #dd3810;
+  width: 50px;
+}
+
+.badge-success {
+  background-color: #198754;
+  color: #198754;
+  width: 50px;
+}
+
+.link-simple {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.div-search-disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.cell-multi-line {
+  display: block !important;
+  overflow-y: auto !important;
+  line-height: 1.143rem !important;
+}
+
+.ml--13 {
+  margin-left: -1.3rem !important;
+}
+
+.ml-03 {
+  margin-left: 0.3rem !important;
+}
+
+.pl-0 {
+  padding-left: 0 !important;
+}
+
+.ml-0 {
+  margin-left: 0 !important;
+}
+
+.ag-header-tarif-nc {
+  background-color: #e2e6ab !important;
+}

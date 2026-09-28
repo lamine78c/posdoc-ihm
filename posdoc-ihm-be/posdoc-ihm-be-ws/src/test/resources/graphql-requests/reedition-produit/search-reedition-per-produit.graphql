@@ -1,0 +1,18 @@
+query SearchReeditionPerProduit($codenv: String, $codorg: [String], $application: String, $periode: String, $codcom: String, $codfic: String) {
+    searchReeditionPerProduit(codenv: $codenv, codorg: $codorg, application: $application, periode: $periode, codcom: $codcom, codfic: $codfic) {
+        codcom
+        codfic
+        numcom
+        refimp
+        codprd
+        libfic
+        pagfic
+        codgam
+        codsit
+        codres
+        coddes
+        nbrexe
+        codorg
+        percod
+    }
+}

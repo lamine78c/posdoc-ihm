@@ -1,0 +1,32 @@
+{
+  "extends": "@tsconfig/node14/tsconfig.json",
+  "compileOnSave": false,
+  "compilerOptions": {
+    "module": "ES2022",
+    "baseUrl": "./",
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ]
+    },
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "target": "ES2022",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "strict": false,
+    "lib": [
+      "es2021",
+      "es2020",
+      "dom"
+    ],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "useDefineForClassFields": false
+  },
+  "allowSyntheticDefaultImports": true
+}

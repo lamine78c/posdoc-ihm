@@ -1,0 +1,15 @@
+mutation UpdateBonTravail($updateBonTravail: [BonTravailUpdateInput], $userInfo: UserInfoInput){
+    updateBonTravail(updateBonTravail: $updateBonTravail, userInfo: $userInfo){
+        codenv
+        codorg
+        codapp
+        percod
+        codcom
+        codfic
+        numcom
+        drecep
+        dfiexp
+        inform
+        delmsp
+    }
+}

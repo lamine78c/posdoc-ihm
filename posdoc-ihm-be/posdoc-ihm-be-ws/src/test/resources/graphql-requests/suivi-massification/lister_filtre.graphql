@@ -1,0 +1,11 @@
+query getDistinctFiltreMassification {
+    getDistinctFiltreMassification {
+        masenv
+        masorg
+        masper
+        codsit
+        appsta
+        dappld
+        dapplt
+    }
+}

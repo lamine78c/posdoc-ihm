@@ -1,0 +1,24 @@
+query searchFacturationDetaillee($query: SearchFacturationDetailleeQuery) {
+    searchFacturationDetaillee(query: $query) {
+        facturationDetailleeWithAllColumns {
+            codorg
+            codapp
+            codcom
+            codfic
+            libfic
+            dfiexp
+            codsit
+            codreg
+            codcli
+            totalPages
+            totalPlis
+            coutTotal
+            tarifs {
+                codeTar
+                plis
+                cout
+            }
+        }
+        message
+    }
+}

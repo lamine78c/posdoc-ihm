@@ -1,0 +1,149 @@
+<div class="row pt-1 normal-content">
+  <div class="col-20 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Environnement:'"
+      [form]="formEnv"
+      [index]="indexForm.ENVIRONNEMENT"
+      [isError]="true"
+      [options]="optionsEnv()"
+      [labelColumns]="5"
+      [labelClass]="'pl-0'"
+      [inputColumns]="5"
+      [errorMessage]="formEnv.errors?.message || formEnv.errors"
+    ></app-liste-deroulante>
+  </div>
+
+  <div class="col-20 p-0">
+    <app-liste-deroulante-hierarchisee
+      sessionDataSearchDirective
+      [form]="formOrg"
+      [formIndex]="indexForm.ORGANISME"
+      [label]="'Organismes:'"
+      [defaultText]="' '"
+      [labelColumns]="4"
+      [inputColumns]="6"
+      [isError]="false"
+      [isWithValidAndRAZBtn]="false"
+      [isLikeRadioBouton]="false"
+      [isOptTreeInit]="isOrgOptionsInitialized"
+      [errorMessage]="formOrg.errors?.message || formOrg.errors"
+      (changeEvent)="onChangeOrganisme($event)"
+    ></app-liste-deroulante-hierarchisee>
+  </div>
+
+  <div class="col-20 p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [label]="'Application:'"
+      [blankOptionValue]="' '"
+      [form]="formApp"
+      [index]="indexForm.APPLICATION"
+      [isError]="false"
+      [options]="optionsApp()"
+      [labelColumns]="4"
+      [hasBlankOption]="true"
+      [inputColumns]="5"
+      [errorMessage]="formApp.errors?.message || formApp.errors"
+    ></app-liste-deroulante>
+  </div>
+
+  <div class="col-20 p-0">
+    <app-select-from-table-list
+      sessionDataSearchDirective
+      [label]="'Période:'"
+      [form]="formPeriode"
+      [index]="indexForm.PERIODE_TB"
+      [isError]="false"
+      [options]="optionsPeriode()"
+      [labelColumns]="4"
+      [inputColumns]="5"
+      [errorMessage]="formPeriode.errors?.message || formPeriode.errors"
+    ></app-select-from-table-list>
+  </div>
+
+  <div class="col-20 p-0">
+    <app-champ-de-saisie
+      sessionDataSearchDirective
+      [index]="indexForm.COMMANDE_TEXT"
+      [label]="'Commande:'"
+      [labelColumns]="5"
+      [inputColumns]="5"
+      [fillInput]="false"
+      [form]="formCom"
+      [isError]="false"
+      [toUpperCase]="true"
+      [errorMessage]="formCom.errors?.message || formCom.errors"
+    ></app-champ-de-saisie>
+  </div>
+</div>
+
+<div class="row pt-1 normal-content">
+  <div class="col-20 p-0">
+    <app-champ-de-saisie
+      sessionDataSearchDirective
+      [index]="indexForm.FICHIER_TEXT"
+      [label]="'Fichier:'"
+      [labelColumns]="4"
+      [labelClass]="'pl-0'"
+      [inputColumns]="6"
+      [fillInput]="false"
+      [form]="formFic"
+      [isError]="false"
+      [toUpperCase]="true"
+      [errorMessage]="formFic.errors?.message || formFic.errors"
+    ></app-champ-de-saisie>
+  </div>
+
+  <div class="col-20 p-0">
+    <app-champ-de-saisie
+      [label]="'Code PRD:'"
+      [labelColumns]="4"
+      [inputColumns]="6"
+      [fillInput]="false"
+      [form]="formPrd"
+      [isError]="false"
+      [toUpperCase]="true"
+      [errorMessage]="formPrd.errors?.message || formPrd.errors"
+    ></app-champ-de-saisie>
+  </div>
+
+  <div class="col-20 p-0">
+    <app-champ-de-saisie
+      sessionDataSearchDirective
+      appNoSpecialCharacters
+      [index]="indexForm.REFIMPRIME"
+      [label]="'Imprimé '"
+      [labelColumns]="4"
+      [inputColumns]="6"
+      [form]="formImp"
+      [isError]="true"
+      [toUpperCase]="true"
+      [maxlength]="8"
+      [errorMessage]="formImp.errors?.message || formImp.errors"
+    ></app-champ-de-saisie>
+  </div>
+
+  <div class="col-20 p-0">
+    <app-liste-deroulante
+      [label]="'Statut:'"
+      [blankOptionValue]="' '"
+      [form]="formSta"
+      [index]="998"
+      [isError]="false"
+      [options]="optionsStatut"
+      [labelColumns]="4"
+      [hasBlankOption]="true"
+      [inputColumns]="6"
+      [errorMessage]="formSta.errors?.message || formSta.errors"
+    ></app-liste-deroulante>
+  </div>
+
+  <div class="col-20 p-0 d-flex align-items-center">
+    <div class="button-group">
+      <button type="button" class="btn btn-primary btn-recherche" [disabled]="!isFormValid()" (click)="valider()">
+        <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+    </div>
+  </div>
+</div>

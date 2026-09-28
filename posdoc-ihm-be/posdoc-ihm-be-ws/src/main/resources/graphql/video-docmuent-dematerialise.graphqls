@@ -1,0 +1,87 @@
+#QUERIES
+extend type Query {
+            getDocsDematerialises(query: SearchDocDemInput): [DocDematerialisePayload]!
+            getDocsDematerialisesVideo(searchDocVideoQuery: SearchDocVideoQuery): [DocVideoPayload]!
+            getDocsDematerialisesVideoInfoDetail(searchDocVideoInfoDetailQuery: SearchDocVideoInfoDetailQuery): DocVideoInfoDetailPayload
+}
+
+input SearchDocDemInput {
+    date: String!
+    codorgs: [String]
+    coddoc: String
+    typact: String
+    docsta: String
+    codapp: String
+    codcom: String
+}
+
+input SearchDocVideoQuery {
+   datdem : String
+   docsta : String
+   codenv : String
+   coddoc : String
+   typact : String
+}
+
+input SearchDocVideoInfoDetailQuery {
+   datdem : String
+   numdem : Int
+}
+
+# documents video
+type DocVideoPayload{
+  datdem : String
+  numdem : String
+  coddoc : String
+  refdem : String
+  typact : String
+  imprim : Boolean
+  docsta : String
+}
+
+
+# documents dématérialisés
+type DocDematerialisePayload{
+    datdem: String
+    numdem: String
+    codenv: String
+    codorg: String
+    codapp: String
+    percod: String
+    codcom: String
+    codfic: String
+    coddoc: String
+    refdem: String
+    typact: String
+    imprim: Boolean
+    docsta: String
+    docinf: String
+    ddodeb: String
+    ddofin: String
+    ddosus: String
+    tpscom: String
+    libinf: String
+    codeSiteDematerialisation: String
+}
+
+# documents video information detail
+type DocVideoInfoDetailPayload{
+    codorg: String
+    codapp: String
+    percod: String
+    codenv: String
+    codcom: String
+    codfic: String
+    coddoc: String
+    refdem: String
+    typact: String
+    imprim: Boolean
+    docsta: String
+    docinf: String
+    ddodeb: String
+    ddofin: String
+    ddosus: String
+    tpscom: String
+    libinf: String
+    codeSiteDematerialisation: String
+}

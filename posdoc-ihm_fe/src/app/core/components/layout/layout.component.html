@@ -1,0 +1,11 @@
+<div class="layout-container">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav [(opened)]="sideNavOpened" [mode]="sideNavMode" class="sidenav mat-elevation-z10"> </mat-sidenav>
+    <mat-sidenav-content>
+      <app-breadcrumb></app-breadcrumb>
+      <div class="main-container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

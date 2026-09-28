@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-center" *ngIf="!isEditing && !params.node.rowPinned && !params.data.lockEdition">
+  <i
+    #actionRenderer
+    tabindex="0"
+    class="icon-b_modify no-focus"
+    (keyup.enter)="clearFilter()"
+    (click)="clearFilter()"
+    aria-hidden="true"
+    title="Editer"
+  >
+    <span class="path1"></span><span class="path2"></span><span class="path3"></span>
+  </i>
+</div>

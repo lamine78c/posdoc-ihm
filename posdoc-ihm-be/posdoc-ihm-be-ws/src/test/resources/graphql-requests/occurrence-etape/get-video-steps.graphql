@@ -1,0 +1,21 @@
+query GetVideoSteps($videoStepPayload: VideoStepPayload!) {
+    getVideoSteps(videoStepPayload: $videoStepPayload) {
+        idpere
+        idetap
+        typetp
+        numcom
+        codcom
+        codfic
+        codgam
+        statut
+        codinf
+        codser
+        codsit
+        codres
+        coddes
+        reedit
+        etpfus
+        script
+        idtfus
+    }
+}

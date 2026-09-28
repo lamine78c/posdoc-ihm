@@ -1,0 +1,50 @@
+<div
+  class="toast-container"
+  [ngClass]="{
+    'with-multiple-lines': !!toast.body || !!toast.linkText || !!toast.doNotDisplayCheckbox,
+    'without-icon':
+      (!toast.iconUrl && toast.classname !== 'note-information' && toast.classname !== 'note-avertissement' && toast.classname !== 'note-erreur') ||
+      toast.classname === 'note-confirmation',
+  }"
+>
+  <div class="toast-icon" *ngIf="toast.classname !== 'note-confirmation'">
+    <svg-icon
+      *ngIf="toast.classname === 'note-information' && !toast.iconUrl"
+      src="assets/icones-showcase/fa_info.svg"
+      [svgStyle]="{ 'width.em': 2.857, 'height.em': 2.857 }"
+    ></svg-icon>
+    <svg-icon
+      *ngIf="toast.classname === 'note-avertissement' && !toast.iconUrl"
+      src="assets/icones-showcase/m_warning.svg"
+      [svgStyle]="{ 'width.em': 2.857, 'height.em': 2.857 }"
+    ></svg-icon>
+    <svg-icon
+      *ngIf="toast.classname === 'note-erreur' && !toast.iconUrl"
+      src="assets/icones-showcase/m_error.svg"
+      [svgStyle]="{ 'width.em': 2.857, 'height.em': 2.857 }"
+    ></svg-icon>
+    <svg-icon *ngIf="toast.iconUrl" src="{{ toast.iconUrl }}" [svgStyle]="{ 'width.em': 2.857, 'height.em': 2.857 }"></svg-icon>
+  </div>
+  <div class="toast-text">
+    <div class="toast-title">{{ toast.title }}</div>
+    <div class="toast-sub-text" *ngIf="!!toast.body">{{ toast.body }}</div>
+    <div class="toast-sub-text mt-0" *ngIf="!!toast.linkText">
+      <a href="{{ toast.link }}" target="_blank" rel="noopener">{{ toast.linkText }}</a>
+    </div>
+    <!-- La checkbox permettant de ne plus afficher une note n'est disponible que pour les notes d'information -->
+    <div class="form-check" *ngIf="!!toast.doNotDisplayCheckbox && toast.classname === 'note-information'">
+      <input class="form-check-input" type="checkbox" id="doNotDisplay-{{ toast.title }}" [formControl]="form.get('doNotDisplay')" />
+      <label class="form-check-label" for="doNotDisplay-{{ toast.title }}"> Ne plus afficher ce message </label>
+    </div>
+  </div>
+  <svg-icon
+    tabindex="0"
+    class="toast-close"
+    [src]="'assets/icones-showcase/m_close.svg'"
+    (click)="closeToast(toast)"
+    (keyup.enter)="closeToast(toast)"
+    *ngIf="!toast.hideClose"
+    [svgStyle]="{ 'width.em': 1.385, 'height.em': 1.385, fill: closeIconColor }"
+  >
+  </svg-icon>
+</div>

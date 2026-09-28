@@ -1,0 +1,7 @@
+DELETE FROM genfic;
+DELETE FROM gennot;
+DELETE FROM notice;
+DELETE FROM gentar;
+DELETE FROM genmas;
+DELETE FROM genapp;
+DELETE FROM utilog;

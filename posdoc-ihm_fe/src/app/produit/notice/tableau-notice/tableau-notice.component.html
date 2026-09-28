@@ -1,0 +1,27 @@
+<div class="global-content">
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Total articles :
+      <div class="badge badge-info badge-ml">{{ totalNotices }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="noticesData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="false"
+      [enableExportButtons]="false"
+      [enableAddButton]="addType"
+      [canAddPerm]="canAddPermPosition"
+      [canEditPerm]="canEditPermPosition"
+      [canRemovePerm]="canRemovePermPosition"
+      [enableFullEdit]="false"
+      [asynchronousErrors$]="asynchronousErrors$"
+      (gridReady)="onGridReady($event)"
+      (deleteRows)="onDeleteRow($event)"
+      (saveEdition)="onSaveEdition($event)"
+    ></app-tableau>
+  </div>
+</div>

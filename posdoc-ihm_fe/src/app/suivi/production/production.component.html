@@ -1,0 +1,19 @@
+<app-onglet [type]="ongletTypeEnum.PREMIER_NIVEAU" [tabs]="onglets" [(active)]="active">
+  @for (onglet of onglets; track onglet.label; let index = $index) {
+    <app-onglet-header-container>
+      <app-onglet-header class="d-flex" [tab]="onglet" [type]="ongletTypeEnum.PREMIER_NIVEAU"></app-onglet-header>
+    </app-onglet-header-container>
+  }
+
+  @if (labelActif === ongletNumEnum.ONGLET_NUMBER_OCCURRENCES_APPLICATION) {
+    <div class="onglet">
+      <app-occurrences-application></app-occurrences-application>
+    </div>
+  }
+
+  @if (labelActif === ongletNumEnum.ONGLET_NUMBER_OCCURRENCES_FICHIERS) {
+    <div class="onglet">
+      <app-occurrences-fichiers></app-occurrences-fichiers>
+    </div>
+  }
+</app-onglet>

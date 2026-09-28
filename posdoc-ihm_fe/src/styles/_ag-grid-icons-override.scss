@@ -1,0 +1,35 @@
+.ag-theme-alpine {
+  .ag-icon-none,
+  .ag-icon-asc,
+  .ag-icon-desc {
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: 2.143rem 2.143rem !important;
+    height: 1.429rem;
+    width: 1rem;
+  }
+
+  .ag-icon-none {
+    background-image: url(../assets/icones-showcase/sort_none.svg) !important;
+  }
+
+  .ag-icon-asc {
+    background-image: url(../assets/icones-showcase/sort_up.svg) !important;
+  }
+
+  .ag-icon-desc {
+    background-image: url(../assets/icones-showcase/sort_down.svg) !important;
+  }
+}
+.ag-floating-filter-body {
+  align-items: center;
+}
+
+.ag-group-value,
+.ag-group-child-count {
+  display: none !important;
+}
+
+.row-consultation {
+  background-color: rgba(186, 85, 211, 0.5) !important;
+}

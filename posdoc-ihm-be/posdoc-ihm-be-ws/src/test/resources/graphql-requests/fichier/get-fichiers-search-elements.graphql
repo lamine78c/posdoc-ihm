@@ -1,0 +1,7 @@
+query getFichiersSearchElements {
+  getFichiersSearchElements {
+    codeEnv
+    codeApp
+    refImprime
+  }
+}

@@ -1,0 +1,12 @@
+<div [formGroup]="listFilterForm">
+  <!-- RÉTROCOMPATIBILITÉ : Ajouter la classe form-select -->
+  <select [attr.disabled]="isDisabled ? isDisabled : null" class="form-select" formControlName="selectedValueFormControl" (change)="valueSelected()">
+    <option value="">Tous</option>
+    <ng-container *ngIf="!!possibleLabelWithValues; else elseBlock">
+      <option *ngFor="let item of possibleLabelWithValues" value="{{ item.value }}">{{ item.label }}</option>
+    </ng-container>
+    <ng-template #elseBlock>
+      <option *ngFor="let value of possibleValues" value="{{ value }}">{{ value }}</option>
+    </ng-template>
+  </select>
+</div>

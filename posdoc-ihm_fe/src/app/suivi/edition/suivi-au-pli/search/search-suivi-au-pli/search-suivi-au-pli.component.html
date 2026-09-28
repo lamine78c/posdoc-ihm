@@ -1,0 +1,86 @@
+<div class="row pt-2 normal-content">
+  <div class="col-3 p-0">
+    <app-champ-de-saisie-date-intervalle
+      [formFrom]="formFromDate"
+      [formTo]="formToDate"
+      [fromMinDate]="fromMinDate"
+      [toMaxDate]="toMaxDate"
+    ></app-champ-de-saisie-date-intervalle>
+  </div>
+  <div class="col-2 p-0">
+    <div class="form-check radio-with-label d-flex align-items-center me-4 align-label">
+      <label class="pt-mr-1 me-2 col-10" for="checkbox-dates-non-saisies"> Ignorer les dates : </label>
+      <input [formControl]="formIsDateEmpty" class="form-check-input" type="checkbox" id="checkbox-dates-non-saisies" />
+    </div>
+  </div>
+  <div class="col-5 p-0">
+    <ng-template #compteTooltip>
+      {{ getComptePlaceholder() }}
+    </ng-template>
+    <app-champ-de-saisie
+      [disableTooltip]="!isDateEmpty()"
+      [ngbTooltip]="compteTooltip"
+      appNoSpecialCharacters
+      [allowedCharacters]="[' ']"
+      [label]="'Compte:'"
+      [labelColumns]="3"
+      [inputColumns]="9"
+      [fillInput]="true"
+      [maxlength]="lengthCompte"
+      [form]="formCompte"
+      [isError]="true"
+      [toUpperCase]="true"
+      [errorMessage]="formCompte.errors?.message || formCompte.errors"
+    ></app-champ-de-saisie>
+  </div>
+  <div class="col-2 p-0">
+    <div class="form-check radio-with-label d-flex align-items-center me-4 align-label">
+      <label class="pt-mr-1 me-2 col-10" for="checkbox-cnav"> CNAV : </label>
+      <input [formControl]="formIsCnav" class="form-check-input" type="checkbox" id="checkbox-cnav" />
+    </div>
+  </div>
+</div>
+<div class="row pt-2 normal-content">
+  <div class="col-3 col-smartdata p-0">
+    <ng-template #smartDataTooltip>
+      {{ getSmartDataPlaceholder() }}
+    </ng-template>
+    <app-champ-de-saisie
+      [disableTooltip]="!isDateEmpty()"
+      [ngbTooltip]="smartDataTooltip"
+      appNoSpecialCharacters
+      [label]="'SmartData:'"
+      [labelColumns]="4"
+      [labelClass]="'pl-0'"
+      [inputColumns]="8"
+      [fillInput]="true"
+      [maxlength]="lengthSmartData"
+      [form]="formSmartData"
+      [isError]="true"
+      [toUpperCase]="true"
+      [errorMessage]="formSmartData.errors?.message || formSmartData.errors"
+    ></app-champ-de-saisie>
+  </div>
+  <div class="col-7 p-0">
+    <app-champ-de-saisie
+      [label]="'Adresse:'"
+      [labelColumns]="2"
+      [inputColumns]="10"
+      [fillInput]="true"
+      [form]="formAdresse"
+      [isError]="true"
+      [toUpperCase]="true"
+      [errorMessage]="formAdresse.errors?.message || formAdresse.errors"
+    ></app-champ-de-saisie>
+  </div>
+  <div class="col-2 p-0">
+    <ng-template #searchButtonTooltip>
+      {{ getSearchButtonInformation() }}
+    </ng-template>
+    <div class="button-group ms-auto" [disableTooltip]="!isDateEmpty()" [ngbTooltip]="searchButtonTooltip">
+      <button type="button" class="btn btn-primary btn-recherche" [disabled]="!isFormValid()" (click)="lister()">
+        <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+    </div>
+  </div>
+</div>

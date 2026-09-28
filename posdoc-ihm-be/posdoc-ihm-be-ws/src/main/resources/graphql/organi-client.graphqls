@@ -1,0 +1,8 @@
+extend type Query {
+    findAllOrganiClient: [OrganiClient]
+}
+
+type OrganiClient {
+    codorg: String
+    codcli: String
+}

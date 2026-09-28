@@ -1,0 +1,10 @@
+mutation CreateParametreEchantillon($var: CreateOrUpdateParametreEchantillonInput!){
+    createParametreEchantillon(createParametreEchantillon: $var){
+        reference
+        type
+        nombrePages
+        nombreLots
+        random
+        formule
+    }
+}

@@ -1,0 +1,7 @@
+mutation UpdateVerrou($var: CreateOrUpdateVerrouInput!){
+    updateVerrou(updateVerrou: $var){
+        code
+        libelle
+        maxExecution
+    }
+}

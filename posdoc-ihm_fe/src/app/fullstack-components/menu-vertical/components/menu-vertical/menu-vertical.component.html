@@ -1,0 +1,20 @@
+<div class="menu-container" [ngClass]="{ 'always-opened': alwaysOpened }" [style]="'--menu-width:' + menuWidth + 'px'">
+  <div #menuCustom class="menu-custom" [ngClass]="{ 'always-opened': alwaysOpened }" [style]="'--menu-width:' + menuWidth + 'px'">
+    <div
+      *ngFor="let menu of menuVertical; let index = index"
+      (mouseover)="addClass(menuCustom)"
+      (mouseleave)="removeClass(menuCustom)"
+      (focusin)="addClass(menuCustom)"
+      (focusout)="removeClass(menuCustom)"
+    >
+      <app-menu-vertical-block
+        [menuVertical]="menu"
+        [alwaysOpened]="alwaysOpened"
+        [index]="index"
+        [openChildIndex]="openChildIndex"
+        [allChildrenExcept]="allChildrenExcept"
+        (closeAllChildrenExcept)="closeAllChildrenExcept($event)"
+      ></app-menu-vertical-block>
+    </div>
+  </div>
+</div>

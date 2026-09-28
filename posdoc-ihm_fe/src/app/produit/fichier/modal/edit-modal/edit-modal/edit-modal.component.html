@@ -1,0 +1,234 @@
+<div class="popup-edit-fichier">
+  <app-popup
+    [modalRef]="modalRef"
+    [title]="title"
+    [firstButton]="{ label: 'Confirmer', icone: 'icon-b_valid' }"
+    [secondButton]="{ label: 'Abandonner', icone: 'icon-b_cancel' }"
+    [isFormValid]="isFormValid()"
+    (saveEvent)="save()"
+  >
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="form-group d-flex align-items-center">
+          <label class="col-2">Organismes :</label>
+          <div class="col-10">{{ selectedOrgs }}</div>
+        </div>
+      </div>
+    </div>
+
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button
+          (click)="toEditFormDef()"
+          class="nav-link active"
+          id="nav-def-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-def"
+          type="button"
+          role="tab"
+          aria-controls="nav-def"
+          aria-selected="true"
+        >
+          Définition
+        </button>
+        <button
+          (click)="toEditFormCodcli()"
+          class="nav-link"
+          id="nav-codcli-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-codcli"
+          type="button"
+          role="tab"
+          aria-controls="nav-codcli"
+          aria-selected="false"
+        >
+          Code client
+        </button>
+      </div>
+    </nav>
+
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-def" role="tabpanel" aria-labelledby="nav-def-tab">
+        <div class="ps-2 bloc-edit">
+          <div class="row pt-2">
+            <div class="col-8">
+              <app-champ-de-saisie
+                appNoSpecialCharacters
+                [label]="'Désignation * :'"
+                [allowedCharacters]="['-', ' ', '(', ')', '_', '#', '%']"
+                [vertical]="true"
+                [form]="formEditEnMasse.get('designation')"
+                [labelColumns]="12"
+                [inputColumns]="12"
+                [fillInput]="true"
+                [toUpperCase]="true"
+                [isError]="true"
+                [errorMessage]="formEditEnMasse.get('designation').errors?.message || formEditEnMasse.get('designation').errors"
+              ></app-champ-de-saisie>
+            </div>
+            <div class="col-4">
+              <app-champ-de-saisie
+                [label]="'Code Produit :'"
+                [vertical]="true"
+                [toUpperCase]="true"
+                [form]="formEditEnMasse.get('codeProduit')"
+                [labelColumns]="8"
+                [inputColumns]="8"
+                [isError]="true"
+                [errorMessage]="formEditEnMasse.get('codeProduit').errors?.message || formEditEnMasse.get('codeProduit').errors"
+              ></app-champ-de-saisie>
+            </div>
+          </div>
+
+          <div class="row pt-2">
+            <div class="col-4">
+              <app-champ-de-saisie
+                [label]="'Référence Format :'"
+                [vertical]="true"
+                [form]="formEditEnMasse.get('refFormat')"
+                [labelColumns]="8"
+                [inputColumns]="8"
+                [isError]="true"
+                [errorMessage]="formEditEnMasse.get('refFormat').errors?.message || formEditEnMasse.get('refFormat').errors"
+              ></app-champ-de-saisie>
+            </div>
+            <div class="col-4">
+              <app-liste-deroulante
+                [label]="'Type Format * :'"
+                [form]="formEditEnMasse.get('typeFormat')"
+                [isError]="true"
+                [options]="formatOptions"
+                [vertical]="true"
+                [labelColumns]="8"
+                [inputColumns]="8"
+                [errorMessage]="formEditEnMasse.get('typeFormat').errors?.message || formEditEnMasse.get('typeFormat').errors"
+              ></app-liste-deroulante>
+            </div>
+            <div class="col-4">
+              <app-champ-de-saisie-auto-completion
+                [label]="'Fond De Page * :'"
+                [index]="1"
+                [vertical]="true"
+                [form]="formEditEnMasse.get('fondPage')"
+                [labelColumns]="8"
+                [inputColumns]="8"
+                [autoCompleteResults]="imprimeData"
+                [editable]="false"
+                [placeholder]="'auto-completion'"
+                [displaySearchIcon]="false"
+                [isError]="true"
+                [errorMessage]="formEditEnMasse.get('fondPage').errors?.message || formEditEnMasse.get('fondPage').errors"
+              ></app-champ-de-saisie-auto-completion>
+            </div>
+          </div>
+          <div class="row pt-2 pb-2">
+            <div class="col-4"></div>
+            <div class="col-4">
+              <app-liste-deroulante
+                [label]="'Signature :'"
+                [form]="formEditEnMasse.get('signature')"
+                [isError]="true"
+                [options]="signatureOptions"
+                [hasBlankOption]="true"
+                [blankOptionValue]="''"
+                [vertical]="true"
+                [labelColumns]="8"
+                [inputColumns]="8"
+                [errorMessage]="formEditEnMasse.get('signature').errors?.message || formEditEnMasse.get('signature').errors"
+              ></app-liste-deroulante>
+            </div>
+            <div class="col-4">
+              <app-champ-de-saisie
+                [label]="'Code Document :'"
+                [vertical]="true"
+                [form]="formEditEnMasse.get('codeDocument')"
+                [labelColumns]="8"
+                [inputColumns]="8"
+                [isError]="true"
+                [errorMessage]="formEditEnMasse.get('codeDocument').errors?.message || formEditEnMasse.get('codeDocument').errors"
+              ></app-champ-de-saisie>
+            </div>
+          </div>
+          <div class="row pt-2 pb-2">
+            <div class="col-4 checkbox-eclatement">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="eclatement"
+                  role="checkbox"
+                  name="eclatement"
+                  [formControl]="formEditEnMasse.get('eclatement')"
+                />
+                <label class="form-check-label" for="eclatement"> Eclatement </label>
+              </div>
+            </div>
+            <div class="col-4">
+              <app-liste-deroulante
+                [label]="'Type Support * :'"
+                [form]="formEditEnMasse.get('typeSupport')"
+                [options]="typSupportOptions"
+                [labelColumns]="8"
+                [inputColumns]="8"
+                [vertical]="true"
+                [fillInput]="false"
+                [isError]="true"
+                [errorMessage]="formEditEnMasse.get('typeSupport').errors?.message || formEditEnMasse.get('typeSupport').errors"
+              ></app-liste-deroulante>
+            </div>
+            <div class="col-4">
+              <app-champ-de-saisie
+                [label]="'Limite regroupement :'"
+                [labelColumns]="8"
+                [inputColumns]="8"
+                [fillInput]="false"
+                [vertical]="true"
+                [typeInput]="'number'"
+                [form]="formEditEnMasse.get('page')"
+                [isError]="true"
+                [errorMessage]="formEditEnMasse.get('page').errors?.message || formEditEnMasse.get('page').errors"
+              ></app-champ-de-saisie>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="nav-codcli" role="tabpanel" aria-labelledby="nav-codcli-tab">
+        <div class="bloc-edit">
+          <div class="form row">
+            <div class="col-6">
+              <app-liste-deroulante
+                [label]="'Code Client * :'"
+                [form]="formCodcli.get('codeClient')"
+                [isError]="true"
+                [options]="clientOptions"
+                [labelColumns]="4"
+                [inputColumns]="8"
+                [errorMessage]="formCodcli.get('codeClient').errors?.message || formCodcli.get('codeClient').errors"
+              ></app-liste-deroulante>
+            </div>
+          </div>
+
+          <div class="formOrgCli" *ngIf="showFormOrgCli">
+            <div class="form row">
+              <h3>Veuillez choisir le code client pour les organismes sans régions :</h3>
+            </div>
+            <div class="form row" *ngFor="let item of formOrgCli.controls | keyvalue; let index = index">
+              <div class="col-6">
+                <app-liste-deroulante
+                  [label]="item.key"
+                  [form]="item.value"
+                  [isError]="true"
+                  [options]="clientOptions"
+                  [labelColumns]="4"
+                  [inputColumns]="8"
+                  [errorMessage]="item.value.errors?.message || item.value.errors"
+                ></app-liste-deroulante>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-popup>
+</div>

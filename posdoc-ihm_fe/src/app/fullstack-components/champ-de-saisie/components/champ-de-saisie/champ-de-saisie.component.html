@@ -1,0 +1,62 @@
+<div class="form row d-flex" *ngIf="form" [ngStyle]="vertical ? { 'flex-direction': 'column' } : {}">
+  <label
+    *ngIf="label"
+    for="input{{ index }}"
+    class="col-{{ labelColumns }} col-form-label {{ labelClass }}"
+    [ngStyle]="{ width: labelWidth + 'px' }"
+    [class.ps-0]="vertical"
+    [ngClass]="{ 'col-form-label-fix': labelWidth }"
+    >{{ label }}</label
+  >
+  <!-- RÉTROCOMPATIBILITÉ : Retirer la classe pe-0 -->
+  <div class="col-{{ inputColumns }} position-relative d-flex" [ngStyle]="fillInput && { width: 'calc(100% - ' + labelWidth + 'px)' }">
+    <!-- RÉTROCOMPATIBILITÉ : Ajouter la class warning sur l'input en cas de warning -->
+    <input
+      id="input{{ index }}"
+      type="{{ typeInput }}"
+      min="0"
+      name="input{{ index }}"
+      maxlength="{{ maxlength }}"
+      class="form-control"
+      [formControl]="form"
+      [placeholder]="placeholder"
+      autocomplete="off"
+      [ngClass]="{
+        'pr-30': isTypePassword,
+        warning: !form.valid && !form.disabled && !isError && form.touched,
+        error: !form.valid && !form.disabled && isError && form.touched,
+      }"
+      (input)="patchFormatedValue($event)"
+    />
+    <img
+      *ngIf="isTypePassword"
+      class="icon-password"
+      alt=""
+      [src]="hidePassword ? 'assets/icons/png/eye-close1.png' : 'assets/icons/png/eye-open1.png'"
+      (click)="togglePasswordVisibility()"
+    />
+    <!-- RÉTROCOMPATIBILITÉ : Remonter le span dans la div col et supprimer les classes inutiles -->
+    <span
+      *ngIf="!form.valid && !form.disabled && !isError && form.touched"
+      class="icon-warning d-flex align-items-center"
+      aria-hidden="true"
+      [ngbPopover]="array.isArray(errorMessage) ? list : errorMessage"
+      triggers="mouseenter:mouseleave focus"
+      tabindex="0"
+    ></span>
+    <span
+      *ngIf="!form.valid && !form.disabled && isError && form.touched"
+      class="icon-error d-flex align-items-center"
+      aria-hidden="true"
+      [ngbPopover]="array.isArray(errorMessage) ? list : errorMessage"
+      triggers="mouseenter:mouseleave focus"
+      tabindex="0"
+    ></span>
+  </div>
+</div>
+
+<ng-template #list>
+  <ng-container *ngFor="let error of errorMessage; let last = last">
+    <div [ngClass]="{ 'mb-2': !last }">{{ error.message }}</div>
+  </ng-container>
+</ng-template>

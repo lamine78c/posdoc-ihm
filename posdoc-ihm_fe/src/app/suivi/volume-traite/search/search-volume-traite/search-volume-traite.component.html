@@ -1,0 +1,61 @@
+<div class="row pt-1 normal-content">
+  <div class="col-flex p-0">
+    <app-champ-de-saisie-date-intervalle
+      [formFrom]="form.get('fromDate')"
+      [formTo]="form.get('toDate')"
+      [fromMinDate]="fromMinDate"
+      [toMaxDate]="toMaxDate"
+    ></app-champ-de-saisie-date-intervalle>
+  </div>
+  <div class="col-flex p-0">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [form]="formEnv"
+      [index]="indexForm.ENVIRONNEMENT"
+      [label]="'Environnement '"
+      [options]="environnementList"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [hasBlankOption]="true"
+      [blankOptionValue]="' '"
+      [isError]="true"
+      [errorMessage]="formEnv.errors?.message || formEnv.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-flex p-0">
+    <app-liste-deroulante-hierarchisee
+      sessionDataSearchDirective
+      [form]="formOrg"
+      [formIndex]="indexForm.ORGANISME"
+      [isOptTreeInit]="isOrgOptionsInitialized"
+      [label]="'Organismes '"
+      [defaultText]="' '"
+      [labelColumns]="5"
+      [inputColumns]="7"
+      [isError]="true"
+      [isWithValidAndRAZBtn]="false"
+      (changeEvent)="onChangeOrganisme($event)"
+      [errorMessage]="formOrg.errors?.message || formOrg.errors"
+    ></app-liste-deroulante-hierarchisee>
+  </div>
+  <div class="col-flex p-0">
+    <app-liste-deroulante-multiple
+      [form]="form.get('ressource')"
+      [label]="'Ressources '"
+      [defaultText]="' '"
+      [labelColumns]="5"
+      [inputColumns]="7"
+      [isError]="true"
+      [isRessourceCustomSort]="true"
+      [isWithValidAndRAZBtn]="false"
+      [errorMessage]="form.get('ressource').errors?.message || form.get('ressource').errors"
+    ></app-liste-deroulante-multiple>
+  </div>
+  <div class="col-flex p-0">
+    <div class="justify-content-end d-flex button-group">
+      <button type="button" class="btn btn-primary btn-recherche" [disabled]="!isFormValid()" (click)="lister()">
+        <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+    </div>
+  </div>
+</div>

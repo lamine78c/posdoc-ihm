@@ -1,0 +1,11 @@
+<app-popup
+  [modalRef]="activeModal"
+  [title]="'Suppression d\'un contenu'"
+  [iconToDisplay]="'assets/icones-showcase/m_warning.svg'"
+  [firstButton]="{ label: 'Confirmer suppression', icone: 'icon-b_valid' }"
+  [secondButton]="{ label: 'Abandonner suppression', icone: 'icon-b_cancel' }"
+>
+  <div>
+    Vous êtes sur le point de supprimer le contenu avec le titre: <B>{{ rowDataArray[0] }}</B>
+  </div>
+</app-popup>

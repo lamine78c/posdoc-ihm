@@ -1,0 +1,216 @@
+#!groovy
+
+@Library('sonar_shared_libs@new_feature_1.1')
+@Library('fedex_shared_libs@1.0.1') _
+
+pipeline {
+  // Agent Jenkins utilisé par défaut
+  agent { label 'docker' }
+
+  options {
+    gitLabConnection('gitlab')
+  }
+
+  environment {
+    HOME = "."
+    PROJECT_KEY = "posdoc_fe_ihm"
+    PROJECT_GROUP = "fr.acoss.posdoc"
+    NOM_TARGET_HAWAI = "posdoc_fe_ihm"
+    MAVEN_REPOSITORY = "maven-releases"
+    CONNECTION_SERVER_DEV = "hawai@10.207.89.195"
+    BASE_URL = "https://posdoc-dev-03.gidn.recouv/posdoc_fe_ihm/"
+  }
+
+  parameters {
+    booleanParam(name: 'tests', defaultValue: true, description: "Activer les tests ?")
+    booleanParam(name: 'tests_E2E', defaultValue: false, description: 'Activer les tests E2E ?')
+    booleanParam(name: 'DEPLOY_NEXUS_FEDEX', defaultValue: false, description: 'Déploiement sur Nexus et fedex')
+    string(name: 'BRANCHE_HAWAI', defaultValue: 'lot_8.0_ihm', description: 'La branche hawai utilisée (Exemple lot_8.0_ihm)')
+    string(name: 'VERSION', defaultValue: '', description: 'Le numéro de version (Exemple 0.0.1)')
+    booleanParam(name: 'sonar', defaultValue: true, description: "Activer sonar ?")
+    booleanParam(name: 'deployDev', defaultValue: false, description: "Déployer environnement de DEV")
+  }
+
+  stages {
+
+    stage('Initialisation gitlab') {
+      steps {
+        updateGitlabCommitStatus name: 'Jenkins', state: 'pending'
+      }
+    }
+    stage('set version ') {
+      when {
+        expression { params.VERSION != "" }
+      }
+      steps {
+        script {
+          docker.image('node:22.13-alpine').inside {
+            withNPM(npmrcConfig: 'npmrc') {
+              sh """sed -i 's/"version": "[^"]*"/"version": "${params.VERSION}"/' package.json"""
+            }
+          }
+        }
+      }
+    }
+
+    stage('npm install') {
+      steps {
+        script {
+          docker.image('node:22.13-alpine').inside {
+            withNPM(npmrcConfig: 'npmrc') {
+              sh 'npm ci --force'
+            }
+          }
+        }
+      }
+    }
+
+    stage('Build') {
+      steps {
+        script {
+          docker.image('node:22.13-alpine').inside {
+            withNPM(npmrcConfig: 'npmrc') {
+              sh 'npm run update-date && npm run build-prod'
+            }
+          }
+        }
+      }
+    }
+
+    // Exécution des tests
+    stage('Tests') {
+      when {
+        expression {
+          return params.tests
+        }
+      }
+      steps {
+        script {
+          docker.image('zenika/alpine-chrome:with-playwright').inside('--entrypoint "" --cap-add=SYS_ADMIN') {
+            sh 'npm run test-ci'
+            junit 'reports/*.xml'
+          }
+        }
+      }
+    }
+
+    stage('Publish nexus NPM') {
+      steps {
+        script {
+          docker.image('node:14.17.3').inside {
+            withNPM(npmrcConfig: 'npmrc') {
+              withCredentials([string(credentialsId: 'NPM_PUBLISH_TOKEN', variable: 'NPM_CONFIG__AUTH')]) {
+                withEnv(['npm_config_email="indus@acoss.fr"']) {
+                  sh 'npm run publish-dist'
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    // création d'une branche et d'un tag
+    // Publication sur le repos maven
+    // Publication sous nexus
+    // Livraision sur hawai et Fedex
+    stage('Publish Deploy Fedex') {
+      when {
+        expression { params.DEPLOY_NEXUS_FEDEX && params.BRANCHE_HAWAI != "" && params.VERSION != "" }
+      }
+      steps {
+        withCredentials([string(credentialsId: 'JENKINS_API_TOKEN', variable: 'JENKINS_API_TOKEN'), usernamePassword(credentialsId: 'GITLAB_ID', usernameVariable: 'GIT_AUTH_USR', passwordVariable: 'GIT_AUTH_PSW')]) {
+          sh 'git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"'
+          echo " Création de la branche : B_${params.VERSION}"
+          sh "git status"
+          sh "git add package.json"
+          sh "git status"
+          sh "git commit -m \"Création de la version ${params.VERSION}\""
+          sh "git branch  B_${params.VERSION}"
+          sh "git checkout B_${params.VERSION}"
+          sh "git tag ${params.VERSION} -m \"version ${params.VERSION} tag\""
+          sh "git push origin HEAD:B_${params.VERSION} ${params.VERSION}"
+        }
+
+        script {
+          docker.image('acoss/generique/node10-npm6-openjdk11-maven3.fr-sonar4-slim:latest').inside {
+            fedex.livraisonFile "org.apache.maven.plugins:maven-deploy-plugin:2.8:deploy-file -e -X -DgroupId=${PROJECT_GROUP} -DartifactId=${PROJECT_KEY} -Dversion=${params.VERSION} -Dpackaging=tar.gz -Dfile=./dist/${NOM_TARGET_HAWAI}.tar.gz -Durl=http://${NEXUS_HOSTNAME}/repository/${MAVEN_REPOSITORY}/ -DrepositoryId=${MAVEN_REPOSITORY} -Dhawai.branchName=${BRANCHE_HAWAI}", true
+          }
+        }
+      }
+    }
+
+    stage('Deploy dev') {
+      when {
+        expression {
+          return params.deployDev
+        }
+      }
+      steps {
+        script {
+          docker.image('node:14.17.3')
+            .inside('-v /etc/passwd:/etc/passwd') {
+              // faire le déploiement
+              sshagent(credentials: ['SSH_KEY_HAWAI']) {
+                echo "*** Copie posdoc_fe_ihm.tar.gz"
+                sh "scp -o StrictHostKeyChecking=no dist/posdoc_fe_ihm.tar.gz ${CONNECTION_SERVER_DEV}:/hawai/system/hwi_install/applications/hwi_posdoc/bin/"
+                echo "** Fin copie"
+                sh "ssh -o StrictHostKeyChecking=no ${CONNECTION_SERVER_DEV} 'yes | sudo -i sh /hawai/system/hwi_install/install.sh posdoc_fe_ihm'"
+              }
+            }
+        }
+      }
+    }
+
+    stage('Analyse on SONAR') {
+      when {
+        expression {
+          return params.sonar
+        }
+      }
+      steps {
+        script {
+          docker.image('sonarsource/sonar-scanner-cli:5.0.1').inside {
+            withSonarQubeEnv('Sonarqube HORS-COBOL') {
+              sh "sonar-scanner"
+            }
+          }
+        }
+      }
+    }
+
+    stage('Tests E2E') {
+      when {
+        expression {
+          return params.tests_E2E
+        }
+      }
+      steps {
+        script {
+          docker.image('mcr.microsoft.com/playwright:v1.55.1-jammy').inside("-e HOME=${env.WORKSPACE}") {
+            sh 'npx playwright test --reporter=list,html,junit'
+          }
+        }
+      }
+    }
+
+  }
+  post {
+    success {
+      updateGitlabCommitStatus name: 'Jenkins', state: 'success'
+    }
+    failure {
+      updateGitlabCommitStatus name: 'Jenkins', state: 'failed'
+    }
+    always {
+      script {
+        if (params.tests_E2E) {
+          publishHTML(target: [reportDir   : 'playwright-report',
+                               reportFiles : 'index.html',
+                               reportName  : 'Rapport E2E Playwright',
+                               allowMissing: false,
+                               keepAll     : true])
+        }
+      }
+    }
+  }
+}

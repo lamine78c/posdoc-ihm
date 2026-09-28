@@ -1,0 +1,3 @@
+query getFichierFromGenfic($codenv: String, $codorg: [String], $periode: String, $commande: String) {
+  getFichierFromGenfic(codenv: $codenv, codorg: $codorg, periode: $periode, commande: $commande)
+}

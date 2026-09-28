@@ -1,0 +1,31 @@
+<div class="input-standalone">
+  <textarea
+    class="form-control"
+    rows="{{ textareaRows }}"
+    id="textarea{{ index }}"
+    [formControl]="form"
+    [placeholder]="placeholder"
+    [maxlength]="maxLength"
+    [ngClass]="{
+      warning: !form.valid && !form.disabled && !isError && form.touched,
+      error: !form.valid && !form.disabled && isError && form.touched,
+    }"
+  ></textarea>
+  <span
+    *ngIf="!form.valid && !form.disabled && !isError && form.touched"
+    class="icon-warning d-flex align-items-center"
+    aria-hidden="true"
+    ngbPopover="{{ errorMessage }}"
+    triggers="mouseenter:mouseleave focus"
+    tabindex="0"
+  ></span>
+  <span
+    *ngIf="!form.valid && !form.disabled && isError && form.touched"
+    class="icon-error d-flex align-items-center"
+    aria-hidden="true"
+    ngbPopover="{{ errorMessage }}"
+    triggers="mouseenter:mouseleave focus"
+    tabindex="0"
+  ></span>
+  <div *ngIf="maxLength" class="textarea-counter">{{ form.value.length }} / {{ maxLength }} caractères</div>
+</div>

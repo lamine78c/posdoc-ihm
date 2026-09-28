@@ -1,0 +1,9 @@
+<app-popup [modalRef]="modalRef" [title]="'Droits d\'accès insuffisants pour l\'utilisateur'" [firstButton]="null" [secondButton]="null">
+  L'utilisateur {{ login }} ne possède aucun droit d'accès. <br />Veuillez effectuer une demande WHAM.
+</app-popup>
+
+<div class="modal-footer">
+  <div class="button-group">
+    <button type="button" class="btn btn-primary" (click)="closePopup()"><i class="icon-b_valid" aria-hidden="true"></i><span>Ok</span></button>
+  </div>
+</div>

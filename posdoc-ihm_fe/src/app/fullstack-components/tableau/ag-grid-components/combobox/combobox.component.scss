@@ -1,0 +1,112 @@
+:host {
+  width: 100%;
+}
+
+.fake-select-container {
+  display: flex !important;
+  align-items: center;
+}
+
+.p-relative {
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+.form-control {
+  width: 100%;
+}
+
+::ng-deep .fake-select-container .form-control {
+  margin-top: 0 !important;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.icon-arrow-down {
+  position: absolute;
+  width: 27px;
+  right: 0;
+  top: 0;
+  height: 100%;
+  border-radius: 0 0.357rem 0 0;
+  border: none;
+  background: lightgray;
+  border-bottom: 1px solid #000;
+}
+
+.btn-error {
+  border-top: 1px solid #ff8080 !important;
+  border-right: 1px solid #ff8080 !important;
+  border-bottom: 1px solid #ff0000 !important;
+}
+
+.option {
+  cursor: pointer;
+  span {
+    padding-left: 1rem;
+  }
+}
+
+.option:hover {
+  background: lightgray;
+}
+
+.form-check {
+  padding-left: 0;
+}
+
+// Couleurs en cas d'erreur
+div.error {
+  border-color: #ff8080 !important;
+  border-bottom-color: #ff0000 !important;
+}
+
+// Couleurs en cas de warning
+div.warning {
+  border-color: #ffc380 !important;
+  border-bottom-color: #ff8600 !important;
+}
+
+/** Liste hiérarchisée **/
+::ng-deep .dropdown-menu {
+  padding: 0.5rem 1rem 0.5rem 0.5rem; // 7px 14px
+
+  .collapse-icon {
+    margin-right: 0.5rem; // 7px
+  }
+
+  .collapse-container {
+    margin-left: 3.143rem; // 44px
+    transform: translate3d(0, 0, 0);
+  }
+
+  .btn {
+    margin: 0 auto;
+    margin-top: 2rem; // 28px
+    margin-bottom: 1rem; // 14px // 21px - 7px (padding d�j� pr�sent) => 14px
+  }
+
+  .fake-select-scrollable-content {
+    max-height: 28.571rem; // 400px
+    overflow: auto;
+    width: calc(100% + 0.5rem); // 0.5rem => padding de la dropdown
+  }
+
+  /** FIX SCROLLBAR OVERLAP **/
+
+  /* Firefox */
+  @-moz-document url-prefix() {
+    .fake-select-scrollable-content {
+      padding-right: 1.214rem; // 17px
+    }
+  }
+
+  /* IE 10+ */
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .fake-select-scrollable-content {
+      padding-right: 1.143rem; // 16px
+    }
+  }
+}

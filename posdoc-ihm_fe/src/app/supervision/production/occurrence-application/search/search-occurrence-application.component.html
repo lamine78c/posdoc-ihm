@@ -1,0 +1,102 @@
+<div class="row pt-1 normal-content">
+  <div class="col-2-sg d-flex">
+    <div class="form row d-flex">
+      <label class="col-5 col-form-label">Date début:</label>
+      <div class="col-7">
+        <app-date-picker
+          [currentDate]="form.get('date')"
+          [maxDate]="toMaxDate"
+          [minDate]="fromMinDate"
+          [readOnly]="isIntervalStart"
+          [disabled]="isIntervalStart"
+        ></app-date-picker>
+      </div>
+    </div>
+  </div>
+  <div class="col-2-ss p-0">
+    <app-liste-deroulante
+      [label]="'Tri:'"
+      [blankOptionValue]="' '"
+      [form]="form.get('tri')"
+      [isError]="true"
+      [options]="optionsTri"
+      [labelColumns]="4"
+      [hasBlankOption]="true"
+      [inputColumns]="8"
+      [isDisabled]="isIntervalStart"
+      [errorMessage]="form.get('tri').errors?.message || form.get('tri').errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-2-sg p-0">
+    <app-liste-deroulante
+      [label]="'Environnement:'"
+      [blankOptionValue]="' '"
+      [form]="formEnv"
+      [index]="indexForm.ENVIRONNEMENT"
+      [isError]="true"
+      [options]="optionsEnv"
+      [labelColumns]="7"
+      [hasBlankOption]="true"
+      [inputColumns]="5"
+      [isDisabled]="isIntervalStart"
+      [errorMessage]="formEnv.errors?.message || formEnv.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-2-s p-0">
+    <app-liste-deroulante-hierarchisee
+      [form]="formOrg"
+      [formIndex]="indexForm.ORGANISME"
+      [label]="'Organismes:'"
+      [defaultText]="' '"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [isError]="true"
+      [disabled]="isIntervalStart"
+      [isWithValidAndRAZBtn]="false"
+      (changeEvent)="onChangeOrganisme($event)"
+      [errorMessage]="formOrg.errors?.message || formOrg.errors"
+    ></app-liste-deroulante-hierarchisee>
+  </div>
+  <div class="col-2-s p-0">
+    <app-liste-deroulante
+      [label]="'Application:'"
+      [blankOptionValue]="' '"
+      [form]="formApp"
+      [index]="indexForm.APPLICATION"
+      [isError]="true"
+      [options]="optionsApp"
+      [labelColumns]="6"
+      [isDisabled]="isIntervalStart"
+      [hasBlankOption]="true"
+      [inputColumns]="6"
+      [errorMessage]="formApp.errors?.message || formApp.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-2-ss p-0">
+    <app-liste-deroulante
+      [label]="'Site:'"
+      [blankOptionValue]="' '"
+      [form]="form.get('site')"
+      [isError]="true"
+      [options]="optionsSite"
+      [isDisabled]="isIntervalStart"
+      [labelColumns]="5"
+      [hasBlankOption]="true"
+      [inputColumns]="7"
+      [errorMessage]="form.get('site').errors?.message || form.get('site').errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="col-1-s p-0">
+    <div class="form-check radio-with-label me-4">
+      <label class="pt-mr-1" for="checkbox-occ-app"> Ext? </label>
+      <input [formControl]="getExtFormControl()" [disableControl]="isIntervalStart" class="form-check-input" type="checkbox" id="checkbox-occ-app" />
+    </div>
+  </div>
+  <div class="col-1-s p-0">
+    <div class="button-group ms-auto">
+      <button type="button" class="btn btn-primary btn-recherche" [disabled]="!isFormValid()" (click)="lister()">
+        <i class="icone icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+extend type Query {
+    getVolumestraites(query: VolumesTraitesSearchQuery): VolumesTraitesDTO!
+    getOrganismesByEnvDate(env: String, fromDate: DateTime, toDate: DateTime):[String]
+    getGamSitResByEnvOrgs(query: EnvOrgsQuery):[ResGamSit]
+    getDistinctOrgsFromGenEtp:[String]
+    getDistinctEnvsFromGenEtp:[String]
+}
+
+input VolumesTraitesSearchQuery {
+    codEnv: String!
+    codOrgs: [String]!
+    resGamSitList: [RessGammSite]!
+    fromDate: String!
+    toDate: String!
+}
+
+input RessGammSite {
+    codRes: String!
+    codGam: String!
+    codSit: String!
+}
+
+type VolumesTraitesDTO {
+    volumesTraitesList: [VolumesTraitesPayload]!
+    message: String
+}
+
+type VolumesTraitesPayload {
+    codorg: String
+    codapp: String
+    codfic: String
+    codcom: String
+    codgam: String
+    codsit: String
+    coddes: String
+    codres: String
+    sumpagfic: Int
+}
+
+type ResGamSit {
+    codres: String
+    codgam: String
+    codsit: String
+}
+
+input EnvOrgsQuery {
+    codeEnv: String!
+    codesOrg: [String]!
+}

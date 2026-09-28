@@ -1,0 +1,20 @@
+.row-with-border {
+  border-bottom: 0.1rem solid #d8d8d8; // 1px
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+}
+
+.row-with-border-horizontal {
+  border-right: 0.1rem solid #d8d8d8; // 1px
+  flex-wrap: wrap;
+  margin-right: 14px;
+  max-height: 220px;
+  min-height: 220px;
+  overflow-y: auto;
+}
+
+.all-env {
+  overflow-x: auto;
+  overflow-y: auto;
+  white-space: nowrap;
+}

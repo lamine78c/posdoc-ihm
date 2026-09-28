@@ -1,0 +1,5 @@
+mutation delete($id: String!) {
+    deleteProfile(deleteProfile: { id: $id }) {
+        ok
+    }
+}

@@ -1,0 +1,31 @@
+query getOccurrenceApplicationForSuiviProduction($query: OccurrenceApplicationSuiviProductionInput) {
+    getOccurrenceApplicationForSuiviProduction(query: $query) {
+        occurrencesApplication {
+            codenv
+            codorg
+            codapp
+            percod
+            appsta
+            appinf
+            arefec
+            dappld
+            dapplt
+            dappls
+            manuel
+            codsit
+            codcom
+            codfic
+            numcom
+            codprd
+            ficsta
+            ficinf
+            frefec
+            ficvid
+            dappcr
+            dfichd
+            dficht
+            dfichs
+        }
+        message
+    }
+}

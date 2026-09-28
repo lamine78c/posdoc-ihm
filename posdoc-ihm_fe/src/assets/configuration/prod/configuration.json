@@ -1,0 +1,44 @@
+{
+  "environnement": {
+    "name": "prod"
+  },
+  "application": {
+    "name": "POSDOC",
+    "version": "1.0.0-SNAPSHOT"
+  },
+  "logging": {
+    "console": true,
+    "level": 0,
+    "logLevelDescription": "TRACE = 0, DEBUG = 1, INFO = 2, LOG = 3, WARN = 4, ERROR = 5, FATAL = 6, OFF = 7"
+  },
+  "apiServer": {
+    "baseUrl": "@POSDOC.IHM_BE_URL@/api/v1"
+  },
+  "inactivityLogoutDelay": 10800000,
+  "prismeConfiguration": {
+    "prismeAuthzEndpoint": "@POSDOC.PRISME_URL@@POSDOC.PRISME_AUTHZ@",
+    "prismeTokenEndpoint": "@POSDOC.PRISME_URL@@POSDOC.PRISME_TOKEN@",
+    "prismeKeysEndpoint": "@POSDOC.PRISME_URL@@POSDOC.PRISME_GETPUBLICKEY@",
+    "prismeUserEndpoint": "@POSDOC.PRISME_URL@@POSDOC.PRISME_USERINFO@",
+    "prismeClientId": "PSFE",
+    "prismeClientSecret": "@POSDOC.POSDOC_IHM_PRISME_CLIENT_SECRET@",
+
+
+    "prismeCodeApp": "PSFE",
+    "prismeIss": "https://gateway.urssaf.recouv",
+
+    "prismeScopeFront": "openid *:PSFE",
+    "prismeScopeBack": "openid *:POSDOC-BE",
+    "prismeRefreshTokensInterval": 890000,
+
+    "applicationUri": "@POSDOC.BO_URL@/posdoc_fe_ihm",
+    "iFrameRenouvellement": "iframeJobPartBoFe",
+    "pageApresConnexion": "@POSDOC.BO_URL@/posdoc_fe_ihm/",
+    "chargerUserInfosFront": true,
+    "chargerUserInfosBack": true,
+    "jetonReadyTopic": "prisme:authentication-request",
+    "jetonMessageTopic": "prisme:set-token",
+    "waitWebMessageURLFragment": "wait_token"
+
+  }
+}

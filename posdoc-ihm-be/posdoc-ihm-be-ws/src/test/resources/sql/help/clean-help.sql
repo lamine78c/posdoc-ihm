@@ -1,0 +1,2 @@
+DELETE FROM help;
+DELETE FROM utilog;

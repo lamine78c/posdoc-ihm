@@ -1,0 +1,10 @@
+query getExistedFichiers($codeEnv: [String], $codeApp: String, $codeCom: String, $codeFic: String) {
+    getExistedFichiers(codeEnv: $codeEnv, codeApp: $codeApp, codeCom: $codeCom, codeFic: $codeFic) {
+        codeEnv
+        codeOrg
+        codeApp
+        codeCom
+        codeFich
+        libFichier
+    }
+}

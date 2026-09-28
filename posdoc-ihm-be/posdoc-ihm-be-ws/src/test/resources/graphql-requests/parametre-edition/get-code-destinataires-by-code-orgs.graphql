@@ -1,0 +1,3 @@
+query getCodeDestinatairesByCodeOrgs($codorgs: [String]!) {
+    getCodeDestinatairesByCodeOrgs(codorgs: $codorgs)
+}

@@ -1,0 +1,7 @@
+mutation CreateClient($var: CreateClientInput!){
+    createClient(createClient: $var){
+        code
+        libelle
+        codeAlliage
+    }
+}

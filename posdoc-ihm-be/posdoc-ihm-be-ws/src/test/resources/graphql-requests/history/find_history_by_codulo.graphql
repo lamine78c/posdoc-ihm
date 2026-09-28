@@ -1,0 +1,13 @@
+query FindHistoryByCodulo($codulo: Int!) {
+    findHistoryByCodulo(codulo: $codulo) {
+        id
+        station
+        utilisateur
+        insertionDate
+        actionUtilisateur
+        condition
+        entite
+        entree
+        sortie
+    }
+}

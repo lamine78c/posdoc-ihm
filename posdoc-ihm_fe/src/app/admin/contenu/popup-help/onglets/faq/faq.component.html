@@ -1,0 +1,51 @@
+<div class="faq-container p-2 d-flex flex-column">
+  <p class="mb-1">Filtres de recherche:</p>
+  <div class="card mat-elevation-z4 p-2 mb-2">
+    <app-liste-deroulante
+      [label]="'Page:'"
+      [form]="filterForm.get('path')"
+      [options]="pathOptions"
+      [labelColumns]="3"
+      [inputColumns]="9">
+    </app-liste-deroulante>
+    <app-champ-de-saisie
+      [label]="'Recherche:'"
+      [form]="filterForm.get('search')"
+      [labelColumns]="3"
+      [inputColumns]="9"
+    ></app-champ-de-saisie>
+  </div>
+  <p class="mb-1">Questions fréquentes:</p>
+  <div class="overflow-y-auto card mat-elevation-z4 p-2 flex-grow-1">
+    @for (faq of filteredFaqs; track faq.id) {
+      <div
+        (click)="toggleAnswer(faq)"
+        class="card mat-elevation-z4 my-1 p-2"
+        [class.selected-card]="selectedFaqId == faq.id"
+        style="cursor: pointer;">
+        <div class="d-flex flex-column">
+          @if (filterForm.get('path')?.value === 'ALL') {
+            <p class="m-0 small text-muted">
+              {{ getPathLabel(faq.path) }}
+            </p>
+          }
+          <p class="m-0 fw-bold">
+            {{ faq.question }}
+          </p>
+        </div>
+        @if (selectedFaqId === faq.id) {
+          <div class="mt-2 border-top pt-2">
+            <div
+              class="m-0 rich-text-content"
+              [innerHTML]="faq.answer || 'Pas de réponse enregistrée.'">
+            </div>
+          </div>
+        }
+      </div>
+    } @empty {
+      <div class="text-center p-3">
+        <p class="text-muted small">Aucune question trouvée.</p>
+      </div>
+    }
+  </div>
+</div>

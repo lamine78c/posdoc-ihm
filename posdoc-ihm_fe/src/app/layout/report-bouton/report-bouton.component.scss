@@ -1,0 +1,16 @@
+.div-report-bouton {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 25px;
+}
+
+img {
+  height: 100%;
+}
+
+@media (max-width: 767px) {
+  .div-report-bouton {
+    display: none;
+  }
+}

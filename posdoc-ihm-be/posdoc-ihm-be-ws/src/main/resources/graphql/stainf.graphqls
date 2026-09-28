@@ -1,0 +1,9 @@
+extend type Query {
+    allStaInf: [StaInfDTO]
+}
+
+type StaInfDTO {
+    statut: String
+    codinf: Int
+    libinf: String
+}

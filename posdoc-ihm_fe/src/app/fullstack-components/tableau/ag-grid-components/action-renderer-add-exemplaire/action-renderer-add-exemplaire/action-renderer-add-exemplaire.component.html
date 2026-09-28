@@ -1,0 +1,20 @@
+<div class="d-flex justify-content-center">
+  @if (canAddParamEditionRessource && !exemplaireExists) {
+    <em
+      tabindex="0"
+      class="icon-b_document no-focus"
+      [class.disabled]="hasProfil || resourceExistsInOtherSite"
+      (click)="onAddExemplaireClick()"
+      title="Ajouter un exemplaire"
+    ></em>
+  }
+  @if (canRemoveParamEditionRessource && exemplaireExists) {
+    <em
+      tabindex="0"
+      class="icon-b_delete no-focus"
+      [class.disabled]="hasProfil"
+      (click)="onDeleteExemplaireClick()"
+      title="Supprimer un exemplaire"
+    ></em>
+  }
+</div>

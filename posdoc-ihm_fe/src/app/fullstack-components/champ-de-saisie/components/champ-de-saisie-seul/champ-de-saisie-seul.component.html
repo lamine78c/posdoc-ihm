@@ -1,0 +1,31 @@
+<div class="input-standalone">
+  <input
+    appNoSpecialCharacters
+    [allowedCharacters]="allowedCharacters"
+    id="input{{ index }}"
+    name="input{{ index }}"
+    type="text"
+    class="form-control"
+    [formControl]="form"
+    [placeholder]="placeholder"
+    autocomplete="off"
+    [ngClass]="{
+      warning: !form.valid && !form.disabled && !isError && form.touched,
+      error: !form.valid && !form.disabled && isError && form.touched,
+    }"
+    (input)="patchFormatedValue($event)"
+  />
+  <span *ngIf="unit" class="my-auto ps-1"> {{ unit }}</span>
+  <span
+    *ngIf="!form.valid && !form.disabled && !isError && form.touched"
+    class="icon-warning d-flex align-items-center"
+    [ngClass]="{ 'control-icon-with-unit': unit }"
+    aria-hidden="true"
+  ></span>
+  <span
+    *ngIf="!form.valid && !form.disabled && isError && form.touched"
+    class="icon-error d-flex align-items-center"
+    [ngClass]="{ 'control-icon-with-unit': unit }"
+    aria-hidden="true"
+  ></span>
+</div>

@@ -1,0 +1,14 @@
+.popup-tableau {
+  height: 350px;
+  width: 100%;
+  overflow: hidden;
+}
+
+::ng-deep .notice-details-modal .modal-dialog {
+  max-width: 60vw;
+  width: 60vw;
+}
+
+::ng-deep .notice-details-modal .modal-content {
+  width: 100%;
+}

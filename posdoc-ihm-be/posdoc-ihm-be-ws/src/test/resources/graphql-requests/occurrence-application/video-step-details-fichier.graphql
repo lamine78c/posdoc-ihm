@@ -1,0 +1,18 @@
+query GetVideoStepDetailsFichier($videoStepDetailsFichierPayload: VideoStepDetailsFichierPayload!) {
+    getVideoStepDetailsFichier(videoStepDetailsFichierPayload: $videoStepDetailsFichierPayload) {
+        codenv
+        codorg
+        codapp
+        percod
+        codcom
+        codfic
+        numcom
+        libfic
+        refimp
+        codcli
+        dfiexp
+        pagfic
+        plific
+        rejfic
+    }
+}

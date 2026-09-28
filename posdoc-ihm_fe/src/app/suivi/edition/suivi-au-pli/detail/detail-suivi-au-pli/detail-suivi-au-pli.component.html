@@ -1,0 +1,42 @@
+<div class="popup-detail-suivi-au-pli">
+  <app-popup [modalRef]="modalRef" [title]="title" [firstButton]="null" [secondButton]="null">
+    <table *ngIf="suiviEtat && detail" class="table-suivi" aria-describedby="table suivi">
+      <thead>
+        <tr>
+          <th *ngFor="let item of suiviEtat" class="{{ item.TEXT_CLASS }}"><span *ngIf="item" class="{{ item.ICONE }}"></span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="row-etat">
+          <td *ngFor="let item of suiviEtat">
+            <span *ngIf="item" class="{{ item.TEXT_CLASS }}">{{ item.TEXT }}</span>
+          </td>
+        </tr>
+        <tr class="row-date">
+          <td *ngFor="let item of suiviEtat">
+            <span *ngIf="item" class="{{ item.TEXT_CLASS }}">{{ item.DATE }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="detail">
+      <table *ngIf="detail" class="table table-striped table-bordered" aria-describedby="table detail">
+        <thead>
+          <tr>
+            <th>Propriété</th>
+            <th>Valeur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of detail" [ngClass]="{ 'odd-row': i % 2 === 0, 'even-row': i % 2 !== 0 }">
+            <td>{{ item.LIBELLE }}</td>
+            <td>
+              <span *ngIf="item.ISHTML" [innerHTML]="item.VALUE"></span>
+              <span *ngIf="!item.ISHTML">{{ item.VALUE }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </app-popup>
+</div>

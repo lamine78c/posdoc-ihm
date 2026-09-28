@@ -1,0 +1,268 @@
+<div class="row pt-1 normal-content search">
+  <!-- Application Section -->
+  <div class="col-12">
+    <h5 class="mb-1">Application</h5>
+  </div>
+  <div class="card mb-3 col-12">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            sessionDataSearchDirective
+            [label]="'Environnement :'"
+            [blankOptionValue]="' '"
+            [form]="formEnv"
+            [index]="indexForm.ENVIRONNEMENT"
+            [isError]="true"
+            [options]="optionsEnv"
+            [labelColumns]="6"
+            [hasBlankOption]="true"
+            [inputColumns]="6"
+            [errorMessage]="formEnv.errors?.message || formEnv.errors"
+          ></app-liste-deroulante>
+        </div>
+        <div class="col-3 p-0">
+          <app-liste-deroulante-hierarchisee
+            sessionDataSearchDirective
+            [form]="formOrg"
+            [formIndex]="indexForm.ORGANISME"
+            [label]="'Organismes :'"
+            [defaultText]="' '"
+            [labelColumns]="5"
+            [inputColumns]="7"
+            [isError]="true"
+            [isWithValidAndRAZBtn]="false"
+            [isOptTreeInit]="isOrgOptionsInitialized"
+            (changeEvent)="onChangeOrganisme($event)"
+            [errorMessage]="formOrg.errors?.message || formOrg.errors"
+          ></app-liste-deroulante-hierarchisee>
+        </div>
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            sessionDataSearchDirective
+            [label]="'Application :'"
+            [blankOptionValue]="' '"
+            [form]="formApp"
+            [index]="indexForm.APPLICATION"
+            [isError]="true"
+            [options]="optionsApp"
+            [labelColumns]="5"
+            [hasBlankOption]="true"
+            [inputColumns]="7"
+            [errorMessage]="formApp.errors?.message || formApp.errors"
+          ></app-liste-deroulante>
+        </div>
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            sessionDataSearchDirective
+            [label]="'Période :'"
+            [blankOptionValue]="' '"
+            [form]="formPeriode"
+            [index]="indexForm.PERIODE"
+            [isError]="true"
+            [options]="optionsPeriode"
+            [labelColumns]="5"
+            [hasBlankOption]="true"
+            [inputColumns]="7"
+            [errorMessage]="formPeriode.errors?.message || formPeriode.errors"
+          ></app-liste-deroulante>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Produit Section -->
+  <div class="col-12">
+    <h5 class="mb-1">Produit</h5>
+  </div>
+  <div class="card mb-3 col-12">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            sessionDataSearchDirective
+            [label]="'Commande :'"
+            [blankOptionValue]="' '"
+            [form]="formCom"
+            [index]="indexForm.COMMANDE"
+            [isError]="true"
+            [options]="optionsCommande"
+            [labelColumns]="6"
+            [hasBlankOption]="true"
+            [inputColumns]="6"
+            [errorMessage]="formCom.errors?.message || formCom.errors"
+          ></app-liste-deroulante>
+        </div>
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            sessionDataSearchDirective
+            [label]="'Fichier :'"
+            [blankOptionValue]="' '"
+            [form]="formFic"
+            [index]="indexForm.FICHIER"
+            [isError]="true"
+            [options]="optionsFichier"
+            [labelColumns]="6"
+            [hasBlankOption]="true"
+            [inputColumns]="6"
+            [errorMessage]="formFic.errors?.message || formFic.errors"
+          ></app-liste-deroulante>
+        </div>
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            [label]="'Gamme :'"
+            [blankOptionValue]="' '"
+            [form]="form.get('gamme')"
+            [isError]="true"
+            [options]="optionsGamme"
+            [labelColumns]="6"
+            [hasBlankOption]="true"
+            [inputColumns]="6"
+            [errorMessage]="form.get('gamme').errors?.message || form.get('gamme').errors"
+          ></app-liste-deroulante>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exemplaire Section -->
+  <div class="col-12">
+    <h5 class="mb-1">Exemplaire</h5>
+  </div>
+  <div class="card mb-3 col-12">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            [label]="'Site :'"
+            [blankOptionValue]="' '"
+            [form]="form.get('site')"
+            [isError]="true"
+            [options]="optionsSite"
+            [labelColumns]="6"
+            [hasBlankOption]="true"
+            [inputColumns]="6"
+            [errorMessage]="form.get('site').errors?.message || form.get('site').errors"
+          ></app-liste-deroulante>
+        </div>
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            [label]="'Ressource :'"
+            [blankOptionValue]="' '"
+            [form]="form.get('ressource')"
+            [isError]="true"
+            [options]="optionsRessource"
+            [labelColumns]="6"
+            [hasBlankOption]="true"
+            [inputColumns]="6"
+            [errorMessage]="form.get('ressource').errors?.message || form.get('ressource').errors"
+          ></app-liste-deroulante>
+        </div>
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            [label]="'Serveur :'"
+            [blankOptionValue]="' '"
+            [form]="form.get('serveur')"
+            [isError]="true"
+            [options]="optionsServeur"
+            [labelColumns]="6"
+            [hasBlankOption]="true"
+            [inputColumns]="6"
+            [errorMessage]="form.get('serveur').errors?.message || form.get('serveur').errors"
+          ></app-liste-deroulante>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Etape Section -->
+  <div class="col-12">
+    <h5 class="mb-1">Etape</h5>
+  </div>
+  <div class="card mb-3 col-12">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            [label]="'Type :'"
+            [blankOptionValue]="' '"
+            [form]="form.get('etapeType')"
+            [isError]="true"
+            [options]="optionsEtapeType"
+            [labelColumns]="6"
+            [hasBlankOption]="true"
+            [inputColumns]="6"
+            [errorMessage]="form.get('etapeType').errors?.message || form.get('etapeType').errors"
+          ></app-liste-deroulante>
+        </div>
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            [label]="'Statut :'"
+            [blankOptionValue]="' '"
+            [form]="form.get('statut')"
+            [isError]="true"
+            [options]="optionsStatut"
+            [labelColumns]="6"
+            [hasBlankOption]="true"
+            [inputColumns]="6"
+            [errorMessage]="form.get('statut').errors?.message || form.get('statut').errors"
+          ></app-liste-deroulante>
+        </div>
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            [label]="'Verrou :'"
+            [blankOptionValue]="' '"
+            [form]="form.get('verrou')"
+            [isError]="true"
+            [options]="optionsVerrou"
+            [labelColumns]="6"
+            [hasBlankOption]="true"
+            [inputColumns]="6"
+            [errorMessage]="form.get('verrou').errors?.message || form.get('verrou').errors"
+          ></app-liste-deroulante>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dates Section -->
+  <div class="col-12">
+    <h5 class="mb-1">Dates</h5>
+  </div>
+  <div class="card col-9">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3 p-0">
+          <app-liste-deroulante
+            [label]="'Type :'"
+            [blankOptionValue]="' '"
+            [form]="form.get('dateType')"
+            [isError]="true"
+            [options]="optionsDateType"
+            [labelColumns]="6"
+            [hasBlankOption]="true"
+            [inputColumns]="6"
+            [errorMessage]="form.get('dateType').errors?.message || form.get('dateType').errors"
+          ></app-liste-deroulante>
+        </div>
+        <div class="col-3 p-0">
+          <div class="form-group d-flex align-items-center">
+            <label class="me-4">Début :</label>
+            <app-date-picker [currentDate]="form.get('dateDebut')" [maxDate]="toMaxDate" [readOnly]="isDateDisabled()"></app-date-picker>
+          </div>
+        </div>
+        <div class="col-3 p-0">
+          <div class="form-group d-flex align-items-center">
+            <label class="me-4">Fin :</label>
+            <app-date-picker [currentDate]="form.get('dateFin')" [maxDate]="toMaxDate" [readOnly]="isDateDisabled()"></app-date-picker>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 p-0 d-flex align-items-center justify-content-center">
+    <button type="button" class="btn btn-primary btn-recherche" (click)="searchOccurrenceEtape()">
+      <i class="icon-b_search"></i><span>Rechercher</span>
+    </button>
+  </div>
+</div>

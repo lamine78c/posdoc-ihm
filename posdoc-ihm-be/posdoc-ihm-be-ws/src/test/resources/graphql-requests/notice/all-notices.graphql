@@ -1,0 +1,6 @@
+query allNotices {
+    allNotices {
+        codnot
+        libnot
+    }
+}

@@ -1,0 +1,7 @@
+query getDistFicByEnvOrgAppComFromExemplaire($query: ExemplaireByFilterQuery) {
+    getDistFicByEnvOrgAppComFromExemplaire(query: $query){
+        codfic
+        refImprime
+        codeProd
+    }
+}

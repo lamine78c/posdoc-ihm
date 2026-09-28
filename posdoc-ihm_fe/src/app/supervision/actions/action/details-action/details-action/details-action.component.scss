@@ -1,0 +1,21 @@
+.popup-detail {
+  width: 900px;
+}
+
+table.table_condition td {
+  padding: 5px 0;
+}
+
+table.table_condition td:nth-child(odd),
+table th:first-child {
+  width: 120px;
+}
+
+table.table_condition td:nth-child(odd) {
+  font-weight: bold;
+}
+
+.detail-action {
+  max-height: 500px;
+  overflow-y: auto;
+}

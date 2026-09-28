@@ -1,0 +1,10 @@
+query GetPublication ($path: String!){
+    getPublication (path: $path) {
+        id
+        path
+        message
+        state
+        createdAt
+        updatedAt
+    }
+}

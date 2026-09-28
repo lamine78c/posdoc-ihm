@@ -1,0 +1,9 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: inherit;
+
+  .input-container {
+    flex: 1;
+  }
+}

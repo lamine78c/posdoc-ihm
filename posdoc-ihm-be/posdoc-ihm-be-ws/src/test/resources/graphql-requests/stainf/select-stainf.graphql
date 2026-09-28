@@ -1,0 +1,7 @@
+query allStaInf {
+    allStaInf {
+        statut
+        codinf
+        libinf
+    }
+}

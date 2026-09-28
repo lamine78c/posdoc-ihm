@@ -1,0 +1,7 @@
+mutation UpdateParametre($var: CreateOrUpdateParametreInput!){
+    updateParametre(updateParametre: $var){
+        code
+        value
+        libelle
+    }
+}

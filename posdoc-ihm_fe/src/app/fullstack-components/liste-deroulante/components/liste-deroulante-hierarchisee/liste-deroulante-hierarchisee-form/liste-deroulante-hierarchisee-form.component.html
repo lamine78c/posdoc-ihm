@@ -1,0 +1,45 @@
+<div class="d-flex">
+  <button
+    *ngIf="!isDisabled"
+    class="btn-no-style collapse-icon"
+    (click)="collapse.toggle()"
+    [attr.aria-expanded]="!isCollapsed"
+    aria-controls="collapse"
+  >
+    <i *ngIf="isCollapsed" aria-hidden="true" class="icon-plus"></i>
+    <i *ngIf="!isCollapsed" aria-hidden="true" class="icon-minus"></i>
+  </button>
+  <div *ngIf="isDisabled" style="margin-left: 1.6em"></div>
+  <div class="form-check">
+    <input
+      (click)="sendSelectedElementOrElements(key)"
+      class="form-check-input"
+      type="checkbox"
+      id="checkboxH-{{ parentIndex }}-{{ key }}"
+      [formControl]="groupForm.get('selectAll')"
+      [ngClass]="{ 'semi-checked': groupForm.get('selectAll').value === null }"
+    />
+    <label class="form-check-label font-weight-semi-bold" for="checkboxH-{{ parentIndex }}-{{ key }}">
+      {{ key }}
+    </label>
+  </div>
+</div>
+
+<div>
+  <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="collapse-container">
+    <div class="form-check" *ngFor="let item of form['controls'] | keyvalue; let index = index">
+      <div>
+        <input
+          (click)="sendSelectedElement(item.key)"
+          class="form-check-input"
+          type="checkbox"
+          id="checkboxH-{{ parentIndex }}-{{ key }}-{{ index }}"
+          [formControl]="item.value"
+        />
+        <label class="form-check-label" for="checkboxH-{{ parentIndex }}-{{ key }}-{{ index }}">
+          {{ item.key }}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

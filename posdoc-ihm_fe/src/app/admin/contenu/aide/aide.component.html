@@ -1,0 +1,24 @@
+<div class="global-content">
+  <div class="normal-content">
+    <h3>Aides contextuelles</h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [overlayLoadingTemplate]="overlayLoadingTemplate"
+      [pagination]="true"
+      [enableExportButtons]="false"
+      [enableAddButton]="addType"
+      [canAddPerm]="canAddPermPosition"
+      [canEditPerm]="canModifyPermPosition"
+      [canRemovePerm]="canRemovePermPosition"
+      (gridReady)="onGridReady($event)"
+      (addEvent)="addRow()"
+      (updateRows)="edit($event)"
+      (deleteRows)="onDeleteRows($event)"
+    ></app-tableau>
+  </div>
+</div>

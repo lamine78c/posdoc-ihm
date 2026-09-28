@@ -1,0 +1,5 @@
+mutation delete($ids: [String]!) {
+    deleteOrganismes(deleteOrganismes: { ids: $ids }) {
+        ok
+    }
+}

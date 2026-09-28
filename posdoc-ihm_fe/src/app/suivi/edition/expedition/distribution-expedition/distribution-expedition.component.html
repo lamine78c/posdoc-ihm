@@ -1,0 +1,30 @@
+<div class="global-content">
+  <div class="normal-content">
+    <app-search-distribution-expedition
+      [fromDefaultDate]="fromDefaultDate"
+      [toDefaultDate]="toDefaultDate"
+      [fromMinDate]="fromMinDate"
+      [toMaxDate]="toMaxDate"
+      (applyDateIntervalleEvent)="lister($event)"
+    ></app-search-distribution-expedition>
+  </div>
+  <div class="normal-content">
+    <h3 class="d-flex">
+      Liste des expéditions
+      <div class="badge badge-info ml-1 mt-auto">{{ nombreExpeditionsTotal }}</div>
+    </h3>
+  </div>
+  <div class="remain-content">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="true"
+      [enableExportButtons]="true"
+      (gridReady)="onGridReady($event)"
+      (exportAsPDF)="export($event)"
+      (exportAsExcel)="export($event)"
+    ></app-tableau>
+  </div>
+</div>

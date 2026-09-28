@@ -1,0 +1,4 @@
+DELETE FROM genapp;
+DELETE FROM genfic;
+DELETE FROM organi;
+DELETE FROM utilog;

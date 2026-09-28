@@ -1,0 +1,5 @@
+mutation DeleteAdressesRetour($var: DeleteByArrayAdresseRetourCompositeIdInput!){
+    deleteAdressesRetour(deleteAdressesRetour: $var){
+        ok
+    }
+}

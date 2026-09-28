@@ -1,0 +1,111 @@
+<div class="row pt-1 normal-content">
+  <div *ngIf="isAffNot" class="col-8 p-0">
+    <app-liste-deroulante
+      [form]="formNot"
+      [label]="'Notice '"
+      [options]="optionsNot"
+      [labelColumns]="4"
+      [inputColumns]="8"
+      [hasBlankOption]="true"
+      [blankOptionValue]="' '"
+      [labelClass]="'pl-0'"
+      [isError]="true"
+      [errorMessage]="formNot.errors?.message || formNot.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div [ngClass]="{ 'col-8': isAffNot, 'col-7 p-0': !isAffNot }">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [form]="formEnv"
+      [index]="indexForm.ENVIRONNEMENT"
+      [label]="'Env. '"
+      [options]="optionsEnv"
+      [labelColumns]="4"
+      [inputColumns]="8"
+      [hasBlankOption]="true"
+      [blankOptionValue]="' '"
+      [labelClass]="!isAffNot ? 'pl-0' : ''"
+      [isError]="true"
+      [errorMessage]="formEnv.errors?.message || formEnv.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div [ngClass]="{ 'col-8': isAffNot, 'col-7': !isAffNot }">
+    <app-liste-deroulante-hierarchisee
+      sessionDataSearchDirective
+      [form]="formOrg"
+      [formIndex]="indexForm.ORGANISME"
+      [isOptTreeInit]="isOrgOptionsInitialized"
+      [label]="'Org. '"
+      [defaultText]="' '"
+      [labelColumns]="4"
+      [inputColumns]="8"
+      [isError]="true"
+      [isWithValidAndRAZBtn]="false"
+      (changeEvent)="onChangeOrganisme($event)"
+      [errorMessage]="formOrg.errors?.message || formOrg.errors"
+    ></app-liste-deroulante-hierarchisee>
+  </div>
+  <div [ngClass]="{ 'col-8': isAffNot, 'col-7': !isAffNot }">
+    <app-liste-deroulante
+      sessionDataSearchDirective
+      [form]="formApp"
+      [index]="indexForm.APPLICATION"
+      [label]="'App. '"
+      [options]="optionsApp"
+      [labelColumns]="4"
+      [inputColumns]="8"
+      [hasBlankOption]="true"
+      [blankOptionValue]="' '"
+      [isError]="true"
+      [errorMessage]="formApp.errors?.message || formApp.errors"
+    ></app-liste-deroulante>
+  </div>
+  <div class="p-0" [ngClass]="{ 'col-8': isAffNot, 'col-7': !isAffNot }">
+    <app-select-list-with-input
+      sessionDataSearchDirective
+      [form]="formCom"
+      [index]="indexForm.COMMANDE_COMBOBOX"
+      [label]="'Commande '"
+      [options]="optionsCom"
+      [labelColumns]="6"
+      [inputColumns]="6"
+      [toUpperCase]="true"
+    ></app-select-list-with-input>
+  </div>
+  <div [ngClass]="{ 'col-8': isAffNot, 'col-7': !isAffNot }">
+    <app-select-from-table-list
+      sessionDataSearchDirective
+      [form]="formFic"
+      [index]="indexForm.FICHIER_TB"
+      [label]="'Fichier '"
+      [options]="optionsFic"
+      [isMultipleSelect]="true"
+      [labelColumns]="5"
+      [inputColumns]="7"
+      [isError]="true"
+      [errorMessage]="formFic.errors?.message || formFic.errors"
+    ></app-select-from-table-list>
+  </div>
+  <div [ngClass]="{ 'col-8': isAffNot, 'col-7': !isAffNot }">
+    <app-champ-de-saisie
+      sessionDataSearchDirective
+      appNoSpecialCharacters
+      [form]="formImp"
+      [index]="indexForm.REFIMPRIME"
+      [label]="'Imprimé '"
+      [labelColumns]="5"
+      [inputColumns]="7"
+      [toUpperCase]="true"
+      [maxlength]="8"
+      [isError]="true"
+      [errorMessage]="formImp.errors?.message || formImp.errors"
+    ></app-champ-de-saisie>
+  </div>
+  <div [ngClass]="{ 'col-8': isAffNot, 'col-7': !isAffNot }">
+    <div class="justify-content-end d-flex button-group">
+      <button type="button" class="btn btn-primary btn-recherche" [disabled]="!isFormValid()" (click)="lister()">
+        <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+    </div>
+  </div>
+</div>

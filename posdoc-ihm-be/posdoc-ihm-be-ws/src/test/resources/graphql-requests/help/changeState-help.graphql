@@ -1,0 +1,10 @@
+mutation ChangeState ($id: Int!){
+    changeStateHelp (id: $id) {
+        id
+        path
+        message
+        state
+        createdAt
+        updatedAt
+    }
+}

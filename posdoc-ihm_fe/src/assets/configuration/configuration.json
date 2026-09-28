@@ -1,0 +1,42 @@
+{
+  "environnement": {
+    "name": "dev"
+  },
+  "application": {
+    "name": "POSDOC",
+    "version": "1.0.0-SNAPSHOT"
+  },
+  "logging": {
+    "console": true,
+    "level": 0,
+    "logLevelDescription": "TRACE = 0, DEBUG = 1, INFO = 2, LOG = 3, WARN = 4, ERROR = 5, FATAL = 6, OFF = 7"
+  },
+  "apiServer": {
+    "baseUrl": "http://localhost:8080/api/v1"
+},
+  "inactivityLogoutDelay": 10800000,
+  "prismeConfiguration": {
+
+    "prismeAuthzEndpoint": "https://gateway-assemblage.gidn.recouv/security/v1/pss/authz",
+    "prismeTokenEndpoint": "https://gateway-assemblage.gidn.recouv/security/v1/pss/token",
+    "prismeKeysEndpoint": "https://gateway-assemblage.gidn.recouv/security/v1/pss/jwks/public",
+    "prismeUserEndpoint": "https://gateway-assemblage.gidn.recouv/security/v1/pss/user-info",
+    "prismeClientId": "PSFE",
+    "prismeClientSecret": "s1Qb9!p?DVW=e#qMVpf<c",
+    "prismeCodeApp": "PSFE",
+    "prismeScopeFront": "openid *:PSFE",
+    "prismeScopeBack": "openid *:POSDOC-BE",
+
+
+    "prismeIss": "https://gateway.urssaf.recouv",
+    "prismeRefreshTokensInterval": 890000,
+    "applicationUri": "localhost:4200",
+    "iFrameRenouvellement": "iframeJobPartBoFe",
+    "pageApresConnexion": "localhost:4200/",
+    "chargerUserInfosFront": true,
+    "chargerUserInfosBack": true,
+    "jetonReadyTopic": "prisme:authentication-request",
+    "jetonMessageTopic": "prisme:set-token",
+    "waitWebMessageURLFragment": "wait_token"
+  }
+}

@@ -1,0 +1,10 @@
+query findNoticeDetailsByFichier($payload: FindNoticeDetailsByFichierPayload!) {
+  findNoticeDetailsByFichier(payload: $payload) {
+    codeNotice
+    format
+    poids
+    portee
+    dateDebut
+    dateFin
+  }
+}

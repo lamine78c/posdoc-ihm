@@ -1,0 +1,7 @@
+<div class="context-menu" (click)="$event.stopPropagation()" [ngStyle]="contextMenuStyle">
+  <ul>
+    <li *ngFor="let option of contextMenuOptions" (click)="handleAction(option.action)">
+      {{ option.label }}
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,19 @@
+<div *ngIf="!isConnecte()">
+  <button type="button" class="btn btn-secondary" (click)="login()" id="connexionBouton">Connexion</button>
+</div>
+
+<div class="d-flex align-items-center" *ngIf="isConnecte()">
+  <div class="help-container">
+    <fust-icone
+      ><span class="icon-2xl icon-b_help cursor-pointer" (click)="loadHelp()"
+        ><span class="path1"></span><span class="path2"></span><span class="path3"></span></span
+    ></fust-icone>
+    @if (notifsCount > 0) {
+      <span class="notification cursor-pointer" (click)="openNotificationsModal()">{{ notifsCount }}</span>
+    }
+  </div>
+  <span class="p-1" id="loginField">Bienvenue : {{ getUtilisateur() }}</span>
+  <button type="button" class="btn ml-2 btn-secondary" (click)="logout()" id="logoutBouton">D&eacute;connexion</button>
+
+  <app-notifications-list [notifications]="notifications"></app-notifications-list>
+</div>

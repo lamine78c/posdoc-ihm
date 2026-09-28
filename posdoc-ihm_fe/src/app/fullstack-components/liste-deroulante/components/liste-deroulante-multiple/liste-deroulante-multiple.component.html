@@ -1,0 +1,96 @@
+<div [class.disabled-icon]="isDisabled">
+  <div class="form row" [ngStyle]="vertical ? { 'flex-direction': 'column' } : {}">
+    <label
+      *ngIf="label"
+      for="dropdownForm{{ formIndex }}"
+      class="col-{{ labelColumns }} col-form-label {{ labelClass }}"
+      [ngStyle]="{ width: labelWidth + 'px' }"
+      [class.ps-0]="vertical"
+      [ngClass]="{ 'col-form-label-fix': labelWidth }"
+      >{{ label }}</label
+    >
+    <div class="col-{{ inputColumns }} position-relative d-flex">
+      <div
+        #dropdownRef
+        container="body"
+        ngbDropdown
+        class="d-inline-block fake-select-container"
+        placement="bottom-left"
+        (openChange)="openChange($event)"
+        (keyup.enter)="toggleDropdown()"
+      >
+        <div
+          [ngStyle]="{ width: labelWidth + 'px' }"
+          [tabindex]="disabled ? -1 : 0"
+          class="fake-select"
+          id="dropdownForm{{ formIndex }}"
+          [ngClass]="{ 'fake-select-disabled': disabled, error: !form.valid && !form.disabled && isError && form.touched }"
+          ngbDropdownToggle
+        >
+          {{ getElementToDisplay() }}
+        </div>
+
+        <div *ngIf="!disabled" ngbDropdownMenu attr.aria-labelledby="dropdownForm{{ formIndex }}">
+          <div class="form-check" *ngIf="!hideSelectAllCheckbox()">
+            <input
+              (click)="selectAll(formSelectAll.get('selectAll').value)"
+              class="form-check-input"
+              type="checkbox"
+              id="selectAll{{ formIndex }}"
+              [formControl]="formSelectAll.get('selectAll')"
+            />
+            <label class="form-check-label" for="selectAll{{ formIndex }}" style="pointer-events: none">
+              Tout sélectionner / Tout désélectionner
+            </label>
+          </div>
+
+          <div class="fake-select-scrollable-content">
+            <div class="form-check" *ngFor="let item of form['controls'] | keyvalue: customSort; let index = index">
+              <input
+                (click)="sendSelectedElementOrElements(item)"
+                [formControl]="item.value"
+                class="form-check-input"
+                type="checkbox"
+                id="checkbox{{ formIndex }}-{{ index }}-{{ item.key }}"
+              />
+              <label class="form-check-label" for="checkbox{{ formIndex }}-{{ index }}-{{ item.key }}">
+                {{ item.key }}
+              </label>
+            </div>
+          </div>
+
+          <div *ngIf="isWithValidAndRAZBtn" class="d-flex">
+            <button *ngIf="isWithRAZ" type="button" class="btn btn-primary" (click)="vider()" style="border: none">
+              <i class="icon-b_cancel" aria-hidden="true"></i><span>RAZ</span>
+            </button>
+            <button type="button" class="btn btn-primary" (click)="valider()" style="border: none">
+              <i class="icon-b_valid" aria-hidden="true"></i><span>Valider</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <span
+        *ngIf="!form.valid && !form.disabled && !isError && form.touched"
+        class="icon-warning d-flex align-items-center ml--13"
+        aria-hidden="true"
+        [ngbPopover]="array.isArray(errorMessage) ? list : errorMessage"
+        triggers="mouseenter:mouseleave focus"
+        tabindex="0"
+      ></span>
+      <span
+        *ngIf="!form.valid && !form.disabled && isError && form.touched"
+        class="icon-error d-flex align-items-center ml--13"
+        aria-hidden="true"
+        [ngbPopover]="array.isArray(errorMessage) ? list : errorMessage"
+        triggers="mouseenter:mouseleave focus"
+        tabindex="0"
+      ></span>
+    </div>
+  </div>
+</div>
+
+<ng-template #list>
+  <ng-container *ngFor="let error of errorMessage; let last = last">
+    <div [ngClass]="{ 'mb-2': !last }">{{ error.message }}</div>
+  </ng-container>
+</ng-template>

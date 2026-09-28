@@ -1,0 +1,11 @@
+query GetCommandesByEnvsOrgsApps($codenvs:[String], $codorgs:[String], $codapp:String) {
+    getCommandesByEnvsOrgsApps(codenvs: $codenvs, codorgs: $codorgs, codapp: $codapp) {
+        code
+        libelle
+        codenv
+        codorg
+        codapp
+        codreg
+        isNotAuthorisedToBeDeleted
+    }
+}

@@ -1,0 +1,10 @@
+mutation Create ($helpPayload: HelpCreatePayload!){
+    createHelp (help: $helpPayload) {
+        id
+        path
+        message
+        state
+        createdAt
+        updatedAt
+    }
+}

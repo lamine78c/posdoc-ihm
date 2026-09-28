@@ -1,0 +1,10 @@
+query getNoticesOccurrenceApplication($query: SearchNoticesOccurrenceApplicationQuery!) {
+    getNoticesOccurrenceApplication(query: $query) {
+        codnot
+        poinot
+        fornot
+        pornot
+        libnot
+        codsit
+    }
+}

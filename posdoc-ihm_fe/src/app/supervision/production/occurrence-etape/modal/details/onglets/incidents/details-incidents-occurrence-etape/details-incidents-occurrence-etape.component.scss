@@ -1,0 +1,43 @@
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+}
+
+.table thead th {
+  background-color: #f8f9fa;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+  white-space: nowrap;
+  overflow: overlay;
+}
+
+.odd-row {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.even-row {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.global-content {
+  height: 500px;
+  overflow-x: auto;
+}
+
+.table-bordered tr,
+.table-bordered th,
+.table-bordered td {
+  height: 30px;
+}

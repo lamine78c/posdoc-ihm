@@ -1,0 +1,2 @@
+DELETE FROM Gammes;
+DELETE FROM Verrou;

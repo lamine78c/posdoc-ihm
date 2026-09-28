@@ -1,0 +1,81 @@
+extend type Mutation {
+    createTarpos(createTarpos: TarposInput!): Tarpos!
+    updateTarpos(updateTarpos: TarposInput!): Tarpos!
+    deleteAllTarpos(deleteAllTarpos: DeleteByArrayStringIdInput!): DeletePayload!
+
+    createTarif(createTarif: CreateTarifInput!): CreateOrUpdateTarifPayload!
+    updateTarif(updateTarif: UpdateTarifInput!): CreateOrUpdateTarifPayload!
+    deleteTarifs(deleteTarifs: [DeleteTarifInput]!): DeletePayload!
+}
+
+extend type Query {
+    allTarpos: [Tarpos]!
+    allTarposByPerimetreEqualToZero: [Tarpos]!
+
+    tarifs(queryParameters: QueryParametersInput!): Paginated
+    allTarifs: [CreateOrUpdateTarifPayload]!
+    getTarifsById(type: String!): [CreateOrUpdateTarifPayload]
+}
+
+type Tarpos {
+    type: String
+    libelle: String
+    ordre: Int
+    tlibre: Boolean
+    compta: Boolean
+    perime: Boolean
+    isNotAuthorisedToBeDeleted: Boolean
+    tarifs: [Tarif]
+}
+
+input TarposInput {
+    type: String
+    libelle: String
+    ordre: Int
+    tlibre: Boolean
+    compta: Boolean
+    perime: Boolean
+}
+
+#Pas de numéro, sera alloué automatiquement
+input CreateTarifInput {
+    type: String!
+    numero: String!
+    dateDebut: Date!
+    dateFin: Date
+    coutPli: Float!
+    urgent: Boolean!
+}
+
+input UpdateTarifInput {
+    type: String!
+    numero: String!
+    dateDebut: Date!
+    dateFin: Date
+    coutPli: Float!
+    urgent: Boolean!
+}
+
+type CreateOrUpdateTarifPayload {
+    type: String!
+    numero: String!
+    dateDebut: Date!
+    dateFin: Date
+    coutPli: Float!
+    urgent: Boolean!
+}
+
+input DeleteTarifInput {
+    type: String!
+    numero: String!
+}
+
+#Tarif
+type Tarif {
+    type: String!
+    numero: String!
+    dateDebut: Date
+    dateFin: Date
+    coutPli: Float!
+    urgent: Boolean!
+}

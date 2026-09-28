@@ -1,0 +1,6 @@
+mutation UpdateRegion($var: CreateOrUpdateRegionInput!){
+    updateRegion(updateRegion: $var){
+        code
+        libelle
+    }
+}

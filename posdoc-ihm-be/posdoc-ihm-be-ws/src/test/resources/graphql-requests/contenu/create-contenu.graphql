@@ -1,0 +1,11 @@
+mutation create ($createContenu: CreateOrUpdateContenuInputDTO!) {
+    createContenu (createContenu: $createContenu) {
+      titre
+      dateActivation
+      dateExpiration
+      message
+      regions {
+         code
+      }
+    }
+}

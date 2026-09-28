@@ -1,0 +1,3 @@
+query getDistinctCommByAppEnv($codapp: String, $codenvs: [String]) {
+    getDistinctCommByAppEnv(codapp: $codapp, codenvs: $codenvs )
+}

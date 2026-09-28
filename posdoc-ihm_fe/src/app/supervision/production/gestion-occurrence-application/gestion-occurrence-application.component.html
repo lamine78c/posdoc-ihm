@@ -1,0 +1,59 @@
+<div class="global-content">
+  <div *ngIf="!paramData" class="normal-content">
+    <app-search-gestion-occurrence-application #searchComponent (applySearchEvent)="lister($event)"></app-search-gestion-occurrence-application>
+  </div>
+  <div *ngIf="!resultat" class="normal-content error">Aucune occurrence d'application pour la date sélectionnée</div>
+  <div *ngIf="resultat" class="normal-content resultat">
+    <table class="table table-striped table-bordered" aria-describedby="table result">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Status :</td>
+          <td>{{ resultat.appsta }}-{{ resultat.appinf }}</td>
+        </tr>
+        <tr>
+          <td>Date de création :</td>
+          <td>{{ resultat.dapplc }}</td>
+        </tr>
+        <tr>
+          <td>Date de début :</td>
+          <td>{{ resultat.dappld }}</td>
+        </tr>
+        <tr>
+          <td>Date de fin :</td>
+          <td>{{ resultat.dapplt }}</td>
+        </tr>
+        <tr>
+          <td>Date de suspension :</td>
+          <td>{{ resultat.dappls }}</td>
+        </tr>
+        <tr>
+          <td>Site d'origine :</td>
+          <td>{{ resultat.sitori }}</td>
+        </tr>
+        <tr>
+          <td>Type de réfection :</td>
+          <td>
+            <div *ngIf="!isModifiable()">{{ resultat.typref }}</div>
+            <div *ngIf="isModifiable()" class="ml-1">
+              <app-liste-deroulante [form]="form.get('typeRefection')" [options]="optionsTypeRefection" [inputColumns]="8"></app-liste-deroulante>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="button-group ms-auto">
+      <button type="button" *ngIf="isModifiable()" class="btn btn-primary btn-recherche" [disabled]="!isFormValid()" (click)="modifier()">
+        <i class="icone icon-b_valid"></i><span>Modifier</span>
+      </button>
+      <button type="button" *ngIf="isTermine()" class="btn btn-primary btn-recherche" (click)="terminer()">
+        <i class="icone icon-b_valid"></i><span>Terminer</span>
+      </button>
+    </div>
+  </div>
+</div>

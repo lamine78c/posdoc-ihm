@@ -1,0 +1,28 @@
+query searchOccAppByFic($fichierPayload: SearchOccAppByFicInput!) {
+    searchOccAppByFic(fichierPayload: $fichierPayload) {
+        libfic
+        libfor
+        libsup
+        libmul
+        reffor
+        refimp
+        refsup
+        reftri
+        refech
+        ficatt
+        ficsta
+        maxpag
+        codprd
+        repexp
+        typsig
+        codcli
+        codrnd
+        ficinf
+        dappcr
+        dfichd
+        dficht
+        dfichs
+        codsit
+        eclate
+    }
+}

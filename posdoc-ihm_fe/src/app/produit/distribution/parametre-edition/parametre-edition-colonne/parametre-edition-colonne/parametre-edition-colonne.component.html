@@ -1,0 +1,23 @@
+<div class="global-content">
+  <div class="normal-content">
+    <app-search-parametre-edition-colonne (applySearchEvent)="listExemplairesByResource($event)"></app-search-parametre-edition-colonne>
+  </div>
+  <h3 class="d-flex">
+    Liste des paramètres d'édition
+    <div class="badge badge-info ml-1 mt-auto">{{ nombreExemplaires }}</div>
+    @if (canRemoveParamEditionRessource) {
+      <button type="button" class="btn btn-secondary" [disabled]="!isDeleteButtonActive()" (click)="deleteSelectedExemplaires()">
+        Supprimer en masse
+      </button>
+    }
+  </h3>
+  <div class="remain-content">
+    <app-tableau
+      [columnDefs]="columnDefs"
+      [gridOptions]="gridOptions"
+      [rowData]="rowData$ | async"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      (gridReady)="onGridReady($event)"
+    ></app-tableau>
+  </div>
+</div>

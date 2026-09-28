@@ -1,0 +1,83 @@
+<app-popup [modalRef]="activeModal" [isFormValid]="isFormValid" [title]="title" [firstButton]="null" [secondButton]="null" (saveEvent)="passBack()">
+  <h3>Vous êtes sur le point d'ajouter un ou plusieurs articles sur l'adresse : {{ adresseSelected }} - {{ orgSelected }}</h3>
+
+  <app-liste-deroulante
+    [label]="'Environnement :'"
+    [form]="formGroup.get('environnement')"
+    [hasBlankOption]="true"
+    [blankOptionValue]="''"
+    [options]="environnementsList"
+    (changeEvent)="onChangeEnvironnement($event)"
+  ></app-liste-deroulante>
+
+  <app-liste-deroulante
+    [label]="'Application :'"
+    [form]="formGroup.get('application')"
+    [hasBlankOption]="true"
+    [blankOptionValue]="''"
+    [options]="applicationsList"
+    (changeEvent)="onChangeApplication($event)"
+  ></app-liste-deroulante>
+
+  <app-liste-deroulante
+    [label]="'Commande :'"
+    [form]="formGroup.get('commande')"
+    [hasBlankOption]="true"
+    [blankOptionValue]="''"
+    [options]="commandesList"
+    (changeEvent)="onChangeCommande($event)"
+  ></app-liste-deroulante>
+
+  <app-liste-deroulante
+    [label]="'Fichier :'"
+    [form]="formGroup.get('fichier')"
+    [hasBlankOption]="true"
+    [blankOptionValue]="''"
+    [options]="fichiersList"
+    (changeEvent)="onChangeFichier($event)"
+  ></app-liste-deroulante>
+
+  <app-champ-de-saisie
+    [form]="formGroup.get('refImp')"
+    [label]="'Imprimé:'"
+    [index]="5"
+    [placeholder]=""
+    [isError]="formGroup.get('refImp').errors != null"
+    [errorMessage]="formGroup.get('refImp').errors === null ? '' : formGroup.get('refImp').errors.message"
+  ></app-champ-de-saisie>
+
+  <div class="d-flex normal-content pb-2" style="margin-top: 15px">
+    <h3>Total articles : {{ nombreTotalArticles }}</h3>
+    <div class="button-group ms-auto">
+      <button type="button" class="btn btn-secondary" (click)="lister()">
+        <i class="icon-b_search" aria-hidden="true"></i><span>Rechercher</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- error -->
+  <div class="errorForm">{{ errorPass }}</div>
+
+  <div class="popup-tableau">
+    <app-tableau
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [pagination]="false"
+      (gridReady)="onGridReady($event)"
+    ></app-tableau>
+  </div>
+</app-popup>
+
+<div class="modal-footer">
+  <div class="button-group">
+    <button type="button" class="btn btn-outline-primary" (click)="closePopup()" *ngIf="secondButton">
+      <i *ngIf="secondButton.icone" aria-hidden="true" style="color: gray"></i><span>{{ secondButton.label }}</span>
+    </button>
+
+    <button type="button" class="btn btn-primary" (click)="passBack()" *ngIf="firstButton" [disabled]="!isEnableButton()">
+      <i *ngIf="firstButton.icone" class="{{ firstButton.icone }}" aria-hidden="true"></i><span>{{ firstButton.label }}</span>
+    </button>
+  </div>
+</div>

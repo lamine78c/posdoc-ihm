@@ -1,0 +1,61 @@
+<div class="ag-pagination d-flex" [formGroup]="form">
+  <div class="d-flex">
+    <label class="lignes-label" for="{{ uniqueAgKey }}-pag">Lignes par page </label>
+    <select class="form-select lignes-label-value" id="{{ uniqueAgKey }}-pag" formControlName="selectNbreLignes">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="200">200</option>
+      <option value="500">500</option>
+    </select>
+    <span class="lignes-total-label"
+      >Nombre total de lignes <span class="ms-2">{{ totalLignes }}</span>
+    </span>
+  </div>
+
+  <div class="page-container">
+    <a
+      class="my-auto text-decoration-none"
+      (click)="first()"
+      (keyup.enter)="first()"
+      title="Première page"
+      [ngClass]="{ disabled: form.get('currentPage').value === 1, 'cursor-pointer': form.get('currentPage').value !== 1 }"
+    >
+      <i class="icon-b_full_left" aria-hidden="true"></i>
+    </a>
+    <a
+      class="my-auto text-decoration-none"
+      (click)="previous()"
+      (keyup.enter)="previous()"
+      title="Page précédente"
+      [ngClass]="{ disabled: form.get('currentPage').value === 1, 'cursor-pointer': form.get('currentPage').value !== 1 }"
+    >
+      <i class="icon-b_left" aria-hidden="true"></i>
+    </a>
+    <label class="my-auto page-label" for="currentPage-{{ uniqueAgKey }}">Page</label>
+
+    <input appNumberInput class="form-control" type="text" id="currentPage-{{ uniqueAgKey }}" formControlName="currentPage" maxLength="3" size="3" />
+    <span class="my-auto total-pages-value"> / {{ totalPages }}</span>
+
+    <a
+      class="my-auto text-decoration-none"
+      (click)="next()"
+      (keyup.enter)="next()"
+      title="Page suivante"
+      [ngClass]="{ disabled: form.get('currentPage').value === totalPages, 'cursor-pointer': form.get('currentPage').value !== totalPages }"
+    >
+      <i class="icon-b_right" aria-hidden="true"></i>
+    </a>
+    <a
+      class="my-auto text-decoration-none"
+      (click)="last()"
+      (keyup.enter)="last()"
+      title="Dernière page"
+      [ngClass]="{ disabled: form.get('currentPage').value === totalPages, 'cursor-pointer': form.get('currentPage').value !== totalPages }"
+    >
+      <i class="icon-b_full_right" aria-hidden="true"></i>
+    </a>
+  </div>
+</div>

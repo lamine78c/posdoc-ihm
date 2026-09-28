@@ -1,0 +1,3 @@
+query GetDistOrgByEnvFromExemplaire($codenvs:[String]) {
+    getDistOrgByEnvFromExemplaire(codenvs: $codenvs)
+}

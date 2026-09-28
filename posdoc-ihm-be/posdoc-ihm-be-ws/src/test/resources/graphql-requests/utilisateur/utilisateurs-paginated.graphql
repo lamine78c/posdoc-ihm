@@ -1,0 +1,17 @@
+query($queryParametersInputDTO: QueryParametersInput!) {
+    utilisateurs(queryParameters: $queryParametersInputDTO) {
+        totalElement
+        totalPages
+        elements {
+            ... on Utilisateur {
+                codeUtilisateur
+                libelleUtilisateur
+                profile
+                password
+                actif
+                codeEnvironnement
+                codeSite
+            }
+        }
+    }
+}

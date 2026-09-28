@@ -1,0 +1,22 @@
+{
+  "formulaire": {
+    "label": {
+      "denomination": "Denomination :",
+      "siren": "Siren :",
+      "activite": "Activity :",
+      "naf": "Naf :",
+      "date_fondation": "Date of foundation :"
+    },
+    "message_erreur": {
+      "champ_obligatoire": "Required field",
+      "caracter_slash": "Character / and \\ not allowed",
+      "neuf_chiffres": "Need contain 9 numbers",
+      "juste_chiffres": "Only numbers",
+      "min_3_chiffres": "Must contain at least 3 numbers",
+      "max_4_chiffres": "Must contain a maximum of 4 numbers"
+    },
+    "bouton_switch_langue": "Passage en Français",
+    "bouton_valider": "Validate",
+    "bouton_annuler": "Cancel"
+  }
+}

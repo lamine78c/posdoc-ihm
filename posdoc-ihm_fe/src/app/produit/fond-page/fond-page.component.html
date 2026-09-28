@@ -1,0 +1,15 @@
+<app-onglet [type]="ongletTypeEnum.PREMIER_NIVEAU" [tabs]="onglets" [(active)]="active">
+  <ng-container *ngFor="let onglet of onglets; index as index">
+    <app-onglet-header-container *appCheckPermission="onglet.perm">
+      <app-onglet-header class="d-flex" [tab]="onglet" [type]="ongletTypeEnum.PREMIER_NIVEAU"></app-onglet-header>
+    </app-onglet-header-container>
+  </ng-container>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_IMPRIMES">
+    <app-distribution-imprime></app-distribution-imprime>
+  </div>
+
+  <div class="onglet" *ngIf="labelActif === ongletNumEnum.ONGLET_NUMBER_REFERENCE">
+    <app-distribution-reference></app-distribution-reference>
+  </div>
+</app-onglet>
