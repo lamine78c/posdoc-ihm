@@ -8,7 +8,9 @@
 
 ---
 
-## 0. Suivi des corrections (commit `929f148` sur `master`)
+## 0. Suivi des corrections (commit `929f148` sur `master`, branche GitLab `EDT-1633`)
+
+> **Pour l'agent** : commencer par le **Lot 0** (section 3), qui corrige ou complète les modifications de la branche `EDT-1633`, avant de passer au Lot 1.
 
 ### Ce qui est corrigé
 
@@ -38,6 +40,8 @@ Les corrections ont été relues une par une. Elles sont correctes, et le décor
 3. Les déclencheurs (Lot 2 : `refreshHeader`, `redrawRows`), Apollo (Lot 3), le DOM rendu (Lot 4) et la change detection (Lot 5) sont inchangés.
 
 ### Points d'attention sur les corrections
+
+Chacun de ces points est repris sous forme de tâche dans le **Lot 0** (section 3).
 
 - **`select-table-editor.component.ts:185-187` (effet de bord à corriger)** : `ngOnDestroy` appelle `closeDropdown()` **sans condition**, et `closeDropdown()` retire le premier élément d'id `custom-dropdown-table` trouvé dans le document. Toute cellule de ce type détruite (scroll, virtualisation, `redrawRows`) ferme donc le menu ouvert par **une autre** cellule, dont `dropdownVisible` reste à `true` (il faudra deux clics pour le rouvrir). Correction minimale : `ngOnDestroy(): void { if (this.dropdownVisible) { this.closeDropdown(); } }`. Correction complète : garder une référence au conteneur créé plutôt que de le chercher par id (voir FC-C4).
 - **Specs** : `compare-modal.component.spec.ts:67` crée `mockGridApi` avec `['setGridOption', 'sizeColumnsToFit', 'addEventListener']`, sans `removeEventListener`. Le nouveau `ngOnDestroy` appellera `this.gridApi.removeEventListener` au teardown du TestBed, ce qui peut faire échouer le test (« Error during cleanup of component »). Ajouter `'removeEventListener'` au spy. Même vérification à faire pour les mocks `params.api` des specs des floating filters, si elles appellent `agInit`.
@@ -125,6 +129,21 @@ DOM nodes ↑ (escalier) · heap ↑ · CPU ↑ à chaque recherche suivante
 - Pour la libération des abonnements, **suivre la convention du projet, `@AutoUnsubscribe`**, là où elle suffit, et `takeUntilDestroyed()` seulement dans les cas où le décorateur ne peut pas agir. Voir la section 3.0 ci-dessous. Les extraits `takeUntilDestroyed` des annexes ne sont qu'**une** façon d'écrire la correction.
 - Composants ag-grid : Angular appelle bien `ngOnDestroy` sur les composants Angular utilisés comme renderer, editor ou filter. Y retirer les listeners avec la **même référence de fonction** (ne pas utiliser `.bind(this)` inline), et vérifier `!api.isDestroyed()` avant `removeEventListener`.
 
+### Lot 0 : reprendre le commit `EDT-1633` (à faire en premier)
+
+Ces tâches corrigent ou complètent les modifications de la branche GitLab `EDT-1633` (commit `929f148` sur `master`). Elles sont petites, locales, et doivent passer avant le Lot 1. Faire un seul commit pour ce lot, puis lancer `npm run test-ci` (au minimum les specs des fichiers touchés).
+
+| Tâche | Fichiers | Réf. |
+|---|---|---|
+| 0.1 **Bug introduit** : dans `select-table-editor`, le `ngOnDestroy` appelle `closeDropdown()` sans condition et `closeDropdown()` retire le premier élément d'id `custom-dropdown-table` du document. Détruire une cellule (scroll, redraw) ferme donc le menu ouvert par une autre cellule, qui reste en `dropdownVisible = true`. Correction minimale : `ngOnDestroy(): void { if (this.dropdownVisible) { this.closeDropdown(); } }`. Mieux : garder dans une propriété `private container?: HTMLElement` le conteneur créé par `openDropdown()` et faire `this.container?.remove()` dans `closeDropdown()` au lieu de `getElementById`. | `fullstack-components/tableau/ag-grid-components/select-table-editor/select-table-editor.component.ts:93-95, 170-176, 185-187` | FC-C4 |
+| 0.2 **Spec cassée probable** : le mock `mockGridApi` n'expose pas `removeEventListener`, alors que le nouveau `ngOnDestroy` l'appelle au teardown du TestBed. Ajouter `'removeEventListener'` (et `'isDestroyed'` si 0.3 est fait) à `jasmine.createSpyObj`. | `produit/commande/modal/compare-modal/compare-modal/compare-modal.component.spec.ts:67` | § A3 |
+| 0.3 Ajouter la garde `!api.isDestroyed()` avant chaque `removeEventListener` ajouté par le commit, pour éviter les warnings ag-grid quand la grille est détruite avant le composant. Exemple : `if (this.params?.api && !this.params.api.isDestroyed() && this.modelUpdatedHandler) { … }`. **Mettre à jour les mocks** en conséquence : un `createSpyObj` sans `isDestroyed` ferait planter l'appel (au minimum `details-param-distr.component.spec.ts:15` et `compare-modal.component.spec.ts:67`). | `multi-select-floating-filter.component.ts:102-106`, `multi-select-hierarchisee-floating-filter.component.ts:93-97`, `multi-select-editor.component.ts:241-246`, `tableau.component.ts:773-782`, `tableau-massification.component.ts:252-258`, `compare-modal.component.ts:194-198`, `details-param-distr.component.ts:69-73` | section 3 |
+| 0.4 **Correction incomplète** : dans le filtre hiérarchisé, `modelUpddated()` crée toujours un nouvel abonnement `selectData` à chaque `modelUpdated` ; `selectDataSubscription` est écrasée et seule la dernière est fermée. Sortir l'abonnement du handler : s'abonner **une fois** dans `agInit`, mémoriser la liste dans `this.allOrganismes`, puis appeler `modelUpddated()` depuis ce callback (code complet en FC-C2). Solution minimale acceptable : `this.selectDataSubscription?.unsubscribe();` juste avant la réassignation. | `multi-select-hierarchisee-floating-filter.component.ts:46-54, 66-91` | FC-C2, SUP-C2 |
+| 0.5 Nettoyage de `details-param-distr` : supprimer `this.params.api.removeEventListener('cellEditingStarted', this.displayErrorsFn);` (cet événement n'est jamais enregistré). **Adapter la spec** : `details-param-distr.component.spec.ts:163` attend précisément cet appel ; remplacer l'attente par `'rowDataUpdated'`. | `admin/fabrication/parametre-distribution/details-param-distr/details-param-distr.component.ts:71` et `.spec.ts:163` | ADM-H3 |
+| 0.6 Nettoyage de `tableau.component` : supprimer l'enregistrement et le retrait du listener `selectionChanged`, la propriété `onSelectionChangedFn` et la méthode vide `onSelectionChanged()`. Supprimer aussi la méthode morte `modelUpdated()`. | `fullstack-components/tableau/components/tableau/tableau.component.ts:235, 343, 346, 761-770, 779-781, 796-801` | FC-B1 |
+| 0.7 `preselection` : faire `clearTimeout(...)` de l'identifiant précédent avant chaque réassignation (les méthodes peuvent être rappelées avant la fin du timer). | `shared/preselection/preselection.component.ts:141, 211` | CORE-M5 |
+| 0.8 Optionnel (sans effet, peut rester ou être retiré) : le `take(1)` sur la mutation `updateExemplaire` (la vraie correction est PROD-B3 : supprimer le tableau `subscriptions` du service root) et le `ngOnDestroy` → `vcr.clear()` de `check-permission`. | `tableau-parametre-edition.service.ts:424`, `check-permission.directive.ts:25-27` | PROD-B3, CORE-B1 |
+
 ### 3.0 `@AutoUnsubscribe` ou `takeUntilDestroyed` : lequel utiliser ?
 
 Le décorateur du projet (`shared/decorators/auto-unsubscribe.decorator.ts`, utilisé dans 138 fichiers) surcharge `ngOnDestroy`. Au destroy, il appelle `unsubscribe()` sur chaque **propriété** de l'instance qui expose cette méthode, et sur chaque tableau de telles propriétés. L'audit en a tenu compte : les fichiers où il couvre déjà les abonnements sont marqués « vérifié correct » (par exemple `interrupteur-select-editor`, `interrupteur-radio`, `preselection:92`, `ressource:158`, `bon-travail:87`, `imprime-search-component:73`) et ne sont pas signalés.
@@ -148,10 +167,9 @@ Les constats restants se répartissent en cinq cas.
 
 | Tâche | Fichiers | Réf. |
 |---|---|---|
-| 1.1 **Priorité n° 1.** Fermer les 4 abonnements `FilterSharedDataService` restants (ajouter `@AutoUnsubscribe` et stocker la souscription, comme dans `column-header`, ou `takeUntilDestroyed()`, voir 3.0, cas A et B) | `fullstack-components/tableau/ag-grid-components/input-filter/input-filter.component.ts:52`, `list-floating-filter/list-floating-filter.component.ts:33`, `action-renderer-clear-filter/…component.ts:18`, `fullstack-components/liste-deroulante/components/liste-deroulante-multiple/liste-deroulante-multiple.component.ts:109` | FC-C1 |
+| 1.1 **Priorité n° 1 après le Lot 0.** Fermer les 4 abonnements `FilterSharedDataService` restants (ajouter `@AutoUnsubscribe` et stocker la souscription, comme dans `column-header`, ou `takeUntilDestroyed()`, voir 3.0, cas A et B) | `fullstack-components/tableau/ag-grid-components/input-filter/input-filter.component.ts:52`, `list-floating-filter/list-floating-filter.component.ts:33`, `action-renderer-clear-filter/…component.ts:18`, `fullstack-components/liste-deroulante/components/liste-deroulante-multiple/liste-deroulante-multiple.component.ts:109` | FC-C1 |
 | 1.2 Ne plus recréer le `FormGroup` mais synchroniser ses contrôles, remplacer `[form]="getFormGroup()"` par `[form]="form"` (le retrait du listener `modelUpdated` est fait) | `multi-select-floating-filter.component.ts:54-100` et `.html:2` ; `multi-select-hierarchisee-floating-filter.component.ts:66-91` | FC-C3, FC-H10 |
-| 1.3 Filtre hiérarchisé : sortir le `selectData.subscribe` du handler `modelUpddated()` et s'abonner une seule fois dans `agInit` | `multi-select-hierarchisee-floating-filter.component.ts:83` | FC-C2, SUP-C2 |
-| 1.4 `select-table-editor` : remplacer `@HostListener('document:click')` par un listener enregistré à l'ouverture et retiré à la fermeture, supprimer l'id fixe et `innerHTML` (le `ngOnDestroy` est fait) | `select-table-editor.component.ts:87-183` | FC-C4 |
+| 1.3 `select-table-editor` (après 0.1) : remplacer `@HostListener('document:click')` par un listener enregistré à l'ouverture et retiré à la fermeture, supprimer l'id fixe et `innerHTML` (le `ngOnDestroy` est fait) | `select-table-editor.component.ts:87-183` | FC-C4 |
 | 1.6 `ContainerComponent` : `takeUntilDestroyed` sur `httpProgress()`, `take(1)` sur `getCodesOrganismesByRegions`, supprimer `ngAfterContentChecked` (remplacer `hasOnglet` par `:has(app-onglet)` en CSS) | `layout/container/container.component.ts:31-61` | CORE-C2, CORE-H1 |
 | 1.7 Services root qui gardent des callbacks de composants : passer par `context` ag-grid ou remettre à `null` au destroy | `suivi/production/occurrences-application/service/tableau-occurrence-application.service.ts`, `occurrences-fichiers/service/tableau-occurrences-fichiers.service.ts` | SUP-M4 |
 
@@ -3068,6 +3086,7 @@ setTimeout(() => URL.revokeObjectURL(url), 60_000);
 
 ### Ordre de correction recommandé (gain attendu sur DOM et heap)
 
+0. Lot 0 (section 3) : reprendre le commit `EDT-1633`.
 1. Fermer les 4 abonnements `FilterSharedDataService.getData()` restants : input-filter, list-floating-filter, action-renderer-clear-filter, liste-deroulante-multiple (column-header, multi-select-hierarchisee et les 4 `selectData.subscribe` des éditeurs sont faits).
 2. Sortir le `selectData.subscribe` du handler `modelUpddated()` de multi-select-hierarchisee (les listeners `modelUpdated` et `rowDataUpdated` sont retirés depuis `929f148`).
 3. Supprimer `redrawRows()` dans `onFilterModified` et les `refreshHeader()` + `resetColumnState()` du clear filter.
