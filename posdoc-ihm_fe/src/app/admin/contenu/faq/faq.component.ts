@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TableauConfigurationBuilderService } from '@app/fullstack-components/tableau/services/tableau-configuration-builder.service';
 import { ColDef, GetRowIdParams, GridApi, GridOptions, GridReadyEvent } from 'ag-grid-community';
@@ -42,7 +42,7 @@ interface FaqData {
   styleUrls: ['./faq.component.scss'],
   standalone: false,
 })
-export class FaqComponent implements OnInit {
+export class FaqComponent implements OnInit, OnDestroy {
   gridOptions: GridOptions;
   overlayNoRowsTemplate: string;
   overlayLoadingTemplate = '<span></span>';
@@ -72,6 +72,7 @@ export class FaqComponent implements OnInit {
   private readonly notificationsRefreshService = inject(NotificationsRefreshService);
   private readonly statusColumnHandler = inject(StatusColumnHandlerService);
   private readonly destroyRef = inject(DestroyRef);
+  private redrawRowsTimeoutId: ReturnType<typeof setTimeout>;
 
   constructor() {
     // Empty constructor
@@ -168,7 +169,7 @@ export class FaqComponent implements OnInit {
         this.rowData = this.mapFaqsToRowData(result.data.searchAllFaq);
         // Forcer le rafraîchissement des styles de lignes après le chargement des données
         if (this.gridApi && this.faqNotifications.length > 0) {
-          setTimeout(() => this.gridApi.redrawRows(), 100);
+          this.redrawRowsTimeoutId = setTimeout(() => this.gridApi.redrawRows(), 100);
         }
       });
   }
@@ -307,5 +308,9 @@ export class FaqComponent implements OnInit {
           },
         });
     });
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.redrawRowsTimeoutId);
   }
 }

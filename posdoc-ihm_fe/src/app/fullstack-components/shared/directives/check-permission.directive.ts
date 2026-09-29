@@ -1,11 +1,11 @@
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { PermissionService } from '@app/services/permission/permission.service';
 
 @Directive({
   selector: '[appCheckPermission]',
   standalone: false,
 })
-export class CheckPermissionDirective {
+export class CheckPermissionDirective implements OnInit, OnDestroy {
   @Input() appCheckPermission: number;
 
   constructor(
@@ -20,5 +20,9 @@ export class CheckPermissionDirective {
     } else {
       this.vcr.clear();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.vcr.clear();
   }
 }

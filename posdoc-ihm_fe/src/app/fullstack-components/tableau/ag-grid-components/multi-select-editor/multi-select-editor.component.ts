@@ -132,12 +132,12 @@ export class MultiSelectEditorComponent implements ICellRendererAngularComp, OnD
 
       // si les données brut n'existe pas, on s'inscrit pour les recevoir
       if (!!!this.params.values.length) {
-        this.params.selectData.subscribe(e => {
+        this.subscriptions.push(this.params.selectData.subscribe(e => {
           allOrganismes = e;
           data = this.getDataWithElmWithoutParent(allOrganismes);
           this.initForm(data);
           this.closeAllCollapse();
-        });
+        }));
       }
       data = this.getDataWithElmWithoutParent(allOrganismes);
     }
@@ -239,6 +239,9 @@ export class MultiSelectEditorComponent implements ICellRendererAngularComp, OnD
   }
 
   ngOnDestroy(): void {
+    if (this.params?.api && this.displayErrorsFn) {
+      this.params.api.removeEventListener('rowDataUpdated', this.displayErrorsFn);
+    }
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 

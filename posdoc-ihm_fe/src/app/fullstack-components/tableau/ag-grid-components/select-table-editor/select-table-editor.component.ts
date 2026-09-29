@@ -1,8 +1,10 @@
 import { NgIf } from '@angular/common';
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
 import SharedUtil from '@app/shared/utils/SharedUtil';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
+import { Subscription } from 'rxjs';
+import { AutoUnsubscribe } from '@app/shared/decorators/auto-unsubscribe.decorator';
 
 @Component({
   selector: 'app-select-table-editor',
@@ -11,7 +13,8 @@ import { ICellRendererParams } from 'ag-grid-community';
   imports: [NgIf],
   styleUrls: ['./select-table-editor.component.scss'],
 })
-export class SelectTableEditorComponent implements ICellRendererAngularComp {
+@AutoUnsubscribe
+export class SelectTableEditorComponent implements ICellRendererAngularComp, OnDestroy {
   params;
   dropdownVisible = false;
   options = [];
@@ -20,6 +23,8 @@ export class SelectTableEditorComponent implements ICellRendererAngularComp {
   isDisabled = false;
 
   @ViewChild('trigger', { static: false }) triggerRef!: ElementRef;
+
+  private selectDataSubscription: Subscription;
 
   agInit(params: ICellRendererParams<any, any>): void {
     this.params = params;
@@ -34,7 +39,7 @@ export class SelectTableEditorComponent implements ICellRendererAngularComp {
   }
 
   private filterData() {
-    this.params.selectData.subscribe(e => {
+    this.selectDataSubscription = this.params.selectData.subscribe(e => {
       if (this.params.filterByFields?.length) {
         this.options = SharedUtil.getUniqueList(
           e.filter(vl =>
@@ -175,6 +180,10 @@ export class SelectTableEditorComponent implements ICellRendererAngularComp {
     if (this.dropdownVisible && !this.triggerRef.nativeElement.contains(event.target)) {
       this.closeDropdown();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.closeDropdown();
   }
 
   private checkIfHidden(): void {

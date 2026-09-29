@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, OnDestroy, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { OngletsParamDataModel } from '@app/models/supervision/production/details/onglets-paramData-model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GestionOccurrenceApplicationComponent } from '../../gestion-occurrence-application.component';
@@ -9,12 +10,14 @@ import { GestionOccurrenceApplicationComponent } from '../../gestion-occurrence-
   styleUrls: ['./gestion-occurrence-application-modal.component.scss'],
   standalone: false,
 })
-export class GestionOccurrenceApplicationModalComponent implements OnInit {
+export class GestionOccurrenceApplicationModalComponent implements OnInit, OnDestroy {
   @Input() paramData: OngletsParamDataModel;
   @ViewChild('gestionOccurrenceApplicationComponentContainer', { read: ViewContainerRef, static: true })
   gestionOccurrenceApplicationComponentContainer: ViewContainerRef;
   modalTitle: string;
   @Output() passEntry = new EventEmitter<any>();
+
+  private passEntrySubscription: Subscription;
 
   constructor(public activeModal: NgbActiveModal) {}
 
@@ -28,10 +31,15 @@ export class GestionOccurrenceApplicationModalComponent implements OnInit {
     const componentRef = this.gestionOccurrenceApplicationComponentContainer.createComponent(GestionOccurrenceApplicationComponent);
     (componentRef.instance as any).paramData = this.paramData;
     // écouteur fils
-    componentRef.instance.passEntry.subscribe(data => {
+    this.passEntrySubscription = componentRef.instance.passEntry.subscribe(data => {
       // renvoie data au parent
       this.passEntry.emit(data);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.passEntrySubscription?.unsubscribe();
+    this.gestionOccurrenceApplicationComponentContainer.clear();
   }
 
   closePopup() {

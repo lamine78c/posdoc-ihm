@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BoutonPopup } from '@app/fullstack-components/popup/components/popup/popup.component';
 import { TableAsynchronousError } from '@app/fullstack-components/tableau/models/tableau.models';
 import { TableauConfigurationBuilderService } from '@app/fullstack-components/tableau/services/tableau-configuration-builder.service';
@@ -20,7 +20,7 @@ import { TableauCompareCommandeService } from '../service/tableau-compare-comman
   standalone: false,
 })
 @AutoUnsubscribe
-export class CompareModalComponent implements OnInit {
+export class CompareModalComponent implements OnInit, OnDestroy {
   @Input() modalRef: NgbModalRef | NgbActiveModal;
   /**   * Titre de la popup   */
   @Input() title: string;
@@ -47,6 +47,7 @@ export class CompareModalComponent implements OnInit {
   asynchronousErrors$: BehaviorSubject<Map<number, TableAsynchronousError[]>> = new BehaviorSubject(null);
   codesEnvironnement: any = [];
   subscriptions: Subscription[] = [];
+  private onPaginationChangedFn: () => void;
   constructor(
     private tableauConfigurationBuilderService: TableauConfigurationBuilderService,
     private tableauService: TableauCompareCommandeService,
@@ -69,7 +70,8 @@ export class CompareModalComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.api;
     // Évènement pour redimensionne les colonnes dans le cas où on change les filtres
-    this.gridApi.addEventListener('paginationChanged', () => this.gridApi.sizeColumnsToFit());
+    this.onPaginationChangedFn = () => this.gridApi.sizeColumnsToFit();
+    this.gridApi.addEventListener('paginationChanged', this.onPaginationChangedFn);
     this.gridApi.setGridOption('loading', false);
   }
   closePopup() {
@@ -187,5 +189,11 @@ export class CompareModalComponent implements OnInit {
     this.rowDetails.forEach(obj => data.push(headers.map(h => obj[h])));
 
     this.generateFileService[fileServiceMap[event.type]](data, headers, title);
+  }
+
+  ngOnDestroy(): void {
+    if (this.gridApi && this.onPaginationChangedFn) {
+      this.gridApi.removeEventListener('paginationChanged', this.onPaginationChangedFn);
+    }
   }
 }

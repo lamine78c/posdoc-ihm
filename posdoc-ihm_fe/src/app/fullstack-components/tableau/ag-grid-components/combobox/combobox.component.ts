@@ -64,9 +64,9 @@ export class ComboboxComponent implements ICellRendererAngularComp, OnDestroy, A
       if (params.values && params.values.length > 0) {
         this.data = params.values;
       } else {
-        this.params.selectData!.subscribe(e => {
+        this.subscriptions.push(this.params.selectData!.subscribe(e => {
           this.data = e;
-        });
+        }));
       }
 
       this.initForm();

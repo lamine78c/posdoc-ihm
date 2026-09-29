@@ -69,5 +69,6 @@ export class DetailsParamDistrComponent {
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
     this.params.api.removeEventListener('cellEditingStarted', this.displayErrorsFn);
+    this.params.api.removeEventListener('rowDataUpdated', this.displayErrorsFn);
   }
 }

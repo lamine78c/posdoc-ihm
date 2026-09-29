@@ -11,7 +11,7 @@ import { ApiAdelaideGammeService } from './api-adelaide-gamme.service';
 import { ApiAdelaideVerrouService } from './api-adelaide-verrou.service';
 import { ApiAdelaideImprimeService } from '@app/services/api-adelaide-imprime.service';
 import { ApiAdelaideFormatService } from '@app/services/api-adelaide-format.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
 import { ApolloQueryResult } from 'apollo-client';
 import { AllRegionsInterface } from '@app/models/accueil/all-regions-interface';
 import { AllImprimeInterface } from '@app/produit/fond-page/imprime/model/imprime.interface';
@@ -56,7 +56,7 @@ export class ApiAdelaideSelectDataService {
 
   getAllRegions(): any[] {
     this.regions = [];
-    this.apiAdelaideRegion.getAllRegions().subscribe((result: ApolloQueryResult<AllRegionsInterface>) => {
+    this.apiAdelaideRegion.getAllRegions().pipe(take(1)).subscribe((result: ApolloQueryResult<AllRegionsInterface>) => {
       result.data.allRegions.forEach(node => {
         this.regions.push(node.code);
       });
@@ -66,7 +66,7 @@ export class ApiAdelaideSelectDataService {
 
   getAllSites(): any[] {
     this.sites = [];
-    this.apiAdelaideSite.getAllSitesCNP().subscribe(data => {
+    this.apiAdelaideSite.getAllSitesCNP().pipe(take(1)).subscribe(data => {
       (data as any).data.allSitesCNP.forEach(node => {
         this.sites.push(node.code);
       });
@@ -76,7 +76,7 @@ export class ApiAdelaideSelectDataService {
 
   getAllComposs(): string[] {
     this.composs = [];
-    this.apiAdelaideCompos.getAllComposs().subscribe((response: any) => {
+    this.apiAdelaideCompos.getAllComposs().pipe(take(1)).subscribe((response: any) => {
       response.data.allComposs.forEach(node => {
         !this.composs.includes(node.libmef) && this.composs.push(node.libmef);
       });
@@ -86,7 +86,7 @@ export class ApiAdelaideSelectDataService {
 
   getAllColimps(): string[] {
     this.colimps = [];
-    this.apiAdelaideColimp.getAllColimps().subscribe((response: any) => {
+    this.apiAdelaideColimp.getAllColimps().pipe(take(1)).subscribe((response: any) => {
       response.data.allColimps.forEach(node => {
         !this.colimps.includes(node.libcol) && this.colimps.push(node.libcol);
       });
@@ -95,7 +95,7 @@ export class ApiAdelaideSelectDataService {
   }
   getAllOrganismes(): any[] {
     this.organismes = [];
-    this.apiAdelaideOrganisme.getAllOrganismes().subscribe(data => {
+    this.apiAdelaideOrganisme.getAllOrganismes().pipe(take(1)).subscribe(data => {
       (data as any).data.allOrganismes.forEach(node => {
         this.organismes.push(node.code);
       });
@@ -106,7 +106,7 @@ export class ApiAdelaideSelectDataService {
   getAllRessources(): any[] {
     // need unique codeRessource
     this.ressources = [];
-    this.apiAdelaideRessources.getAllRessources().subscribe(data => {
+    this.apiAdelaideRessources.getAllRessources().pipe(take(1)).subscribe(data => {
       (data as any).data.allRessources.forEach(node => {
         !this.ressources.includes(node.codeRessource) && this.ressources.push(node.codeRessource);
       });
@@ -116,7 +116,7 @@ export class ApiAdelaideSelectDataService {
 
   getAllEnvironnements(): any[] {
     this.environnements = [];
-    this.apiAdelaideEnvironnement.getAllEnvironnement().subscribe(data => {
+    this.apiAdelaideEnvironnement.getAllEnvironnement().pipe(take(1)).subscribe(data => {
       (data as any).data.allEnvironnements.forEach(node => {
         this.environnements.push(node.code);
       });
@@ -131,7 +131,7 @@ export class ApiAdelaideSelectDataService {
   getAllApplications(): any[] {
     // need unique code
     this.applications = [];
-    this.apiAdelaideApplication.getAllApplications().subscribe(data => {
+    this.apiAdelaideApplication.getAllApplications().pipe(take(1)).subscribe(data => {
       (data as any).data.allApplications.forEach(node => {
         !this.applications.includes(node.code) && this.applications.push(node.code);
       });
@@ -145,7 +145,7 @@ export class ApiAdelaideSelectDataService {
 
   getAllGammes(): any[] {
     this.gammes = [];
-    this.apiAdelaideGamme.getAllGammes().subscribe(data => {
+    this.apiAdelaideGamme.getAllGammes().pipe(take(1)).subscribe(data => {
       (data as any).data.allGammes.forEach(node => {
         this.gammes.push(node.code);
       });
@@ -155,7 +155,7 @@ export class ApiAdelaideSelectDataService {
 
   getAllVerrous(): any[] {
     this.verrous = [];
-    this.apiAdelaideVerrou.getAllVerrous().subscribe(data => {
+    this.apiAdelaideVerrou.getAllVerrous().pipe(take(1)).subscribe(data => {
       (data as any).data.allVerrous.forEach(node => {
         this.verrous.push(node.code);
       });
@@ -165,7 +165,7 @@ export class ApiAdelaideSelectDataService {
 
   getAllImprimes(): any[] {
     this.imprimes = [];
-    this.apiAdelaideImprimeService.getAllImprimes().subscribe((data: ApolloQueryResult<AllImprimeInterface>) => {
+    this.apiAdelaideImprimeService.getAllImprimes().pipe(take(1)).subscribe((data: ApolloQueryResult<AllImprimeInterface>) => {
       data.data.allImprimes.forEach(node => {
         this.imprimes.push(node.reference);
       });
@@ -175,7 +175,7 @@ export class ApiAdelaideSelectDataService {
 
   getAllTypesFormat(): any[] {
     this.typesFormat = [];
-    this.apiAdelaideFormatService.getFormats().subscribe(data => {
+    this.apiAdelaideFormatService.getFormats().pipe(take(1)).subscribe(data => {
       (data as any).data.allFormats.forEach(node => {
         this.typesFormat.push(node.code);
       });

@@ -230,6 +230,9 @@ export class TableauComponent implements OnInit, OnDestroy {
   private uniqueAgKey: string;
   // ID HTML unique
   uniqueUiID: string = 'id-' + new Date().getTime();
+  // Références des listeners pour pouvoir les retirer
+  private onFilterChangedFn: () => void;
+  private onSelectionChangedFn: () => void;
 
   // Sauvegarde des données avant l'édition
   dataBeforeEdition: any[] = [];
@@ -336,17 +339,11 @@ export class TableauComponent implements OnInit, OnDestroy {
     // Sauvegarde la configuration par défaut et charge la configuration utilisateur des colonnes
     this.handleColConfiguration();
 
-    this.gridApi.addEventListener('filterChanged', () => {
-      if (this.gridApi?.getSelectedNodes()?.length > 1) {
-        this.gridApi.deselectAll();
-      }
-    });
+    this.onFilterChangedFn = this.onFilterChanged.bind(this);
+    this.onSelectionChangedFn = this.onSelectionChanged.bind(this);
+    this.gridApi.addEventListener('filterChanged', this.onFilterChangedFn);
 
-    this.gridApi.addEventListener('selectionChanged', () => {
-      // Aucune action nécessaire ici car le bouton "Supprimer en masse"
-      // est géré par [disabled]="!isEnableButton()" dans le template
-      // et sa visibilité est déterminée par displayDeleteSelectedButton
-    });
+    this.gridApi.addEventListener('selectionChanged', this.onSelectionChangedFn);
   }
 
   /**
@@ -776,8 +773,30 @@ export class TableauComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((subscription: Subscription) => subscription?.unsubscribe());
     if (this.gridApi) {
       this.gridApi.removeEventListener('cellEditingStarted', this.onFormEditionStartedFn);
+      if (this.onFilterChangedFn) {
+        this.gridApi.removeEventListener('filterChanged', this.onFilterChangedFn);
+      }
+      if (this.onSelectionChangedFn) {
+        this.gridApi.removeEventListener('selectionChanged', this.onSelectionChangedFn);
+      }
     }
     this.notesService.removeAllStatic();
     this.filterSharedDataService.updateData(false);
+  }
+
+  /**
+   * Désélectionne toutes les lignes si plus d'une est sélectionnée lors d'un changement de filtre
+   */
+  onFilterChanged(): void {
+    if (this.gridApi?.getSelectedNodes()?.length > 1) {
+      this.gridApi.deselectAll();
+    }
+  }
+
+  /**
+   * Gestion des changements de sélection (aucune action nécessaire, géré par le template)
+   */
+  onSelectionChanged(): void {
+    // Le bouton "Supprimer en masse" est géré par [disabled]="!isEnableButton()" dans le template
   }
 }

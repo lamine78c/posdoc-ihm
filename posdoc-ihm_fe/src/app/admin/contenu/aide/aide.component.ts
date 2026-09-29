@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { TableauConfigurationBuilderService } from '@app/fullstack-components/tableau/services/tableau-configuration-builder.service';
 import { ColDef, GetRowIdParams, GridApi, GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { TableauAideService } from './service/tableau-aide.service';
@@ -24,12 +24,13 @@ import { StatusColumnHandlerService } from '@app/admin/contenu/services/status-c
   standalone: false,
 })
 @AutoUnsubscribe
-export class AideComponent implements OnInit {
+export class AideComponent implements OnInit, OnDestroy {
   gridOptions: GridOptions;
   overlayNoRowsTemplate: string;
   overlayLoadingTemplate = '<span></span>';
 
   subscriptions: Subscription[] = [];
+  private openEditModalTimeoutId: ReturnType<typeof setTimeout>;
 
   rowData: any = [];
   pathLabels: Map<string, string> = new Map();
@@ -324,7 +325,7 @@ export class AideComponent implements OnInit {
         } else {
           // Rouvrir la modal d'édition avec les données modifiées si l'utilisateur annule
           const updatedData = { ...selectedData, path: data.path, message: data.message };
-          setTimeout(() => this.openEditModal(updatedData), 100);
+          this.openEditModalTimeoutId = setTimeout(() => this.openEditModal(updatedData), 100);
         }
       })
     );
@@ -391,5 +392,9 @@ export class AideComponent implements OnInit {
       modalRef.componentInstance.path = aideData.path;
       modalRef.componentInstance.aideMessage = aideData.message;
     }
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.openEditModalTimeoutId);
   }
 }

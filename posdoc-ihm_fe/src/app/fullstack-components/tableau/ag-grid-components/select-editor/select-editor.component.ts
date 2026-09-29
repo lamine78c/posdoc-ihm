@@ -82,9 +82,9 @@ export class SelectEditorComponent implements ICellRendererAngularComp, OnDestro
       if (params.values && params.values.length > ZERO) {
         this.data = params.values;
       } else {
-        this.params.selectData.subscribe(e => {
+        this.subscriptions.push(this.params.selectData.subscribe(e => {
           this.data = e;
-        });
+        }));
       }
 
       this.initForm();

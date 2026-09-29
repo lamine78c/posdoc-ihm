@@ -13,7 +13,7 @@ import { ParamColShowInterface } from '@app/models/tableau/param-col-show-interf
 import CustomValidators from '@app/shared/utils/CustomValidators';
 import { CellClickedEvent, CellValueChangedEvent, ColDef, ColGroupDef, SortDirection } from 'ag-grid-community';
 import { AutoUnsubscribe } from '@app/shared/decorators/auto-unsubscribe.decorator';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -419,7 +419,7 @@ export class TableauParametreEditionService {
     oldValueInCaseOfException: any
   ) {
     this.subscriptions.push(
-      this.apiAdelaideService.updateExemplaire(updateDTO).subscribe({
+      this.apiAdelaideService.updateExemplaire(updateDTO).pipe(take(1)).subscribe({
         next: () => {
           param.node.data[key] = updateDTO[key];
           param.api.redrawRows({ rowNodes: [param.node] });

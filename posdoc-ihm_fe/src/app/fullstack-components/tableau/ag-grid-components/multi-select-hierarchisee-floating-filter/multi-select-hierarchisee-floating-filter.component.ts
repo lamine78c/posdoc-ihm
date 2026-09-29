@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FilterSharedDataService } from '@app/services/filter-shared-data.service';
 import SharedUtil from '@app/shared/utils/SharedUtil';
 import { RowNode } from 'ag-grid-community';
 import { Subscription } from 'rxjs';
+import { AutoUnsubscribe } from '@app/shared/decorators/auto-unsubscribe.decorator';
 
 @Component({
   selector: 'app-multi-hierarchisee-select-floating-filter',
@@ -11,7 +12,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./multi-select-hierarchisee-floating-filter.component.scss'],
   standalone: false,
 })
-export class MultiSelectHierarchiseeFloatingFilterComponent {
+@AutoUnsubscribe
+export class MultiSelectHierarchiseeFloatingFilterComponent implements OnDestroy {
   // @ViewChild('dropdownRef', {static: false, read: NgbDropdown}) dropdown: NgbDropdown;
   defaultText: string;
 
@@ -30,15 +32,20 @@ export class MultiSelectHierarchiseeFloatingFilterComponent {
 
   selectedItems = [];
 
+  private filterSharedDataSubscription: Subscription;
+  private selectDataSubscription: Subscription;
+  private modelUpdatedHandler: () => void;
+
   constructor(
     private fb: FormBuilder,
     private filterSharedDataService: FilterSharedDataService
   ) {
-    this.filterSharedDataService.getData().subscribe(isDisabled => (this.isDisabled = isDisabled));
+    this.filterSharedDataSubscription = this.filterSharedDataService.getData().subscribe(isDisabled => (this.isDisabled = isDisabled));
   }
 
   agInit(params): void {
-    params.api.addEventListener('modelUpdated', this.modelUpddated.bind(this));
+    this.modelUpdatedHandler = this.modelUpddated.bind(this);
+    params.api.addEventListener('modelUpdated', this.modelUpdatedHandler);
 
     this.params = params;
     this.formIndex = this.params?.formIndex;
@@ -73,13 +80,19 @@ export class MultiSelectHierarchiseeFloatingFilterComponent {
       // liste total des organisque existatnt, avec leur régions
       let allOrganismes;
       // si les données brut n'existe pas, on s'inscrit pour les recevoir
-      this.params.selectData!.subscribe(e => {
+      this.selectDataSubscription = this.params.selectData!.subscribe(e => {
         allOrganismes = e;
         // si le filtre est activé, on coche les checkbox du formulaire
         const isFilter = this.selectedItems.length ? true : false;
         const orgs = uniqueDataFromGrid;
         this.form = SharedUtil.getOrgFormByOrgData(this.form, orgs, allOrganismes, isFilter);
       });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.params?.api && this.modelUpdatedHandler) {
+      this.params.api.removeEventListener('modelUpdated', this.modelUpdatedHandler);
     }
   }
 }

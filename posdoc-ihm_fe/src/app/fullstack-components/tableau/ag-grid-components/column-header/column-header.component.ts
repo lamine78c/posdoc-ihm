@@ -2,6 +2,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { RowNode } from 'ag-grid-community';
 import { ExtendedIHeaderParams } from '../../models/tableau.models';
 import { FilterSharedDataService } from '@app/services/filter-shared-data.service';
+import { Subscription } from 'rxjs';
+import { AutoUnsubscribe } from '@app/shared/decorators/auto-unsubscribe.decorator';
 
 @Component({
   selector: 'app-column-header',
@@ -9,6 +11,7 @@ import { FilterSharedDataService } from '@app/services/filter-shared-data.servic
   styleUrls: ['./column-header.component.scss'],
   standalone: false,
 })
+@AutoUnsubscribe
 export class ColumnHeaderComponent implements OnDestroy {
   isDisabled: boolean = false;
 
@@ -27,8 +30,10 @@ export class ColumnHeaderComponent implements OnDestroy {
   onSortChangedFn;
   onFilterChangedFn;
 
+  private filterSharedDataSubscription: Subscription;
+
   constructor(private filterSharedDataService: FilterSharedDataService) {
-    this.filterSharedDataService.getData().subscribe(isDisabled => (this.isDisabled = isDisabled));
+    this.filterSharedDataSubscription = this.filterSharedDataService.getData().subscribe(isDisabled => (this.isDisabled = isDisabled));
   }
 
   agInit(params: ExtendedIHeaderParams): void {

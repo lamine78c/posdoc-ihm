@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { initExemplaireByFilterQuery } from '@app/models/supervision/production/gestion-occurrence-etape-interface';
 import { ApiAdelaideDistributionService } from '@app/services/api-adelaide-distribution.service';
@@ -27,7 +27,7 @@ import { ArrayUtil } from '../utils/ArrayUtil';
   standalone: false,
 })
 @AutoUnsubscribe
-export class PreselectionComponent implements OnInit {
+export class PreselectionComponent implements OnInit, OnDestroy {
   @Input() form: FormGroup;
   @Input() applicationOptions = [];
   @Input() commandeOptions = [];
@@ -64,6 +64,8 @@ export class PreselectionComponent implements OnInit {
   @Input() isDistribution = false;
   distributionListOfOldSelectedOrganismesCode: string[] = [];
   distributionOldSelectedApplication;
+  private selectedEnvsTimeoutId: ReturnType<typeof setTimeout>;
+  private distributionValueChangeOrgTimeoutId: ReturnType<typeof setTimeout>;
 
   private readonly sessionDataSearchService = inject(SessionDataSearchService);
   private readonly apiAdelaideDistributionService = inject(ApiAdelaideDistributionService);
@@ -136,7 +138,7 @@ export class PreselectionComponent implements OnInit {
   }
 
   getSelectedEnvironnements() {
-    setTimeout(() => {
+    this.selectedEnvsTimeoutId = setTimeout(() => {
       if (this.isEnvOptionsInitialized) {
         const selectedEnvs = this.getSelectedEnvs();
         this.selectedEnvironnements.emit(selectedEnvs);
@@ -206,7 +208,7 @@ export class PreselectionComponent implements OnInit {
       this.formApp.reset(false, { emitEvent: true });
     }
 
-    setTimeout(() => {
+    this.distributionValueChangeOrgTimeoutId = setTimeout(() => {
       // pouvoir requêter sans rentrer une commande si une seule région est sélectionnée
       if (ArrayUtil.isSelectedOrgsInOneRegion(this.formOrg.getRawValue())) {
         this.formCom.setValidators([]);
@@ -284,5 +286,10 @@ export class PreselectionComponent implements OnInit {
           this.formFic.reset('', { emitEvent: true });
         })
     );
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.selectedEnvsTimeoutId);
+    clearTimeout(this.distributionValueChangeOrgTimeoutId);
   }
 }

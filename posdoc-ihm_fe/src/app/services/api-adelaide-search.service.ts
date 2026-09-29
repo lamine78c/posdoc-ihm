@@ -5,6 +5,7 @@ import { ApolloQueryResult } from 'apollo-client';
 import { ApiAdelaideEnvironnementService } from './api-adelaide-environnement.service';
 import { ApiAdelaideOrganismeService } from './api-adelaide-organisme.service';
 import { ApiAdelaideRegionService } from './api-adelaide-region.service';
+import { take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,7 @@ export class ApiAdelaideSearchService {
 
   getAllEnvironnements(): any[] {
     this.environnements = [];
-    this.apiAdelaideEnvironnement.getAllEnvironnement().subscribe(data => {
+    this.apiAdelaideEnvironnement.getAllEnvironnement().pipe(take(1)).subscribe(data => {
       (data as any).data.allEnvironnements.forEach(element => {
         this.environnements.push({ value: element.code, text: element.libelle });
       });
@@ -41,10 +42,10 @@ export class ApiAdelaideSearchService {
     this.organismesRegions = [];
     this.formGroupOrgReg = new UntypedFormGroup({});
 
-    this.apiAdelaideRegionService.getAllRegions().subscribe((result: ApolloQueryResult<AllRegionsInterface>) => {
+    this.apiAdelaideRegionService.getAllRegions().pipe(take(1)).subscribe((result: ApolloQueryResult<AllRegionsInterface>) => {
       this.regions = result.data.allRegions;
 
-      this.apiAdelaideOrganismeService.getAllOrganismes().subscribe(data => {
+      this.apiAdelaideOrganismeService.getAllOrganismes().pipe(take(1)).subscribe(data => {
         this.organismes = (data as any).data.allOrganismes;
         const organismesNoRegion = this.organismes.filter(org => org.codeRegion == null || org.codeRegion == '');
 

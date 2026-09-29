@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./multi-select-floating-filter.component.scss'],
   standalone: false,
 })
-export class MultiSelectFloatingFilterComponent implements OnInit {
+export class MultiSelectFloatingFilterComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   formIndex: number;
@@ -21,6 +21,8 @@ export class MultiSelectFloatingFilterComponent implements OnInit {
 
   isFormatDDMMYYYYCustomSort = false;
 
+  private modelUpdatedHandler: () => void;
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -28,7 +30,8 @@ export class MultiSelectFloatingFilterComponent implements OnInit {
   }
 
   agInit(params: any): void {
-    params.api.addEventListener('modelUpdated', this.modelUpddated.bind(this));
+    this.modelUpdatedHandler = this.modelUpddated.bind(this);
+    params.api.addEventListener('modelUpdated', this.modelUpdatedHandler);
     this.params = params;
     this.isRessourceCustomSort = this.params?.isRessourceCustomSort;
     this.isFormatDDMMYYYYCustomSort = this.params?.isFormatDDMMYYYYCustomSort;
@@ -94,5 +97,11 @@ export class MultiSelectFloatingFilterComponent implements OnInit {
       this.modelUpddated();
     }
     return this.form;
+  }
+
+  ngOnDestroy(): void {
+    if (this.params?.api && this.modelUpdatedHandler) {
+      this.params.api.removeEventListener('modelUpdated', this.modelUpdatedHandler);
+    }
   }
 }
