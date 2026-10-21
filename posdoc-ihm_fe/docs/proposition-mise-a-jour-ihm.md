@@ -26,7 +26,7 @@ Pourquoi les tentatives précédentes n'ont pas suffi :
 
 - **Balises `meta http-equiv="Cache-Control"`** dans `index.html` : ignorées par les navigateurs modernes pour les décisions de cache HTTP.
 - **Règles du `.htaccess`** : correctes et bien présentes dans l'archive livrée (le script `publish-dist` utilise `ls -A`, qui inclut les fichiers cachés). Mais elles ne s'appliquent que si le virtual host Apache autorise `.htaccess` sur ce répertoire et charge `mod_headers`. Indice fort qu'il n'est pas lu : sa règle de réécriture cible `/posdoc-ihm-fe/index.html`, un chemin différent du base-href de production `/posdoc_fe_ihm/`. Si ce fichier était actif, un rafraîchissement sur une URL profonde échouerait.
-- **Hash sur les bundles** : nécessaire, mais ne protège pas `index.html`.
+- **Hash sur les bundles** : nécessaire, mais ne protège pas `index.html`. À noter : le build utilise `browser-esbuild`, qui nomme les fichiers `main-UVUYC35V.js`, alors que la règle `immutable` du `.htaccess` attend `main.abcdef12.js`. Cette règle ne s'applique donc à aucun bundle. Sans conséquence sur le problème (les noms sont uniques), mais elle confirme que le `.htaccess` n'a pas été vérifié face au build réel.
 - **Délai avant effet** : même quand les bons en-têtes sont enfin envoyés, les copies déjà en cache restent utilisées jusqu'à expiration de leur fraîcheur heuristique. Un test juste après la correction conclut à tort qu'elle ne marche pas.
 
 ## 3. Diagnostic à réaliser avant de développer
@@ -46,7 +46,9 @@ curl -sI "https://<hôte>/posdoc_fe_ihm/suivi/production"
 | La troisième réponse est un 200 avec le contenu d'`index.html` | La réécriture SPA est assurée par la configuration Apache, pas par le `.htaccess`. |
 | La troisième réponse est un 404 | Le `.htaccess` est actif mais sa règle de réécriture est fausse. |
 
-Sans curl, la même information se lit dans les outils de développement du navigateur, onglet Réseau, case « Désactiver le cache » décochée, en ouvrant l'application par un favori : une ligne `index.html` marquée « from disk cache » confirme le cache navigateur.
+Sans curl, la même information se lit dans les outils de développement du navigateur, onglet Réseau, filtre Document, case « Désactiver le cache » décochée, en ouvrant l'application par un favori. Il n'y a pas de ligne `index.html` : le document porte le nom de la route (`home`, par exemple) parce que la réécriture SPA sert `index.html` sous cette URL. Une taille « (cache du disque) » sur cette ligne confirme que le navigateur a servi l'application sans interroger le serveur.
+
+**Constat du 21/10/2026** : la ligne `home` (document, statut 200, initiateur « Autre ») est servie depuis le cache du disque, de même que `retour_pss`. Le mécanisme de la section 2 est confirmé. Reste à lire les en-têtes de réponse de cette ligne pour savoir si `Cache-Control` est absent ou ignoré.
 
 Compléter auprès de l'exploitation : nombre de nœuds frontaux derrière le répartiteur et ordre de livraison. Des nœuds mis à jour à des moments différents produisent le même symptôme.
 
@@ -74,12 +76,12 @@ export async function verifierVersionDeployee(): Promise<void> {
   }
   const scriptCourant = Array.from(document.scripts)
     .map(s => s.src)
-    .find(src => /main\.[a-f0-9]+\.js$/.test(src));
+    .find(src => /main-[A-Z0-9]{8}\.js$/.test(src)); // nommage du builder browser-esbuild
   if (!scriptCourant) {
     return;
   }
   const html = await fetch(`index.html?nocache=${Date.now()}`, { cache: 'no-store' }).then(r => r.text());
-  const scriptServeur = html.match(/main\.[a-f0-9]+\.js/)?.[0];
+  const scriptServeur = html.match(/main-[A-Z0-9]{8}\.js/)?.[0];
   if (scriptServeur && !scriptCourant.endsWith(scriptServeur)) {
     sessionStorage.setItem(DEJA_RECHARGE, '1');
     window.location.reload();
@@ -269,6 +271,10 @@ fs.writeFileSync('ngsw-config.json', JSON.stringify(ngswConfig, null, 2));
 `.htaccess` (ou virtual host) :
 
 ```apache
+# Bundles du builder browser-esbuild : main-XXXXXXXX.js, chunk-XXXXXXXX.js, polyfills-XXXXXXXX.js
+<FilesMatch "-[A-Z0-9]{8}\.(js|css)$">
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
 <FilesMatch "^(ngsw-worker|safety-worker)\.js$">
   Header set Cache-Control "no-store, must-revalidate"
 </FilesMatch>
