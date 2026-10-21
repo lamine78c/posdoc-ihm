@@ -48,7 +48,19 @@ curl -sI "https://<hôte>/posdoc_fe_ihm/suivi/production"
 
 Sans curl, la même information se lit dans les outils de développement du navigateur, onglet Réseau, filtre Document, case « Désactiver le cache » décochée, en ouvrant l'application par un favori. Il n'y a pas de ligne `index.html` : le document porte le nom de la route (`home`, par exemple) parce que la réécriture SPA sert `index.html` sous cette URL. Une taille « (cache du disque) » sur cette ligne confirme que le navigateur a servi l'application sans interroger le serveur.
 
-**Constat du 21/10/2026** : la ligne `home` (document, statut 200, initiateur « Autre ») est servie depuis le cache du disque, de même que `retour_pss`. Le mécanisme de la section 2 est confirmé. Reste à lire les en-têtes de réponse de cette ligne pour savoir si `Cache-Control` est absent ou ignoré.
+**Constat du 21/10/2026** sur `http://posdoc-01.urssaf.recouv/posdoc_fe_ihm/home` : la ligne `home` (document, statut 200, initiateur « Autre ») est servie depuis le cache du disque, de même que `retour_pss`. En-têtes de réponse de la copie en cache :
+
+| En-tête | Valeur | Lecture |
+|---------|--------|---------|
+| `Cache-Control` | absent | Les règles du `.htaccess` ne sont pas appliquées. Le navigateur applique le cache heuristique. |
+| `Expires` | absent | Pas de `mod_expires`. |
+| `ETag` | absent | Revalidation possible uniquement par `If-Modified-Since`. |
+| `Last-Modified` | 14 septembre 2026 | Date du dernier déploiement sur ce serveur. Fraîcheur heuristique au 21 octobre : 10 % de 37 jours, soit environ **3,7 jours** sans aucune requête au serveur. |
+| `Age`, `Via`, `X-Cache` | absents | Pas de proxy intermédiaire : la réponse vient directement d'Apache. |
+| `Server` | Apache | |
+| Schéma de l'URL | **HTTP**, pas HTTPS | Un service worker ne s'enregistre que dans un contexte sécurisé. Voir la section 4.3 et le risque 0. |
+
+Le mécanisme de la section 2 est confirmé dans sa forme la plus simple : aucun en-tête de cache, fraîcheur heuristique calculée sur un `Last-Modified` ancien, et plus le déploiement précédent est vieux, plus les utilisateurs gardent l'ancienne version longtemps après le suivant.
 
 Compléter auprès de l'exploitation : nombre de nœuds frontaux derrière le répartiteur et ordre de livraison. Des nœuds mis à jour à des moments différents produisent le même symptôme.
 
@@ -58,11 +70,30 @@ Les trois niveaux sont complémentaires. Le premier soulage immédiatement, le d
 
 ### 4.1 Niveau 1 : en-têtes côté serveur (exploitation, une heure)
 
-Faire envoyer réellement `Cache-Control: no-store, must-revalidate` pour `index.html` et `no-cache` pour les JSON de configuration, dans le virtual host Apache si `.htaccess` n'est pas honoré. Corriger au passage la règle de réécriture pour qu'elle cible `/posdoc_fe_ihm/index.html`.
+Le constat de la section 3 montre qu'Apache n'envoie aucun en-tête de cache. Deux causes possibles, à vérifier par l'exploitation sur le serveur : `mod_headers` non chargé (`httpd -M | grep headers`), ou `AllowOverride` sans `FileInfo` sur le répertoire de l'application, auquel cas le `.htaccess` est ignoré. Dans les deux cas, la correction la plus sûre est de porter les directives dans le virtual host :
+
+```apache
+<Directory "/chemin/vers/posdoc_fe_ihm">
+  <Files "index.html">
+    Header set Cache-Control "no-store, must-revalidate"
+  </Files>
+  <FilesMatch "\.json$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  # Bundles du builder browser-esbuild : noms uniques par build, cache long sans risque
+  <FilesMatch "-[A-Z0-9]{8}\.(js|css)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</Directory>
+```
+
+La directive `<Files "index.html">` s'applique aussi quand `index.html` est servi par la réécriture SPA sous une URL de route comme `/home`. Corriger au passage la règle de réécriture pour qu'elle cible `/posdoc_fe_ihm/index.html`.
+
+Effet attendu : à chaque ouverture, le navigateur revalide `index.html` (requête `If-Modified-Since`, réponse 304 si rien n'a changé, 200 avec le nouveau contenu après un déploiement). Les copies déjà en cache chez les utilisateurs restent utilisées jusqu'à 3,7 jours après la correction, puis le problème disparaît pour ce cas.
 
 Couvre : l'utilisateur qui ouvre l'application. Ne couvre pas : l'onglet gardé ouvert, un intermédiaire qui ignore les en-têtes, les copies déjà en cache avant la correction.
 
-### 4.2 Niveau 2 : auto-contrôle au démarrage (front, une demi-journée)
+### 4.2 Niveau 2 : auto-contrôle au démarrage et vérification périodique (front, un jour)
 
 Au démarrage, l'application relit `index.html` avec un paramètre anti-cache, compare le nom du bundle principal avec celui qu'elle exécute et, s'ils diffèrent, recharge la page une seule fois. Un rechargement explicite envoie une requête de revalidation que le navigateur et tout proxy conforme doivent honorer, contrairement à une navigation ordinaire qui se sert dans le cache sans demander.
 
@@ -89,7 +120,11 @@ export async function verifierVersionDeployee(): Promise<void> {
 }
 ```
 
-Appelée dans `main.ts` avant `bootstrapModule`, en production uniquement. Couvre : l'ouverture de l'application avec un `index.html` périmé, quelle que soit la configuration serveur. Ne couvre pas : l'onglet gardé ouvert. Devient inutile une fois le niveau 3 en place.
+Appelée dans `main.ts` avant `bootstrapModule`, en production uniquement. Couvre : l'ouverture de l'application avec un `index.html` périmé, quelle que soit la configuration serveur.
+
+La même comparaison, sans le rechargement automatique, est rejouée toutes les 15 minutes et au retour d'onglet par un petit service `AppUpdateService` (même structure qu'en 5.3, avec cette fonction comme source de détection à la place de `SwUpdate`). Quand le bundle serveur diffère, le service passe à l'état `ready` : le bandeau de la section 5.4 s'affiche, et le rechargement se fait sur clic ou à l'inactivité. Cela couvre l'onglet gardé ouvert.
+
+Ce niveau répond aux besoins 1 et 2. Il ne vérifie pas l'intégrité des fichiers avant activation et ne détecte pas un cache corrompu (besoin 3), rôles du niveau 3. Si le niveau 3 est mis en place, seule la source de détection change, le service et le bandeau sont conservés.
 
 ### 4.3 Niveau 3 : service worker Angular (front, solution de fond)
 
@@ -101,7 +136,9 @@ Le service worker Angular n'est pas seulement un mécanisme de notification. C'e
 - La vérification périodique et le bandeau couvrent l'onglet gardé ouvert, ce qui répond au besoin 1. Les événements d'échec et de cache irrécupérable répondent au besoin 3.
 - Pendant la fenêtre de déploiement, ou si des nœuds frontaux sont désynchronisés, un `ngsw.json` et des bundles de versions différentes donnent un hash incohérent : l'installation est marquée en échec et l'ancienne version reste servie sans plantage jusqu'à la vérification suivante.
 
-Un point à ne pas négliger : le service worker couvre aussi la **version minimale commune** de tous ces cas sans dépendre d'une configuration Apache, Hawai ou proxy qui échappe à l'équipe.
+Le service worker couvre ainsi tous ces cas sans dépendre d'une configuration Apache, Hawai ou proxy qui échappe à l'équipe.
+
+**Condition bloquante : HTTPS.** Un service worker ne s'enregistre que dans un contexte sécurisé (HTTPS, ou `localhost`). Le constat de la section 3 a été fait sur `http://posdoc-01.urssaf.recouv`. Si les utilisateurs accèdent à l'application en HTTP, `ServiceWorkerModule` ne fera rien, silencieusement, et le niveau 3 est sans effet. Il faut soit confirmer que l'URL de production est en HTTPS (comme la DEV, `https://posdoc-dev-03.gidn.recouv`), soit obtenir le passage en HTTPS avant d'engager ce niveau. Dans l'attente, les niveaux 1 et 2 constituent la solution complète pour les besoins 1 et 2.
 
 ## 5. Mise en œuvre du service worker
 
@@ -299,7 +336,8 @@ Pour prouver que le problème est résolu, `ApiInterceptor` ajoute l'en-tête `X
 
 | # | Point | Action |
 |---|-------|--------|
-| 1 | Le `.htaccess` n'est probablement pas lu en production, et sa règle de réécriture est incohérente avec le base-href. | Diagnostic de la section 3. Porter les en-têtes dans le virtual host si nécessaire. |
+| 0 | L'application est servie en **HTTP** sur le serveur observé. Un service worker ne s'enregistre pas hors HTTPS. | Confirmer le schéma de l'URL utilisée par les utilisateurs en production. Sans HTTPS, le niveau 3 est à reporter et les niveaux 1 et 2 portent seuls la solution. |
+| 1 | Le `.htaccess` n'est pas lu en production (aucun `Cache-Control` reçu), et sa règle de réécriture est incohérente avec le base-href. | Porter les en-têtes dans le virtual host (4.1). Vérifier `mod_headers` et `AllowOverride`. |
 | 2 | Proxy intranet ou répartiteur qui ignorerait le paramètre anti-cache de `ngsw.json`. | Prototype d'une journée sur DEV avec un build service worker : vérifier dans les outils de développement que `ngsw-worker.js` s'enregistre et que `ngsw.json` arrive à jour après un redéploiement. |
 | 3 | Interaction avec Prisme : redirection avec fragment `wait_token`, iframe de renouvellement de jeton, `prismeKit.js` externe. | Couvert par le même prototype. Si besoin, restreindre `navigationUrls` dans `ngsw-config.json`. |
 | 4 | Première livraison avec service worker : les utilisateurs encore sur l'ancienne version n'en bénéficient pas. | Le niveau 2 (auto-contrôle au démarrage) livré avant couvre cette transition. Choisir un créneau de faible activité. |
@@ -310,16 +348,17 @@ Pour prouver que le problème est résolu, `ApiInterceptor` ajoute l'en-tête `X
 
 | Lot | Contenu | Charge |
 |-----|---------|--------|
-| 0 | Diagnostic (section 3), correction des en-têtes et de la réécriture côté Apache avec l'exploitation | 0,5 à 1 j |
-| 1 | Auto-contrôle au démarrage (4.2) et en-tête de mesure `X-Posdoc-Fe-Version` (5.6) | 1 j |
-| 2 | Prototype service worker sur DEV, levée des risques 2 et 3 | 1 j |
+| 0 | Correction des en-têtes et de la réécriture côté Apache avec l'exploitation (4.1) ; confirmation HTTP ou HTTPS en production | 0,5 à 1 j |
+| 1 | Auto-contrôle au démarrage, vérification périodique, bandeau, rechargement à l'inactivité (4.2) et en-tête de mesure `X-Posdoc-Fe-Version` (5.6) | 2 j |
+| 2 | Si HTTPS confirmé : prototype service worker sur DEV, levée des risques 2 et 3 | 1 j |
 | 3 | Service worker complet : configuration, `AppUpdateService`, bandeau, activation, build, tests | 3 à 4 j |
 | 4 | Recette multi-versions sur DEV, documentation exploitation (kill switch), CHANGELOG | 1 j |
 
-Les lots 0 et 1 soulagent le problème en deux jours. Le lot 2 décide si le lot 3 est engagé tel quel ou si un ajustement de configuration est nécessaire.
+Les lots 0 et 1 règlent le problème constaté en trois jours et couvrent les besoins 1 et 2. Les lots 2 à 4 n'ont de sens qu'en HTTPS et apportent le besoin 3 et la tolérance aux caches intermédiaires.
 
 ## 8. Décisions à prendre
 
 1. Délai d'inactivité avant rechargement automatique (proposé : 10 minutes, configurable).
 2. Comportement avec une fenêtre détachée ouverte : bloquer le rechargement automatique, ou fermer la fenêtre.
-3. Qui porte la correction Apache : l'équipe via `.htaccess` si celui-ci est honoré, ou l'exploitation via le virtual host.
+3. Qui porte la correction Apache : l'exploitation via le virtual host, puisque le `.htaccess` n'est pas lu.
+4. L'URL de production est-elle en HTTPS ? Sans cela, le service worker est à écarter et la solution s'arrête au lot 1.
